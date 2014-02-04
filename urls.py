@@ -6,8 +6,7 @@ admin.autodiscover()
 from tasks.views import TasksView
 
 urlpatterns = patterns('',
-    url(r'^tasks/$', TasksView),
-    # url(r'^blog/', include('blog.urls')),
-
+    url(r'^$', TasksView.as_view()),
+    url(r'^tasks/$', TasksView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
 )

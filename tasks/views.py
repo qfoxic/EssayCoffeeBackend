@@ -1,4 +1,6 @@
-import tasks
+from django.views.generic.list import ListView
 
-class TasksView:
-  pass
+from tasks.models import TasksTree
+
+class TasksView(ListView):
+  model = TasksTree
