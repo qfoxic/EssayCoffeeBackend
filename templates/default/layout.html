@@ -1,5 +1,5 @@
 {% with skin_prefix=layout.skin_prefix|default:"default" side_pos=layout.side_location|default:"left" %}
-{% load i18n staticfiles %}
+{% load i18n staticfiles raw %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,8 +14,6 @@
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/{{ skin_prefix }}/style.css">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     </head>
     <body>
         {% include skin_prefix|add:"/header.html" %}
@@ -27,5 +25,9 @@
         </section>
         {% include skin_prefix|add:"/footer.html" %}
     </body>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}js/lib/jsviews.min.js"></script>
+    <script src="{{ STATIC_URL }}js/app.js"></script>
 </html>
 {% endwith %}

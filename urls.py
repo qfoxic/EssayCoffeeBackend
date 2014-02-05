@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^file/(?P<module>[a-z]+)/(?P<file>[a-zA-Z0-9_.-]+)/$',FileView.as_view(),{'module_path':'file'}),
     url(r'^test/', BaseView.as_view(template_name='test/index.html'),{'module_path':'test'}),
+    url(r'^dashboard/', BaseView.as_view(template_name='dashboard/index.html'),{'module_path':'dashboard'}),
 )
