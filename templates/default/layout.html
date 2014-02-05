@@ -1,0 +1,31 @@
+{% with skin_prefix=layout.skin_prefix|default:"default" side_pos=layout.side_location|default:"left" %}
+{% load i18n staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- P2P Market -->
+        <title>{%block pagetitle %}{% endblock %}</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=9">
+        <link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.ico">
+        <link rel="apple-touch-icon" href="{{ STATIC_URL }}images/apple-touch-icon.png">
+        <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=latin,cyrillic-ext,cyrillic">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/{{ skin_prefix }}/style.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        {% include skin_prefix|add:"/header.html" %}
+        {% block info_block%}{%endblock%}
+        <section class="main">
+            {% block left_side%}{%endblock%}
+            {% block content%}{%endblock%}
+            {% block right_side%}{%endblock%}
+        </section>
+        {% include skin_prefix|add:"/footer.html" %}
+    </body>
+</html>
+{% endwith %}

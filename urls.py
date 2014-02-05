@@ -11,5 +11,5 @@ urlpatterns = patterns('',
     url(r'^tasks/$', CategoriesView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^file/(?P<module>[a-z]+)/(?P<file>[a-zA-Z0-9_.-]+)/$',FileView.as_view(),{'module_path':'file'}),
-
+    url(r'^test/', BaseView.as_view(template_name='test/index.html'),{'module_path':'test'}),
 )
