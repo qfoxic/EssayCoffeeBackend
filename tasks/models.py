@@ -13,6 +13,16 @@ def ValidateGeoPt(value):
     raise ValidationError('Geo Pointer should contains lat and lon decimals.')
 
 
+class Categories(models.Model):
+  itype = models.SmallIntegerField(choices=co.ITEM_TYPES,
+                                   default=co.TYPE_CATEGORY)
+  pid = models.ForeignKey('self', blank=True, null=True)
+  name = models.CharField(max_length=co.MAX_STRING_LEN)
+
+  class Meta:
+    db_table = 'categories'
+
+
 class Task(models.Model):
   title = models.CharField(max_length=co.TITLE_MAX_LEN)
   overview = models.TextField()
@@ -31,17 +41,8 @@ class Task(models.Model):
                               max_digits=co.DECIMAL_DIGITS)
   status = models.SmallIntegerField(choices=co.TASK_STATUSES,
                                     default=co.NOT_ASSIGNED)
+  category = models.ForeignKey(Categories, related_name='category')
 
   class Meta:
     db_table = 'tasks'
 
-
-class TasksTree(models.Model):
-  itype = models.SmallIntegerField(choices=co.ITEM_TYPES,
-                                   default=co.TYPE_CATEGORY)
-  pid = models.ForeignKey('self', blank=True, null=True)
-  name = models.CharField(max_length=co.MAX_STRING_LEN)
-  task_id = models.ForeignKey(Task, on_delete=models.PROTECT)
-
-  class Meta:
-    db_table = 'taskstree'

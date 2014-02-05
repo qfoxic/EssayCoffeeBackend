@@ -1,6 +1,6 @@
 from django.views.generic.list import ListView
 
-from tasks.models import TasksTree
+from tasks.models import Categories
 
 class TasksView(ListView):
-  model = TasksTree
+  model = Categories
