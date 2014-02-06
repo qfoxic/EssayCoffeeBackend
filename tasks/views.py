@@ -1,19 +1,14 @@
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
-
-from tasks.models import Categories, Task
+from tasks.models import Task, Categories
 from general.views import BaseView
 
 
-class CategoriesView(BaseView, ListView):
+class CategoriesView(BaseView):
   """Displays categories with their tasks.
 
   If category_id is missed then displays all tasks else displays tasks for
   specified category id.
   """
   template_name = 'categories_list.html'
-  model = Categories
-  context_object_name = 'categories'
   module_name = 'tasks'
 
   def get_context_data(self, **kwargs):
@@ -24,10 +19,11 @@ class CategoriesView(BaseView, ListView):
       context['tasks'] = Task.objects.filter(category_id__exact=category_id)
     else:
       context['tasks'] = Task.objects.all()
+    context['categories'] = Categories.objects.all()
     return context
 
 
-class TaskView(BaseView, DetailView):
+class TaskView(BaseView):
   model = Task
   template_name = 'task_form.html'
   context_object_name = 'task'

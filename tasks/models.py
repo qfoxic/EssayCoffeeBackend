@@ -46,9 +46,10 @@ class Task(models.Model):
   completed = models.DateTimeField(null=True, blank=True)
   end_point = models.CharField(max_length=co.MAX_STRING_LEN)
   geo_location = models.CharField(max_length=co.MAX_STRING_LEN,
-                                  validators=[ValidateGeoPt], null=True)
+                                  validators=[ValidateGeoPt], null=True,
+                                  blank=True)
   price = models.DecimalField(null=True, decimal_places=co.DECIMAL_PLACES,
-                              max_digits=co.DECIMAL_DIGITS)
+                              max_digits=co.DECIMAL_DIGITS, blank=True)
   status = models.SmallIntegerField(choices=co.TASK_STATUSES,
                                     default=co.NOT_ASSIGNED)
   category = models.ForeignKey(Categories, related_name='category')
@@ -58,7 +59,7 @@ class Task(models.Model):
 
   @models.permalink
   def get_absolute_url(self):
-    return  ('task_by_id', (), {'task_id': self.id})
+    return  ('task_by_id', (), {'pk': self.id})
   to_link = get_absolute_url
 
   class Meta:

@@ -2,6 +2,7 @@ import os
 
 from django.conf import settings
 from django.utils import translation
+from django.views.generic.base import TemplateView
 
 import lib.confreader as conf
 import constants as co
@@ -17,13 +18,14 @@ def check_mobile(request):
   return False
 
 
-class BaseView(object):
+class BaseView(TemplateView):
   """Base class for all views. In addition, it loads settings from "config/" 
   module's directory and then from database.
   """
   module_name = 'general'
 
-  def _init_module_settings(self):
+  def __init__(self, **kwargs):
+    super(BaseView, self).__init__(**kwargs)
     global_settings = conf.load(co.GLOBAL_MODULE_NAME)
     module_settings = conf.load(self.module_name)
     try:
@@ -34,7 +36,6 @@ class BaseView(object):
           self.module_name, e)
 
   def get_template_names(self):
-    self._init_module_settings()
     try:
       skin_prefix = self.settings['layout']['skin_prefix']
     except KeyError:
@@ -43,6 +44,11 @@ class BaseView(object):
     self.template_name = os.path.join(skin_prefix, self.module_name,
                                       self.template_name)
     return [self.template_name]
+
+  def get_context_data(self, **kwargs):
+    context = super(BaseView, self).get_context_data(**kwargs)
+    context.update(self.settings)
+    return context
 
 
 class TipView(BaseView):
