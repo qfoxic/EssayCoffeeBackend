@@ -1,3 +1,7 @@
+{% extends layout.skin_prefix|add:"/layout.html" %}
+{% load i18n %}
+{% block pagetitle %}All Tasks{% endblock %}
+{% block content %}
 <h1>Categories</h1>
 <ul>
 {% for cat in categories %}
@@ -14,4 +18,6 @@
     <li>No tasks yet.</li>
 {% endfor %}
 </ul>
-<!--code>{% debug %}</code-->
+{% debug %}
+{% endblock %} 
+
