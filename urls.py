@@ -3,14 +3,16 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from tasks.views import CategoriesView
-from general.views import BaseView, FileView
+from tasks.views import CategoriesView, TaskView
 
 urlpatterns = patterns('',
     url(r'^$', CategoriesView.as_view()),
-    url(r'^tasks/$', CategoriesView.as_view()),
+
+    url(r'^category/$', CategoriesView.as_view(), name='all_tasks'),
+    url(r'^category/(?P<category_id>\d{0,4})$', CategoriesView.as_view(), name='tasks_by_category'),
+    url(r'^task/(?P<task_id>\d+)$', TaskView.as_view(), {'module_path': 'task'}, name='task_by_id'),
+
+    url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^file/(?P<module>[a-z]+)/(?P<file>[a-zA-Z0-9_.-]+)/$',FileView.as_view(),{'module_path':'file'}),
-    url(r'^test/', BaseView.as_view(template_name='test/index.html'),{'module_path':'test'}),
-    url(r'^dashboard/', BaseView.as_view(template_name='dashboard/index.html'),{'module_path':'dashboard'}),
+    #url(r'^test/', BaseView.as_view(template_name='test/index.html'),{'module_path':'test'}),
 )

@@ -19,6 +19,11 @@ class Categories(models.Model):
   pid = models.ForeignKey('self', blank=True, null=True)
   name = models.CharField(max_length=co.MAX_STRING_LEN)
 
+  @models.permalink
+  def get_absolute_url(self):
+    return  ('tasks_by_category', (), {'category_id': self.id})
+  to_link = get_absolute_url
+
   class Meta:
     db_table = 'categories'
 
@@ -42,6 +47,11 @@ class Task(models.Model):
   status = models.SmallIntegerField(choices=co.TASK_STATUSES,
                                     default=co.NOT_ASSIGNED)
   category = models.ForeignKey(Categories, related_name='category')
+
+  @models.permalink
+  def get_absolute_url(self):
+    return  ('task_by_id', (), {'task_id': self.id})
+  to_link = get_absolute_url
 
   class Meta:
     db_table = 'tasks'
