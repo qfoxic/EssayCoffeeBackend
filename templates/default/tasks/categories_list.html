@@ -1,16 +1,17 @@
 <h1>Categories</h1>
 <ul>
 {% for cat in categories %}
-    <li>{{ task.name }}</li>
+    <li><a href="{{cat.to_link}}">{{ cat.name }}</a></li>
 {% empty %}
     <li>No categories yet.</li>
 {% endfor %}
 </ul>
+<h1>Tasks</h1>
 <ul>
-{% for cat in categories %}
-    <li>{{ task.name }}</li>
+{% for task in tasks %}
+    <li><a href="{{task.to_link}}">{{ task.title }}</a></li>
 {% empty %}
-    <li>No categories yet.</li>
+    <li>No tasks yet.</li>
 {% endfor %}
 </ul>
 <!--code>{% debug %}</code-->

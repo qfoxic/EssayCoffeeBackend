@@ -42,15 +42,7 @@ class BaseView(object):
       skin_prefix = co.DEFAULT_SKIN_PREFIX
     self.template_name = os.path.join(skin_prefix, self.module_name,
                                       self.template_name)
-    #if check_mobile(self.request):
-    #  self.template_name = os.path.join('mobile',
-    #                                    self.module_name, self.template_name)
-
     return [self.template_name]
-
-#  @method_decorator(login_required(login_url=co.LOGIN_URL))
-#  def dispatch(self, request, *args, **kwargs):
-#    return super(BaseView, self).dispatch(request, *args, **kwargs)
 
 
 class TipView(BaseView):
