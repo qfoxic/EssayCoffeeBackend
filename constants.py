@@ -31,17 +31,22 @@ TASK_STATUSES = (
   (NOT_ASSIGNED, 'NOT ASSIGNED'),
   (FINISHED, 'FINISHED'))
 
+# If task has public access then it will be visible to everyone.
+# private tasks are visible only for users from private group.
+PUBLIC_ACCESS = 0
+PRIVATE_ACCESS = 1
+ACCESS_LEVELS = ((PUBLIC_ACCESS, 'PUBLIC ACCESS'),
+                 (PRIVATE_ACCESS, 'PRIVATE ACCESS'))
+
 
 # Category related item types.
-# Category means a category node with children.
-TYPE_CATEGORY = 0
 # Task means task itself
 TYPE_TASK = 1
 # History means finished task
 TYPE_HISTORY = 2
 
-ITEM_TYPES = (
-  (TYPE_CATEGORY, 'CATEGORY'),
+TASK_TYPES = (
+  (TYPE_TASK, 'TASK'),
   (TYPE_HISTORY, 'HISTORY'))
 
 

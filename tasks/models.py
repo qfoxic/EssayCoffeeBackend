@@ -14,10 +14,11 @@ def ValidateGeoPt(value):
 
 
 class Categories(models.Model):
-  itype = models.SmallIntegerField(choices=co.ITEM_TYPES,
-                                   default=co.TYPE_CATEGORY)
   pid = models.ForeignKey('self', blank=True, null=True)
   name = models.CharField(max_length=co.MAX_STRING_LEN)
+
+  def __str__(self):
+    return self.name
 
   @models.permalink
   def get_absolute_url(self):
@@ -30,6 +31,10 @@ class Categories(models.Model):
 
 class Task(models.Model):
   title = models.CharField(max_length=co.TITLE_MAX_LEN)
+  ttype = models.SmallIntegerField(choices=co.TASK_TYPES,
+                                   default=co.TYPE_TASK)
+  access_level = models.SmallIntegerField(choices=co.ACCESS_LEVELS,
+                                          default=co.PUBLIC_ACCESS)
   overview = models.TextField()
   owner = models.ForeignKey(User, on_delete=models.CASCADE,
                             related_name='owner')
@@ -47,6 +52,9 @@ class Task(models.Model):
   status = models.SmallIntegerField(choices=co.TASK_STATUSES,
                                     default=co.NOT_ASSIGNED)
   category = models.ForeignKey(Categories, related_name='category')
+
+  def __str__(self):
+    return self.title
 
   @models.permalink
   def get_absolute_url(self):

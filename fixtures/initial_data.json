@@ -1,0 +1,20 @@
+[
+{
+  "pk": 1,
+  "model": "auth.user",
+  "fields": {
+    "username": "transport",
+    "first_name": "",
+    "last_name": "",
+    "is_active": true,
+    "is_superuser": true,
+    "is_staff": true,
+    "last_login": "2014-02-05T11:40:51.956Z",
+    "groups": [],
+    "user_permissions": [],
+    "password": "pbkdf2_sha256$12000$ReRVRXYL54Dc$1pftpdE3slkw0kpP7dIFBQ46fgaKYER7FpN1L197coo=",
+    "email": "transport@tr.trans",
+    "date_joined": "2014-02-05T11:34:19.032Z"
+  }
+}
+]
