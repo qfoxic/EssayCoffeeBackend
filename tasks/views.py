@@ -28,4 +28,7 @@ class CategoriesView(BaseView, ListView):
 
 
 class TaskView(BaseView, DetailView):
+  model = Task
   template_name = 'task_form.html'
+  context_object_name = 'task'
+  module_name = 'tasks'

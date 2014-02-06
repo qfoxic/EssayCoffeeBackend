@@ -10,7 +10,7 @@ urlpatterns = patterns('',
 
     url(r'^category/$', CategoriesView.as_view(), name='all_tasks'),
     url(r'^category/(?P<category_id>\d{0,4})$', CategoriesView.as_view(), name='tasks_by_category'),
-    url(r'^task/(?P<task_id>\d+)$', TaskView.as_view(), {'module_path': 'task'}, name='task_by_id'),
+    url(r'^task/(?P<pk>\d+)$', TaskView.as_view(), name='task_by_id'),
 
     url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^admin/', include(admin.site.urls)),
