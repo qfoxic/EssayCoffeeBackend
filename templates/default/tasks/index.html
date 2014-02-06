@@ -1,0 +1,34 @@
+{% extends layout.skin_prefix|add:"/layout.html" %}
+{% load i18n %}
+{% block pagetitle %}All Tasks{% endblock %}
+{% block content %}
+<h1>Tasks</h1>
+<ul>
+    {% for task in tasks %}
+    <li>
+        <a href="{{task.to_link}}">{{ task.title }}</a>
+    </li>
+    {% empty %}
+    <li>
+        No tasks yet.
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+{% block left_side %}
+<aside class="left">
+    <h1>Categories</h1>
+    <ul>
+        {% for cat in categories %}
+        <li>
+            <a href="{{cat.to_link}}">{{ cat.name }}</a>
+        </li>
+        {% empty %}
+        <li>
+            No categories yet.
+        </li>
+        {% endfor %}
+    </ul>
+</aside>
+{% endblock %}
+

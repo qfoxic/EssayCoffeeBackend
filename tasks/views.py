@@ -8,7 +8,7 @@ class CategoriesView(BaseView):
   If category_id is missed then displays all tasks else displays tasks for
   specified category id.
   """
-  template_name = 'categories_list.html'
+  template_name = 'index.html'
   module_name = 'tasks'
 
   def get_context_data(self, **kwargs):

@@ -18,11 +18,13 @@
     <body>
         {% include skin_prefix|add:"/header.html" %}
         {% block info_block%}{%endblock%}
-        <section class="main">
+        <div class="main">
             {% block left_side%}{%endblock%}
-            {% block content%}{%endblock%}
+            <section class="main">
+                {% block content%}{%endblock%}
+            </section>
             {% block right_side%}{%endblock%}
-        </section>
+        </div>
         {% include skin_prefix|add:"/footer.html" %}
     </body>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
