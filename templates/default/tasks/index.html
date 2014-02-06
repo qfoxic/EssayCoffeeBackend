@@ -2,7 +2,9 @@
 {% load i18n %}
 {% block pagetitle %}All Tasks{% endblock %}
 {% block content %}
-<h1>Tasks</h1>
+<div class="lh">
+    <span class="glyphicon glyphicon-align-justify /*glyphicon-list*/"></span> {% trans "Tasks" %}
+</div>
 <ul>
     {% for task in tasks %}
     <li>
@@ -17,8 +19,10 @@
 {% endblock %}
 {% block left_side %}
 <aside class="left">
-    <h1>Categories</h1>
-    <ul>
+    <div class="lh">
+        <span class="glyphicon glyphicon-th"></span><span class="title">{% trans "Categories" %}</span><span class="badge">{{categories|length}}</span>
+    </div>
+    <ul class="nav nav-pills nav-stacked il">
         {% for cat in categories %}
         <li>
             <a href="{{cat.to_link}}">{{ cat.name }}</a>
@@ -31,4 +35,8 @@
     </ul>
 </aside>
 {% endblock %}
-
+{% block info_block %}
+<section class="info">
+    Hello! This page content doesn't match the module purposes
+</section>
+{% endblock %}
