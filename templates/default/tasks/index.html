@@ -25,7 +25,7 @@
     <ul class="nav nav-pills nav-stacked il">
         {% for cat in categories %}
         <li>
-            <a href="{{cat.to_link}}">{{ cat.name }}</a>
+            <a href="{{cat.to_link}}">{% trans cat.name|lower %}</a>
         </li>
         {% empty %}
         <li>
