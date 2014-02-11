@@ -1,4 +1,4 @@
-<form action="{% if object %}{{object.to_link}}{% else %}{% url "task_new" %}{% endif %}" method="post">{% csrf_token %}
+<form action="{% if object %}{% url "task_edit" object.pk %}{% else %}{% url "task_new" %}{% endif %}" method="post">{% csrf_token %}
   {{ form.non_field_errors }}
   {{ form.errors }}
   <div>

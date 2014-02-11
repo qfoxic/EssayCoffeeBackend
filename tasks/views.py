@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 from django.core.urlresolvers import reverse_lazy
 
 from tasks.models import Task, Categories
-from general.views import BaseView
+from general.views import BaseView, owner_required
 
 
 class TaskForm(ModelForm):
@@ -59,6 +59,10 @@ class UpdateTaskView(BaseView, UpdateView):
     kwargs['request'] = self.request
     return kwargs
 
+  def post(self, *args, **kwargs):
+    owner_required(self.request.user, self.get_object())
+    return super(UpdateTaskView, self).post(*args, **kwargs)
+
 
 class CreateTaskView(BaseView, CreateView):
   module_name = 'tasks'
@@ -84,3 +88,6 @@ class RemoveTaskView(BaseView, DeleteView):
   success_url = reverse_lazy('all_tasks')
   template_name = 'task_delete_form.html'
 
+  def post(self, *args, **kwargs):
+    #owner_required(self.request.user, self.get_object())
+    return super(RemoveTaskView, self).post(*args, **kwargs)

@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.decorators import permission_required
+from django.core.urlresolvers import reverse_lazy
 
 from django.contrib import admin
 admin.autodiscover()
@@ -9,6 +9,7 @@ admin.autodiscover()
 from tasks.views import CategoriesView, UpdateTaskView, CreateTaskView
 from tasks.views import RemoveTaskView, DetailTaskView
 from general.views import LoginView, LogoutView
+
 
 task_new = login_required(
     permission_required('tasks.add_task', raise_exception=True)(CreateTaskView.as_view()),

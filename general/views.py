@@ -5,6 +5,7 @@ from django.utils import translation
 from django.views.generic import TemplateView
 from django.contrib.auth.views import login, logout
 from django.core.urlresolvers import reverse_lazy
+from django.core.exceptions import PermissionDenied
 
 import lib.confreader as conf
 import constants as co
@@ -18,6 +19,12 @@ def check_mobile(request):
     if b or v:
       return True
   return False
+
+
+def owner_required(user, entity):
+  """Checks whether user is owner of an entity."""
+  if not user.is_superuser and not entity.owner.pk == user.pk :
+    raise PermissionDenied
 
 
 class BaseView(object):
