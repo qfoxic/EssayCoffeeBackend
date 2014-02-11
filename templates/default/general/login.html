@@ -1,0 +1,25 @@
+{% extends layout.skin_prefix|add:"/layout.html" %}
+{% load i18n %}
+{% block pagetitle %}All Tasks{% endblock %}
+{% block content %}
+<form action="{% url "login" %}" method="post">{% csrf_token %}
+  {{form.errors}}
+  <input type="hidden" name="next" value="{{next}}">
+  <div>
+    <label>Username:
+      <input type="text" name="username" />
+    </label>
+  </div>
+  <div>
+    <label>Password:
+      <input type="text" name="password" />
+    </label>
+  </div>
+  <input type="submit" value="Submit" />
+</form>
+{% endblock %}
+{% block info_block %}
+<section class="info">
+    Hello! This page content doesn't match the module purposes
+</section>
+{% endblock %}

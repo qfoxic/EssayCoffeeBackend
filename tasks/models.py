@@ -31,12 +31,12 @@ class Categories(models.Model):
 
 class Task(models.Model):
   title = models.CharField(max_length=co.TITLE_MAX_LEN)
-  ttype = models.SmallIntegerField(choices=co.TASK_TYPES,
+  ttype = models.SmallIntegerField(choices=co.TASK_TYPES, blank=True,
                                    default=co.TYPE_TASK)
-  access_level = models.SmallIntegerField(choices=co.ACCESS_LEVELS,
+  access_level = models.SmallIntegerField(choices=co.ACCESS_LEVELS, blank=True,
                                           default=co.PUBLIC_ACCESS)
   overview = models.TextField()
-  owner = models.ForeignKey(User, on_delete=models.CASCADE,
+  owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True,
                             related_name='owner')
   assignee = models.ForeignKey(User, null=True, blank=True,
                                related_name='assignee')
@@ -50,7 +50,7 @@ class Task(models.Model):
                                   blank=True)
   price = models.DecimalField(null=True, decimal_places=co.DECIMAL_PLACES,
                               max_digits=co.DECIMAL_DIGITS, blank=True)
-  status = models.SmallIntegerField(choices=co.TASK_STATUSES,
+  status = models.SmallIntegerField(choices=co.TASK_STATUSES, blank=True,
                                     default=co.NOT_ASSIGNED)
   category = models.ForeignKey(Categories, related_name='category')
 
@@ -59,7 +59,7 @@ class Task(models.Model):
 
   @models.permalink
   def get_absolute_url(self):
-    return  ('task_by_id', (), {'pk': self.id})
+    return  ('task_view', (), {'pk': self.id})
   to_link = get_absolute_url
 
   class Meta:

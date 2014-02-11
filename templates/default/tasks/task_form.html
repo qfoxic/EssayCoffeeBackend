@@ -1,1 +1,41 @@
-<h1>{{task.title}}</h1>
+<form action="{% if object %}{{object.to_link}}{% else %}{% url "task_new" %}{% endif %}" method="post">{% csrf_token %}
+  {{ form.non_field_errors }}
+  {{ form.errors }}
+  <div>
+    {{form.title.errors}}
+    <label>Title:
+      {{form.title}}
+    </label>
+  </div>
+  <div>
+    {{form.overview.errors}}
+    <label>Overview:
+      {{form.overview}}
+    </label>
+  </div>
+  <div>
+    {{form.expired.errors}}
+    <label>Expired At:
+      {{form.expired}}
+    </label>
+  </div>
+  <div>
+    {{form.end_point.errors}}
+    <label>End Point:
+      {{form.end_point}}
+    </label>
+  </div>
+  <div>
+    {{form.price.errors}}
+    <label>Price:
+      {{form.price}}
+    </label>
+  </div>
+  <div>
+    {{form.category.errors}}
+    <label>Category:
+      {{form.category}}
+    </label>
+  </div>
+  <input type="submit" value="Submit" />
+</form>

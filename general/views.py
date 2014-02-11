@@ -2,7 +2,9 @@ import os
 
 from django.conf import settings
 from django.utils import translation
-from django.views.generic.base import TemplateView
+from django.views.generic import TemplateView
+from django.contrib.auth.views import login, logout
+from django.core.urlresolvers import reverse_lazy
 
 import lib.confreader as conf
 import constants as co
@@ -18,7 +20,7 @@ def check_mobile(request):
   return False
 
 
-class BaseView(TemplateView):
+class BaseView(object):
   """Base class for all views. In addition, it loads settings from "config/" 
   module's directory and then from database.
   """
@@ -45,11 +47,22 @@ class BaseView(TemplateView):
                                       self.template_name)
     return [self.template_name]
 
-  def get_context_data(self, **kwargs):
-    context = super(BaseView, self).get_context_data(**kwargs)
-    context.update(self.settings)
-    return context
 
+class LoginView(BaseView, TemplateView):
+  template_name='login.html'
+
+  def render_to_response(self, context, **response_kwargs):
+    context.update(self.settings)
+    return login(request=self.request, template_name=self.get_template_names(),
+        extra_context=context)
+
+  def post(self, *args, **kwargs):
+    return login(request=self.request)
+
+
+class LogoutView(BaseView, TemplateView):
+  def render_to_response(self, context, **response_kwargs):
+    return logout(request=self.request, next_page=reverse_lazy('all_tasks'))
 
 class TipView(BaseView):
   def get_context_data(self, **kwargs):
