@@ -8,8 +8,8 @@ admin.autodiscover()
 
 from tasks.views import CategoriesView, UpdateTaskView, CreateTaskView
 from tasks.views import RemoveTaskView, DetailTaskView
-from general.views import LoginView, LogoutView
-
+from general.views import LoginView, LogoutView, ResetPswdView
+from general.views import ResetPswdDoneView, ResetPswdConfirmView, ResetPswdCompleteView
 
 task_new = login_required(
     permission_required('tasks.add_task', raise_exception=True)(CreateTaskView.as_view()),
@@ -25,9 +25,9 @@ task_details = DetailTaskView.as_view()
 urlpatterns = patterns('',
     url(r'^$', CategoriesView.as_view()),
 
-    url(r'^category/$', CategoriesView.as_view(), name='all_tasks'),
     url(r'^category/(?P<category_id>\d{0,4})$', CategoriesView.as_view(), name='tasks_by_category'),
 
+    url(r'^tasks/$', CategoriesView.as_view(), name='all_tasks'),
     url(r'^task/new$', task_new, name='task_new'),
     url(r'^task/(?P<pk>\d+)/$', task_details, name='task_view'),
     url(r'^task/(?P<pk>\d+)/edit$', task_update, name='task_edit'),
@@ -35,6 +35,10 @@ urlpatterns = patterns('',
 
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
+    url(r'^reset/$', ResetPswdView.as_view(), name='pswd_reset'),
+    url(r'^resetdone/$', ResetPswdDoneView.as_view(), name='pswd_reset_done'),
+    url(r'^resetconfirm/(?P<uidb64>.*)/(?P<token>.*)$', ResetPswdConfirmView.as_view(), name='pswd_reset_confirm'),
+    url(r'^resetcomplete/$', ResetPswdCompleteView.as_view(), name='pswd_reset_complete'),
 
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^test/', BaseView.as_view(template_name='test/index.html'),{'module_path':'test'}),

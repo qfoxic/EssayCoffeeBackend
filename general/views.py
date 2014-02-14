@@ -3,7 +3,8 @@ import os
 from django.conf import settings
 from django.utils import translation
 from django.views.generic import TemplateView
-from django.contrib.auth.views import login, logout
+from django.contrib.auth.views import login, logout, password_reset
+from django.contrib.auth.views import password_reset_done, password_reset_confirm, password_reset_complete
 from django.core.urlresolvers import reverse_lazy
 from django.core.exceptions import PermissionDenied
 
@@ -64,44 +65,75 @@ class LoginView(BaseView, TemplateView):
         extra_context=context)
 
   def post(self, *args, **kwargs):
-    return login(request=self.request)
+    kwargs.update(self.settings)
+    return login(request=self.request, template_name=self.get_template_names(),
+                 extra_context=kwargs)
 
 
 class LogoutView(BaseView, TemplateView):
   def render_to_response(self, context, **response_kwargs):
     return logout(request=self.request, next_page=reverse_lazy('all_tasks'))
 
-class TipView(BaseView):
-  def get_context_data(self, **kwargs):
-    kwargs.update(self.settings)
-    lang = translation.get_language()
-    real_path = os.path.join(settings.SITE_ROOT, 'templates', 'tips/%s/%s.html' % ( lang, kwargs['id'] ))
-    if_not_path = os.path.join(settings.SITE_ROOT, 'templates', 'tips/en/%s.html' % kwargs['id'])
-    
-    if not os.path.exists(real_path):
-      if not os.path.exists(if_not_path):
-        self.template_name = 'tips/en/not_found.html'
-      else:  
-        self.template_name = 'tips/en/%s.html' % kwargs['id']
-    else:
-      self.template_name = 'tips/%s/%s.html' % ( lang, kwargs['id'] )
-    return kwargs
+
+class ResetPswdView(BaseView, TemplateView):
+  template_name='password_reset_form.html'
+  email_template_name='password_reset_email.html'
+  
+  def get_email_template(self):
+    try:
+      skin_prefix = self.settings['layout']['skin_prefix']
+    except KeyError:
+      print 'Could not obtain skin prefix skipping to default.'
+      skin_prefix = co.DEFAULT_SKIN_PREFIX
+    return os.path.join(skin_prefix, self.module_name, self.email_template_name)
+
+  def render_to_response(self, context, **response_kwargs):
+    context.update(self.settings)
+    return password_reset(request=self.request,
+                          template_name=self.get_template_names(),
+                          email_template_name=self.get_email_template(),
+                          post_reset_redirect=reverse_lazy('pswd_reset_done'),
+                          extra_context=context)
+
+  def post(self, *args, **kwargs):
+    return password_reset(request=self.request,
+                          template_name=self.get_template_names(),
+                          email_template_name=self.get_email_template(),
+                          post_reset_redirect=reverse_lazy('pswd_reset_done'))
 
 
-class HelpView(BaseView):
-  def get_context_data(self, **kwargs):
-    kwargs.update(self.settings)
-    lang = translation.get_language()
-    if not kwargs['id']:
-      kwargs['id'] = 'index'  
-    real_path = os.path.join(settings.SITE_ROOT, 'templates', 'help/%s/%s.html' % ( lang, kwargs['id'] ))
-    if_not_path = os.path.join(settings.SITE_ROOT, 'templates', 'help/en/%s.html' % kwargs['id'])
-    
-    if not os.path.exists(real_path):
-      if not os.path.exists(if_not_path):
-        self.template_name = 'help/en/not_found.html'
-      else:  
-        self.template_name = 'help/en/%s.html' % kwargs['id']
-    else:
-      self.template_name = 'help/%s/%s.html' % ( lang, kwargs['id'] )
-    return kwargs
+class ResetPswdConfirmView(BaseView, TemplateView):
+  template_name='password_reset_confirm.html'
+
+  def render_to_response(self, context, **response_kwargs):
+    context.update(self.settings)
+    return password_reset_confirm(request=self.request,
+        uidb64=context['uidb64'], token=context['token'],
+        template_name=self.get_template_names(),
+        post_reset_redirect=reverse_lazy('pswd_reset_complete'),
+        extra_context=context)
+
+  def post(self, *args, **kwargs):
+    return password_reset_confirm(request=self.request,
+        uidb64=kwargs['uidb64'], token=kwargs['token'],
+        post_reset_redirect=reverse_lazy('pswd_reset_complete'))
+
+
+class ResetPswdCompleteView(BaseView, TemplateView):
+  template_name='password_reset_complete.html'
+
+  def render_to_response(self, context, **response_kwargs):
+    context.update(self.settings)
+    return password_reset_complete(request=self.request,
+        template_name=self.get_template_names(), extra_context=context)
+
+
+class ResetPswdDoneView(BaseView, TemplateView):
+  template_name='password_reset_done.html'
+
+  def render_to_response(self, context, **response_kwargs):
+    context.update(self.settings)
+    return password_reset_done(request=self.request,
+                               template_name=self.get_template_names(),
+                               extra_context=context)
+
