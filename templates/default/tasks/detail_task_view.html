@@ -1,38 +1,40 @@
 {% extends layout.skin_prefix|add:"default/layout.html" %}
 {% load i18n %}
-{% block pagetitle %}Task Details{% endblock %}
+{% block pagetitle %}{% trans "Task Details" %}{% endblock %}
 {% block content %}
-<div>
-    <label>Title:
-        {{object.title}} </label>
-</div>
-<div>
-    <label>Overview:
-        {{object.overview}} </label>
-</div>
-<div>
-    <label>Expired At:
-        {{object.expired}} </label>
-</div>
-<div>
-    <label>End Point:
-        {{object.end_point}} </label>
-</div>
-<div>
-    <label>Price:
-        {{object.price}} </label>
-</div>
-<div>
-    <label>Category:
-        {{object.category}} </label>
-</div>
-<div>
-    <label>Owner:
-        {{object.owner}} </label>
-</div>
+<section class="container-fluid" style="margin: 1em auto; width: 80%">
+    <div>
+        <label>Title:
+            {{object.title}} </label>
+    </div>
+    <div>
+        <label>Overview:
+            {{object.overview}} </label>
+    </div>
+    <div>
+        <label>Expired At:
+            {{object.expired}} </label>
+    </div>
+    <div>
+        <label>End Point:
+            {{object.end_point}} </label>
+    </div>
+    <div>
+        <label>Price:
+            {{object.price}} </label>
+    </div>
+    <div>
+        <label>Category:
+            {{object.category}} </label>
+    </div>
+    <div>
+        <label>Owner:
+            {{object.owner}} </label>
+    </div>
+</section>
 {% endblock %}
 {% block info_block %}
 <section class="info">
-    <h2>Task Details</h2>
+    <h2>{% trans "Task Details" %}</h2>
 </section>
 {% endblock %}

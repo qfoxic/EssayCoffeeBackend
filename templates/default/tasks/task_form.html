@@ -1,59 +1,64 @@
 {% extends layout.skin_prefix|add:"default/layout.html" %}
 {% load i18n attr %}
-{% block pagetitle %}Edit Task{% endblock %}
+{% block pagetitle %}{% trans "Edit Task" %}{% endblock %}
 {% block content %}
-<section class="container-fluid" style="margin: 1em auto; width: 80%">
-    <form role="form" action="{% if object %}{% url "task_edit" object.pk %}{% else %}{% url "task_new" %}{% endif %}" method="post">
-        {% csrf_token %}
-        <!-- {{ form.non_field_errors }} -->
-        <!-- {{ form.errors }} -->
-        <div class="row">
-            <div class="form-group col-md-9{% if form.title.errors %} has-error{% endif %}">
-                <!-- {{form.title.errors}} -->
-                <label>{% trans "Title" %}</label>
-                {{form.title|attr:"class:form-control,autocomplete:off,placeholder:Enter a task title"}}
-            </div>
-            <div class="form-group col-md-3{% if form.category.errors %} has-error{% endif %}">
-                <!-- {{form.category.errors}} -->
-                <label>{% trans "Category" %}</label>
-                {{form.category|attr:"class:form-control"}}
-            </div>
-        </div>
-        <div class="form-group{% if form.overview.errors %} has-error{% endif %}">
-            <!-- {{form.overview.errors}} -->
-            <label>{% trans "Overview" %}</label>
-            {{form.overview|attr:"class:form-control,rows:7,placeholder:Enter a task details"}}
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6{% if form.expired.errors %} has-error{% endif %}">
-                <!-- {{form.expired.errors}} -->
-                <label>{% trans "Expired At" %}</label>
-                <div class="datetimepicker input-group date">
-                    {{form.expired|attr:"class:form-control,placeholder:Enter a date/time"}}
-                    <span class="input-group-addon"><span class="fa fa-calendar fa-2"></span> </span>
+<section class="container-fluid panel panel-default{% if form.errors %} panel-danger{% endif %}">
+    <div class="panel-heading">
+        <h3 class="panel-title">{% trans "Edit Task" %}</h3>
+    </div>
+    <div class="panel-body">
+        <form role="form" action="{% if object %}{% url "task_edit" object.pk %}{% else %}{% url "task_new" %}{% endif %}" method="post">
+            {% csrf_token %}
+            <!-- {{ form.non_field_errors }} -->
+            <!-- {{ form.errors }} -->
+            <div class="row">
+                <div class="form-group col-md-9{% if form.title.errors %} has-error{% endif %}">
+                    <!-- {{form.title.errors}} -->
+                    <label>{% trans "Title" %}</label>
+                    {{form.title|attr:"class:form-control,autocomplete:off,placeholder:Enter a task title"}}
+                </div>
+                <div class="form-group col-md-3{% if form.category.errors %} has-error{% endif %}">
+                    <!-- {{form.category.errors}} -->
+                    <label>{% trans "Category" %}</label>
+                    {{form.category|attr:"class:form-control"}}
                 </div>
             </div>
-            <div class="form-group col-md-6{% if form.price.errors %} has-error{% endif %}">
-                <label>{% trans "Price" %}</label>
-                <!-- {{form.price.errors}} -->
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
-                    {{form.price|attr:"class:form-control,placeholder:Enter a price"}}
-                    <span class="input-group-addon">.00</span>
+            <div class="form-group{% if form.overview.errors %} has-error{% endif %}">
+                <!-- {{form.overview.errors}} -->
+                <label>{% trans "Overview" %}</label>
+                {{form.overview|attr:"class:form-control,rows:7,placeholder:Enter a task details"}}
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6{% if form.expired.errors %} has-error{% endif %}">
+                    <!-- {{form.expired.errors}} -->
+                    <label>{% trans "Expired At" %}</label>
+                    <div class="datetimepicker input-group date">
+                        {{form.expired|attr:"class:form-control,placeholder:Enter a date/time"}}
+                        <span class="input-group-addon"><span class="fa fa-calendar fa-2"></span> </span>
+                    </div>
+                </div>
+                <div class="form-group col-md-6{% if form.price.errors %} has-error{% endif %}">
+                    <label>{% trans "Price" %}</label>
+                    <!-- {{form.price.errors}} -->
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                        {{form.price|attr:"class:form-control,placeholder:Enter a price"}}
+                        <span class="input-group-addon">.00</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div>
-            {{form.end_point.errors}}
-            <label>End Point:
-                {{form.end_point}} </label>
-        </div>
-        <input type="submit" value="Submit" class="btn btn-primary" />
-    </form>
+            <div class="form-group{% if form.end_point.errors %} has-error{% endif %}">
+                <!-- {{form.end_point.errors}} -->
+                <label>{% trans "End Point" %}</label>
+                {{form.end_point|attr:"class:form-control,placeholder:Enter a point"}}
+            </div>
+            <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
+        </form>
+    </div>
 </section>
 {% endblock %}
 {% block info_block %}
-<section class="info">
-    <h2>Edit Task</h2>
-</section>
+<!-- <section class="info">
+<h2>{% trans "Edit Task" %}</h2>
+</section> -->
 {% endblock %}

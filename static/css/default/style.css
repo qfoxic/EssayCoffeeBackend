@@ -9,6 +9,11 @@ html, body {
 a {
     outline: 0 !important;
 }
+section.panel {
+    margin: 2em auto;
+    padding: 0;
+    width: 800px;
+}
 section.info {
     /*min-height: 250px;*/
     margin-top: 50px;
