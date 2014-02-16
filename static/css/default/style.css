@@ -13,7 +13,7 @@ section.info {
     /*min-height: 250px;*/
     margin-top: 50px;
     box-shadow: 0 -2px 16px -2px rgba(0, 0, 0, 0.1) inset;
-    background-color: rgba(189, 255, 181, 0.35);
+    background-color: rgba(232, 232, 232, .35);
     padding: 2em;
     color: #134a31;
     text-shadow: 0 1px 1px #FFF;
@@ -72,13 +72,17 @@ div.lh span.badge {
 div.lh span.title {
     padding: 0 15px 0 10px;
 }
-ul.il li > a {
+/*ul > li * {
+ vertical-align: middle;
+ }*/
+
+li > a {
     /*margin-top: .5em;*/
     font-size: 1.1em;
     font-weight: 300;
-    padding: 3px 10px 3px 42px;
+    /*padding: 3px 10px 3px 42px;*/
     letter-spacing: 1px;
     /*font-family: Tahoma, Arial, Helvetica, sans-serif;*/
     /*font-variant: small-caps;*/
-    
+
 }

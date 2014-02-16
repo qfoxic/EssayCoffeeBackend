@@ -10,15 +10,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=9">
         <link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.ico">
         <link rel="apple-touch-icon" href="{{ STATIC_URL }}images/apple-touch-icon.png">
-        <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=latin,cyrillic-ext,cyrillic">
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=latin,cyrillic-ext,cyrillic" type="text/css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/{{ skin_prefix }}/style.css">
     </head>
     <body>
         {% include skin_prefix|add:"/header.html" %}
         {% block info_block%}{%endblock%}
-        <div class="container">
+        <div class="container" style="padding-bottom: 3em">
             {% block left_side%}{%endblock%}
             <section class="main">
                 {% block content%}{%endblock%}
@@ -27,9 +29,12 @@
         </div>
         {% include skin_prefix|add:"/footer.html" %}
     </body>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <script src="{{ STATIC_URL }}js/lib/jsviews.min.js"></script>
-    <script src="{{ STATIC_URL }}js/app.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}js/lib/moment.min.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}js/lib/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}js/lib/locales/bootstrap-datetimepicker.ru.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}js/lib/jsviews.min.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}js/app.js" type="text/javascript"></script>
 </html>
 {% endwith %}

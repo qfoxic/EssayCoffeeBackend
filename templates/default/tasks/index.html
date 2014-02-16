@@ -3,16 +3,16 @@
 {% block pagetitle %}All Tasks{% endblock %}
 {% block content %}
 <div class="lh">
-    <span class="glyphicon glyphicon-align-justify /*glyphicon-list*/"></span> {% trans "Tasks" %}
+    <i class="fa fa-tasks"></i><span class="title">{% trans "Tasks" %}</span><span class="badge">{{tasks|length}}</span>
 </div>
-<ul>
+<ul class="fa-ul">
     {% for task in tasks %}
     <li>
-        <a href="{{task.to_link}}">{{ task.title }}</a>
+        <i class="fa-li fa fa-check-square-o"></i><a href="{{task.to_link}}">{{ task.title }}</a>
     </li>
     {% empty %}
     <li>
-        No tasks yet.
+        <i class="fa-li fa fa-square-o"></i>{% trans "No tasks yet" %}
     </li>
     {% endfor %}
 </ul>
@@ -20,16 +20,16 @@
 {% block left_side %}
 <aside class="left">
     <div class="lh">
-        <span class="glyphicon glyphicon-th"></span><span class="title">{% trans "Categories" %}</span><span class="badge">{{categories|length}}</span>
+        <i class="fa fa-th"></i><span class="title">{% trans "Categories" %}</span><span class="badge">{{categories|length}}</span>
     </div>
-    <ul class="nav nav-pills nav-stacked il">
+    <ul class="fa-ul">
         {% for cat in categories %}
         <li>
-            <a href="{{cat.to_link}}">{% trans cat.name|lower %}</a>
+            <i class="fa-li fa fa-bookmark-o"></i><a href="{{cat.to_link}}">{% trans cat.name|lower %}</a>
         </li>
         {% empty %}
         <li>
-            No categories yet.
+            <i class="fa-li fa fa-bookmark-o"></i>{% trans "No categories yet" %}
         </li>
         {% endfor %}
     </ul>
@@ -37,6 +37,6 @@
 {% endblock %}
 {% block info_block %}
 <section class="info">
-    Hello! This page content doesn't match the module purposes
+    Hello! This is categories view
 </section>
 {% endblock %}
