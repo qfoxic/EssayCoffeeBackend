@@ -1,4 +1,4 @@
-{% extends layout.skin_prefix|add:"default/layout.html" %}
+{% extends layout.skin_prefix|add:"/layout.html" %}
 {% load i18n attr %}
 {% block pagetitle %}{% trans "Edit Task" %}{% endblock %}
 {% block content %}
@@ -7,6 +7,7 @@
         <h3 class="panel-title">{% trans "Edit Task" %}</h3>
     </div>
     <div class="panel-body">
+        {{form.errors}}
         <form role="form" action="{% if object %}{% url "task_edit" object.pk %}{% else %}{% url "task_new" %}{% endif %}" method="post">
             {% csrf_token %}
             <!-- {{ form.non_field_errors }} -->

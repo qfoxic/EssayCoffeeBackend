@@ -1,5 +1,15 @@
-<form action="{% url "task_remove" object.id %}" method="post">{% csrf_token %}
-  <h3>{{object.title}}</h3>
-  <div>Are you sure?</div>
-  <input type="submit" value="Submit" />
-</form>
+{% extends layout.skin_prefix|add:"/layout.html" %}
+{% load i18n %}
+{% block pagetitle %}{% trans "Task Details" %}{% endblock %}
+{% block content %}
+  <form action="{% url "task_remove" object.id %}" method="post">{% csrf_token %}
+    <h3>{{object.title}}</h3>
+    <div>Are you sure?</div>
+    <input type="submit" value="Submit" />
+  </form>
+{% endblock %}
+{% block info_block %}
+<section class="info">
+    <h2>{% trans "Task Details" %}</h2>
+</section>
+{% endblock %}

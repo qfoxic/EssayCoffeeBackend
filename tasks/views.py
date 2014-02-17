@@ -59,9 +59,14 @@ class UpdateTaskView(BaseView, UpdateView):
     kwargs['request'] = self.request
     return kwargs
 
-  def post(self, *args, **kwargs):
-    owner_required(self.request.user, self.get_object())
-    return super(UpdateTaskView, self).post(*args, **kwargs)
+  def get_context_data(self, **kwargs):
+    context = super(UpdateTaskView, self).get_context_data(**kwargs)
+    context.update(self.settings)
+    return context
+
+  def dispatch(self, request, *args, **kwargs):
+    owner_required(request.user, self.get_object())
+    return super(UpdateTaskView, self).dispatch(request, *args, **kwargs)
 
 
 class CreateTaskView(BaseView, CreateView):
@@ -75,11 +80,21 @@ class CreateTaskView(BaseView, CreateView):
     kwargs['request'] = self.request
     return kwargs
 
+  def get_context_data(self, **kwargs):
+    context = super(CreateTaskView, self).get_context_data(**kwargs)
+    context.update(self.settings)
+    return context
+
 
 class DetailTaskView(BaseView, DetailView):
   module_name = 'tasks'
   queryset = Task.objects.all()
   template_name = 'detail.html'
+
+  def get_context_data(self, **kwargs):
+    context = super(DetailTaskView, self).get_context_data(**kwargs)
+    context.update(self.settings)
+    return context
 
 
 class RemoveTaskView(BaseView, DeleteView):
@@ -88,6 +103,11 @@ class RemoveTaskView(BaseView, DeleteView):
   success_url = reverse_lazy('all_tasks')
   template_name = 'delete.html'
 
-  def post(self, *args, **kwargs):
-    #owner_required(self.request.user, self.get_object())
-    return super(RemoveTaskView, self).post(*args, **kwargs)
+  def get_context_data(self, **kwargs):
+    context = super(RemoveTaskView, self).get_context_data(**kwargs)
+    context.update(self.settings)
+    return context
+
+  def dispatch(self, request, *args, **kwargs):
+    owner_required(request.user, self.get_object())
+    return super(RemoveTaskView, self).dispatch(request, *args, **kwargs)
