@@ -49,7 +49,7 @@ class CategoriesView(BaseView, TemplateView):
 
 
 class UpdateTaskView(BaseView, UpdateView):
-  template_name = 'task_form.html'
+  template_name = 'edit.html'
   form_class = TaskForm
   queryset = Task.objects.all()
   module_name = 'tasks'
@@ -68,7 +68,7 @@ class CreateTaskView(BaseView, CreateView):
   module_name = 'tasks'
   form_class = TaskForm
   queryset = Task.objects.all()
-  template_name = 'task_form.html'
+  template_name = 'edit.html'
 
   def get_form_kwargs(self):
     kwargs = super(CreateTaskView, self).get_form_kwargs()
@@ -79,14 +79,14 @@ class CreateTaskView(BaseView, CreateView):
 class DetailTaskView(BaseView, DetailView):
   module_name = 'tasks'
   queryset = Task.objects.all()
-  template_name = 'detail_task_view.html'
+  template_name = 'detail.html'
 
 
 class RemoveTaskView(BaseView, DeleteView):
   module_name = 'tasks'
   queryset = Task.objects.all()
   success_url = reverse_lazy('all_tasks')
-  template_name = 'task_delete_form.html'
+  template_name = 'delete.html'
 
   def post(self, *args, **kwargs):
     #owner_required(self.request.user, self.get_object())
