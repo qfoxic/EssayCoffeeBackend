@@ -2,7 +2,7 @@ import os
 
 from django.conf import settings
 from django.utils import translation
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 from django.contrib.auth.views import login, logout, password_reset
 from django.contrib.auth.views import password_reset_done, password_reset_confirm, password_reset_complete
 from django.core.urlresolvers import reverse_lazy
@@ -22,13 +22,13 @@ def check_mobile(request):
   return False
 
 
-def owner_required(user, entity):
+def owner_required(user, owner_id):
   """Checks whether user is owner of an entity."""
-  if not user.is_superuser and not entity.owner.pk == user.pk :
+  if not user.is_superuser and not owner_id == user.pk :
     raise PermissionDenied
 
 
-class BaseView(object):
+class BaseView(View):
   """Base class for all views. In addition, it loads settings from "config/" 
   module's directory and then from database.
   """

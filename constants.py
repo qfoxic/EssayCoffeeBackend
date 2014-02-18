@@ -38,6 +38,9 @@ PRIVATE_ACCESS = 1
 ACCESS_LEVELS = ((PUBLIC_ACCESS, 'PUBLIC ACCESS'),
                  (PRIVATE_ACCESS, 'PRIVATE ACCESS'))
 
+# Available ratings for a comments.
+COMMENT_RATINGS = ((0, 'NULL'), (1, 'ONE'), (2, 'TWO'), (3, 'THREE'),
+                   (4, 'FOUR'), (5, 'FIVE'))
 
 # Category related item types.
 # Task means task itself

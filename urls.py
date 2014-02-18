@@ -8,6 +8,7 @@ admin.autodiscover()
 
 from tasks.views import CategoriesView, UpdateTaskView, CreateTaskView
 from tasks.views import RemoveTaskView, DetailTaskView
+from comments.views import CreateCommentView, RemoveCommentView
 from general.views import LoginView, LogoutView, ResetPswdView
 from general.views import ResetPswdDoneView, ResetPswdConfirmView, ResetPswdCompleteView
 
@@ -22,6 +23,13 @@ task_rm = login_required(
     login_url=reverse_lazy('login'))
 task_details = DetailTaskView.as_view()
 
+comment_new = login_required(
+    permission_required('comments.add_comment', raise_exception=True)(CreateCommentView.as_view()),
+    login_url=reverse_lazy('login'))
+comment_rm = login_required(
+    permission_required('comments.delete_comment', raise_exception=True)(RemoveCommentView.as_view()),
+    login_url=reverse_lazy('login'))
+
 urlpatterns = patterns('',
     url(r'^$', CategoriesView.as_view()),
 
@@ -32,6 +40,9 @@ urlpatterns = patterns('',
     url(r'^task/(?P<pk>\d+)/$', task_details, name='task_view'),
     url(r'^task/(?P<pk>\d+)/edit$', task_update, name='task_edit'),
     url(r'^task/(?P<pk>\d+)/remove$', task_rm, name='task_remove'),
+
+    url(r'^comment/(?P<task_id>\d+)/new$', comment_new, name='comment_new'),
+    url(r'^comment/(?P<pk>\d+)/remove$', comment_rm, name='comment_remove'),
 
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),

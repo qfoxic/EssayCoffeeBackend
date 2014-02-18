@@ -8,6 +8,7 @@ from django.views.generic import TemplateView
 from django.core.urlresolvers import reverse_lazy
 
 from tasks.models import Task, Categories
+from comments.models import Comment
 from general.views import BaseView, owner_required
 
 
@@ -65,7 +66,7 @@ class UpdateTaskView(BaseView, UpdateView):
     return context
 
   def dispatch(self, request, *args, **kwargs):
-    owner_required(request.user, self.get_object())
+    owner_required(request.user, self.get_object().owner.pk)
     return super(UpdateTaskView, self).dispatch(request, *args, **kwargs)
 
 
@@ -94,6 +95,8 @@ class DetailTaskView(BaseView, DetailView):
   def get_context_data(self, **kwargs):
     context = super(DetailTaskView, self).get_context_data(**kwargs)
     context.update(self.settings)
+    task_id = self.kwargs.get('pk')
+    context['comments'] = Comment.objects.filter(ctask_id__exact=task_id)
     return context
 
 
@@ -109,5 +112,5 @@ class RemoveTaskView(BaseView, DeleteView):
     return context
 
   def dispatch(self, request, *args, **kwargs):
-    owner_required(request.user, self.get_object())
+    owner_required(request.user, self.get_object().owner.pk)
     return super(RemoveTaskView, self).dispatch(request, *args, **kwargs)

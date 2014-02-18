@@ -72,10 +72,27 @@
   }
 },
 {
+  "pk": 9, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "comment", 
+    "name": "comment", 
+    "app_label": "comments"
+  }
+},
+{
   "pk": "nz7xx5kpsfx85tguaqfnmcrizx0vcenp", 
   "model": "sessions.session", 
   "fields": {
     "expire_date": "2014-03-04T13:03:47.158Z", 
+    "session_data": "YThjZTMxYWE2MmQ5MTJkNDlkZWM1ZmFmOTljMjY4MDg2MzRlOTUzYzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0="
+  }
+},
+{
+  "pk": "q1kpnvbjxljwybzql6zh091lhjsz4m8q", 
+  "model": "sessions.session", 
+  "fields": {
+    "expire_date": "2014-03-04T16:45:15.831Z", 
     "session_data": "YThjZTMxYWE2MmQ5MTJkNDlkZWM1ZmFmOTljMjY4MDg2MzRlOTUzYzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0="
   }
 },
@@ -312,11 +329,41 @@
   }
 },
 {
+  "pk": 25, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_comment", 
+    "name": "Can add comment", 
+    "content_type": 9
+  }
+},
+{
+  "pk": 26, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_comment", 
+    "name": "Can change comment", 
+    "content_type": 9
+  }
+},
+{
+  "pk": 27, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_comment", 
+    "name": "Can delete comment", 
+    "content_type": 9
+  }
+},
+{
   "pk": 1, 
   "model": "auth.group", 
   "fields": {
     "name": "employer", 
     "permissions": [
+      25, 
+      26, 
+      27, 
       22, 
       23, 
       24
@@ -328,7 +375,11 @@
   "model": "auth.group", 
   "fields": {
     "name": "employee", 
-    "permissions": []
+    "permissions": [
+      25, 
+      26, 
+      27
+    ]
   }
 },
 {
@@ -341,7 +392,7 @@
     "is_active": true, 
     "is_superuser": true, 
     "is_staff": true, 
-    "last_login": "2014-02-18T13:02:28.058Z", 
+    "last_login": "2014-02-18T15:56:59.340Z", 
     "groups": [], 
     "user_permissions": [], 
     "password": "pbkdf2_sha256$12000$S4VIFgNH9DOZ$vhK8sFkmuwUwjD+K1ipkkyxEfy4EY1gGHCgHSHpRkD0=", 
@@ -359,7 +410,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-02-18T13:03:47.153Z", 
+    "last_login": "2014-02-18T16:45:15.827Z", 
     "groups": [
       1
     ], 
@@ -390,27 +441,6 @@
   }
 },
 {
-  "pk": 1, 
-  "model": "tasks.task", 
-  "fields": {
-    "status": 1, 
-    "category": 1, 
-    "updated": "2014-02-18T13:01:36.290Z", 
-    "assignee": null, 
-    "overview": "overview", 
-    "completed": null, 
-    "title": "Employer task1", 
-    "created": "2014-02-18T13:01:36.290Z", 
-    "access_level": 0, 
-    "geo_location": "", 
-    "end_point": "end point", 
-    "owner": 2, 
-    "ttype": 1, 
-    "expired": "2014-02-18T15:01:19Z", 
-    "price": "12"
-  }
-},
-{
   "pk": 2, 
   "model": "tasks.task", 
   "fields": {
@@ -429,6 +459,63 @@
     "ttype": 1, 
     "expired": "2014-02-06T18:08:52Z", 
     "price": "22.22"
+  }
+},
+{
+  "pk": 3, 
+  "model": "tasks.task", 
+  "fields": {
+    "status": 1, 
+    "category": 1, 
+    "updated": "2014-02-18T16:44:43.254Z", 
+    "assignee": null, 
+    "overview": "ssssss", 
+    "completed": null, 
+    "title": "Some task", 
+    "created": "2014-02-18T16:44:43.254Z", 
+    "access_level": 0, 
+    "geo_location": null, 
+    "end_point": "end point", 
+    "owner": 1, 
+    "ttype": 1, 
+    "expired": "2014-02-06T18:08:52Z", 
+    "price": "22"
+  }
+},
+{
+  "pk": 1, 
+  "model": "comments.comment", 
+  "fields": {
+    "body": "qqqq", 
+    "rating": 2, 
+    "cowner": 1, 
+    "created": "2014-02-18T16:44:51.333Z", 
+    "title": "title111", 
+    "ctask": 3
+  }
+},
+{
+  "pk": 2, 
+  "model": "comments.comment", 
+  "fields": {
+    "body": "qqqq", 
+    "rating": 1, 
+    "cowner": 1, 
+    "created": "2014-02-18T16:44:55.529Z", 
+    "title": "title111", 
+    "ctask": 3
+  }
+},
+{
+  "pk": 3, 
+  "model": "comments.comment", 
+  "fields": {
+    "body": "qqqq", 
+    "rating": 1, 
+    "cowner": 1, 
+    "created": "2014-02-18T16:44:59.275Z", 
+    "title": "title111", 
+    "ctask": 3
   }
 },
 {
@@ -585,6 +672,32 @@
     "change_message": "", 
     "user": 1, 
     "content_type": 8
+  }
+},
+{
+  "pk": 13, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2014-02-18T15:57:11.830Z", 
+    "object_repr": "employee", 
+    "object_id": "2", 
+    "change_message": "Changed permissions.", 
+    "user": 1, 
+    "content_type": 3
+  }
+},
+{
+  "pk": 14, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2014-02-18T15:57:24.712Z", 
+    "object_repr": "employer", 
+    "object_id": "1", 
+    "change_message": "Changed permissions.", 
+    "user": 1, 
+    "content_type": 3
   }
 }
 ]
