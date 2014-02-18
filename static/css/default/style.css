@@ -15,13 +15,13 @@ section.panel {
     width: 800px;
 }
 section.info {
-    /*min-height: 250px;*/
-    margin-top: 50px;
-    box-shadow: 0 -2px 16px -2px rgba(0, 0, 0, 0.1) inset;
     background-color: rgba(232, 232, 232, .35);
+    border: 1px solid rgba(232, 232, 232, 1);
+    margin-top: 50px;
     padding: 2em;
     color: #134a31;
     text-shadow: 0 1px 1px #FFF;
+    width: 100%;
 }
 section.info h1 {
     /*font-size: 3.5em;*/
@@ -49,22 +49,36 @@ div.copy {
 .task-details .overview {
     font-weight: 300;
     line-height: 160%;
-    padding: 1em 0 2em;
+    padding: 2em .5em;
     text-align: justify;
 }
 .task-details .price {
-    border: 1px solid rgb(212, 244, 219);
-    padding: 4px 8px;
-    background-color: rgba(212, 244, 219, .5);
     float: right;
+    margin-left: 20px;
+    border: 1px solid rgb(212, 244, 219);
+    padding: 3px 8px 0;
+    background-color: rgba(212, 244, 219, .5);
     font-size: 1.5em;
     font-family: Georgia, Geneva, Times, "Times New Roman", serif;
     box-shadow: 1px 3px 5px rgba(0,0,0,.1);
 }
-.price i {
-    margin-right: .5em;
-    color: #134A31;
+.task-details .price i {
+    margin-right: .3em;
+    color: rgba(133,187,101,.7);
     vertical-align: middle;
+}
+.task-details-inner {
+    box-shadow: 0 30px 25px -30px rgba(0, 0, 0, 0.1);
+    padding-bottom: 2em;
+}
+.task-details .owner {
+    /*float: left;*/
+    /*margin: 0 1.5em 0 0;*/
+    /*text-align: center;*/
+}
+.task-details .owner > img {
+    width: 100px;
+    height: 100px;
 }
 .task-details div.info-row > div.info-col {
     color: #888;
@@ -82,24 +96,7 @@ div.copy {
     clear: both;
     overflow: auto;
     margin-bottom: 1.5em;
-    font-size: .8em;
-}
-div.main {
-    /*margin: 55px auto;*/
-    /*overflow: auto;*/
-    /*width: 1000px;*/
-}
-section.main {
-    overflow: auto;
-    padding-left: 1em;
-}
-div.left {
-    width: 250px;
-    height: 100%;
-    float: left;
-    color: #333;
-    z-index: 1;
-    overflow: hidden;
+    font-size: .9em;
 }
 div.lh {
     padding: 5px 10px;
@@ -115,10 +112,6 @@ div.lh span.badge {
 div.lh span.title {
     padding: 0 15px 0 10px;
 }
-/*ul > li * {
- vertical-align: middle;
- }*/
-
 li > a {
     /*margin-top: .5em;*/
     font-size: 1.1em;

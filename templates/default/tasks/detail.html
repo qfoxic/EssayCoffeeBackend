@@ -3,76 +3,91 @@
 {% block pagetitle %}{% trans "Task Details" %}{% endblock %}
 {% block content %}
 <section class="container-fluid task-details" style="margin: 0 auto">
-    <div>
-        <div class="price">
-            <i class="fa fa-2x fa-money"></i>{{object.price}} $
-        </div>
-        <h2>{{object.title}}</h2>
-    </div>
-    <div class="overview">
-        {{object.overview}}
-    </div>
-    <div class="info-row">
-        <div class="info-col">
-            <i class="fa fa-lg fa-clock-o"></i>{{object.expired}}
-        </div>
-        <div class="info-col">
-            <i class="fa fa-lg fa-check-square-o"></i>status: [ open | performed ]
-        </div>
-        <div class="info-col">
-            <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{object.created}}
-        </div>
-        <div class="info-col">
-            <i class="fa fa-lg fa-bookmark-o"></i>{{object.category}}
-        </div>
-    </div>
-    <div>
-        <i class="fa fa-lg fa-map-marker" style="margin-right:.5em;color:#555"></i>{% trans "Localtion" %}: {{object.end_point}}
-    </div>
-    <label>Owner:
-        {{object.owner}} </label>
-    </div>
-    <div class="lh">
-        <span class="title">{% trans "Comments" %}</span><span class="badge">{{comments|length}}</span>
-    </div>
-    <ul>
-        {% for comment in comments %}
-        <li>
-            {{ comment.title }}
-            <form action="{% url "comment_remove" comment.pk %}" method="POST">
-                {% csrf_token %}
-                <input type="submit" value="{% trans "Remove" %}" class="btn btn-primary" />
-            </form>
-        </li>
-        {% empty %}
-        <li>
-            {% trans "No comments yet" %}
-        </li>
-        {% endfor %}
-    </ul>
-    <form action="{% url "comment_new" task_id=object.pk %}" method="post">
-        {% csrf_token %}
-        <!-- {{ form.non_field_errors }} -->
-        <!-- {{ form.errors }} -->
-        <div class="row">
-            <div class="form-group col-md-9{% if form.title.errors %} has-error{% endif %}">
-                <!-- {{form.title.errors}} -->
-                <label>{% trans "Title" %}</label>
-                <input type="text" name="title" />
+    <div class="row">
+        <div class="col-md-3">
+            <div class="owner">
+                <img src="#" alt="{{object.owner}}" class="img-thumbnail">
+                <br />
+                {{object.owner}}
             </div>
         </div>
-        <div class="form-group{% if form.body.errors %} has-error{% endif %}">
-            <!-- {{form.body.errors}} -->
-            <label>{% trans "Body" %}</label>
-            <input type="text" name="body" />
+        <div class="col-md-9">
+            <div class="task-details-inner">
+                <div>
+                    <div class="price">
+                        <i class="fa fa-2x fa-money"></i>{{object.price}} $
+                    </div>
+                    <h2>{{object.title}}</h2>
+                </div>
+                <div class="overview">
+                    {{object.overview}}
+                </div>
+                <div class="info-row">
+                    <div class="info-col" style="font-weight:500;color:#333">
+                        <i class="fa fa-lg fa-clock-o"></i>{% trans "Expire" %}: {{object.expired}}
+                    </div>
+                    <div class="info-col">
+                        <i class="fa fa-lg fa-check-square-o"></i>{% trans "Status" %}: [ open | performed ]
+                    </div>
+                    <div class="info-col">
+                        <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{object.created}}
+                    </div>
+                    <div class="info-col">
+                        <i class="fa fa-lg fa-bookmark-o"></i>{{object.category}}
+                    </div>
+                </div>
+                <div>
+                    <i class="fa fa-lg fa-map-marker" style="margin-right:.5em;color:#555"></i>{% trans "Localtion" %}: {{object.end_point}}
+                </div>
+            </div>
+            <div class="comments">
+                <div class="lh">
+                    <span class="title">{% trans "Comments" %}</span><span class="badge">{{comments|length}}</span>
+                </div>
+                <ul>
+                    {% for comment in comments %}
+                    <li>
+                        {{ comment.title }}
+                        <form action="{% url "comment_remove" comment.pk %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value="{% trans "Remove" %}" class="btn btn-primary" />
+                        </form>
+                    </li>
+                    {% empty %}
+                    <li>
+                        {% trans "No comments yet" %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="comments-form" style="margin-right:100px">
+                <form action="{% url "comment_new" task_id=object.pk %}" method="post">
+                    {% csrf_token %}
+                    <!-- {{ form.non_field_errors }} -->
+                    <!-- {{ form.errors }} -->
+                    <div class="form-group{% if form.title.errors %} has-error{% endif %}">
+                        <!-- {{form.title.errors}} -->
+                        <label>{% trans "Title" %}</label>
+                        <input type="text" name="title" class="form-control"/>
+                    </div>
+                    <div class="form-group{% if form.body.errors %} has-error{% endif %}">
+                        <!-- {{form.body.errors}} -->
+                        <label>{% trans "Body" %}</label>
+                        <textarea name="body" class="form-control" rows="5"></textarea>
+                    </div>
+                    <div class="form-group{% if form.rating.errors %} has-error{% endif %}">
+                        <!-- {{form.rating.errors}} -->
+                        <label>{% trans "Put your rating 0-5" %}</label>
+                        <input type="text" name="rating" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="form-group{% if form.rating.errors %} has-error{% endif %}">
-            <!-- {{form.rating.errors}} -->
-            <label>{% trans "Put your rating 0-5" %}</label>
-            <input type="text" name="rating" />
-        </div>
-        <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
-    </form>
+    </div>
 </section>
 {% endblock %}
 {% block info_block %}
