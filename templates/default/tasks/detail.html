@@ -2,45 +2,46 @@
 {% load i18n %}
 {% block pagetitle %}{% trans "Task Details" %}{% endblock %}
 {% block content %}
-<section class="container-fluid" style="margin: 1em auto; width: 80%">
+<section class="container-fluid task-details" style="margin: 0 auto">
     <div>
-        <label>Title:
-            {{object.title}} </label>
+        <div class="price">
+            <i class="fa fa-2x fa-money"></i>{{object.price}} $
+        </div>
+        <h2>{{object.title}}</h2>
+    </div>
+    <div class="overview">
+        {{object.overview}}
+    </div>
+    <div class="info-row">
+        <div class="info-col">
+            <i class="fa fa-lg fa-clock-o"></i>{{object.expired}}
+        </div>
+        <div class="info-col">
+            <i class="fa fa-lg fa-check-square-o"></i>status: [ open | performed ]
+        </div>
+        <div class="info-col">
+            <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{object.created}}
+        </div>
+        <div class="info-col">
+            <i class="fa fa-lg fa-bookmark-o"></i>{{object.category}}
+        </div>
     </div>
     <div>
-        <label>Overview:
-            {{object.overview}} </label>
+        <i class="fa fa-lg fa-map-marker" style="margin-right:.5em;color:#555"></i>{% trans "Localtion" %}: {{object.end_point}}
     </div>
-    <div>
-        <label>Expired At:
-            {{object.expired}} </label>
-    </div>
-    <div>
-        <label>End Point:
-            {{object.end_point}} </label>
-    </div>
-    <div>
-        <label>Price:
-            {{object.price}} </label>
-    </div>
-    <div>
-        <label>Category:
-            {{object.category}} </label>
-    </div>
-    <div>
-        <label>Owner:
-            {{object.owner}} </label>
+    <label>Owner:
+        {{object.owner}} </label>
     </div>
     <div class="lh">
-      <span class="title">{% trans "Comments" %}</span><span class="badge">{{comments|length}}</span>
+        <span class="title">{% trans "Comments" %}</span><span class="badge">{{comments|length}}</span>
     </div>
     <ul>
         {% for comment in comments %}
         <li>
             {{ comment.title }}
             <form action="{% url "comment_remove" comment.pk %}" method="POST">
-               {% csrf_token %}
-               <input type="submit" value="{% trans "Remove" %}" class="btn btn-primary" />
+                {% csrf_token %}
+                <input type="submit" value="{% trans "Remove" %}" class="btn btn-primary" />
             </form>
         </li>
         {% empty %}

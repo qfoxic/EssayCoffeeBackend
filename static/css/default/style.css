@@ -46,6 +46,44 @@ div.copy {
     text-shadow: 0px 1px 0 rgba(0, 0, 0, 0.5);
     font-weight: 200;
 }
+.task-details .overview {
+    font-weight: 300;
+    line-height: 160%;
+    padding: 1em 0 2em;
+    text-align: justify;
+}
+.task-details .price {
+    border: 1px solid rgb(212, 244, 219);
+    padding: 4px 8px;
+    background-color: rgba(212, 244, 219, .5);
+    float: right;
+    font-size: 1.5em;
+    font-family: Georgia, Geneva, Times, "Times New Roman", serif;
+    box-shadow: 1px 3px 5px rgba(0,0,0,.1);
+}
+.price i {
+    margin-right: .5em;
+    color: #134A31;
+    vertical-align: middle;
+}
+.task-details div.info-row > div.info-col {
+    color: #888;
+    white-space: nowrap;
+    width: auto;
+    float: left;
+    padding: 0 2em 0 0;
+    margin-bottom: .5em;
+}
+.task-details div.info-row > div.info-col > i {
+    margin-right: .4em;
+    color: #555;
+}
+.task-details div.info-row {
+    clear: both;
+    overflow: auto;
+    margin-bottom: 1.5em;
+    font-size: .8em;
+}
 div.main {
     /*margin: 55px auto;*/
     /*overflow: auto;*/
