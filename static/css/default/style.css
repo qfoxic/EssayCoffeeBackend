@@ -48,14 +48,14 @@ div.copy {
 }
 div.main {
     /*margin: 55px auto;*/
-    overflow: auto;
-    width: 1000px;
+    /*overflow: auto;*/
+    /*width: 1000px;*/
 }
 section.main {
     overflow: auto;
     padding-left: 1em;
 }
-aside.left {
+div.left {
     width: 250px;
     height: 100%;
     float: left;

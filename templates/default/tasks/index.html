@@ -5,7 +5,8 @@
 <div class="lh">
     <i class="fa fa-tasks"></i><span class="title">{% trans "Tasks" %}</span><span class="badge">{{tasks|length}}</span>
 </div>
-<ul class="fa-ul">
+<!-- <ul class="fa-ul"> -->
+<ul>
     {% for task in tasks %}
     <li>
         <i class="fa-li fa fa-check-square-o"></i><a href="{{task.to_link}}">{{ task.title }}</a>
@@ -18,11 +19,12 @@
 </ul>
 {% endblock %}
 {% block left_side %}
-<aside class="left">
+<div class="left">
     <div class="lh">
         <i class="fa fa-th"></i><span class="title">{% trans "Categories" %}</span><span class="badge">{{categories|length}}</span>
     </div>
-    <ul class="fa-ul">
+    <!-- <ul class="fa-ul"> -->
+    <ul>
         {% for cat in categories %}
         <li>
             <i class="fa-li fa fa-bookmark-o"></i><a href="{{cat.to_link}}">{% trans cat.name|lower %}</a>
@@ -33,7 +35,7 @@
         </li>
         {% endfor %}
     </ul>
-</aside>
+</div>
 {% endblock %}
 {% block info_block %}
 <section class="info">
