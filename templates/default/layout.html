@@ -20,12 +20,8 @@
     <body>
         {% include skin_prefix|add:"/header.html" %}
         {% block info_block%}{%endblock%}
-        <div class="conatiner" style="padding: 55px 0; margin:0 auto; width: 900px">
-            {% block left_side%}{%endblock%}
-            <section class="container-fluid">
-                {% block content%}{%endblock%}
-            </section>
-            {% block right_side%}{%endblock%}
+        <div class="conatiner-fluid" style="padding: 55px 0; margin:0 auto; width: 85%">
+            {% block content%}{%endblock%}
         </div>
         {% include skin_prefix|add:"/footer.html" %}
     </body>
