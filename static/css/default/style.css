@@ -12,7 +12,7 @@ a {
 section.panel {
     margin: 2em auto;
     padding: 0;
-    width: 800px;
+    width: 90%;
 }
 section.info {
     background-color: rgba(232, 232, 232, .35);

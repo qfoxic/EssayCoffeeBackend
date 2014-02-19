@@ -1,25 +1,46 @@
 {% extends layout.skin_prefix|add:"/layout.html" %}
 {% load i18n %}
 {% block pagetitle %}All Tasks{% endblock %}
-{% block content %}
-<form action="{% url "login" %}" method="post">{% csrf_token %}
-  {{form.errors}}
-  <input type="hidden" name="next" value="{{next}}">
-  <div>
-    <label>Username:
-      <input type="text" name="username" />
-    </label>
-  </div>
-  <div>
-    <label>Password:
-      <input type="text" name="password" />
-    </label>
-  </div>
-  <input type="submit" value="Submit" />
-</form>
-{% endblock %}
 {% block info_block %}
 <section class="info">
-    Hello! This page content doesn't match the module purposes
+    <h4>In order to access, please login or register</h4>
 </section>
+{% endblock %}
+{% block content %}
+<div class="panel panel-default" style="width:430px;margin:3em auto">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        <i class="fa fa-key fa-lg" style="margin-right:1em"></i> {% trans "Login" %}
+    </div>
+    <div class="panel-body">
+        <form action="{% url "login" %}" method="post" class="form-horizontal" role="form">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{next}}">
+            <div class="form-group">
+                <label for="user_input" class="col-sm-2 control-label">{% trans "Username" %}</label>
+                <div class="col-sm-10">
+                    <input id="user_input" type="text" name="username" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">{% trans "Password" %}</label>
+                <div class="col-sm-10">
+                    <input id="passwd_input" type="password" name="password" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">
+                        {% trans "Sign in" %}
+                    </button>
+                </div>
+            </div>
+            {% if form.errors %}
+            <div class="alert alert-danger" style="margin-bottom:.2em">
+                {{form.errors}}
+            </div>
+            {% endif %}
+        </form>
+    </div>
+</div>
 {% endblock %}
