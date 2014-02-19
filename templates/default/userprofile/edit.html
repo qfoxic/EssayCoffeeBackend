@@ -1,0 +1,54 @@
+{% extends layout.skin_prefix|add:"/layout.html" %}
+{% load i18n attr %}
+{% block pagetitle %}{% trans "User Profile" %}{% endblock %}
+{% block content %}
+<section class="container-fluid panel panel-default{% if form.errors %} panel-danger{% endif %}">
+    <div class="panel-heading">
+        <h3 class="panel-title">{% trans "User profile" %}</h3>
+    </div>
+    <div class="panel-body">
+        {{form.errors}}
+        <form role="form" action="{% url "user_new" %}" method="post" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <!-- {{ form.non_field_errors }} -->
+            <!-- {{ form.errors }} -->
+            <div class="row">
+                <div class="form-group col-md-9{% if form.username.errors %} has-error{% endif %}">
+                    <label>{% trans "Usename" %}</label>
+                    {{form.username}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-9{% if form.first_name.errors %} has-error{% endif %}">
+                    <label>{% trans "First Name" %}</label>
+                    {{form.first_name}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-9{% if form.last_name.errors %} has-error{% endif %}">
+                    <label>{% trans "Last Name" %}</label>
+                    {{form.last_name}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-9{% if form.email.errors %} has-error{% endif %}">
+                    <label>{% trans "Email" %}</label>
+                    {{form.email}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-9{% if form.photo.errors %} has-error{% endif %}">
+                    <label>{% trans "Photo" %}</label>
+                    {{form.photo}}
+                </div>
+            </div>
+            <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
+        </form>
+    </div>
+</section>
+{% endblock %}
+{% block info_block %}
+<!-- <section class="info">
+<h2>{% trans "Edit Task" %}</h2>
+</section> -->
+{% endblock %}

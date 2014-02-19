@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'tasks',
     'comments',
+    'userprofile'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -87,3 +88,6 @@ STATICFILES_DIRS = (
 )
 TEMPLATE_DIRS = (os.path.join(PROJECT_DIR, 'templates'),)
 LOGIN_REDIRECT_URL = '/category/'
+
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
+MEDIA_URL = '/media/'

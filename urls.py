@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 from django.core.urlresolvers import reverse_lazy
@@ -8,6 +9,7 @@ admin.autodiscover()
 
 from tasks.views import CategoriesView, UpdateTaskView, CreateTaskView
 from tasks.views import RemoveTaskView, DetailTaskView
+from userprofile.views import CreateProfileEmployerView, DetailProfileEmployerView
 from comments.views import CreateCommentView, RemoveCommentView
 from general.views import LoginView, LogoutView, ResetPswdView
 from general.views import ResetPswdDoneView, ResetPswdConfirmView, ResetPswdCompleteView
@@ -30,6 +32,10 @@ comment_rm = login_required(
     permission_required('comments.delete_comment', raise_exception=True)(RemoveCommentView.as_view()),
     login_url=reverse_lazy('login'))
 
+#TODO Replace CreateProfileEmployerView, DetailProfileEmployerView with appropriate view according to settings.py
+user_new = CreateProfileEmployerView.as_view()
+user_details = login_required(DetailProfileEmployerView.as_view(), login_url=reverse_lazy('login'))
+
 urlpatterns = patterns('',
     url(r'^$', CategoriesView.as_view()),
 
@@ -44,6 +50,9 @@ urlpatterns = patterns('',
     url(r'^comment/(?P<task_id>\d+)/new$', comment_new, name='comment_new'),
     url(r'^comment/(?P<pk>\d+)/remove$', comment_rm, name='comment_remove'),
 
+    url(r'profile/new', user_new, name='user_new'),
+    url(r'profile/(?P<pk>\d+)/$', user_details, name='user_details'),
+
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
     url(r'^reset/$', ResetPswdView.as_view(), name='pswd_reset'),
@@ -52,5 +61,10 @@ urlpatterns = patterns('',
     url(r'^resetcomplete/$', ResetPswdCompleteView.as_view(), name='pswd_reset_complete'),
 
     url(r'^admin/', include(admin.site.urls)),
-    #url(r'^test/', BaseView.as_view(template_name='test/index.html'),{'module_path':'test'}),
+)
+
+
+# Displays uploaded files.
+urlpatterns += patterns('',
+    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
