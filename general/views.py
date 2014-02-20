@@ -33,6 +33,7 @@ class BaseView(View):
   module's directory and then from database.
   """
   module_name = 'general'
+  owner_required = False # raise an Error if owner is required.
 
   def __init__(self, **kwargs):
     super(BaseView, self).__init__(**kwargs)
@@ -44,6 +45,15 @@ class BaseView(View):
       self.settings = {}
       print 'Could not read config files for module %s: %s' % (
           self.module_name, e)
+
+  def dispatch(self, request, *args, **kwargs):
+    if self.owner_required:
+      owner_required(request.user, self.user_id())
+    return super(BaseView, self).dispatch(request, *args, **kwargs)
+
+  def render_to_response(self, context, **response_kwargs):
+    context.update(self.settings)
+    return super(BaseView, self).render_to_response(context, **response_kwargs)
 
   def get_template_names(self):
     try:

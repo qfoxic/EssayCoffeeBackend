@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse_lazy
 
 from tasks.models import Task, Categories
 from comments.models import Comment
-from general.views import BaseView, owner_required
+from general.views import BaseView
 
 
 class TaskForm(ModelForm):
@@ -38,7 +38,6 @@ class CategoriesView(BaseView, TemplateView):
 
   def get_context_data(self, **kwargs):
     context = super(CategoriesView, self).get_context_data(**kwargs)
-    context.update(self.settings)
     category_id = self.kwargs.get('category_id')
 
     if category_id:
@@ -54,20 +53,15 @@ class UpdateTaskView(BaseView, UpdateView):
   form_class = TaskForm
   queryset = Task.objects.all()
   module_name = 'tasks'
+  owner_required = True
 
   def get_form_kwargs(self):
     kwargs = super(UpdateTaskView, self).get_form_kwargs()
     kwargs['request'] = self.request
     return kwargs
 
-  def get_context_data(self, **kwargs):
-    context = super(UpdateTaskView, self).get_context_data(**kwargs)
-    context.update(self.settings)
-    return context
-
-  def dispatch(self, request, *args, **kwargs):
-    owner_required(request.user, self.get_object().owner.pk)
-    return super(UpdateTaskView, self).dispatch(request, *args, **kwargs)
+  def user_id(self):
+    return self.get_object().owner.pk
 
 
 class CreateTaskView(BaseView, CreateView):
@@ -81,11 +75,6 @@ class CreateTaskView(BaseView, CreateView):
     kwargs['request'] = self.request
     return kwargs
 
-  def get_context_data(self, **kwargs):
-    context = super(CreateTaskView, self).get_context_data(**kwargs)
-    context.update(self.settings)
-    return context
-
 
 class DetailTaskView(BaseView, DetailView):
   module_name = 'tasks'
@@ -94,7 +83,6 @@ class DetailTaskView(BaseView, DetailView):
 
   def get_context_data(self, **kwargs):
     context = super(DetailTaskView, self).get_context_data(**kwargs)
-    context.update(self.settings)
     task_id = self.kwargs.get('pk')
     context['comments'] = Comment.objects.filter(ctask_id__exact=task_id)
     return context
@@ -105,12 +93,8 @@ class RemoveTaskView(BaseView, DeleteView):
   queryset = Task.objects.all()
   success_url = reverse_lazy('all_tasks')
   template_name = 'delete.html'
+  owner_required = True
 
-  def get_context_data(self, **kwargs):
-    context = super(RemoveTaskView, self).get_context_data(**kwargs)
-    context.update(self.settings)
-    return context
+  def user_id(self):
+    return self.get_object().owner.pk
 
-  def dispatch(self, request, *args, **kwargs):
-    owner_required(request.user, self.get_object().owner.pk)
-    return super(RemoveTaskView, self).dispatch(request, *args, **kwargs)

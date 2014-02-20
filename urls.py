@@ -10,6 +10,7 @@ admin.autodiscover()
 from tasks.views import CategoriesView, UpdateTaskView, CreateTaskView
 from tasks.views import RemoveTaskView, DetailTaskView
 from userprofile.views import CreateProfileEmployerView, DetailProfileEmployerView
+from userprofile.views import UpdateProfileEmployerView, RemoveProfileView
 from comments.views import CreateCommentView, RemoveCommentView
 from general.views import LoginView, LogoutView, ResetPswdView
 from general.views import ResetPswdDoneView, ResetPswdConfirmView, ResetPswdCompleteView
@@ -32,9 +33,13 @@ comment_rm = login_required(
     permission_required('comments.delete_comment', raise_exception=True)(RemoveCommentView.as_view()),
     login_url=reverse_lazy('login'))
 
-#TODO Replace CreateProfileEmployerView, DetailProfileEmployerView with appropriate view according to settings.py
+#TODO Replace CreateProfileEmployerView, DetailProfileEmployerView,
+# UpdateProfileEmployerView with appropriate view according to settings.py
 user_new = CreateProfileEmployerView.as_view()
 user_details = login_required(DetailProfileEmployerView.as_view(), login_url=reverse_lazy('login'))
+user_edit = login_required(UpdateProfileEmployerView.as_view(), login_url=reverse_lazy('login'))
+user_remove = login_required(RemoveProfileView.as_view(), login_url=reverse_lazy('login'))
+
 
 urlpatterns = patterns('',
     url(r'^$', CategoriesView.as_view()),
@@ -52,6 +57,8 @@ urlpatterns = patterns('',
 
     url(r'profile/new', user_new, name='user_new'),
     url(r'profile/(?P<pk>\d+)/$', user_details, name='user_details'),
+    url(r'profile/(?P<pk>\d+)/edit$', user_edit, name='user_edit'),
+    url(r'profile/(?P<pk>\d+)/remove', user_remove, name='user_remove'),
 
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),

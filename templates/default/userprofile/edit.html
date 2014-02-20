@@ -8,7 +8,7 @@
     </div>
     <div class="panel-body">
         {{form.errors}}
-        <form role="form" action="{% url "user_new" %}" method="post" enctype='multipart/form-data'>
+        <form role="form" action="{% if object %}{% url "user_edit" object.pk %}{% else %}{% url "user_new" %}{% endif %}" method="post" enctype='multipart/form-data'>
             {% csrf_token %}
             <!-- {{ form.non_field_errors }} -->
             <!-- {{ form.errors }} -->

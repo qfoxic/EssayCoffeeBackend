@@ -4,7 +4,7 @@ from django.views.generic.edit import DeleteView
 
 from comments.models import Comment
 from tasks.models import Task
-from general.views import BaseView, owner_required
+from general.views import BaseView
 from django.core.urlresolvers import reverse
 
 
@@ -47,16 +47,11 @@ class RemoveCommentView(BaseView, DeleteView):
   module_name = 'tasks'
   queryset = Comment.objects.all()
   template_name = 'delete.html'
-
-  def get_context_data(self, **kwargs):
-    context = super(RemoveCommentView, self).get_context_data(**kwargs)
-    context.update(self.settings)
-    return context
+  owner_required = True
 
   def get_success_url(self):
     task_id = self.object.ctask.pk
     return reverse('task_view', kwargs={'pk': task_id})
 
-  def dispatch(self, request, *args, **kwargs):
-    owner_required(request.user, self.get_object().cowner.pk)
-    return super(RemoveCommentView, self).dispatch(request, *args, **kwargs)
+  def user_id(self):
+    return self.get_object().cowner.pk

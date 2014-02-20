@@ -1,73 +1,90 @@
 from django import forms
 from django.contrib.auth.models import Group
-#from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
+from django.views.generic.edit import UpdateView
 from django.views.generic import DetailView
 
-from general.views import BaseView, owner_required
-from django.core.urlresolvers import reverse
+from general.views import BaseView
+from django.core.urlresolvers import reverse_lazy
 
 from userprofile.models import UserProfile
-from django.contrib.auth.models import User
 
 import constants as co
 
 
-class NewProfileForm(forms.Form):
-  username = forms.CharField()
-  first_name = forms.CharField()
-  last_name = forms.CharField()
-  email = forms.EmailField()
-  photo = forms.FileField()
+class ProfileForm(forms.ModelForm):
 
-  def __init__(self, instance=None, request=None, groupname=None,
-               *args, **kwargs):
-    super(NewProfileForm, self).__init__(*args, **kwargs)
-    self.request = request
-    self.instance = instance
-    self.groupname = groupname
+  def __init__(self, group_name=None, *args, **kwargs):
+    super(ProfileForm, self).__init__(*args, **kwargs)
+    self.group_name = group_name
 
   class Meta:
+    model = UserProfile
     fields = ['username', 'first_name', 'last_name', 'email', 'photo']
 
-  def save(self):
-    cl = self.cleaned_data
-    user = User(username=cl.get('username'), first_name=cl.get('first_name'),
-                last_name=cl.get('last_name'), email=cl.get('email'))
-    user.save()
-    user.groups.add(Group.objects.get(name=self.groupname))
-    user.save()
-    profile = UserProfile(user=user, photo=cl.get('photo'))
-    profile.save()
-    return profile
+  def save(self, commit=True):
+    instance = super(ProfileForm, self).save(commit=commit)
+    instance.groups.add(Group.objects.get(name=self.group_name))
+    instance.save()
+    return instance
 
 
-class CreateProfileEmployerView(BaseView, CreateView):
+class CreateProfileView(BaseView, CreateView):
   module_name = 'userprofile'
-  form_class = NewProfileForm
+  form_class = ProfileForm
   queryset = UserProfile.objects.all()
   template_name = 'edit.html'
+  group_name = ''
 
   def get_form_kwargs(self):
-    kwargs = super(CreateProfileEmployerView, self).get_form_kwargs()
-    kwargs['request'] = self.request
-    kwargs['groupname'] = co.EMPLOYER_GROUP_NAME
+    kwargs = super(CreateProfileView, self).get_form_kwargs()
+    kwargs['group_name'] = self.group_name
     return kwargs
 
-  def get_context_data(self, **kwargs):
-    context = super(CreateProfileEmployerView, self).get_context_data(**kwargs)
-    context.update(self.settings)
-    return context
+
+class UpdateProfileView(BaseView, UpdateView):
+  template_name = 'edit.html'
+  form_class = ProfileForm
+  queryset = UserProfile.objects.all()
+  module_name = 'userprofile'
+  group_name = ''
+  owner_required = True
+
+  def get_form_kwargs(self):
+    kwargs = super(UpdateProfileView, self).get_form_kwargs()
+    kwargs['group_name'] = self.group_name
+    return kwargs
+
+  def user_id(self):
+    return self.get_object().pk
 
 
-class DetailProfileEmployerView(BaseView, DetailView):
+class DetailProfileView(BaseView, DetailView):
   module_name = 'userprofile'
   queryset = UserProfile.objects.all()
   template_name = 'detail.html'
+  group_name = ''
 
-  def get_context_data(self, **kwargs):
-    context = super(DetailProfileEmployerView, self).get_context_data(**kwargs)
-    context.update(self.settings)
-    return context
 
+class RemoveProfileView(BaseView, DeleteView):
+  module_name = 'userprofile'
+  queryset = UserProfile.objects.all()
+  success_url = reverse_lazy('all_tasks')
+  template_name = 'delete.html'
+  owner_required = True
+
+  def user_id(self):
+    return self.get_object().pk
+
+
+class DetailProfileEmployerView(DetailProfileView):
+  group_name = co.EMPLOYER_GROUP_NAME
+
+
+class CreateProfileEmployerView(CreateProfileView):
+  group_name = co.EMPLOYER_GROUP_NAME
+
+
+class UpdateProfileEmployerView(UpdateProfileView):
+  group_name = co.EMPLOYER_GROUP_NAME
