@@ -78,13 +78,13 @@ class RemoveProfileView(BaseView, DeleteView):
     return self.get_object().pk
 
 
-class DetailProfileEmployerView(DetailProfileView):
-  group_name = co.EMPLOYER_GROUP_NAME
+class DetailProfileWriterView(DetailProfileView):
+  group_name = co.WRITER_GROUP
 
 
-class CreateProfileEmployerView(CreateProfileView):
-  group_name = co.EMPLOYER_GROUP_NAME
+class CreateProfileWriterView(CreateProfileView):
+  group_name = co.WRITER_GROUP
 
 
-class UpdateProfileEmployerView(UpdateProfileView):
-  group_name = co.EMPLOYER_GROUP_NAME
+class UpdateProfileWriterView(UpdateProfileView):
+  group_name = co.WRITER_GROUP

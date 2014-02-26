@@ -91,3 +91,5 @@ LOGIN_REDIRECT_URL = '/category/'
 
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 MEDIA_URL = '/media/'
+
+ACTIVE_GROUP = 'writer'

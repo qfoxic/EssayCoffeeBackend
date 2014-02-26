@@ -6,11 +6,12 @@ from django.core.urlresolvers import reverse_lazy
 
 from django.contrib import admin
 admin.autodiscover()
+import constants as co
 
 from tasks.views import CategoriesView, UpdateTaskView, CreateTaskView
 from tasks.views import RemoveTaskView, DetailTaskView
-from userprofile.views import CreateProfileEmployerView, DetailProfileEmployerView
-from userprofile.views import UpdateProfileEmployerView, RemoveProfileView
+from userprofile.views import CreateProfileWriterView, DetailProfileWriterView
+from userprofile.views import UpdateProfileWriterView, RemoveProfileView
 from comments.views import CreateCommentView, RemoveCommentView
 from general.views import LoginView, LogoutView, ResetPswdView
 from general.views import ResetPswdDoneView, ResetPswdConfirmView, ResetPswdCompleteView
@@ -35,10 +36,11 @@ comment_rm = login_required(
 
 #TODO Replace CreateProfileEmployerView, DetailProfileEmployerView,
 # UpdateProfileEmployerView with appropriate view according to settings.py
-user_new = CreateProfileEmployerView.as_view()
-user_details = login_required(DetailProfileEmployerView.as_view(), login_url=reverse_lazy('login'))
-user_edit = login_required(UpdateProfileEmployerView.as_view(), login_url=reverse_lazy('login'))
-user_remove = login_required(RemoveProfileView.as_view(), login_url=reverse_lazy('login'))
+if settings.ACTIVE_GROUP == co.WRITER_GROUP:
+  user_new = CreateProfileWriterView.as_view()
+  user_details = login_required(DetailProfileWriterView.as_view(), login_url=reverse_lazy('login'))
+  user_edit = login_required(UpdateProfileWriterView.as_view(), login_url=reverse_lazy('login'))
+  user_remove = login_required(RemoveProfileView.as_view(), login_url=reverse_lazy('login'))
 
 
 urlpatterns = patterns('',

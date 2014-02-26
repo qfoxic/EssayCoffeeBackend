@@ -19,8 +19,11 @@ class TaskForm(ModelForm):
 
   class Meta:
     model = Task
-    fields = ['title', 'overview', 'expired', 'end_point', 'price',
-              'category', 'owner']
+    fields = ['first_name', 'last_name', 'gender', 'email', 'country', 'phone',
+              'paper_title', 'discipline', 'assigment', 'level', 'urgency',
+              'spacing', 'page_number', 'style', 'source_number',
+              'instructions', 'attach', 'discount', 'accept_terms', 'category',
+              'owner']
 
   def clean_owner(self):
     """Specifies default User parameter."""
