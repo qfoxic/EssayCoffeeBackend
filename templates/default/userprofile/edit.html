@@ -31,15 +31,27 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-9{% if form.email.errors %} has-error{% endif %}">
-                    <label>{% trans "Email" %}</label>
-                    {{form.email}}
+                <div class="form-group col-md-9{% if form.gender.errors %} has-error{% endif %}">
+                    <label>{% trans "Gender" %}</label>
+                    {{form.gender}}
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-9{% if form.photo.errors %} has-error{% endif %}">
-                    <label>{% trans "Photo" %}</label>
-                    {{form.photo}}
+                <div class="form-group col-md-9{% if form.country.errors %} has-error{% endif %}">
+                    <label>{% trans "Country" %}</label>
+                    {{form.country}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-9{% if form.phone.errors %} has-error{% endif %}">
+                    <label>{% trans "Phone" %}</label>
+                    {{form.phone}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-9{% if form.email.errors %} has-error{% endif %}">
+                    <label>{% trans "Email" %}</label>
+                    {{form.email}}
                 </div>
             </div>
             <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />

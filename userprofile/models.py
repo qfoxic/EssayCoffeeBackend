@@ -3,14 +3,15 @@ import os
 from django.db import models
 from django.contrib.auth.models import User, UserManager
 
-#import constants as co
-
-def get_profile_path(instance, filename):
-  return os.path.join(instance.username, 'profile', filename)
+import constants as co
 
 
 class UserProfile(User):
-  photo = models.FileField(upload_to=get_profile_path)
+  gender = models.SmallIntegerField(choices=co.GENDER, blank=True,
+                                    default=co.MALE)
+  country = models.CharField(choices=co.COUNTRIES, max_length=co.TITLE_MAX_LEN)
+  phone = models.CharField(max_length=co.TITLE_MAX_LEN)
+
   updated = models.DateTimeField(auto_now=True)
   objects = UserManager()
 

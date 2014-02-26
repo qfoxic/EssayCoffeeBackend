@@ -21,7 +21,8 @@ class ProfileForm(forms.ModelForm):
 
   class Meta:
     model = UserProfile
-    fields = ['username', 'first_name', 'last_name', 'email', 'photo']
+    fields = ['username', 'first_name', 'last_name', 'email', 'gender',
+              'country', 'phone']
 
   def save(self, commit=True):
     instance = super(ProfileForm, self).save(commit=commit)
