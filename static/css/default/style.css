@@ -122,3 +122,6 @@ li > a {
     /*font-variant: small-caps;*/
 
 }
+.file-input {
+    margin: 1.7em 0 0 !important;
+}
