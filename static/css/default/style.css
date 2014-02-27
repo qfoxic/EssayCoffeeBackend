@@ -125,3 +125,4 @@ li > a {
 .file-input {
     margin: 1.7em 0 0 !important;
 }
+label {font-weight: 400; font-size: .9em}
