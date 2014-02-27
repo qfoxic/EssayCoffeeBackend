@@ -1,5 +1,21 @@
 import re
 
+ORDER_MAIL = """
+Dear %(first_name)s 
+
+Thank you for ordering at %(domain)s. We will assign your order to the best writer available as soon as 
+
+possible and will let you know via email.
+
+Regards,
+
+Administration
+"""
+ORDER_MAIL_SUBJECT = 'Thanks for ordering.'
+
+ADMIN_EMAIL = 'workforum@ukr.net'
+ADMIN_DOMAIN = 'workforum@ukr.net'
+
 # Settings related variables.
 CONFIG_PATH = 'config'
 GLOBAL_MODULE_NAME = 'global'
@@ -23,11 +39,12 @@ MAX_STRING_LEN = 500
 
 
 # Task related statuses.
-RUNNING = 0
+ASSIGNED = 0
 NOT_ASSIGNED = 1
 FINISHED = 2
+
 TASK_STATUSES = (
-  (RUNNING, 'RUNNING'),
+  (ASSIGNED, 'ASSIGNED'),
   (NOT_ASSIGNED, 'NOT ASSIGNED'),
   (FINISHED, 'FINISHED'))
 

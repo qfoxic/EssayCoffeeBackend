@@ -3,6 +3,7 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 from django.views.generic import DetailView
+from django.core.mail import send_mail
 
 from django.views.generic import TemplateView
 from django.core.urlresolvers import reverse_lazy
@@ -10,6 +11,8 @@ from django.core.urlresolvers import reverse_lazy
 from tasks.models import Task, Categories
 from comments.models import Comment
 from general.views import BaseView
+
+import constants as co
 
 
 class TaskForm(ModelForm):
@@ -28,6 +31,14 @@ class TaskForm(ModelForm):
   def clean_owner(self):
     """Specifies default User parameter."""
     return self.request.user
+
+  def save(self, *args, **kwargs):
+    # send email
+    mail = co.ORDER_MAIL % {'first_name': self.request.user.first_name,
+                            'domain': co.ADMIN_DOMAIN}
+    send_mail(co.ORDER_MAIL_SUBJECT, mail, co.ADMIN_EMAIL,
+              self.request.user.email)
+    return super(TaskForm, self).save(*args, **kwargs)
 
 
 class CategoriesView(BaseView, TemplateView):
@@ -101,3 +112,19 @@ class RemoveTaskView(BaseView, DeleteView):
   def user_id(self):
     return self.get_object().owner.pk
 
+
+class CustomerTaskView(CategoriesView):
+  template_name = 'index.html'
+  module_name = 'tasks'
+
+  def get_context_data(self, **kwargs):
+    context = super(CustomerTaskView, self).get_context_data(**kwargs)
+    category_id = self.kwargs.get('category_id')
+    owner = self.request.user
+    if category_id:
+      context['tasks'] = Task.objects.filter(category_id__exact=category_id,
+                                             owner__exact=owner)
+    else:
+      context['tasks'] = Task.objects.filter(owner__exact=owner)
+    context['categories'] = Categories.objects.all()
+    return context

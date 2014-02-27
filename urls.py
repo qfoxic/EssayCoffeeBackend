@@ -9,7 +9,7 @@ admin.autodiscover()
 import constants as co
 
 from tasks.views import CategoriesView, UpdateTaskView, CreateTaskView
-from tasks.views import RemoveTaskView, DetailTaskView
+from tasks.views import RemoveTaskView, DetailTaskView, CustomerTaskView
 
 from userprofile.views import CreateProfileWriterView, DetailProfileWriterView
 from userprofile.views import CreateProfileCustomerView, DetailProfileCustomerView, UpdateProfileCustomerView
@@ -19,6 +19,7 @@ from comments.views import CreateCommentView, RemoveCommentView
 from general.views import LoginView, LogoutView, ResetPswdView
 from general.views import ResetPswdDoneView, ResetPswdConfirmView, ResetPswdCompleteView
 
+task_list = CategoriesView.as_view()
 task_new = login_required(
     permission_required('tasks.add_task', raise_exception=True)(CreateTaskView.as_view()),
     login_url=reverse_lazy('login'))
@@ -44,6 +45,8 @@ if settings.ACTIVE_GROUP == co.WRITER_GROUP:
   user_details = login_required(DetailProfileWriterView.as_view(), login_url=reverse_lazy('login'))
   user_edit = login_required(UpdateProfileWriterView.as_view(), login_url=reverse_lazy('login'))
 elif settings.ACTIVE_GROUP == co.CUSTOMER_GROUP:
+  task_list = login_required(CustomerTaskView.as_view(), login_url=reverse_lazy('login'))
+
   user_new = CreateProfileCustomerView.as_view()
   user_details = login_required(DetailProfileCustomerView.as_view(), login_url=reverse_lazy('login'))
   user_edit = login_required(UpdateProfileCustomerView.as_view(), login_url=reverse_lazy('login'))
@@ -56,7 +59,7 @@ urlpatterns = patterns('',
 
     url(r'^category/(?P<category_id>\d{0,4})$', CategoriesView.as_view(), name='tasks_by_category'),
 
-    url(r'^tasks/$', CategoriesView.as_view(), name='task_list'),
+    url(r'^tasks/$', task_list, name='task_list'),
     url(r'^task/new$', task_new, name='task_new'),
     url(r'^task/(?P<pk>\d+)/$', task_details, name='task_view'),
     url(r'^task/(?P<pk>\d+)/edit$', task_update, name='task_edit'),

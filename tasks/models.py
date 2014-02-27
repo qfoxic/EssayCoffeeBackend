@@ -65,10 +65,7 @@ class Task(models.Model):
                                related_name='assignee')
   created = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(auto_now=True)
-  #expired = models.DateTimeField()
   completed = models.DateTimeField(null=True, blank=True)
-  #price = models.DecimalField(decimal_places=co.DECIMAL_PLACES,
-  #                            max_digits=co.DECIMAL_DIGITS)
   status = models.SmallIntegerField(choices=co.TASK_STATUSES, blank=True,
                                     default=co.NOT_ASSIGNED)
   category = models.ForeignKey(Categories, related_name='category')

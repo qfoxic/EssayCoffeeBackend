@@ -29,6 +29,7 @@ class ProfileForm(forms.ModelForm):
     if self.user_id:
       # In case it will be passed somehow.
       del self.cleaned_data['password']
+      del self.cleaned_data['username']
       user = UserProfile(pk=self.user_id, **self.cleaned_data)
     else:
       user = UserProfile.objects.create_user(**self.cleaned_data)
