@@ -1,0 +1,201 @@
+{% extends layout.skin_prefix|add:"/layout.html" %}
+{% load i18n attr %}
+{% block pagetitle %}{% trans "Edit Task" %}{% endblock %}
+{% block content %}
+<section class="container-fluid panel panel-default{% if form.errors %} panel-danger{% endif %}">
+    <div class="panel-heading">
+        <h3 class="panel-title">{% trans "Edit Task" %}</h3>
+    </div>
+    <div class="panel-body">
+        {{form.errors}}
+        <form role="form" action="{% if object %}{% url "task_edit" object.pk %}{% else %}{% url "task_new" %}{% endif %}" method="post">
+            {% csrf_token %}
+            <!-- {{ form.non_field_errors }} -->
+            <!-- {{ form.errors }} -->
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-5">
+                    <div class="form-group{% if form.first_name.errors %} has-error{% endif %}">
+                        <!-- {{form.title.errors}} -->
+                        <label>{% trans "First Name" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            {{form.first_name|attr:"class:form-control,autocomplete:off,placeholder:Enter a first name"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.last_name.errors %} has-error{% endif %}">
+                        <!-- {{form.title.errors}} -->
+                        <label>{% trans "Last Name" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            {{form.last_name|attr:"class:form-control,autocomplete:off,placeholder:Enter a last name"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.gender.errors %} has-error{% endif %}">
+                        <!-- {{form.title.errors}} -->
+                        <label>{% trans "Gender" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-male fa-fw"></i></span>
+                            {{form.gender|attr:"class:form-control,autocomplete:off,placeholder:Gender"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.email.errors %} has-error{% endif %}">
+                        <!-- {{form.title.errors}} -->
+                        <label>{% trans "Email" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                            {{form.email|attr:"class:form-control,autocomplete:off,placeholder:Email address"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.phone.errors %} has-error{% endif %}">
+                        <!-- {{form.title.errors}} -->
+                        <label>{% trans "Phone" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+                            {{form.phone|attr:"type:tel,class:form-control,autocomplete:off,placeholder:Phone number"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.country.errors %} has-error{% endif %}">
+                        <!-- {{form.title.errors}} -->
+                        <label>{% trans "Country" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-location-arrow fa-fw"></i></span>
+                            {{form.country|attr:"class:form-control,autocomplete:off,placeholder:Contry"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.discount.errors %} has-error{% endif %}">
+                        <!-- {{form.title.errors}} -->
+                        <label>{% trans "Discount Code" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-barcode fa-fw"></i></span>
+                            {{form.discount|attr:"class:form-control,autocomplete:off,placeholder:Discount Code"}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <!-- nested columns -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group{% if form.category.errors %} has-error{% endif %}">
+                                <!-- {{form.category.errors}} -->
+                                <label>{% trans "Category" %}</label>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-th fa-fw"></i></span>
+                                    {{form.category|attr:"class:form-control"}}
+                                </div>
+                            </div>
+                            <div class="form-group{% if form.assigment.errors %} has-error{% endif %}">
+                                <!-- {{form.title.errors}} -->
+                                <label>{% trans "Assigment Type" %}</label>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-list-alt fa-fw"></i></span>
+                                    {{form.assigment|attr:"class:form-control,autocomplete:off,placeholder:Assigment Type"}}
+                                </div>
+                            </div>
+                            <div class="form-group{% if form.urgency.errors %} has-error{% endif %}">
+                                <!-- {{form.title.errors}} -->
+                                <label>{% trans "Urgency" %}</label>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
+                                    {{form.urgency|attr:"class:form-control,autocomplete:off,placeholder:Urgency"}}
+                                </div>
+                            </div>
+                            <div class="form-group{% if form.page_number.errors %} has-error{% endif %}">
+                                <!-- {{form.title.errors}} -->
+                                <label>{% trans "Number of pages" %}</label>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-files-o fa-fw"></i></span>
+                                    {{form.page_number|attr:"class:form-control,autocomplete:off,placeholder:Number of pages"}}
+                                </div>
+                            </div>
+                        </div><!-- .nested left col -->
+                        <div class="col-md-6">
+                            <div class="form-group{% if form.discipline.errors %} has-error{% endif %}">
+                                <!-- {{form.title.errors}} -->
+                                <label>{% trans "Discipline" %}</label>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-book fa-fw"></i></span>
+                                    {{form.discipline|attr:"class:form-control,autocomplete:off,placeholder:Discipline"}}
+                                </div>
+                            </div>
+                            <div class="form-group{% if form.level.errors %} has-error{% endif %}">
+                                <!-- {{form.title.errors}} -->
+                                <label>{% trans "Level" %}</label>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-certificate fa-fw"></i></span>
+                                    {{form.level|attr:"class:form-control,autocomplete:off,placeholder:Level"}}
+                                </div>
+                            </div>
+                            <div class="form-group{% if form.style.errors %} has-error{% endif %}">
+                                <!-- {{form.title.errors}} -->
+                                <label>{% trans "Academic Styles" %}</label>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-building-o fa-fw"></i></span>
+                                    {{form.style|attr:"class:form-control,autocomplete:off,placeholder:Styles"}}
+                                </div>
+                            </div>
+                            <div class="form-group{% if form.source_number.errors %} has-error{% endif %}">
+                                <!-- {{form.title.errors}} -->
+                                <label>{% trans "Number of sources/references" %}</label>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-bars fa-fw"></i></span>
+                                    {{form.source_number|attr:"class:form-control,autocomplete:off,placeholder:Number of sources/references"}}
+                                </div>
+                            </div>
+                        </div><!-- .nested right col -->
+                    </div><!-- .nested row -->
+                    <div class="row">
+                        <div class="col-md-3 form-group{% if form.spacing.errors %} has-error{% endif %}">
+                            <!-- {{form.title.errors}} -->
+                            <label>{% trans "Spacing" %}</label>
+                            <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon"><i class="fa fa-arrows-v fa-fw"></i></span>
+                                {{form.spacing|attr:"class:form-control,autocomplete:off,placeholder:Spacing"}}
+                            </div>
+                        </div>
+                        <div class="col-md-9 form-group{% if form.attach.errors %} has-error{% endif %}">
+                            <!-- {{form.title.errors}} -->
+                            <!-- <label>{% trans "Attachment" %}</label> -->
+                            <div class="panel panel-default file-input">
+                                <!-- <div class="panel-body"> -->
+                                {{form.attach|attr:"class:upload-file btn-default,autocomplete:off,title:Attachment"}}
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.paper_title.errors %} has-error{% endif %}">
+                        <!-- {{form.title.errors}} -->
+                        <label>{% trans "Paper Title" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
+                            {{form.paper_title|attr:"class:form-control,autocomplete:off,placeholder:Paper Title"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.instructions.errors %} has-error{% endif %}">
+                        <!-- {{form.title.errors}} -->
+                        <label>{% trans "Paper Instructions" %}</label>
+                        {{form.instructions|attr:"class:form-control,rows:4,autocomplete:off,placeholder:Paper Instructions"}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="checkbox form-group col-md-3 col-md-offset-2{% if form.accept_terms.errors %} has-error{% endif %}">
+                    <label> {{form.accept_terms}}
+                        {% trans "I accept terms and conditions" %}</label>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary btn-lg" role="button">
+                        {% trans "Submit" %} <i class='fa fa-check-circle-o fa-lg'></i>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</section>
+{% endblock %}
+{% block info_block %}
+<!-- <section class="info">
+<h2>{% trans "Edit Task" %}</h2>
+</section> -->
+{% endblock %}

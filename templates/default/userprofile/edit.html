@@ -2,7 +2,7 @@
 {% load i18n attr %}
 {% block pagetitle %}{% trans "User Profile" %}{% endblock %}
 {% block content %}
-<section class="container-fluid panel panel-default{% if form.errors %} panel-danger{% endif %}" style="width:50%;margin:3em auto 1em">
+<section class="container-fluid panel panel-default{% if form.errors %} panel-danger{% endif %}" style="width:70%;margin:3em auto 1em">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-user fa-lg" style="margin-right:1em"></i>{% trans "User profile" %}</h3>
     </div>
@@ -11,7 +11,10 @@
         <form role="form" role="form" action="{% if object %}{% url "user_edit" object.pk %}{% else %}{% url "user_new" %}{% endif %}" method="post" enctype='multipart/form-data'>
             {% csrf_token %}
             <div class="row">
-                <div class="col-md-10 col-md-offset-1">
+                <div class="col-md-6">
+                    <div class="well well-sm">
+                        {% trans "Account details" %}
+                    </div>
                     <div class="form-group{% if form.username.errors %} has-error{% endif %}"
                     {% if form.username.errors %} data-toggle="tooltip" data-placement="left"
                     title="{% trans "Error: Username field is required" %}"{% endif %}>
@@ -29,6 +32,26 @@
                             <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                             {{form.password|attr:"type:password,class:form-control,autocomplete:off,placeholder:Enter a password"}}
                         </div>
+                    </div>
+                    <div class="form-group{% if form.confirm_pass.errors %} has-error{% endif %}"
+                    {% if form.password.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: Confirm password field is required" %}"{% endif %}>
+                        <label>{% trans "Confirm Password" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                            <input id="id_confirm_pass" name="confirm_pass" type="password" class="form-control" autocomplete="off" placeholder="{% trans "Confirm password" %}">
+                        </div>
+                    </div>
+                    <div class="form-group" style="text-align:center;margin-top: 7em">
+                        <button type="submit" class="btn btn-primary btn-lg" role="button">
+                            {% trans "Submit" %} <i class='fa fa-check-circle-o fa-lg'></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- .left column -->
+                <div class="col-md-6">
+                    <div class="well well-sm">
+                        {% trans "Personal information" %}
                     </div>
                     <div class="form-group{% if form.first_name.errors %} has-error{% endif %}"
                     {% if form.first_name.errors %} data-toggle="tooltip" data-placement="left"
@@ -84,14 +107,9 @@
                             {{form.country|attr:"class:form-control,autocomplete:off,placeholder:Contry"}}
                         </div>
                     </div>
-                    <div class="col-md-12" style="text-align:center">
-                        <button type="submit" class="btn btn-primary btn-lg" role="button">
-                            {% trans "Submit" %} <i class='fa fa-check-circle-o fa-lg'></i>
-                        </button>
-                    </div>
-
-                </div>
+                </div><!-- .right column -->
             </div>
+            <div class="row"></div>
         </form>
     </div>
 </section>

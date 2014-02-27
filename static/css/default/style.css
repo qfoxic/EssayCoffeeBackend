@@ -125,4 +125,16 @@ li > a {
 .file-input {
     margin: 1.7em 0 0 !important;
 }
+.file-input.form-control {
+	padding:0;
+	border-collapse: collapse;
+}
+.file-input .input-group-addon {
+	border:none;
+}
+.file-input-wrapper {
+	border-top:none;
+	border-bottom:none;
+	border-radius: 0;
+}
 label {font-weight: 400; font-size: .9em}
