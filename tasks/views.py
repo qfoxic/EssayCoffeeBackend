@@ -94,7 +94,7 @@ class DetailTaskView(BaseView, DetailView):
 class RemoveTaskView(BaseView, DeleteView):
   module_name = 'tasks'
   queryset = Task.objects.all()
-  success_url = reverse_lazy('all_tasks')
+  success_url = reverse_lazy('task_list')
   template_name = 'delete.html'
   owner_required = True
 

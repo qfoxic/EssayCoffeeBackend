@@ -56,7 +56,7 @@ urlpatterns = patterns('',
 
     url(r'^category/(?P<category_id>\d{0,4})$', CategoriesView.as_view(), name='tasks_by_category'),
 
-    url(r'^tasks/$', CategoriesView.as_view(), name='all_tasks'),
+    url(r'^tasks/$', CategoriesView.as_view(), name='task_list'),
     url(r'^task/new$', task_new, name='task_new'),
     url(r'^task/(?P<pk>\d+)/$', task_details, name='task_view'),
     url(r'^task/(?P<pk>\d+)/edit$', task_update, name='task_edit'),

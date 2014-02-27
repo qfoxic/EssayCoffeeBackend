@@ -78,7 +78,7 @@ class DetailProfileView(BaseView, DetailView):
 class RemoveProfileView(BaseView, DeleteView):
   module_name = 'userprofile'
   queryset = UserProfile.objects.all()
-  success_url = reverse_lazy('all_tasks')
+  success_url = reverse_lazy('task_list')
   template_name = 'delete.html'
   owner_required = True
 

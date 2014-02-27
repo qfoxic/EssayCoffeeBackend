@@ -82,7 +82,7 @@ class LoginView(BaseView, TemplateView):
 
 class LogoutView(BaseView, TemplateView):
   def render_to_response(self, context, **response_kwargs):
-    return logout(request=self.request, next_page=reverse_lazy('all_tasks'))
+    return logout(request=self.request, next_page=reverse_lazy('task_list'))
 
 
 class ResetPswdView(BaseView, TemplateView):
