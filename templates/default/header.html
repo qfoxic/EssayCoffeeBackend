@@ -16,10 +16,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/tasks/">{% trans "All tasks" %}</a>
+                        <a href="/tasks/"><i class='fa fa-tasks fa-lg' style="margin-right:.5em"></i>{% trans "All tasks" %}</a>
                     </li>
                     <li class="active">
-                        <a href="/task/new">{% trans "Create a task" %}</a>
+                        <a href="/task/new"><i class='fa fa-asterisk fa-lg' style="margin-right:.5em"></i>{% trans "Create a task" %}</a>
                     </li>
                     <!-- <li>
                     <a href="#">Hello, {{user}}</a>
@@ -44,12 +44,16 @@
                     </li>
                     </ul>
                     </li> -->
+                    {% if user.username %}
+                    <li>
+                        <a href="/profile/{{ user.pk }}"><i class='fa fa-user fa-lg' style="margin-right:.5em"></i>{% trans "Profile" %}</a>
+                    </li>
+                    {% endif %}
                     <li>
                         {% if user.username %}
-                        <a href="/profile/{{ user.pk }}">{% trans "Profile" %}</a>
-                        <a href="/logout">{% trans "Log out" %}</a>
+                        <a href="/logout">{% trans "Log out" %}<i class='fa fa-sign-out fa-lg' style="margin-left:.5em"></i></a>
                         {% else %}
-                        <a href="/login">{% trans "Sign in" %}</a>
+                        <a href="/login">{% trans "Sign in" %}<i class='fa fa-sign-in fa-lg' style="margin-left:.5em"></i></a>
                         {% endif %}
                     </li>
                 </ul>
