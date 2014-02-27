@@ -15,10 +15,19 @@
                     <div class="form-group{% if form.username.errors %} has-error{% endif %}"
                     {% if form.username.errors %} data-toggle="tooltip" data-placement="left"
                     title="{% trans "Error: Username field is required" %}"{% endif %}>
-                        <label>{% trans "username" %}</label>
+                        <label>{% trans "Username" %}</label>
                         <div class="input-group margin-bottom-sm">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             {{form.username|attr:"class:form-control,autocomplete:off,placeholder:Enter a username"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.password.errors %} has-error{% endif %}"
+                    {% if form.password.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: Password field is required" %}"{% endif %}>
+                        <label>{% trans "Password" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                            {{form.password|attr:"type:password,class:form-control,autocomplete:off,placeholder:Enter a password"}}
                         </div>
                     </div>
                     <div class="form-group{% if form.first_name.errors %} has-error{% endif %}"
