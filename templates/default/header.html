@@ -45,7 +45,7 @@
                     </li> -->
                     {% if user.username %}
                     <li>
-                        <a href="/profile/{{ user.pk }}"><i class='fa fa-user fa-lg' style="margin-right:.5em"></i>{% trans "Profile" %}</a>
+                        <a href="{% url "user_edit" user.pk %}"><i class='fa fa-user fa-lg' style="margin-right:.5em"></i>{% trans "Profile" %}</a>
                     </li>
                     {% endif %}
                     <li>
