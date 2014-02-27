@@ -12,8 +12,17 @@
             {% csrf_token %}
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
+                    <div class="form-group{% if form.username.errors %} has-error{% endif %}"
+                    {% if form.username.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: Username field is required" %}"{% endif %}>
+                        <label>{% trans "username" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            {{form.username|attr:"class:form-control,autocomplete:off,placeholder:Enter a username"}}
+                        </div>
+                    </div>
                     <div class="form-group{% if form.first_name.errors %} has-error{% endif %}"
-                    {% if form.country.errors %} data-toggle="tooltip" data-placement="left"
+                    {% if form.first_name.errors %} data-toggle="tooltip" data-placement="left"
                     title="{% trans "Error: First Name field is required" %}"{% endif %}>
                         <label>{% trans "First Name" %}</label>
                         <div class="input-group margin-bottom-sm">
@@ -22,7 +31,7 @@
                         </div>
                     </div>
                     <div class="form-group{% if form.last_name.errors %} has-error{% endif %}"
-                    {% if form.country.errors %} data-toggle="tooltip" data-placement="left"
+                    {% if form.last_name.errors %} data-toggle="tooltip" data-placement="left"
                     title="{% trans "Error: Last Name field is required" %}"{% endif %}>
                         <label>{% trans "Last Name" %}</label>
                         <div class="input-group margin-bottom-sm">
@@ -31,7 +40,7 @@
                         </div>
                     </div>
                     <div class="form-group{% if form.gender.errors %} has-error{% endif %}"
-                    {% if form.country.errors %} data-toggle="tooltip" data-placement="left"
+                    {% if form.gender.errors %} data-toggle="tooltip" data-placement="left"
                     title="{% trans "Error: Gender field is required" %}"{% endif %}>
                         <label>{% trans "Gender" %}</label>
                         <div class="input-group margin-bottom-sm">
@@ -40,7 +49,7 @@
                         </div>
                     </div>
                     <div class="form-group{% if form.email.errors %} has-error{% endif %}"
-                    {% if form.country.errors %} data-toggle="tooltip" data-placement="left"
+                    {% if form.email.errors %} data-toggle="tooltip" data-placement="left"
                     title="{% trans "Error: Email field is required" %}"{% endif %}>
                         <label>{% trans "Email" %}</label>
                         <div class="input-group margin-bottom-sm">
@@ -49,7 +58,7 @@
                         </div>
                     </div>
                     <div class="form-group{% if form.phone.errors %} has-error{% endif %}"
-                    {% if form.country.errors %} data-toggle="tooltip" data-placement="left"
+                    {% if form.phone.errors %} data-toggle="tooltip" data-placement="left"
                     title="{% trans "Error: Phone field is required" %}"{% endif %}>
                         <label>{% trans "Phone" %}</label>
                         <div class="input-group margin-bottom-sm">

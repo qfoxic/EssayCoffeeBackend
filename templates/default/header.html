@@ -15,14 +15,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="/task/new">{% trans "Create a task" %}</a>
-                    </li>
                     <li>
                         <a href="/tasks/">{% trans "All tasks" %}</a>
                     </li>
-                    <li>
-                        <a href="#">{% trans "Executors" %}</a>
+                    <li class="active">
+                        <a href="/task/new">{% trans "Create a task" %}</a>
                     </li>
                     <!-- <li>
                     <a href="#">Hello, {{user}}</a>
@@ -49,6 +46,7 @@
                     </li> -->
                     <li>
                         {% if user.username %}
+                        <a href="/profile/{{ user.pk }}">{% trans "Profile" %}</a>
                         <a href="/logout">{% trans "Log out" %}</a>
                         {% else %}
                         <a href="/login">{% trans "Sign in" %}</a>
