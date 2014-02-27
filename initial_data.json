@@ -1,120 +1,6 @@
 [
 {
   "pk": 1,
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "model": "logentry",
-    "name": "log entry",
-    "app_label": "admin"
-  }
-},
-{
-  "pk": 2,
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "model": "permission",
-    "name": "permission",
-    "app_label": "auth"
-  }
-},
-{
-  "pk": 3,
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "model": "group",
-    "name": "group",
-    "app_label": "auth"
-  }
-},
-{
-  "pk": 4,
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "model": "user",
-    "name": "user",
-    "app_label": "auth"
-  }
-},
-{
-  "pk": 5,
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "model": "contenttype",
-    "name": "content type",
-    "app_label": "contenttypes"
-  }
-},
-{
-  "pk": 6,
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "model": "session",
-    "name": "session",
-    "app_label": "sessions"
-  }
-},
-{
-  "pk": 7,
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "model": "categories",
-    "name": "categories",
-    "app_label": "tasks"
-  }
-},
-{
-  "pk": 8,
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "model": "task",
-    "name": "task",
-    "app_label": "tasks"
-  }
-},
-{
-  "pk": 9,
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "model": "comment",
-    "name": "comment",
-    "app_label": "comments"
-  }
-},
-{
-  "pk": 10,
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "model": "userprofile",
-    "name": "user profile",
-    "app_label": "userprofile"
-  }
-},
-{
-  "pk": "4m9t8cmxvs6gbsis5h3z01tz9bxzejm3",
-  "model": "sessions.session",
-  "fields": {
-    "expire_date": "2014-03-11T16:02:49.295Z",
-    "session_data": "ZGRmZWRkNzBlNDIwMzFkN2JmMzFmZTA3MjMzNTg1ZTNhN2UzYzQ4MTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0="
-  }
-},
-{
-  "pk": "nz7xx5kpsfx85tguaqfnmcrizx0vcenp",
-  "model": "sessions.session",
-  "fields": {
-    "expire_date": "2014-03-04T13:03:47.158Z",
-    "session_data": "YThjZTMxYWE2MmQ5MTJkNDlkZWM1ZmFmOTljMjY4MDg2MzRlOTUzYzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0="
-  }
-},
-{
-  "pk": "q1kpnvbjxljwybzql6zh091lhjsz4m8q",
-  "model": "sessions.session",
-  "fields": {
-    "expire_date": "2014-03-04T16:45:15.831Z",
-    "session_data": "YThjZTMxYWE2MmQ5MTJkNDlkZWM1ZmFmOTljMjY4MDg2MzRlOTUzYzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0="
-  }
-},
-{
-  "pk": 1,
   "model": "tasks.categories",
   "fields": {
     "pid": null,
@@ -457,7 +343,7 @@
   "pk": 3,
   "model": "auth.group",
   "fields": {
-    "name": "requester",
+    "name": "customer",
     "permissions": [
       10,
       11,
@@ -479,57 +365,69 @@
   "model": "auth.user",
   "fields": {
     "username": "transport",
-    "first_name": "",
-    "last_name": "",
+    "first_name": "Transport",
+    "last_name": "Transport",
     "is_active": true,
-    "is_superuser": true,
-    "is_staff": true,
-    "last_login": "2014-02-25T16:02:49.291Z",
-    "groups": [],
+    "is_superuser": false,
+    "is_staff": false,
+    "last_login": "2014-02-27T13:42:29.118Z",
+    "groups": [
+      3
+    ],
     "user_permissions": [],
-    "password": "pbkdf2_sha256$12000$S4VIFgNH9DOZ$vhK8sFkmuwUwjD+K1ipkkyxEfy4EY1gGHCgHSHpRkD0=",
-    "email": "transport@tr.com",
-    "date_joined": "2014-02-18T12:54:14.944Z"
+    "password": "",
+    "email": "wwww@ww.com",
+    "date_joined": "2014-02-27T13:42:29.118Z"
   }
 },
 {
   "pk": 2,
   "model": "auth.user",
   "fields": {
-    "username": "employer",
-    "first_name": "",
-    "last_name": "",
+    "username": "customer",
+    "first_name": "Cust",
+    "last_name": "Cust",
     "is_active": true,
     "is_superuser": false,
     "is_staff": false,
-    "last_login": "2014-02-18T16:45:15.827Z",
+    "last_login": "2014-02-27T13:33:05.806Z",
     "groups": [
-      1
+      1,
+      3
     ],
     "user_permissions": [],
-    "password": "pbkdf2_sha256$12000$Wa5JE3BTGted$1NZb9netRI9tpOpwN7RL0bVr1E7otjCW7tMue2GkbPU=",
-    "email": "employer@tr.com",
-    "date_joined": "2014-02-18T12:55:45Z"
+    "password": "pbkdf2_sha256$12000$tWviAngv7g8A$0ALKCUZmzjJLjXDbBgqUIC5pG1FeXN2XieFiklKhevA=",
+    "email": "cust@ukt.rnt",
+    "date_joined": "2014-02-27T13:33:05.806Z"
   }
 },
 {
-  "pk": 3,
-  "model": "auth.user",
+  "pk": 1,
+  "model": "userprofile.userprofile",
   "fields": {
-    "username": "employee",
-    "first_name": "",
-    "last_name": "",
-    "is_active": true,
-    "is_superuser": false,
-    "is_staff": false,
-    "last_login": "2014-02-18T12:59:18.139Z",
+    "updated": "2014-02-27T13:42:29.119Z",
+    "gender": 0,
+    "phone": "123",
     "groups": [
-      2
+      3
     ],
-    "user_permissions": [],
-    "password": "pbkdf2_sha256$12000$sRz0CfYCXrF0$EKCHHXsO5VC+W1F4u2KF1ZE9tbuJgKaL/2MimojDt9E=",
-    "email": "employee@tr.com",
-    "date_joined": "2014-02-18T12:56:19Z"
+    "country": "UG",
+    "user_permissions": []
+  }
+},
+{
+  "pk": 2,
+  "model": "userprofile.userprofile",
+  "fields": {
+    "updated": "2014-02-27T13:33:05.870Z",
+    "gender": 0,
+    "phone": "12344",
+    "groups": [
+      1,
+      3
+    ],
+    "country": "UG",
+    "user_permissions": []
   }
 },
 {
@@ -788,6 +686,19 @@
     "object_repr": "writer",
     "object_id": "2",
     "change_message": "Changed permissions.",
+    "user": 1,
+    "content_type": 3
+  }
+},
+{
+  "pk": 21,
+  "model": "admin.logentry",
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2014-02-27T10:35:13.566Z",
+    "object_repr": "customer",
+    "object_id": "3",
+    "change_message": "Changed name.",
     "user": 1,
     "content_type": 3
   }

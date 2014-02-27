@@ -10,8 +10,11 @@ import constants as co
 
 from tasks.views import CategoriesView, UpdateTaskView, CreateTaskView
 from tasks.views import RemoveTaskView, DetailTaskView
+
 from userprofile.views import CreateProfileWriterView, DetailProfileWriterView
-from userprofile.views import UpdateProfileWriterView, RemoveProfileView
+from userprofile.views import CreateProfileCustomerView, DetailProfileCustomerView, UpdateProfileCustomerView
+from userprofile.views import RemoveProfileView, UpdateProfileWriterView
+
 from comments.views import CreateCommentView, RemoveCommentView
 from general.views import LoginView, LogoutView, ResetPswdView
 from general.views import ResetPswdDoneView, ResetPswdConfirmView, ResetPswdCompleteView
@@ -40,7 +43,12 @@ if settings.ACTIVE_GROUP == co.WRITER_GROUP:
   user_new = CreateProfileWriterView.as_view()
   user_details = login_required(DetailProfileWriterView.as_view(), login_url=reverse_lazy('login'))
   user_edit = login_required(UpdateProfileWriterView.as_view(), login_url=reverse_lazy('login'))
-  user_remove = login_required(RemoveProfileView.as_view(), login_url=reverse_lazy('login'))
+elif settings.ACTIVE_GROUP == co.CUSTOMER_GROUP:
+  user_new = CreateProfileCustomerView.as_view()
+  user_details = login_required(DetailProfileCustomerView.as_view(), login_url=reverse_lazy('login'))
+  user_edit = login_required(UpdateProfileCustomerView.as_view(), login_url=reverse_lazy('login'))
+
+user_remove = login_required(RemoveProfileView.as_view(), login_url=reverse_lazy('login'))
 
 
 urlpatterns = patterns('',

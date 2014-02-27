@@ -15,9 +15,10 @@ import constants as co
 
 class ProfileForm(forms.ModelForm):
 
-  def __init__(self, group_name=None, *args, **kwargs):
+  def __init__(self, group_name=None, user_id=None, *args, **kwargs):
     super(ProfileForm, self).__init__(*args, **kwargs)
     self.group_name = group_name
+    self.user_id = user_id
 
   class Meta:
     model = UserProfile
@@ -25,10 +26,15 @@ class ProfileForm(forms.ModelForm):
               'country', 'phone']
 
   def save(self, commit=True):
-    instance = super(ProfileForm, self).save(commit=commit)
-    instance.groups.add(Group.objects.get(name=self.group_name))
-    instance.save()
-    return instance
+    if self.user_id:
+      # In case it will be passed somehow.
+      del self.cleaned_data['password']
+      user = UserProfile(pk=self.user_id, **self.cleaned_data)
+    else:
+      user = UserProfile.objects.create_user(**self.cleaned_data)
+      user.groups.add(Group.objects.get(name=self.group_name))
+    user.save()
+    return user
 
 
 class CreateProfileView(BaseView, CreateView):
@@ -55,6 +61,7 @@ class UpdateProfileView(BaseView, UpdateView):
   def get_form_kwargs(self):
     kwargs = super(UpdateProfileView, self).get_form_kwargs()
     kwargs['group_name'] = self.group_name
+    kwargs['user_id'] = self.user_id()
     return kwargs
 
   def user_id(self):
@@ -89,3 +96,17 @@ class CreateProfileWriterView(CreateProfileView):
 
 class UpdateProfileWriterView(UpdateProfileView):
   group_name = co.WRITER_GROUP
+
+
+class DetailProfileCustomerView(DetailProfileView):
+  group_name = co.CUSTOMER_GROUP
+
+
+class CreateProfileCustomerView(CreateProfileView):
+  group_name = co.CUSTOMER_GROUP
+
+
+class UpdateProfileCustomerView(UpdateProfileView):
+  group_name = co.CUSTOMER_GROUP
+
+

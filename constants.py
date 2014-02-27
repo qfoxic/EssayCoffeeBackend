@@ -155,6 +155,7 @@ ACCESS_LEVELS = ((PUBLIC_ACCESS, 'PUBLIC ACCESS'),
 COMMENT_RATINGS = ((0, 'NULL'), (1, 'ONE'), (2, 'TWO'), (3, 'THREE'),
                    (4, 'FOUR'), (5, 'FIVE'))
 
+CUSTOMER_GROUP = 'customer'
 WRITER_GROUP = 'writer'
 
 # Category related item types.
