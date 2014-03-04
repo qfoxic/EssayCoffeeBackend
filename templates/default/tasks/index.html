@@ -28,7 +28,7 @@
         <!-- <ul> -->
             {% for task in tasks %}
             <li>
-                <i class="fa-li fa fa-check-square-o"></i><a href="{{task.to_link}}">{{ task.title }}</a>
+                <i class="fa-li fa fa-check-square-o"></i><a href="{{task.to_link}}">{{ task.owner.username }}-{{task.created}}</a>
             </li>
             {% empty %}
             <li>

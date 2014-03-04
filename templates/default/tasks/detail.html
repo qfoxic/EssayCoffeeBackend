@@ -4,13 +4,6 @@
 {% block content %}
 <section class="container-fluid task-details" style="margin: 0 auto">
     <div class="row">
-        <div class="col-md-3">
-            <div class="owner">
-                <img src="#" alt="{{object.owner}}" class="img-thumbnail">
-                <br />
-                {{object.owner}}
-            </div>
-        </div>
         <div class="col-md-9">
             <div class="task-details-inner">
                 <div>
@@ -23,9 +16,6 @@
                     {{object.overview}}
                 </div>
                 <div class="info-row">
-                    <div class="info-col" style="font-weight:500;color:#333">
-                        <i class="fa fa-lg fa-clock-o"></i>{% trans "Expire" %}: {{object.expired}}
-                    </div>
                     <div class="info-col">
                         <i class="fa fa-lg fa-check-square-o"></i>{% trans "Status" %}: [ open | performed ]
                     </div>
