@@ -22,7 +22,7 @@ class TaskForm(ModelForm):
 
   class Meta:
     model = Task
-    fields = ['first_name', 'last_name', 'gender', 'email', 'country', 'phone',
+    fields = [
               'paper_title', 'discipline', 'assigment', 'level', 'urgency',
               'spacing', 'page_number', 'style', 'source_number',
               'instructions', 'attach', 'discount', 'accept_terms', 'category',
@@ -36,8 +36,8 @@ class TaskForm(ModelForm):
     # send email
     mail = co.ORDER_MAIL % {'first_name': self.request.user.first_name,
                             'domain': co.ADMIN_DOMAIN}
-    send_mail(co.ORDER_MAIL_SUBJECT, mail, co.ADMIN_EMAIL,
-              self.request.user.email)
+    #send_mail(co.ORDER_MAIL_SUBJECT, mail, co.ADMIN_EMAIL,
+    #          self.request.user.email)
     return super(TaskForm, self).save(*args, **kwargs)
 
 

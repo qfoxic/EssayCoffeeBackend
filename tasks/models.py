@@ -35,12 +35,6 @@ def get_attach_path(instance, filename):
 
 
 class Task(models.Model):
-  first_name = models.CharField(max_length=co.TITLE_MAX_LEN)
-  last_name = models.CharField(max_length=co.TITLE_MAX_LEN)
-  gender = models.SmallIntegerField(choices=co.GENDER, default=co.MALE)
-  email = models.EmailField()
-  country = models.CharField(choices=co.COUNTRIES, max_length=co.TITLE_MAX_LEN, default=co.COUNTRIES[0])
-  phone = models.CharField(max_length=co.TITLE_MAX_LEN)
   paper_title = models.CharField(max_length=co.TITLE_MAX_LEN)
   discipline = models.CharField(choices=co.DISCIPLINES, max_length=co.TITLE_MAX_LEN, default=co.DISCIPLINES[0])
   assigment = models.CharField(choices=co.ASSIGMENTS, max_length=co.TITLE_MAX_LEN, default=co.ASSIGMENTS[0])
