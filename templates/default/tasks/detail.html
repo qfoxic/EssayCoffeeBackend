@@ -38,7 +38,7 @@
                     {% for comment in comments %}
                     <li>
                         {{ comment.title }}
-                        <form action="{% url "comment_remove" comment.pk %}" method="POST">
+                        <form action="{% url "comment_remove" comment.pk %}" method="post">
                             {% csrf_token %}
                             <input type="submit" value="{% trans "Remove" %}" class="btn btn-primary" />
                         </form>
