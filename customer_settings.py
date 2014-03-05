@@ -57,7 +57,7 @@ AUTHENTICATION_BACKENDS = (
 
 ROOT_URLCONF = 'urls'
 
-WSGI_APPLICATION = 'wsgi.application'
+WSGI_APPLICATION = 'customer_wsgi.application'
 
 
 # Database
@@ -69,7 +69,7 @@ DATABASES = {
         #'NAME': os.path.join('/var/www/transport', 'db.sqlite3'),
         'ENGINE':'django.db.backends.mysql',
         'NAME': 'transport',
-        'USER': 'root',
+        'USER': 'transport',
         'PASSWORD': 'Secret677',
         'HOST': '127.0.0.1',
         'PORT': '3306',
