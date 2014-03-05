@@ -106,7 +106,13 @@
                         <div class="file-input form-control">
                             <div class="input-group margin-bottom-sm">
                                 <span class="input-group-addon"><i class="fa fa-upload fa-fw"></i></span>
-                                {{form.attach|attr:"class:upload-file,title:Attachment"}}
+                                <!-- {{form.attach|attr:"class:upload-file,title:Attachment"}} -->
+                                <input id="id_attach" class="upload-file" type="file" title="Attachment" name="attach">
+                                {% if form.attach.value %}
+                                <a href="{{form.attach.value}}">{{form.attach.value}}</a>
+                                <input id="attach-clear_id" type="checkbox" name="attach-clear">
+                                <label for="attach-clear_id">{% trans "Clear" %}</label>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -128,7 +134,7 @@
                     <label> {{form.accept_terms}}
                         {% trans "I accept terms and conditions" %}</label>
                 </div>
-                <div class="col-md-5" style="text-align:right"> 
+                <div class="col-md-5" style="text-align:right">
                     <button type="submit" class="btn btn-primary btn-lg" role="button" style="width:50%">
                         {% trans "Submit" %}<i class='fa fa-check-circle-o fa-lg' style="margin-left:1em"></i>
                     </button>
