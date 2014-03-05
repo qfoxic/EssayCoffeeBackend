@@ -10,8 +10,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-#BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-BASE_DIR = '/var/www'
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+#BASE_DIR = '/var/www'
 PROJECT_DIR = os.path.join(BASE_DIR, 'transport')
 
 # Quick-start development settings - unsuitable for production
