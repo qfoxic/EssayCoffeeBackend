@@ -34,10 +34,10 @@ class TaskForm(ModelForm):
 
   def save(self, *args, **kwargs):
     # send email
-    #mail = co.ORDER_MAIL % {'first_name': self.request.user.first_name,
-    #                        'domain': co.ADMIN_DOMAIN}
-    #send_mail(co.ORDER_MAIL_SUBJECT, mail, co.ADMIN_EMAIL,
-    #          self.request.user.email)
+    mail = co.ORDER_MAIL % {'first_name': self.request.user.first_name,
+                            'domain': co.ADMIN_DOMAIN}
+    send_mail(co.ORDER_MAIL_SUBJECT, mail, co.ADMIN_EMAIL,
+              [self.request.user.email])
     return super(TaskForm, self).save(*args, **kwargs)
 
 
@@ -119,12 +119,12 @@ class CustomerTaskView(CategoriesView):
 
   def get_context_data(self, **kwargs):
     context = super(CustomerTaskView, self).get_context_data(**kwargs)
-    category_id = self.kwargs.get('category_id')
+    #category_id = self.kwargs.get('category_id')
     owner = self.request.user
-    if category_id:
-      context['tasks'] = Task.objects.filter(category_id__exact=category_id,
-                                             owner__exact=owner)
-    else:
-      context['tasks'] = Task.objects.filter(owner__exact=owner)
-    context['categories'] = Categories.objects.all()
+    #if category_id:
+    #  context['tasks'] = Task.objects.filter(category_id__exact=category_id,
+    #                                         owner__exact=owner)
+    #else:
+    context['tasks'] = Task.objects.filter(owner__exact=owner)
+    #context['categories'] = Categories.objects.all()
     return context

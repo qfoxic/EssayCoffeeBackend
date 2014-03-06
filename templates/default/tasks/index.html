@@ -3,23 +3,6 @@
 {% block pagetitle %}All Tasks{% endblock %}
 {% block content %}
 <div class="row">
-    <div class="col-md-3">
-        <div class="lh">
-            <i class="fa fa-th"></i><span class="title">{% trans "Categories" %}</span><span class="badge">{{categories|length}}</span>
-        </div>
-        <ul class="fa-ul">
-        <!-- <ul> -->
-            {% for cat in categories %}
-            <li>
-                <i class="fa-li fa fa-bookmark-o"></i><a href="{{cat.to_link}}">{% trans cat.name|lower %}</a>
-            </li>
-            {% empty %}
-            <li>
-                <i class="fa-li fa fa-bookmark-o"></i>{% trans "No categories yet" %}
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
     <div class="col-md-9">
         <div class="lh">
             <i class="fa fa-tasks"></i><span class="title">{% trans "Tasks" %}</span><span class="badge">{{tasks|length}}</span>
