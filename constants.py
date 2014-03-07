@@ -174,6 +174,7 @@ COMMENT_RATINGS = ((0, 'NULL'), (1, 'ONE'), (2, 'TWO'), (3, 'THREE'),
 
 CUSTOMER_GROUP = 'customer'
 WRITER_GROUP = 'writer'
+ADMIN_GROUP = 'admin'
 
 # Category related item types.
 # Task means task itself
