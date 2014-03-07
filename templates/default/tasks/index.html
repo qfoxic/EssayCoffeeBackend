@@ -11,7 +11,7 @@
         <ul class="fa-ul">
             {% for task in tasks %}
             <li>
-                <i class="fa-li fa fa-check-square-o"></i><a href="{{task.to_link}}">{{ task.owner.username }}-{{task.created}}</a>
+                <i class="fa-li fa fa-check-square-o"></i><a href="{{task.to_link}}">{{ task.paper_title }}-{{task.created|date:"U"}}</a>
             </li>
             {% empty %}
             <li>
