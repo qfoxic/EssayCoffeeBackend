@@ -39,13 +39,12 @@
                             {{form.page_number|attr:"class:form-control,autocomplete:off,placeholder:Number of pages"}}
                         </div>
                     </div>
-
-                    <div class="form-group{% if form.discount.errors %} has-error{% endif %}">
+                    <div class="form-group{% if form.spacing.errors %} has-error{% endif %}">
                         <!-- {{form.title.errors}} -->
-                        <label>{% trans "Discount Code" %}</label>
+                        <label>{% trans "Spacing" %}</label>
                         <div class="input-group margin-bottom-sm">
-                            <span class="input-group-addon"><i class="fa fa-barcode fa-fw"></i></span>
-                            {{form.discount|attr:"class:form-control,autocomplete:off,placeholder:Discount Code"}}
+                            <span class="input-group-addon"><i class="fa fa-arrows-v fa-fw"></i></span>
+                            {{form.spacing|attr:"class:form-control,autocomplete:off,placeholder:Spacing"}}
                         </div>
                     </div>
                 </div>
@@ -82,14 +81,6 @@
                             {{form.source_number|attr:"class:form-control,autocomplete:off,placeholder:Number of sources/references"}}
                         </div>
                     </div>
-                    <div class="form-group{% if form.spacing.errors %} has-error{% endif %}">
-                        <!-- {{form.title.errors}} -->
-                        <label>{% trans "Spacing" %}</label>
-                        <div class="input-group margin-bottom-sm">
-                            <span class="input-group-addon"><i class="fa fa-arrows-v fa-fw"></i></span>
-                            {{form.spacing|attr:"class:form-control,autocomplete:off,placeholder:Spacing"}}
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="row">
@@ -122,12 +113,21 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-5 col-md-offset-1{% if form.accept_terms.errors %} has-error{% endif %}">
+                <div class="col-md-3 col-md-offset-1{% if form.accept_terms.errors %} has-error{% endif %}">
                     <label> {{form.accept_terms}}
                         {% trans "I accept terms and conditions" %}</label>
                 </div>
-                <div class="col-md-5" style="text-align:right">
-                    <button type="submit" class="btn btn-primary btn-lg" role="button" style="width:50%">
+
+                <div class="col-md-4 form-group">
+                    <!-- {{form.title.errors}} -->
+                    <div class="input-group margin-bottom-sm">
+                        <span class="input-group-addon"><i class="fa fa-barcode fa-fw"></i></span>
+                        {{form.discount|attr:"class:form-control,autocomplete:off,placeholder:Discount Code"}}
+                    </div>
+                </div>
+
+                <div class="col-md-3" style="text-align:right">
+                    <button type="submit" class="btn btn-primary btn-lg" role="button" style="width:90%">
                         {% trans "Submit" %}<i class='fa fa-check-circle-o fa-lg' style="margin-left:1em"></i>
                     </button>
                 </div>
