@@ -25,7 +25,7 @@ class TaskForm(ModelForm):
     fields = [
               'paper_title', 'discipline', 'assigment', 'level', 'urgency',
               'spacing', 'page_number', 'style', 'source_number',
-              'instructions', 'attach', 'discount', 'accept_terms', 'category',
+              'instructions', 'attach', 'discount', 'accept_terms',
               'owner']
 
   def clean_owner(self):
@@ -42,11 +42,7 @@ class TaskForm(ModelForm):
 
 
 class TaskIndexView(BaseView, TemplateView):
-  """Displays categories with their tasks.
-
-  If category_id is missed then displays all tasks else displays tasks for
-  specified category id.
-  """
+  """Displays all tasks for singned users."""
   template_name = 'index.html'
   module_name = 'tasks'
 

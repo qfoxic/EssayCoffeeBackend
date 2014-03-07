@@ -6,12 +6,9 @@ from django.core.exceptions import ValidationError
 import constants as co
 
 
-def ValidateGeoPt(value):
-  try:
-    lat, lon = value.split(',')
-    float(lat), float(lon)
-  except ValueError:
-    raise ValidationError('Geo Pointer should contains lat and lon decimals.')
+def ValidateTerms(value):
+  if not value:
+    raise ValidationError('Please accept terms.')
 
 
 class Categories(models.Model):
@@ -42,7 +39,7 @@ class Task(models.Model):
   instructions = models.TextField(blank=True, null=True)
   attach = models.FileField(upload_to=get_attach_path, blank=True, null=True)
   discount = models.CharField(max_length=co.TITLE_MAX_LEN, blank=True, null=True)
-  accept_terms = models.BooleanField()
+  accept_terms = models.BooleanField(validators=[ValidateTerms])
   #######################################
   ttype = models.SmallIntegerField(choices=co.TASK_TYPES, blank=True,
                                    default=co.TYPE_TASK)
@@ -57,7 +54,6 @@ class Task(models.Model):
   completed = models.DateTimeField(null=True, blank=True)
   status = models.SmallIntegerField(choices=co.TASK_STATUSES, blank=True,
                                     default=co.NOT_ASSIGNED)
-  category = models.ForeignKey(Categories, related_name='category')
 
   def __str__(self):
     return self.title
