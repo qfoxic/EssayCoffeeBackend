@@ -2,13 +2,13 @@
 {% load i18n %}
 {% block pagetitle %}All Tasks{% endblock %}
 {% block content %}
-<div class="row">
+  {% if tasks %}
+  <div class="row">
     <div class="col-md-9">
         <div class="lh">
             <i class="fa fa-tasks"></i><span class="title">{% trans "Tasks" %}</span><span class="badge">{{tasks|length}}</span>
         </div>
         <ul class="fa-ul">
-        <!-- <ul> -->
             {% for task in tasks %}
             <li>
                 <i class="fa-li fa fa-check-square-o"></i><a href="{{task.to_link}}">{{ task.owner.username }}-{{task.created}}</a>
@@ -20,7 +20,8 @@
             {% endfor %}
         </ul>
     </div>
-</div>
+  </div>
+  {% endif  %}
 {% endblock %}
 {% block info_block %}
 <section class="info">

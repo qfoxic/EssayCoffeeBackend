@@ -98,7 +98,7 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_DIR, "static"),
 )
 TEMPLATE_DIRS = (os.path.join(PROJECT_DIR, 'templates'),)
-LOGIN_REDIRECT_URL = '/category/'
+LOGIN_REDIRECT_URL = '/'
 
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 MEDIA_URL = '/media/'

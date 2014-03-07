@@ -41,7 +41,7 @@ class TaskForm(ModelForm):
     return super(TaskForm, self).save(*args, **kwargs)
 
 
-class CategoriesView(BaseView, TemplateView):
+class TaskIndexView(BaseView, TemplateView):
   """Displays categories with their tasks.
 
   If category_id is missed then displays all tasks else displays tasks for
@@ -51,14 +51,9 @@ class CategoriesView(BaseView, TemplateView):
   module_name = 'tasks'
 
   def get_context_data(self, **kwargs):
-    context = super(CategoriesView, self).get_context_data(**kwargs)
-    category_id = self.kwargs.get('category_id')
-
-    if category_id:
-      context['tasks'] = Task.objects.filter(category_id__exact=category_id)
-    else:
+    context = super(TaskIndexView, self).get_context_data(**kwargs)
+    if self.request.user.is_authenticated():
       context['tasks'] = Task.objects.all()
-    context['categories'] = Categories.objects.all()
     return context
 
 
@@ -113,18 +108,12 @@ class RemoveTaskView(BaseView, DeleteView):
     return self.get_object().owner.pk
 
 
-class CustomerTaskView(CategoriesView):
+class CustomerTaskView(TaskIndexView):
   template_name = 'index.html'
   module_name = 'tasks'
 
   def get_context_data(self, **kwargs):
     context = super(CustomerTaskView, self).get_context_data(**kwargs)
-    #category_id = self.kwargs.get('category_id')
     owner = self.request.user
-    #if category_id:
-    #  context['tasks'] = Task.objects.filter(category_id__exact=category_id,
-    #                                         owner__exact=owner)
-    #else:
     context['tasks'] = Task.objects.filter(owner__exact=owner)
-    #context['categories'] = Categories.objects.all()
     return context

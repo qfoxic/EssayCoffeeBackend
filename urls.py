@@ -8,7 +8,7 @@ from django.contrib import admin
 admin.autodiscover()
 import constants as co
 
-from tasks.views import CategoriesView, UpdateTaskView, CreateTaskView
+from tasks.views import TaskIndexView, UpdateTaskView, CreateTaskView
 from tasks.views import RemoveTaskView, DetailTaskView, CustomerTaskView
 
 from userprofile.views import CreateProfileWriterView, DetailProfileWriterView
@@ -19,7 +19,7 @@ from comments.views import CreateCommentView, RemoveCommentView
 from general.views import LoginView, LogoutView, ResetPswdView
 from general.views import ResetPswdDoneView, ResetPswdConfirmView, ResetPswdCompleteView
 
-task_list = CategoriesView.as_view()
+task_list = TaskIndexView.as_view()
 task_new = login_required(
     permission_required('tasks.add_task', raise_exception=True)(CreateTaskView.as_view()),
     login_url=reverse_lazy('login'))
@@ -55,9 +55,7 @@ user_remove = login_required(RemoveProfileView.as_view(), login_url=reverse_lazy
 
 
 urlpatterns = patterns('',
-    url(r'^$', CategoriesView.as_view()),
-
-    url(r'^category/(?P<category_id>\d{0,4})$', CategoriesView.as_view(), name='tasks_by_category'),
+    url(r'^$', TaskIndexView.as_view()),
 
     url(r'^tasks/$', task_list, name='task_list'),
     url(r'^task/new$', task_new, name='task_new'),

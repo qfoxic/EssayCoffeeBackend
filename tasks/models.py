@@ -21,11 +21,6 @@ class Categories(models.Model):
   def __str__(self):
     return self.name
 
-  @models.permalink
-  def get_absolute_url(self):
-    return  ('tasks_by_category', (), {'category_id': self.id})
-  to_link = get_absolute_url
-
   class Meta:
     db_table = 'categories'
 

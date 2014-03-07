@@ -68,7 +68,7 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join('/var/www/transport', 'db.sqlite3'),
         'ENGINE':'django.db.backends.mysql',
-        'NAME': 'transport',
+        'NAME': 'transport_vpaslav',
         'USER': 'transport',
         'PASSWORD': 'Secret677',
         'HOST': '127.0.0.1',
@@ -98,7 +98,7 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_DIR, "static"),
 )
 TEMPLATE_DIRS = (os.path.join(PROJECT_DIR, 'templates'),)
-LOGIN_REDIRECT_URL = '/category/'
+LOGIN_REDIRECT_URL = '/'
 
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 MEDIA_URL = '/media/'
