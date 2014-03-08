@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n tags %}
 <header>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
@@ -16,10 +16,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                 {% if user.username %}
-                    <li>
+                    <li class="{% active request 'tasks/' %}">
                         <a href="{% url "task_list" %}"><i class='fa fa-tasks fa-lg' style="margin-right:.5em"></i>{% trans "My Orders" %}</a>
                     </li>
-                    <li class="active">
+                    <li class="{% active request 'task/' %}">
                         <a href="{% url "task_new" %}"><i class='fa fa-asterisk fa-lg' style="margin-right:.5em"></i>{% trans "Order Now" %}</a>
                     </li>
                 {% endif %}
@@ -44,7 +44,7 @@
                     </ul>
                     </li> -->
                     {% if user.username %}
-                    <li>
+                    <li class="{% active request 'profile' %}">
                         <a href="{% url "user_edit" user.pk %}"><i class='fa fa-user fa-lg' style="margin-right:.5em"></i>{% trans "Profile" %}</a>
                     </li>
                     {% endif %}
@@ -67,5 +67,4 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-
 </header>

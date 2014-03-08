@@ -10,6 +10,9 @@ $( document ).ready( function( ) {
     // down: "fa fa-arrow-down"
     // }
     // } );
+    $( '.btn-cancel' ).on( 'click', function( ) {
+        history.back( );
+    } );
     $( '.upload-file' ).bootstrapFileInput( );
     $( '.has-error' ).tooltip( {
         container: 'body',

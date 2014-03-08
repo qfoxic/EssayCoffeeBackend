@@ -4,17 +4,9 @@
 {% block content %}
 <section class="container-fluid task-details" style="margin: 0 auto">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-8 col-md-offset-1">
             <div class="task-details-inner">
-                <div>
-                    <div class="price">
-                        <i class="fa fa-2x fa-money"></i>{{object.price}} $
-                    </div>
-                    <h2>{{object.title}}</h2>
-                </div>
-                <div class="overview">
-                    {{object.overview}}
-                </div>
+                <div>{{object.assigment}}</div>
                 <div class="info-row">
                     <div class="info-col">
                         <i class="fa fa-lg fa-check-square-o"></i>{% trans "Status" %}: [ open | performed ]
@@ -22,9 +14,6 @@
                     <div class="info-col">
                         <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{object.created}}
                     </div>
-                </div>
-                <div>
-                    <i class="fa fa-lg fa-map-marker" style="margin-right:.5em;color:#555"></i>{% trans "Localtion" %}: {{object.end_point}}
                 </div>
             </div>
             <div class="comments">
@@ -79,6 +68,6 @@
 {% endblock %}
 {% block info_block %}
 <section class="info">
-    <h2>{% trans "Task Details" %}</h2>
+    <h2>{% trans "Task Details" %} <a href="{% url "task_edit" object.id %}" title="{% trans "Edit task" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a></h2>
 </section>
 {% endblock %}

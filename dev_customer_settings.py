@@ -55,6 +55,18 @@ AUTHENTICATION_BACKENDS = (
     'userprofile.auth.UserProfileBackend',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.request",
+)
+
+
 ROOT_URLCONF = 'urls'
 
 WSGI_APPLICATION = 'customer_wsgi.application'
@@ -66,7 +78,7 @@ WSGI_APPLICATION = 'customer_wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(PROJECT_DIR, 'db.sq3'),
 #         'ENGINE':'django.db.backends.mysql',
 #         'NAME': 'transport',
 #         'USER': 'transport',
