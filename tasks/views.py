@@ -36,8 +36,9 @@ class TaskForm(ModelForm):
     # send email
     mail = co.ORDER_MAIL % {'first_name': self.request.user.first_name,
                             'domain': co.ADMIN_DOMAIN}
-    send_mail(co.ORDER_MAIL_SUBJECT, mail, co.ADMIN_EMAIL,
-              [self.request.user.email])
+# TODO: this is a bug!!!!
+#    send_mail(co.ORDER_MAIL_SUBJECT, mail, co.ADMIN_EMAIL,
+#              [self.request.user.email])
     return super(TaskForm, self).save(*args, **kwargs)
 
 
