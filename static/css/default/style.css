@@ -6,7 +6,7 @@ html, body {
     margin: 0px;
     padding: 0px;
 }
-a {
+a, button, select, input {
     outline: 0 !important;
 }
 section.panel {

@@ -117,28 +117,18 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-5 col-md-offset-1{% if form.accept_terms.errors %} has-error{% endif %}">
-                    <div class="input-group margin-bottom-sm">
+                <div class="col-md-5 col-md-offset-1">
+                    <div class="form-group input-group margin-bottom-sm {% if form.accept_terms.errors %} has-error{% endif %}">
                         <span class="input-group-addon">{{form.accept_terms}}</span>
                         <span class="form-control" style="overflow:auto">{% trans "I accept terms and conditions" %}</span>
                     </div>
-                    <!-- <label> {{form.accept_terms}}
-                    {% trans "I accept terms and conditions" %}</label> -->
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-5 form-group col-md-offset-1">
-                    <!-- {{form.title.errors}} -->
-                    <div class="input-group margin-bottom-sm">
+                    <div class="form-group input-group margin-bottom-sm">
                         <span class="input-group-addon"><i class="fa fa-barcode fa-fw"></i></span>
                         {{form.discount|attr:"class:form-control,autocomplete:off,placeholder:Discount Code"}}
                     </div>
                 </div>
-
-                <div class="col-md-5 form-group" style="text-align:right;white-space:nowrap">
-                    <a href="#" class="btn-cancel btn btn-default btn-lg" role="button" style="width:40%">
-                        <i class='fa fa-times-circle-o fa-lg' style="margin-right:.5em"></i>{% trans "Cancel" %}
-                    </a>
+                <div class="col-md-5 form-group" style="text-align:right;padding-top:1em">
+                    <a href="#" class="btn-cancel btn btn-default btn-lg" role="button" style="width:40%"> <i class='fa fa-times-circle-o fa-lg' style="margin-right:.5em"></i>{% trans "Cancel" %} </a>
                     <button type="submit" class="btn btn-primary btn-lg" role="button" style="width:40%">
                         {% trans "Submit" %}<i class='fa fa-check-circle-o fa-lg' style="margin-left:.5em"></i>
                     </button>
