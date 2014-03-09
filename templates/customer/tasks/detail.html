@@ -1,0 +1,109 @@
+{% extends layout.skin_prefix|add:"/layout.html" %}
+{% load i18n %}
+{% block pagetitle %}{% trans "Task Details" %}{% endblock %}
+{% block content %}
+<section class="container-fluid task-details" style="margin: 0 auto">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-1">
+            <div class="task-details-inner">
+                <style>.test-line{
+                    margin-bottom: .5em;
+                    border-bottom: 1px dotted #aaa;
+                }</style>
+                <div class="test-line">
+                   [assigment]: {{object.assigment}}
+                </div>
+                <div class="test-line">
+                   [urgency]: {{object.urgency}}
+                </div>
+                <div class="test-line">
+                   [page_number]: {{object.page_number}}
+                </div>
+                <div class="test-line">
+                   [spacing]: {{object.spacing}}
+                </div>
+                <div class="test-line">
+                   [discipline]: {{object.discipline}}
+                </div>
+                <div class="test-line">
+                   [level]: {{object.level}}
+                </div>
+                <div class="test-line">
+                   [style]: {{object.style}}
+                </div>
+                <div class="test-line">
+                   [source_number]: {{object.source_number}}
+                </div>
+                <div class="test-line">
+                   [attach]: {{object.attach}}
+                </div>
+                <div class="test-line">
+                   [paper_title]: {{object.paper_title}}
+                </div>
+                <div class="test-line">
+                   [instructions]:<br/> {{object.instructions}}
+                </div>
+                <div class="info-row">
+                    <div class="info-col">
+                        <i class="fa fa-lg fa-check-square-o"></i>{% trans "Status" %}: [ open | performed ]
+                    </div>
+                    <div class="info-col">
+                        <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{object.created}}
+                    </div>
+                </div>
+            </div>
+            <div class="comments">
+                <div class="lh">
+                    <span class="title">{% trans "Comments" %}</span><span class="badge">{{comments|length}}</span>
+                </div>
+                <ul>
+                    {% for comment in comments %}
+                    <li>
+                        {{ comment.title }}
+                        <form action="{% url "comment_remove" comment.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="{% trans "Remove" %}" class="btn btn-primary" />
+                        </form>
+                    </li>
+                    {% empty %}
+                    <li>
+                        {% trans "No comments yet" %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="comments-form" style="margin-right:100px">
+                <form action="{% url "comment_new" task_id=object.pk %}" method="post">
+                    {% csrf_token %}
+                    <!-- {{ form.non_field_errors }} -->
+                    <!-- {{ form.errors }} -->
+                    <div class="form-group{% if form.title.errors %} has-error{% endif %}">
+                        <!-- {{form.title.errors}} -->
+                        <label>{% trans "Title" %}</label>
+                        <input type="text" name="title" class="form-control"/>
+                    </div>
+                    <div class="form-group{% if form.body.errors %} has-error{% endif %}">
+                        <!-- {{form.body.errors}} -->
+                        <label>{% trans "Body" %}</label>
+                        <textarea name="body" class="form-control" rows="5"></textarea>
+                    </div>
+                    <div class="form-group{% if form.rating.errors %} has-error{% endif %}">
+                        <!-- {{form.rating.errors}} -->
+                        <label>{% trans "Put your rating 0-5" %}</label>
+                        <input type="text" name="rating" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block info_block %}
+<section class="info">
+    <h2>{% trans "Task Details" %} <a href="{% url "task_edit" object.id %}" title="{% trans "Edit task" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a></h2>
+</section>
+{% endblock %}
