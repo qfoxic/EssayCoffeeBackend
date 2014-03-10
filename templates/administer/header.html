@@ -20,30 +20,27 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='fa fa-tasks fa-lg' style="margin-right:.5em"></i>{% trans "Orders "%} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#">{% trans "Completed" %}</a>
+                                <a href="{% url 'tasks_finished' %}">{% trans "Completed orders" %}</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <strong style="margin-left: .8em;font-size:1.2em;">{% trans "Free" %}</strong>
+                                <strong style="margin-left: .8em;font-size:1.2em;">{% trans "Free orders" %}</strong>
                             </li>
                             <li>
-                                <a href="#">{% trans "Unprocessed" %}</a>
+                                <a href="{% url 'tasks_unprocessed' %}">{% trans "Unprocessed orders" %}</a>
                             </li>
                             <li>
-                                <a href="#">{% trans "Suspicious / untrustworthy/ incomplete orders"%}</a>
-                            </li>
-                            <li>
-                                <a href="#">{% trans "Archive" %}</a>
+                                <a href="{% url 'tasks_rejected' %}">{% trans "Suspicious/Untrustworthy/Incomplete orders"%}</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <strong style="margin-left: .8em;font-size:1.2em;">{% trans "Archive" %}</strong>
+                                <strong style="margin-left: .8em;font-size:1.2em;">{% trans "Active orders" %}</strong>
                             </li>
                             <li>
-                                <a href="#">{% trans "Processed" %}</a>
+                                <a href="{% url 'tasks_active'  %}">{% trans "Processing orders" %}</a>
                             </li>
                             <li>
-                                <a href="#">{% trans "Expired" %}</a>
+                                <a href="#">{% trans "Expired orders" %}</a>
                             </li>
                         </ul>
                     </li>

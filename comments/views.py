@@ -3,7 +3,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 
 from comments.models import Comment
-from tasks.models import Task
+from general.models import Task
 from general.views import BaseView
 from django.core.urlresolvers import reverse
 
@@ -30,7 +30,7 @@ class CommentForm(ModelForm):
 class CreateCommentView(BaseView, CreateView):
   form_class = CommentForm
   queryset = Comment.objects.all()
-  module_name = 'tasks'
+  module_name = 'default'
   template_name = 'detail.html'
 
   def get_form_kwargs(self):
@@ -44,7 +44,7 @@ class CreateCommentView(BaseView, CreateView):
 
 
 class RemoveCommentView(BaseView, DeleteView):
-  module_name = 'tasks'
+  module_name = 'default'
   queryset = Comment.objects.all()
   template_name = 'delete.html'
   owner_required = True

@@ -22,14 +22,12 @@ class ProfileForm(forms.ModelForm):
 
   class Meta:
     model = UserProfile
-    fields = ['username','password', 'first_name', 'last_name', 'email', 'gender',
+    fields = ['first_name', 'last_name', 'email', 'gender',
               'country', 'phone']
 
   def save(self, commit=True):
     if self.user_id:
       # In case it will be passed somehow.
-      del self.cleaned_data['password']
-      del self.cleaned_data['username']
       user = UserProfile(pk=self.user_id, **self.cleaned_data)
     else:
       user = UserProfile.objects.create_user(**self.cleaned_data)
@@ -39,10 +37,9 @@ class ProfileForm(forms.ModelForm):
 
 
 class CreateProfileView(BaseView, CreateView):
-  module_name = 'userprofile'
   form_class = ProfileForm
   queryset = UserProfile.objects.all()
-  template_name = 'edit.html'
+  template_name = 'userprofile/edit.html'
   group_name = ''
 
   def get_form_kwargs(self):
@@ -52,10 +49,9 @@ class CreateProfileView(BaseView, CreateView):
 
 
 class UpdateProfileView(BaseView, UpdateView):
-  template_name = 'edit.html'
+  template_name = 'userprofile/edit.html'
   form_class = ProfileForm
   queryset = UserProfile.objects.all()
-  module_name = 'userprofile'
   group_name = ''
   owner_required = True
 
@@ -70,17 +66,15 @@ class UpdateProfileView(BaseView, UpdateView):
 
 
 class DetailProfileView(BaseView, DetailView):
-  module_name = 'userprofile'
   queryset = UserProfile.objects.all()
-  template_name = 'detail.html'
+  template_name = 'userprofile/detail.html'
   group_name = ''
 
 
 class RemoveProfileView(BaseView, DeleteView):
-  module_name = 'userprofile'
   queryset = UserProfile.objects.all()
   success_url = reverse_lazy('task_list')
-  template_name = 'delete.html'
+  template_name = 'userprofile/delete.html'
   owner_required = True
 
   def user_id(self):

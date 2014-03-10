@@ -53,7 +53,7 @@ class Task(models.Model):
   updated = models.DateTimeField(auto_now=True)
   completed = models.DateTimeField(null=True, blank=True)
   status = models.SmallIntegerField(choices=co.TASK_STATUSES, blank=True,
-                                    default=co.NOT_ASSIGNED)
+                                    default=co.UNPROCESSED)
 
   def __str__(self):
     return self.title

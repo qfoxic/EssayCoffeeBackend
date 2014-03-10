@@ -37,7 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tasks',
+    'customer',
+    'general',
     'comments',
     'userprofile',
 )
@@ -80,7 +81,7 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join('/var/www/transport', 'db.sqlite3'),
         'ENGINE':'django.db.backends.mysql',
-        'NAME': 'transport',
+        'NAME': 'transport_vpaslav',
         'USER': 'transport',
         'PASSWORD': 'Secret677',
         'HOST': '127.0.0.1',

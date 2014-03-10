@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-# BASE_DIR = '/var/www'
+#BASE_DIR = '/var/www'
 PROJECT_DIR = os.path.join(BASE_DIR, 'transport')
 
 # Quick-start development settings - unsuitable for production
@@ -37,9 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'customer',
-    'comments',
+    'administer',
     'general',
+    'comments',
     'userprofile',
 )
 
@@ -70,7 +70,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 ROOT_URLCONF = 'urls'
 
-WSGI_APPLICATION = 'customer_wsgi.application'
+WSGI_APPLICATION = 'admin_wsgi.application'
 
 
 # Database
@@ -78,14 +78,14 @@ WSGI_APPLICATION = 'customer_wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(PROJECT_DIR, 'db.sq3'),
-         'ENGINE':'django.db.backends.mysql',
-         'NAME': 'transport_vpaslav',
-         'USER': 'transport',
-         'PASSWORD': 'Secret677',
-         'HOST': '127.0.0.1',
-         'PORT': '3306',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join('/var/www/transport', 'db.sqlite3'),
+        'ENGINE':'django.db.backends.mysql',
+        'NAME': 'transport_vpaslav',
+        'USER': 'transport',
+        'PASSWORD': 'Secret677',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
@@ -116,5 +116,5 @@ LOGIN_REDIRECT_URL = '/'
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 MEDIA_URL = '/media/'
 
-ACTIVE_GROUP = 'customer'
+ACTIVE_GROUP = 'admin'
 CUSTOM_USER_MODEL = 'userprofile.UserProfile'

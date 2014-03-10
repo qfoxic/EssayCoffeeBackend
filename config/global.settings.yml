@@ -1,2 +1,2 @@
 layout: # to view
-  skin_prefix: customer # skin prefix [ customer, admin, writer ]
+  skin_prefix: default # skin prefix [ customer, admin, writer ]
