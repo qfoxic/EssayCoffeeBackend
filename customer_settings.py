@@ -81,7 +81,7 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join('/var/www/transport', 'db.sqlite3'),
         'ENGINE':'django.db.backends.mysql',
-        'NAME': 'transport_vpaslav',
+        'NAME': 'transport',
         'USER': 'transport',
         'PASSWORD': 'Secret677',
         'HOST': '127.0.0.1',
