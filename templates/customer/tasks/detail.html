@@ -45,12 +45,23 @@
                 </div>
                 <div class="info-row">
                     <div class="info-col">
-                        <i class="fa fa-lg fa-check-square-o"></i>{% trans "Status" %}: [ open | performed ]
+                        <i class="fa fa-lg fa-check-square-o"></i>{% trans "Status" %}: [{{object_status}}] 
                     </div>
                     <div class="info-col">
                         <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{object.created}}
                     </div>
                 </div>
+                {% if object.status == co.DRAFT %}
+                <div class="info-row">
+                  <div class="info-col">
+                    {#TODO Put a link here.#}
+                    <form action="{% url 'task_submit' object.pk %}" method="POST">
+                      {% csrf_token %}
+                      <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
+                    </form>
+                  </div>
+                </div>
+                {% endif %}
             </div>
             <div class="comments">
                 <div class="lh">

@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, ValidationError
 from general.models import Task
 
 import constants as co
@@ -28,3 +28,18 @@ class TaskForm(ModelForm):
 #    send_mail(co.ORDER_MAIL_SUBJECT, mail, co.ADMIN_EMAIL,
 #              [self.request.user.email])
     return super(TaskForm, self).save(*args, **kwargs)
+
+
+class TaskSubmitForm(ModelForm):
+  class Meta:
+    model = Task
+    fields = ['status']
+
+  def __init__(self, request=None, *args, **kwargs):
+    super(TaskSubmitForm, self).__init__(*args, **kwargs)
+    self.request = request
+
+  def clean_status(self):
+    if self.instance.status == co.DRAFT:
+      return co.UNPROCESSED
+    raise ValidationError('Could not submit task because it is not in appropriate state.')

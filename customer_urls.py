@@ -10,7 +10,8 @@ import constants as co
 
 from general.views import TaskIndexView, UpdateTaskView, CreateTaskView
 from general.views import RemoveTaskView, DetailTaskView
-from customer.views import CustomerTaskView,CustomerCreateTaskView, CustomerUpdateTaskView,CustomerDetailTaskView
+from customer.views import CustomerTaskView,CustomerCreateDraftTaskView,CustomerUpdateTaskView
+from customer.views import CustomerDetailTaskView,CustomerSubmitTaskView
 
 from userprofile.views import CreateProfileWriterView, DetailProfileWriterView
 from userprofile.views import CreateProfileCustomerView, DetailProfileCustomerView, UpdateProfileCustomerView
@@ -39,7 +40,10 @@ user_remove = login_required(RemoveProfileView.as_view(), login_url=reverse_lazy
 task_list = login_required(CustomerTaskView.as_view(), login_url=reverse_lazy('login'))
 task_details = CustomerDetailTaskView.as_view()
 task_new = login_required(
-  permission_required('general.add_task', raise_exception=True)(CustomerCreateTaskView.as_view()),
+  permission_required('general.add_task', raise_exception=True)(CustomerCreateDraftTaskView.as_view()),
+  login_url=reverse_lazy('login'))
+task_submit = login_required(
+  permission_required('general.change_task', raise_exception=True)(CustomerSubmitTaskView.as_view()),
   login_url=reverse_lazy('login'))
 task_update = login_required(
   permission_required('general.change_task', raise_exception=True)(CustomerUpdateTaskView.as_view()),
@@ -52,6 +56,7 @@ urlpatterns = patterns('',
     url(r'^task/(?P<pk>\d+)/remove$', task_rm, name='task_remove'),
     url(r'^task/new$', task_new, name='task_new'),
     url(r'^task/(?P<pk>\d+)/edit$', task_update, name='task_edit'),
+    url(r'^task/(?P<pk>\d+)/submit$', task_submit, name='task_submit'),
 
     url(r'^comment/(?P<task_id>\d+)/new$', comment_new, name='comment_new'),
     url(r'^comment/(?P<pk>\d+)/remove$', comment_rm, name='comment_remove'),

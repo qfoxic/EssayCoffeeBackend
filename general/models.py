@@ -53,15 +53,16 @@ class Task(models.Model):
   updated = models.DateTimeField(auto_now=True)
   completed = models.DateTimeField(null=True, blank=True)
   status = models.SmallIntegerField(choices=co.TASK_STATUSES, blank=True,
-                                    default=co.UNPROCESSED)
+                                    default=co.DRAFT)
 
   def __str__(self):
-    return self.title
+    return self.paper_title
 
   @models.permalink
   def get_absolute_url(self):
     return  ('task_view', (), {'pk': self.id})
   to_link = get_absolute_url
+
 
   class Meta:
     db_table = 'tasks'

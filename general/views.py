@@ -66,6 +66,8 @@ class BaseView(View):
 
   def render_to_response(self, context, **response_kwargs):
     context.update(self.settings)
+    # Pass constants to templates.
+    context['co'] = co
     return super(BaseView, self).render_to_response(context, **response_kwargs)
 
   def get_template_names(self):
