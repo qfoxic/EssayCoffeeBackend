@@ -11,10 +11,10 @@ import constants as co
 from general.views import TaskIndexView, UpdateTaskView, CreateTaskView
 from general.views import RemoveTaskView, DetailTaskView
 from customer.views import CustomerTaskView,CustomerCreateDraftTaskView,CustomerUpdateTaskView
-from customer.views import CustomerDetailTaskView,CustomerSubmitTaskView
+from customer.views import CustomerDetailTaskView,CustomerSubmitTaskView,CreateProfileCustomerView
+from customer.views import UpdateProfileCustomerView 
 
 from userprofile.views import CreateProfileWriterView, DetailProfileWriterView
-from userprofile.views import CreateProfileCustomerView, DetailProfileCustomerView, UpdateProfileCustomerView
 from userprofile.views import RemoveProfileView, UpdateProfileWriterView
 
 from comments.views import CreateCommentView, RemoveCommentView
@@ -33,7 +33,6 @@ comment_rm = login_required(
     login_url=reverse_lazy('login'))
 
 user_new = CreateProfileCustomerView.as_view()
-user_details = login_required(DetailProfileCustomerView.as_view(), login_url=reverse_lazy('login'))
 user_edit = login_required(UpdateProfileCustomerView.as_view(), login_url=reverse_lazy('login'))
 user_remove = login_required(RemoveProfileView.as_view(), login_url=reverse_lazy('login'))
 
@@ -62,7 +61,7 @@ urlpatterns = patterns('',
     url(r'^comment/(?P<pk>\d+)/remove$', comment_rm, name='comment_remove'),
 
     url(r'profile/new', user_new, name='user_new'),
-    url(r'profile/(?P<pk>\d+)/$', user_details, name='user_details'),
+    url(r'profile/(?P<pk>\d+)/$', user_edit, name='user_details'),
     url(r'profile/(?P<pk>\d+)/edit$', user_edit, name='user_edit'),
     url(r'profile/(?P<pk>\d+)/remove', user_remove, name='user_remove'),
 

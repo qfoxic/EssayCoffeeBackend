@@ -21,8 +21,13 @@
                     title="{% trans "Error: Username field is required" %}"{% endif %}>
                         <label>{% trans "Username" %}</label>
                         <div class="input-group margin-bottom-sm">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            {{form.username|attr:"class:form-control,autocomplete:off,placeholder:Enter a username"}}
+                         <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                         {% if form.username.value %}
+                           <input id="id_username" name="username" class="form-control"
+                                  placeholder="Enter a first name" value="{{form.username.value}}">
+                         {% else %}
+                           <input id="id_username" name="username" class="form-control" placeholder="Enter a first name">
+                         {% endif %}
                         </div>
                     </div>
                     <div class="form-group{% if form.password.errors %} has-error{% endif %}"
@@ -31,7 +36,15 @@
                         <label>{% trans "Password" %}</label>
                         <div class="input-group margin-bottom-sm">
                             <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                            {{form.password|attr:"type:password,class:form-control,autocomplete:off,placeholder:Enter a password"}}
+                            {% if form.password.value %}
+                              <input id="id_password" name="password"
+                                     type="password" class="form-control"
+                                     placeholder="Enter a password" value="{{form.password.value}}">
+                            {% else %}
+                              <input id="id_password" name="password"
+                                     type="password" class="form-control"
+                                     placeholder="Enter a password">
+                            {% endif %}
                         </div>
                     </div>
                     <div class="form-group{% if form.confirm_pass.errors %} has-error{% endif %}"

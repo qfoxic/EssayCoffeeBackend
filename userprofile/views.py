@@ -14,21 +14,28 @@ import constants as co
 
 
 class ProfileForm(forms.ModelForm):
-
   def __init__(self, group_name=None, user_id=None, *args, **kwargs):
     super(ProfileForm, self).__init__(*args, **kwargs)
     self.group_name = group_name
     self.user_id = user_id
+    if user_id:
+      self.fields['password'].required = False
+      self.fields['username'].required = False
 
   class Meta:
     model = UserProfile
-    fields = ['first_name', 'last_name', 'email', 'gender',
+    fields = ['username', 'password', 'first_name', 'last_name', 'email', 'gender',
               'country', 'phone']
-
+  
   def save(self, commit=True):
     if self.user_id:
-      # In case it will be passed somehow.
-      user = UserProfile(pk=self.user_id, **self.cleaned_data)
+      user = UserProfile.objects.get(pk=self.user_id)
+      user.first_name=self.cleaned_data['first_name']
+      user.last_name=self.cleaned_data['last_name']
+      user.email=self.cleaned_data['email']
+      user.gender=self.cleaned_data['gender']
+      user.country=self.cleaned_data['country']
+      user.phone=self.cleaned_data['phone']
     else:
       user = UserProfile.objects.create_user(**self.cleaned_data)
       user.groups.add(Group.objects.get(name=self.group_name))
@@ -37,6 +44,7 @@ class ProfileForm(forms.ModelForm):
 
 
 class CreateProfileView(BaseView, CreateView):
+  module_name = ''
   form_class = ProfileForm
   queryset = UserProfile.objects.all()
   template_name = 'userprofile/edit.html'
@@ -93,15 +101,5 @@ class UpdateProfileWriterView(UpdateProfileView):
   group_name = co.WRITER_GROUP
 
 
-class DetailProfileCustomerView(DetailProfileView):
-  group_name = co.CUSTOMER_GROUP
-
-
-class CreateProfileCustomerView(CreateProfileView):
-  group_name = co.CUSTOMER_GROUP
-
-
-class UpdateProfileCustomerView(UpdateProfileView):
-  group_name = co.CUSTOMER_GROUP
 
 

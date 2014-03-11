@@ -1,6 +1,7 @@
 from general.models import Task, Categories
 from general.forms import TaskSubmitForm
 from general.views import BaseView, TaskIndexView, CreateTaskView, UpdateTaskView, DetailTaskView
+from userprofile.views import CreateProfileView, UpdateProfileView
 import constants as co
 
 
@@ -46,3 +47,14 @@ class CustomerDetailTaskView(DetailTaskView):
 
   def user_id(self):
     return self.get_object().owner.pk
+
+
+class CreateProfileCustomerView(CreateProfileView):
+  module_name = 'customer'
+  group_name = co.CUSTOMER_GROUP
+
+
+class UpdateProfileCustomerView(UpdateProfileView):
+  module_name = 'customer'
+  group_name = co.CUSTOMER_GROUP
+

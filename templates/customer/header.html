@@ -49,9 +49,9 @@
                     {% endif %}
                     <li>
                         {% if user.username %}
-                        <a href="/logout">{% trans "Log out" %}<i class='fa fa-sign-out fa-lg' style="margin-left:.5em"></i></a>
+                        <a href="{% url 'logout' %}">{% trans "Log out" %}<i class='fa fa-sign-out fa-lg' style="margin-left:.5em"></i></a>
                         {% else %}
-                        <a href="/login">{% trans "Sign in" %}<i class='fa fa-sign-in fa-lg' style="margin-left:.5em"></i></a>
+                        <a href="{% url 'login' %}">{% trans "Sign in" %}<i class='fa fa-sign-in fa-lg' style="margin-left:.5em"></i></a>
                         {% endif %}
                     </li>
                 </ul>
