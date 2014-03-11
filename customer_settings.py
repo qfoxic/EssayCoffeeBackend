@@ -20,6 +20,10 @@ PROJECT_DIR = os.path.join(BASE_DIR, 'transport')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '_w$x6+-q7hk1)5h6)w^pf(8&n3+dmi^hbc4_6_o+-)wfe&8!+*'
 
+CSRF_COOKIE_NAME = 'csrfc'
+SESSION_COOKIE_NAME = 'sessc'
+#CSRF_COOKIE_DOMAIN = '85.17.249.125:8081'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -68,7 +72,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'customer_urls'
 
 WSGI_APPLICATION = 'customer_wsgi.application'
 
