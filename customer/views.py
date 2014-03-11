@@ -37,8 +37,12 @@ class CustomerUpdateTaskView(UpdateTaskView):
 class CustomerDetailTaskView(DetailTaskView):
   module_name = 'customer'
   template_name = 'tasks/detail.html'
+  owner_required = True
 
   def get_context_data(self, **kwargs):
     context = super(DetailTaskView, self).get_context_data(**kwargs)
     context['object_status'] = co.TASK_STATUSES_DICT.get(self.object.status)
     return context
+
+  def user_id(self):
+    return self.get_object().owner.pk
