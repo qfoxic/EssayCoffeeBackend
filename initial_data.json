@@ -106,10 +106,26 @@
   }
 },
 {
-  "pk": "hn73tqzce4el2zk9g1p0fa2wp8nnc2fb", 
+  "pk": "qoc59522meqfh0zdfq5ekap6i1o6ih1v", 
   "model": "sessions.session", 
   "fields": {
-    "expire_date": "2014-03-25T10:15:16Z", 
+    "expire_date": "2014-03-26T14:57:25Z", 
+    "session_data": "NGM2OWE2OGZiM2I2YTE0MGNhYmE0ZGRkYzlmZDhiODBhNWE4YjBlMTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJwcm9maWxlLmF1dGguVXNlclByb2ZpbGVCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0="
+  }
+},
+{
+  "pk": "s6y8r90pjjxwc1pc83t0qubbpmvgf5h8", 
+  "model": "sessions.session", 
+  "fields": {
+    "expire_date": "2014-03-25T23:49:38Z", 
+    "session_data": "ZDUyZTNlYmMxMzUyNDgxYWFiYzg2YWFmNTUzMzYzMzgzYmUyOTNhNjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJwcm9maWxlLmF1dGguVXNlclByb2ZpbGVCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6M30="
+  }
+},
+{
+  "pk": "upj9yxw5omudfuh6rnuqng941bg5gpf7", 
+  "model": "sessions.session", 
+  "fields": {
+    "expire_date": "2014-03-25T14:12:48Z", 
     "session_data": "NGM2OWE2OGZiM2I2YTE0MGNhYmE0ZGRkYzlmZDhiODBhNWE4YjBlMTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJwcm9maWxlLmF1dGguVXNlclByb2ZpbGVCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0="
   }
 },
@@ -456,7 +472,7 @@
     "is_active": true, 
     "is_superuser": true, 
     "is_staff": true, 
-    "last_login": "2014-03-11T10:15:15Z", 
+    "last_login": "2014-03-12T14:57:25Z", 
     "groups": [], 
     "user_permissions": [], 
     "password": "pbkdf2_sha256$12000$tnsdTndxKJbb$0+31vNtiMtAKd8ZuBLtcL/qP/UyhzTDWuKoG62IBwFM=", 
@@ -494,7 +510,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-03-11T10:15:20Z", 
+    "last_login": "2014-03-11T23:49:38Z", 
     "groups": [
       2
     ], 
@@ -502,6 +518,105 @@
     "password": "pbkdf2_sha256$12000$Avp8yAII4Wkx$1rSQ266/93jktacIQPEcBWEvpdMEHoyj9djFEa1AOFQ=", 
     "email": "cust@ukt.rnt", 
     "date_joined": "2014-03-11T10:15:21Z"
+  }
+},
+{
+  "pk": 1, 
+  "model": "general.task", 
+  "fields": {
+    "discipline": "hs", 
+    "status": 0, 
+    "style": 1, 
+    "assigment": "ab", 
+    "level": "hs", 
+    "completed": null, 
+    "created": "2014-03-11T23:48:01Z", 
+    "spacing": 2, 
+    "updated": "2014-03-11T23:48:29Z", 
+    "owner": 3, 
+    "attach": "", 
+    "page_number": 1, 
+    "paper_title": "assignment 1", 
+    "assignee": null, 
+    "ttype": 1, 
+    "accept_terms": true, 
+    "source_number": 1, 
+    "discount": "", 
+    "access_level": 0, 
+    "urgency": 21600, 
+    "instructions": "one two three"
+  }
+},
+{
+  "pk": 1, 
+  "model": "comments.comment", 
+  "fields": {
+    "body": "commentar", 
+    "rating": 1, 
+    "cowner": 3, 
+    "created": "2014-03-12T00:11:03Z", 
+    "title": "1st", 
+    "ctask": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "comments.comment", 
+  "fields": {
+    "body": "asdsadasdasdasd", 
+    "rating": 1, 
+    "cowner": 3, 
+    "created": "2014-03-12T00:11:32Z", 
+    "title": "asd", 
+    "ctask": 1
+  }
+},
+{
+  "pk": 3, 
+  "model": "comments.comment", 
+  "fields": {
+    "body": "123", 
+    "rating": 1, 
+    "cowner": 3, 
+    "created": "2014-03-12T00:13:16Z", 
+    "title": "123", 
+    "ctask": 1
+  }
+},
+{
+  "pk": 6, 
+  "model": "comments.comment", 
+  "fields": {
+    "body": "asd", 
+    "rating": 1, 
+    "cowner": 3, 
+    "created": "2014-03-12T00:22:59Z", 
+    "title": "asd", 
+    "ctask": 1
+  }
+},
+{
+  "pk": 7, 
+  "model": "comments.comment", 
+  "fields": {
+    "body": "asd", 
+    "rating": 5, 
+    "cowner": 3, 
+    "created": "2014-03-12T00:26:23Z", 
+    "title": "asd", 
+    "ctask": 1
+  }
+},
+{
+  "pk": 8, 
+  "model": "comments.comment", 
+  "fields": {
+    "body": "asd", 
+    "rating": 5, 
+    "cowner": 3, 
+    "created": "2014-03-12T00:27:21Z", 
+    "title": "asd", 
+    "ctask": 1
   }
 },
 {
