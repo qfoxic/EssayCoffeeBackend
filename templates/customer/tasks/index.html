@@ -2,29 +2,59 @@
 {% load i18n %}
 {% block pagetitle %}-- All Tasks -- {% endblock %}
 {% block content %}
-  {% if tasks %}
-  <div class="row">
+{% if tasks %}
+<div class="row">
     <div class="col-md-9">
         <div class="lh">
             <i class="fa fa-tasks"></i><span class="title">{% trans "Tasks" %}</span><span class="badge">{{tasks|length}}</span>
         </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Order name</th>
+                    <th>Status</th>
+                    <th>Executor</th>
+                    <th>Created</th>
+                    <th>Deadline</th>
+                    <th>Unread msgs</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr></tr>
+            </tfoot>
+        </table>
+        <!--
         <ul class="fa-ul">
-            {% for task in tasks %}
-            <li>
-                <i class="fa-li fa fa-check-square-o"></i><a href="{{task.to_link}}">{{ task.paper_title }}-{{task.created|date:"U"}}</a>
-            </li>
-            {% empty %}
-            <li>
-                <i class="fa-li fa fa-square-o"></i>{% trans "No tasks yet" %}
-            </li>
-            {% endfor %}
-        </ul>
+        {% for task in tasks %}
+        <li>
+        <i class="fa-li fa fa-check-square-o"></i><a href="{{task.to_link}}">{{ task.paper_title }}-{{task.created|date:"U"}}</a>
+        </li>
+        {% empty %}
+        <li>
+        <i class="fa-li fa fa-square-o"></i>{% trans "No tasks yet" %}
+        </li>
+        {% endfor %}
+        </ul> -->
     </div>
-  </div>
-  {% endif  %}
+</div>
+{% endif  %}
 {% endblock %}
 {% block info_block %}
 <section class="info">
-     --- Hello! This is categories view ---
+    --- Hello! This is categories view ---
 </section>
 {% endblock %}
