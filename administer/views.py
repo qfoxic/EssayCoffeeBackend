@@ -1,4 +1,4 @@
-from general.models import Task, Categories
+from general.models import Task
 from general.views import BaseView, TaskIndexView, DetailTaskView
 from userprofile.views import DetailProfileView,UpdateProfileView
 import constants as co

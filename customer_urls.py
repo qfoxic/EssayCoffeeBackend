@@ -13,11 +13,11 @@ from general.views import RemoveTaskView, DetailTaskView
 from customer.views import CustomerTaskView,CustomerCreateDraftTaskView,CustomerUpdateTaskView
 from customer.views import CustomerDetailTaskView,CustomerSubmitTaskView,CreateProfileCustomerView
 from customer.views import UpdateProfileCustomerView 
+from customer.views import CustomerCreateCommentView, CustomerRemoveCommentView 
 
 from userprofile.views import CreateProfileWriterView, DetailProfileWriterView
 from userprofile.views import RemoveProfileView, UpdateProfileWriterView
 
-from comments.views import CreateCommentView, RemoveCommentView
 from general.views import LoginView, LogoutView, ResetPswdView
 from general.views import ResetPswdDoneView, ResetPswdConfirmView, ResetPswdCompleteView
 
@@ -26,10 +26,10 @@ task_rm = login_required(
     login_url=reverse_lazy('login'))
 
 comment_new = login_required(
-    permission_required('comments.add_comment', raise_exception=True)(CreateCommentView.as_view()),
+    permission_required('comments.add_comment', raise_exception=True)(CustomerCreateCommentView.as_view()),
     login_url=reverse_lazy('login'))
 comment_rm = login_required(
-    permission_required('comments.delete_comment', raise_exception=True)(RemoveCommentView.as_view()),
+    permission_required('comments.delete_comment', raise_exception=True)(CustomerRemoveCommentView.as_view()),
     login_url=reverse_lazy('login'))
 
 user_new = CreateProfileCustomerView.as_view()

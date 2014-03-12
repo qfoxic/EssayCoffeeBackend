@@ -1,6 +1,7 @@
-from general.models import Task, Categories
+from general.models import Task
 from general.forms import TaskSubmitForm
 from general.views import BaseView, TaskIndexView, CreateTaskView, UpdateTaskView, DetailTaskView
+from comments.views import CreateCommentView, RemoveCommentView 
 from userprofile.views import CreateProfileView, UpdateProfileView
 import constants as co
 
@@ -41,7 +42,7 @@ class CustomerDetailTaskView(DetailTaskView):
   owner_required = True
 
   def get_context_data(self, **kwargs):
-    context = super(DetailTaskView, self).get_context_data(**kwargs)
+    context = super(CustomerDetailTaskView, self).get_context_data(**kwargs)
     context['object_status'] = co.TASK_STATUSES_DICT.get(self.object.status)
     return context
 
@@ -58,3 +59,9 @@ class UpdateProfileCustomerView(UpdateProfileView):
   module_name = 'customer'
   group_name = co.CUSTOMER_GROUP
 
+
+class CustomerCreateCommentView(CreateCommentView):
+  module_name = 'customer'
+
+class CustomerRemoveCommentView(RemoveCommentView):
+  module_name = 'customer'

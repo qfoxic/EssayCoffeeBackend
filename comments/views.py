@@ -6,6 +6,8 @@ from comments.models import Comment
 from general.models import Task
 from general.views import BaseView
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 
 class CommentForm(ModelForm):
@@ -28,10 +30,10 @@ class CommentForm(ModelForm):
 
 
 class CreateCommentView(BaseView, CreateView):
+  module_name = 'default'
+  template_name = 'tasks/detail.html'
   form_class = CommentForm
   queryset = Comment.objects.all()
-  module_name = 'default'
-  template_name = 'detail.html'
 
   def get_form_kwargs(self):
     kwargs = super(CreateCommentView, self).get_form_kwargs()
@@ -42,11 +44,16 @@ class CreateCommentView(BaseView, CreateView):
   def get_success_url(self):
     return reverse('task_view', kwargs={'pk': self.kwargs.get('task_id')})
 
+  def form_invalid(self, form):
+    # If form is invalid redirect to task details with an error.
+    messages.add_message(self.request, messages.ERROR, str(form.errors))
+    return HttpResponseRedirect(self.get_success_url())
+
 
 class RemoveCommentView(BaseView, DeleteView):
   module_name = 'default'
+  template_name = 'tasks/delete.html'
   queryset = Comment.objects.all()
-  template_name = 'delete.html'
   owner_required = True
 
   def get_success_url(self):

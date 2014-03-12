@@ -11,15 +11,15 @@ def ValidateTerms(value):
     raise ValidationError('Please accept terms.')
 
 
-class Categories(models.Model):
-  pid = models.ForeignKey('self', blank=True, null=True)
-  name = models.CharField(max_length=co.MAX_STRING_LEN)
+#class Categories(models.Model):
+#  pid = models.ForeignKey('self', blank=True, null=True)
+#  name = models.CharField(max_length=co.MAX_STRING_LEN)
 
-  def __str__(self):
-    return self.name
-
-  class Meta:
-    db_table = 'categories'
+#  def __str__(self):
+#    return self.name
+#
+#  class Meta:
+#    db_table = 'categories'
 
 
 def get_attach_path(instance, filename):
