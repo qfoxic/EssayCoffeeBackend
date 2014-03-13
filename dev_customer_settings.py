@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'customer_wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+#        'ENGINE': 'django.db.backends.sqlite3',
 #        'NAME': os.path.join(PROJECT_DIR, 'db.sq3'),
          'ENGINE':'django.db.backends.mysql',
          'NAME': 'transport_vpaslav',
