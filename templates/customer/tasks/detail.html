@@ -45,7 +45,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-col">
-                        <i class="fa fa-lg fa-check-square-o"></i>{% trans "Status" %}: [{{object_status}}] 
+                        <i class="fa fa-lg fa-check-square-o"></i>{% trans "Status" %}: [{{object.get_status}}] 
                     </div>
                     <div class="info-col">
                         <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{object.created}}

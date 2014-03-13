@@ -58,6 +58,10 @@ class Task(models.Model):
   def __str__(self):
     return self.paper_title
 
+  def get_task_status(self):
+    return co.TASK_STATUSES_DICT.get(self.status)
+  get_status = get_task_status
+
   @models.permalink
   def get_absolute_url(self):
     return  ('task_view', (), {'pk': self.id})
