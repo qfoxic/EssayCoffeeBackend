@@ -71,11 +71,11 @@
                     {% for comment in comments %}
                     <li>
                         {{ comment.title }}
-                        <form action="{% url "comment_remove" comment.pk %}" method="post">
-                            {% csrf_token %}
-                            <input type="submit" value="{% trans "Remove" %}" class="btn btn-primary" />
-                        </form>
                     </li>
+                    <li>
+                        {{ comment.body }}
+                    </li>
+                    <br />
                     {% empty %}
                     <li>
                         {% trans "No comments yet" %}
@@ -97,18 +97,14 @@
                     <div class="form-group{% if form.title.errors %} has-error{% endif %}">
                         <!-- {{form.title.errors}} -->
                         <label>{% trans "Title" %}</label>
-                        <input type="text" name="title" class="form-control"/>
+                        <input type="text" name="title" class="form-control" required/>
                     </div>
                     <div class="form-group{% if form.body.errors %} has-error{% endif %}">
                         <!-- {{form.body.errors}} -->
                         <label>{% trans "Body" %}</label>
-                        <textarea name="body" class="form-control" rows="5"></textarea>
+                        <textarea name="body" class="form-control" rows="5" required></textarea>
                     </div>
-                    <div class="form-group{% if form.rating.errors %} has-error{% endif %}">
-                        <!-- {{form.rating.errors}} -->
-                        <label>{% trans "Put your rating 0-5" %}</label>
-                        <input type="text" name="rating" />
-                    </div>
+                    <input type="hidden" name="rating" value="0"/>
                     <div class="form-group">
                         <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
                     </div>
@@ -120,6 +116,9 @@
 {% endblock %}
 {% block info_block %}
 <section class="info">
-    <h2>{% trans "Task Details" %} <a href="{% url "task_edit" object.id %}" title="{% trans "Edit task" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a></h2>
+    <h2>{% trans "Task Details" %} 
+    {% if object.status == co.DRAFT %}
+      <a href="{% url "task_edit" object.id %}" title="{% trans "Edit task" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a></h2>
+    {% endif  %}
 </section>
 {% endblock %}

@@ -36,7 +36,8 @@ TITLE_MAX_LEN = 100
 
 # Max len of typical overview string
 MAX_STRING_LEN = 500
-
+INSTRUCTION_MAX_LEN = 10000
+MAX_FILE_LEN = 50 * 1024 * 1024 # 50 MB
 
 # Task related statuses.
 UNPROCESSED = 0
@@ -135,6 +136,7 @@ COUNTRIES = (
 
 
 DISCIPLINES = (
+  (0, '- Please choose -'),
   ('hs', 'History'), ('ln', 'Linguistics'), ('lt', 'Literature'),
   ('pa', 'Performing arts'), ('ph', 'Philosophy'), ('rg', 'Religion'),
   ('va', 'Visual arts'), ('an', 'Anthropology'), ('ar', 'Archaeology'),
@@ -146,24 +148,28 @@ DISCIPLINES = (
 
 
 ASSIGMENTS = (
+  ('', '- Please choose -'),
   ('es', 'Essay'), ('re', 'Report'), ('ab', 'Abstract'),
   ('an', 'Annotated bibliography'), ('rw', 'Review'), ('cs', 'Case Study'))
 
 
 LEVELS = (
+  ('', '- Please choose -'),
   ('hs', 'High School'), ('co', 'College'), ('un', 'University'),
   ('ms', 'Master\'s'), ('ph', 'PHD'))
 
 # Urgency is more convenient to represent as time in seconds and label
 URGENCY = (
+  (0, '- Please choose -'),
   (21600, '6hours'), (43200, '12 hours'), (86400, '1 day'), (172800, '2 days'),
   (259200, '3days'), (518400, '6days'), (1036800, '12days'),
   (2073600, '24+days'))
 
 
-SPACING = ((1, 'Single'), (2, 'Double'))
+SPACING = ((0, '- Please choose -'), (1, 'Single'), (2, 'Double'))
 
 STYLES = (
+  (0, '- Please choose -'),
   (1, 'MLA'), (2, 'APA'), (3, 'Chicago'), (4, 'Turabian'), (5, 'Harvar'),
   (6, 'other'))
 

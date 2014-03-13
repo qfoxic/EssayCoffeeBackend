@@ -10,35 +10,40 @@ def ValidateTerms(value):
   if not value:
     raise ValidationError('Please accept terms.')
 
+def ValidateEmptySelect(value):
+  if not value:
+    raise ValidationError('Please select an option.')
 
-#class Categories(models.Model):
-#  pid = models.ForeignKey('self', blank=True, null=True)
-#  name = models.CharField(max_length=co.MAX_STRING_LEN)
-
-#  def __str__(self):
-#    return self.name
-#
-#  class Meta:
-#    db_table = 'categories'
-
+def ValidateMinSize(size):
+  def Validate(value):
+    if len(value) < size:
+      raise ValidationError('Size should be at least %s' % size)
+  return Validate
 
 def get_attach_path(instance, filename):
   return os.path.join(instance.owner.username, 'attach', filename)
 
 
 class Task(models.Model):
-  paper_title = models.CharField(max_length=co.TITLE_MAX_LEN)
-  discipline = models.CharField(choices=co.DISCIPLINES, max_length=co.TITLE_MAX_LEN, default=co.DISCIPLINES[0])
-  assigment = models.CharField(choices=co.ASSIGMENTS, max_length=co.TITLE_MAX_LEN, default=co.ASSIGMENTS[0])
+  paper_title = models.CharField(max_length=co.TITLE_MAX_LEN, validators=[ValidateMinSize(4)])
+  discipline = models.CharField(choices=co.DISCIPLINES, max_length=co.TITLE_MAX_LEN,
+                                default=co.DISCIPLINES[0], validators=[ValidateEmptySelect])
+  assigment = models.CharField(choices=co.ASSIGMENTS, max_length=co.TITLE_MAX_LEN,
+                               default=co.ASSIGMENTS[0], validators=[ValidateEmptySelect])
   level = models.CharField(choices=co.LEVELS, max_length=co.TITLE_MAX_LEN, default=co.LEVELS[0])
-  urgency = models.SmallIntegerField(choices=co.URGENCY, default=co.URGENCY[0])
-  spacing = models.SmallIntegerField(choices=co.SPACING, default=co.SPACING[0])
+  urgency = models.SmallIntegerField(choices=co.URGENCY, default=co.URGENCY[0],
+                                     validators=[ValidateEmptySelect])
+  spacing = models.SmallIntegerField(choices=co.SPACING, default=co.SPACING[0],
+                                     validators=[ValidateEmptySelect])
   page_number = models.SmallIntegerField()
-  style = models.SmallIntegerField(choices=co.STYLES, default=co.STYLES[0])
+  style = models.SmallIntegerField(choices=co.STYLES, default=co.STYLES[0],
+                                   validators=[ValidateEmptySelect])
   source_number = models.SmallIntegerField()
-  instructions = models.TextField(blank=True, null=True)
-  attach = models.FileField(upload_to=get_attach_path, blank=True, null=True)
-  discount = models.CharField(max_length=co.TITLE_MAX_LEN, blank=True, null=True)
+  instructions = models.TextField(max_length=co.INSTRUCTION_MAX_LEN,
+                                  validators=[ValidateMinSize(100)])
+  attach = models.FileField(upload_to=get_attach_path, max_length=co.MAX_FILE_LEN,
+                            blank=True, null=True)
+  discount = models.CharField(max_length=co.TITLE_MAX_LEN)
   accept_terms = models.BooleanField(validators=[ValidateTerms])
   #######################################
   ttype = models.SmallIntegerField(choices=co.TASK_TYPES, blank=True,
