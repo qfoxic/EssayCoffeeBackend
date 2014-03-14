@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.core.exceptions import PermissionDenied
 
 from general.models import Task
-from comments.models import comment
+from comments.models import Comment
 from general.forms import TaskForm
 
 from django.views.generic.edit import UpdateView
