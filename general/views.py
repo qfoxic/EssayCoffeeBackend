@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.core.exceptions import PermissionDenied
 
 from general.models import Task
-from comments.models import Comment
+from comments.models import comment
 from general.forms import TaskForm
 
 from django.views.generic.edit import UpdateView
@@ -207,6 +207,8 @@ class DetailTaskView(BaseView, DetailView):
     context = super(DetailTaskView, self).get_context_data(**kwargs)
     task_id = self.kwargs.get('pk')
     context['comments'] = Comment.objects.filter(ctask_id__exact=task_id)
+    context['can_comment'] = (self.object.status != co.DRAFT)
+    context['can_edit'] = (self.object.status == co.DRAFT)
     return context
 
 

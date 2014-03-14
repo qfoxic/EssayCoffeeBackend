@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, ValidationError
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 
@@ -8,6 +8,8 @@ from general.views import BaseView
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+
+import constants as co
 
 
 class CommentForm(ModelForm):
@@ -27,6 +29,20 @@ class CommentForm(ModelForm):
   def clean_ctask(self):
     """Specifies default task for a comment."""
     return Task.objects.get(pk=self.task_id)
+  
+  def check_permissions(self, cleaned_data):
+    """Raises an exception if there are no permissions to save a form."""
+    if self.cleaned_data['ctask'].owner != self.request.user:
+      raise ValidationError('Only owners of this entity can leave comments.')
+    if self.cleaned_data['ctask'].status == co.DRAFT:
+      raise ValidationError('Items with a draft status can not be commented.') 
+ 
+  def clean(self):
+    # Check some conditions before saving a form.
+    cleaned_data = super(CommentForm, self).clean()
+    self.check_permissions(cleaned_data)
+    return cleaned_data
+     
 
 
 class CreateCommentView(BaseView, CreateView):

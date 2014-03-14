@@ -51,7 +51,7 @@
                         <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{object.created}}
                     </div>
                 </div>
-                {% if object.status == co.DRAFT %}
+                {% if can_edit %}
                 <div class="info-row">
                   <div class="info-col">
                     <form action="{% url 'task_submit' object.pk %}" method="POST">
@@ -85,7 +85,7 @@
                     {% endfor %}
                 </ul>
             </div>
-
+            {% if can_comment %}
             <div class="comments-form" style="margin-right:100px">
                 {% if messages %}
                   {% for message in messages %}
@@ -112,6 +112,7 @@
                     </div>
                 </form>
             </div>
+            {% endif  %}
         </div>
     </div>
 </section>
@@ -119,7 +120,7 @@
 {% block info_block %}
 <section class="info">
     <h2>{% trans "Task Details" %} 
-    {% if object.status == co.DRAFT %}
+    {% if can_edit %}
       <a href="{% url "task_edit" object.id %}" title="{% trans "Edit task" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a></h2>
     {% endif  %}
 </section>
