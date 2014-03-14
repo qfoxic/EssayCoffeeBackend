@@ -80,6 +80,12 @@ div.copy {
     width: 100px;
     height: 100px;
 }
+.ilm {
+    margin-left: 12px !important
+}
+.irm {
+    margin-right: 12px !important
+}
 .task-details div.info-row > div.info-col {
     color: #888;
     white-space: nowrap;
@@ -126,15 +132,18 @@ li > a {
     margin: 1.7em 0 0 !important;
 }
 .file-input.form-control {
-	padding:0;
-	border-collapse: collapse;
+    padding: 0;
+    border-collapse: collapse;
 }
 .file-input .input-group-addon {
-	border:none;
+    border: none;
 }
 .file-input-wrapper {
-	border-top:none;
-	border-bottom:none;
-	border-radius: 0;
+    border-top: none;
+    border-bottom: none;
+    border-radius: 0;
 }
-label {font-weight: 400; font-size: .9em}
+label {
+    font-weight: 400;
+    font-size: .9em
+}

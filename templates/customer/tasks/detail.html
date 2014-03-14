@@ -6,46 +6,48 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-1">
             <div class="task-details-inner">
-                <style>.test-line{
-                    margin-bottom: .5em;
-                    border-bottom: 1px dotted #aaa;
-                }</style>
-                <div class="test-line">
-                   {% trans "Assigment" %}: {{object.get_assigment}}
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4><i class="fa fa-tag fa-fw irm"></i><strong>{% trans "Paper Title" %}</strong>: <em>{{object.paper_title}}</em></h4>
+                        <hr>
+                        <i class="fa fa-file-text fa-fw irm"></i><strong>{% trans "Instructions" %}</strong>
+                        <br>
+                        <p style="padding-left:2em;text-align:justify;font-style:italic;line-height: 160%">
+                            {{object.instructions}}
+                        </p>
+                    </div>
                 </div>
-                <div class="test-line">
-                   {% trans "Urgency:" %} {{object.get_urgency}}
+                <hr>
+                <div class="row" style="line-height: 160%">
+                    <div class="col-md-4">
+                        <i class="fa fa-list-alt fa-fw irm"></i><strong>{% trans "Assigment" %}</strong>: <em>{{object.get_assigment}}</em>
+                        <br>
+                        <i class="fa fa-clock-o fa-fw irm"></i><strong>{% trans "Urgency" %}</strong>: <em>{{object.get_urgency}}</em>
+                        <br>
+                        <i class="fa fa-files-o fa-fw irm"></i><strong>{% trans "Page Number" %}</strong>: <em>{{object.page_number}}</em>
+                        <br>
+                    </div>
+                    <div class="col-md-4">
+                        <i class="fa fa-arrows-v fa-fw irm"></i><strong>{% trans "Spacing" %}</strong>: <em>{{object.get_spacing}}</em>
+                        <br>
+                        <i class="fa fa-book fa-fw irm"></i><strong>{% trans "Discipline" %}</strong>: <em>{{object.get_discipline}}</em>
+                        <br>
+                        <i class="fa fa-certificate fa-fw irm"></i><strong>{% trans "Level" %}</strong>: <em>{{object.get_level}}</em>
+                        <br>
+                    </div>
+                    <div class="col-md-4">
+                        <i class="fa fa-building-o fa-fw irm"></i><strong>{% trans "Style" %}</strong>: <em>{{object.get_style}}</em>
+                        <br>
+                        <i class="fa fa-bars fa-fw irm"></i><strong>{% trans "Sources Number" %}</strong>: <em>{{object.source_number}}</em>
+                        <br>
+                        <i class="fa fa-paperclip fa-fw irm"></i><strong>{% trans "Attach" %}</strong>: <em>{{object.attach}}</em>
+                        <br>
+                    </div>
                 </div>
-                <div class="test-line">
-                   {% trans "Page Number:" %} {{object.page_number}}
-                </div>
-                <div class="test-line">
-                   {% trans "Spacing:" %} {{object.get_spacing}}
-                </div>
-                <div class="test-line">
-                   {% trans "Discipline:" %} {{object.get_discipline}}
-                </div>
-                <div class="test-line">
-                   {% trans "Level:" %} {{object.get_level}}
-                </div>
-                <div class="test-line">
-                   {% trans "Style:" %} {{object.get_style}}
-                </div>
-                <div class="test-line">
-                   {% trans "Source Number:" %} {{object.source_number}}
-                </div>
-                <div class="test-line">
-                   {% trans "Attach:" %} {{object.attach}}
-                </div>
-                <div class="test-line">
-                   {% trans "Paper Title:" %} {{object.paper_title}}
-                </div>
-                <div class="test-line">
-                   {% trans "Instructions:" %}<br/> {{object.instructions}}
-                </div>
+                <hr>
                 <div class="info-row">
                     <div class="info-col">
-                        <i class="fa fa-lg fa-check-square-o"></i>{% trans "Status" %}: [{{object.get_status}}] 
+                        <i class="fa fa-lg fa-check-square-o"></i>{% trans "Status" %}: [{{object.get_status}}]
                     </div>
                     <div class="info-col">
                         <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{object.created}}
@@ -53,31 +55,28 @@
                 </div>
                 {% if can_edit %}
                 <div class="info-row">
-                  <div class="info-col">
-                    <form action="{% url 'task_submit' object.pk %}" method="POST">
-                      {% csrf_token %}
-                      <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
-                    </form>
-                  </div>
+                    <div class="info-col">
+                        <form action="{% url 'task_submit' object.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
+                        </form>
+                    </div>
                 </div>
                 {% endif %}
             </div>
             <div class="comments">
                 <div class="lh">
-                    <span class="title">{% trans "Comments" %}</span><span class="badge">{{comments|length}}</span>
+                    <i class="fa fa-comments-o"></i><span class="title">{% trans "Comments" %}</span><span class="badge">{{comments|length}}</span>
                 </div>
                 <ul>
                     {% for comment in comments %}
-                       <div class="info-col">
-                         <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{comment.created}} 
-                       </div>
-                       <div class="info-col">
-                         {% trans "Title" %}: {{comment.title}}
-                       </div>
-                       <div class="info-col">
-                         {{comment.body}}
-                       </div>
-                    <br />
+                    <div class="pull-right text-muted" style="text-align:right; font-size:.8em">
+                        <i class="fa fa-lg fa-calendar"></i> {% trans "Created" %}: {{comment.created}}
+                    </div>
+                    <h4> {{comment.title}} </h4>
+                    <p>
+                        {{comment.body}}
+                    </p>
                     {% empty %}
                     <li>
                         {% trans "No comments yet" %}
@@ -88,9 +87,9 @@
             {% if can_comment %}
             <div class="comments-form" style="margin-right:100px">
                 {% if messages %}
-                  {% for message in messages %}
-                    {{message}}
-                  {% endfor %}
+                {% for message in messages %}
+                {{message}}
+                {% endfor %}
                 {% endif %}
                 <form action="{% url "comment_new" task_id=object.pk %}" method="post">
                     {% csrf_token %}
@@ -108,7 +107,9 @@
                     </div>
                     <input type="hidden" name="rating" value="0"/>
                     <div class="form-group">
-                        <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
+                        <button type="submit" class="btn btn-primary btn-lg" role="button" style="width:30%">
+                            {% trans "Post" %}<i class='fa fa-comment-o' style="margin-left:.5em"></i>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -119,9 +120,8 @@
 {% endblock %}
 {% block info_block %}
 <section class="info">
-    <h2>{% trans "Task Details" %} 
-    {% if can_edit %}
-      <a href="{% url "task_edit" object.id %}" title="{% trans "Edit task" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a></h2>
+    <h2>{% trans "Task Details" %}
+    {% if can_edit %} <a href="{% url "task_edit" object.id %}" title="{% trans "Edit task" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a></h2>
     {% endif  %}
 </section>
 {% endblock %}
