@@ -63,9 +63,13 @@ class Task(models.Model):
   def __str__(self):
     return self.paper_title
 
-  def get_task_status(self):
-    return co.TASK_STATUSES_DICT.get(self.status)
-  get_status = get_task_status
+  get_status = lambda self: co.TASK_STATUSES_DICT.get(self.status)
+  get_discipline = lambda self: co.DISCIPLINES_DICT.get(self.discipline)
+  get_spacing = lambda self: co.SPACING_DICT.get(self.spacing)
+  get_assigment = lambda self: co.ASSIGMENTS_DICT.get(self.assigment)
+  get_level = lambda self: co.LEVELS_DICT.get(self.level)
+  get_urgency = lambda self: co.URGENCY_DICT.get(self.urgency)  
+  get_style = lambda self: co.STYLES_DICT.get(self.style) 
 
   @models.permalink
   def get_absolute_url(self):

@@ -161,9 +161,9 @@ LEVELS = (
 # Urgency is more convenient to represent as time in seconds and label
 URGENCY = (
   (0, '- Please choose -'),
-  (21600, '6hours'), (43200, '12 hours'), (86400, '1 day'), (172800, '2 days'),
-  (259200, '3days'), (518400, '6days'), (1036800, '12days'),
-  (2073600, '24+days'))
+  (21600, '6 hours'), (43200, '12 hours'), (86400, '1 day'), (172800, '2 days'),
+  (259200, '3 days'), (518400, '6 days'), (1036800, '12 days'),
+  (2073600, '24+ days'))
 
 
 SPACING = ((0, '- Please choose -'), (1, 'Single'), (2, 'Double'))
@@ -172,6 +172,14 @@ STYLES = (
   (0, '- Please choose -'),
   (1, 'MLA'), (2, 'APA'), (3, 'Chicago'), (4, 'Turabian'), (5, 'Harvar'),
   (6, 'other'))
+
+TASK_STATUSES_DICT = dict(TASK_STATUSES)
+URGENCY_DICT = dict(URGENCY)
+SPACING_DICT = dict(SPACING)
+STYLES_DICT = dict(STYLES)
+LEVELS_DICT = dict(LEVELS)
+ASSIGMENTS_DICT = dict(ASSIGMENTS)
+DISCIPLINES_DICT = dict(DISCIPLINES)
 
 # If task has public access then it will be visible to everyone.
 # private tasks are visible only for users from private group.

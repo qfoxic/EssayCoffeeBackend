@@ -11,57 +11,57 @@
                     border-bottom: 1px dotted #aaa;
                 }</style>
                 <div class="test-line">
-                   [assigment]: {{object.assigment}}
+                   Assigment: {{object.get_assigment}}
                 </div>
                 <div class="test-line">
-                   [urgency]: {{object.urgency}}
+                   Urgency: {{object.get_urgency}}
                 </div>
                 <div class="test-line">
-                   [page_number]: {{object.page_number}}
+                   Page Number: {{object.page_number}}
                 </div>
                 <div class="test-line">
-                   [spacing]: {{object.spacing}}
+                   Spacing: {{object.get_spacing}}
                 </div>
                 <div class="test-line">
-                   [discipline]: {{object.discipline}}
+                   Discipline: {{object.get_discipline}}
                 </div>
                 <div class="test-line">
-                   [level]: {{object.level}}
+                   Level: {{object.get_level}}
                 </div>
                 <div class="test-line">
-                   [style]: {{object.style}}
+                   Style: {{object.get_style}}
                 </div>
                 <div class="test-line">
-                   [source_number]: {{object.source_number}}
+                   Source Number: {{object.source_number}}
                 </div>
                 <div class="test-line">
-                   [attach]: {{object.attach}}
+                   Attach: {{object.attach}}
                 </div>
                 <div class="test-line">
-                   [paper_title]: {{object.paper_title}}
+                   Paper Title: {{object.paper_title}}
                 </div>
                 <div class="test-line">
-                   [instructions]:<br/> {{object.instructions}}
+                   Instructions:<br/> {{object.instructions}}
                 </div>
                 <div class="info-row">
                     <div class="info-col">
-                        <i class="fa fa-lg fa-check-square-o"></i>{% trans "Status" %}: [ open | performed ]
+                        <i class="fa fa-lg fa-check-square-o"></i>{% trans "Status" %}: [{{object.get_status}}] 
                     </div>
                     <div class="info-col">
                         <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{object.created}}
                     </div>
-                    <form action="#" method="post">
-                      {% csrf_token %}
-                      <!-- {{ form.non_field_errors }} -->
-                      <!-- {{ form.errors }} -->
-                      <div class="form-group">
-                        <input type="submit" value="{% trans "Approve" %}" class="btn btn-primary" />
-                      </div>
-                      <div class="form-group">
-                        <input type="submit" value="{% trans "Reject" %}" class="btn btn-primary" />
-                      </div>
-                    </form>
                 </div>
+                {% if object.status == co.DRAFT %}
+                <div class="info-row">
+                  <div class="info-col">
+                    {#TODO Put a link here.#}
+                    <form action="{% url 'task_submit' object.pk %}" method="POST">
+                      {% csrf_token %}
+                      <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
+                    </form>
+                  </div>
+                </div>
+                {% endif %}
             </div>
             <div class="comments">
                 <div class="lh">
@@ -71,11 +71,11 @@
                     {% for comment in comments %}
                     <li>
                         {{ comment.title }}
-                        <form action="{% url "comment_remove" comment.pk %}" method="post">
-                            {% csrf_token %}
-                            <input type="submit" value="{% trans "Remove" %}" class="btn btn-primary" />
-                        </form>
                     </li>
+                    <li>
+                        {{ comment.body }}
+                    </li>
+                    <br />
                     {% empty %}
                     <li>
                         {% trans "No comments yet" %}
@@ -85,6 +85,11 @@
             </div>
 
             <div class="comments-form" style="margin-right:100px">
+                {% if messages %}
+                  {% for message in messages %}
+                    {{message}}
+                  {% endfor %}
+                {% endif %}
                 <form action="{% url "comment_new" task_id=object.pk %}" method="post">
                     {% csrf_token %}
                     <!-- {{ form.non_field_errors }} -->
@@ -92,18 +97,14 @@
                     <div class="form-group{% if form.title.errors %} has-error{% endif %}">
                         <!-- {{form.title.errors}} -->
                         <label>{% trans "Title" %}</label>
-                        <input type="text" name="title" class="form-control"/>
+                        <input type="text" name="title" class="form-control" required/>
                     </div>
                     <div class="form-group{% if form.body.errors %} has-error{% endif %}">
                         <!-- {{form.body.errors}} -->
                         <label>{% trans "Body" %}</label>
-                        <textarea name="body" class="form-control" rows="5"></textarea>
+                        <textarea name="body" class="form-control" rows="5" required></textarea>
                     </div>
-                    <div class="form-group{% if form.rating.errors %} has-error{% endif %}">
-                        <!-- {{form.rating.errors}} -->
-                        <label>{% trans "Put your rating 0-5" %}</label>
-                        <input type="text" name="rating" />
-                    </div>
+                    <input type="hidden" name="rating" value="0"/>
                     <div class="form-group">
                         <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
                     </div>
@@ -114,4 +115,10 @@
 </section>
 {% endblock %}
 {% block info_block %}
+<section class="info">
+    <h2>{% trans "Task Details" %} 
+    {% if object.status == co.DRAFT %}
+      <a href="{% url "task_edit" object.id %}" title="{% trans "Edit task" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a></h2>
+    {% endif  %}
+</section>
 {% endblock %}
