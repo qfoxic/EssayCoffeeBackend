@@ -11,13 +11,12 @@ $( document ).ready( function( ) {
     // }
     // } );
     $( '.btn-cancel' ).on( 'click', function( ) {
-        var r = confirm( "Are you sure to leave this page? All unsaved data will be lost." );
-        if( r == true ) {
-            window.location.replace('/tasks/');//history.back( );
-            return false;
-        } else {
-            return false;
-        }
+        var message = "Are you sure to leave this page? All unsaved data will be lost&hellip;";
+        bootbox.confirm( message, function( result ) {
+            if( result == true ) {
+                window.location.replace( '/tasks/' );
+            }
+        } );
     } );
     $( '.upload-file' ).bootstrapFileInput( );
     $( '.has-error' ).tooltip( {
