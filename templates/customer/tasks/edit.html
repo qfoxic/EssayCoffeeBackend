@@ -92,7 +92,7 @@
                     <div class="form-group{% if form.attach.errors %} has-error{% endif %}">
                         <div class="file-input form-control">
                             <div class="input-group margin-bottom-sm">
-                                <span class="input-group-addon"><i class="fa fa-upload fa-fw"></i></span>
+                                <span class="input-group-addon"><i class="fa fa-paperclip fa-fw"></i></span>
                                 <!-- {{form.attach|attr:"class:upload-file,title:Attachment"}} -->
                                 <input id="id_attach" class="upload-file" type="file" title="Attachment" name="attach">
                                 {% if form.attach.value %}
@@ -119,7 +119,7 @@
             <div class="row">
                 <div class="col-md-5 col-md-offset-1">
                     <div class="form-group input-group margin-bottom-sm {% if form.accept_terms.errors %} has-error{% endif %}">
-                        <span class="input-group-addon">{{form.accept_terms}}</span>
+                        <span class="input-group-addon">{{form.accept_terms|attr:"class:accept-chk"}}</span>
                         <span class="form-control" style="overflow:auto">{% trans "I accept terms and conditions" %}</span>
                     </div>
                     <div class="form-group input-group margin-bottom-sm">
@@ -130,13 +130,12 @@
                 <div class="col-md-5 form-group" style="text-align:right;padding-top:1em">
                     {% if not object or object.status == co.DRAFT %}
                     <a href="#" class="btn-cancel btn btn-default btn-lg" role="button" style="width:40%"> <i class='fa fa-times-circle-o fa-lg' style="margin-right:.5em"></i>{% trans "Cancel" %} </a>
-                      <button type="submit" class="btn btn-primary btn-lg" role="button" style="width:40%">
-                          {% trans "Next" %}<i class='fa fa-check-circle-o fa-lg' style="margin-left:.5em"></i>
-                      </button>
+                    <button type="submit" class="btn btn-primary btn-lg" role="button" style="width:40%">
+                        {% trans "Next" %}<i class='fa fa-check-circle-o fa-lg' style="margin-left:.5em"></i>
+                    </button>
                     {% endif %}
                 </div>
             </div>
-
         </form>
     </div>
 </section>

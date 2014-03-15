@@ -86,6 +86,9 @@ div.copy {
 .irm {
     margin-right: 12px !important
 }
+.accept-chk {
+    margin: auto 3px !important;
+}
 .task-details div.info-row > div.info-col {
     color: #888;
     white-space: nowrap;

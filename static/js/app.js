@@ -11,7 +11,13 @@ $( document ).ready( function( ) {
     // }
     // } );
     $( '.btn-cancel' ).on( 'click', function( ) {
-        history.back( );
+        var r = confirm( "Are you sure to leave this page? All unsaved data will be lost." );
+        if( r == true ) {
+            window.location.replace('/tasks/');//history.back( );
+            return false;
+        } else {
+            return false;
+        }
     } );
     $( '.upload-file' ).bootstrapFileInput( );
     $( '.has-error' ).tooltip( {
