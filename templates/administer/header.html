@@ -10,7 +10,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/"><i class="fa fa-font fa-lg" style="margin-right:.5em"></i>Translation Portal <sup><small>admin</small></sup></a>
+                <a class="navbar-brand" href="/"><i class="fa fa-font fa-lg" style="margin-right:.5em"></i>
+                  Translation Portal <sup><small>admin ({{user.username}})</small></sup></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -30,7 +31,7 @@
                                 <a href="{% url 'tasks_unprocessed' %}">{% trans "Unprocessed orders" %}</a>
                             </li>
                             <li>
-                                <a href="{% url 'tasks_rejected' %}">{% trans "Suspicious/Untrustworthy/Incomplete orders"%}</a>
+                                <a href="{% url 'tasks_suspicious' %}">{% trans "Suspicious/Untrustworthy/Incomplete orders"%}</a>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -41,6 +42,13 @@
                             </li>
                             <li>
                                 <a href="#">{% trans "Expired orders" %}</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <strong style="margin-left: .8em;font-size:1.2em;">{% trans "Rejected orders" %}</strong>
+                            </li>
+                            <li>
+                                <a href="{% url 'tasks_rejected'  %}">{% trans "Rejected orders" %}</a>
                             </li>
                         </ul>
                     </li>

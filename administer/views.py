@@ -1,7 +1,7 @@
 from general.models import Task
 from general.views import TaskIndexView, DetailTaskView, UpdateTaskView
 from general.views import DetailTaskView, UpdateTaskView
-from general.forms import TaskApproveForm, TaskRejectForm 
+from general.forms import TaskApproveForm, TaskRejectForm, TaskSuspectForm 
 from userprofile.views import DetailProfileView, UpdateProfileView
 from userprofile.views import CreateProfileView
 import constants as co
@@ -31,6 +31,15 @@ class AdminRejectTaskView(UpdateTaskView):
   def get_success_url(self):
     return self.object.to_link()
 
+
+class AdminSuspectTaskView(UpdateTaskView):
+  form_class = TaskSuspectForm 
+  module_name = 'administer'
+  template_name = 'tasks/detail.html'
+  owner_required = False
+  
+  def get_success_url(self):
+    return self.object.to_link()
 
 ###################admin profiles
 class AdminDetailProfileView(DetailProfileView):
@@ -77,6 +86,16 @@ class AdminActiveTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(AdminActiveTasksView, self).get_context_data(**kwargs)
     context['tasks'] = Task.objects.filter(status__exact=co.ACTIVE)
+    return context
+
+
+class AdminSuspiciousTasksView(TaskIndexView):
+  module_name = 'administer'
+  template_name = 'tasks/index.html'
+
+  def get_context_data(self, **kwargs):
+    context = super(AdminSuspiciousTasksView, self).get_context_data(**kwargs)
+    context['tasks'] = Task.objects.filter(status__exact=co.SUSPICIOUS)
     return context
 
 

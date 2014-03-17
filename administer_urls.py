@@ -11,9 +11,9 @@ import constants as co
 from general.views import UpdateTaskView
 
 from administer.views import AdminActiveTasksView, AdminRejectedTasksView, AdminUnprocessedTasksView, AdminFinishedTasksView 
-from administer.views import AdminDetailTaskView 
+from administer.views import AdminDetailTaskView, AdminSuspiciousTasksView 
 from administer.views import AdminDetailProfileView,AdminUpdateProfileView,AdminCreateProfileView 
-from administer.views import AdminApproveTaskView, AdminRejectTaskView 
+from administer.views import AdminApproveTaskView, AdminRejectTaskView,AdminSuspectTaskView 
 
 from userprofile.views import RemoveProfileView
 
@@ -29,6 +29,7 @@ user_edit = login_required(AdminUpdateProfileView.as_view(), login_url=reverse_l
 task_list = login_required(AdminUnprocessedTasksView.as_view(), login_url=reverse_lazy('login'))
 tasks_active = login_required(AdminActiveTasksView.as_view(), login_url=reverse_lazy('login'))
 tasks_rejected = login_required(AdminRejectedTasksView.as_view(), login_url=reverse_lazy('login'))
+tasks_suspicious = login_required(AdminSuspiciousTasksView.as_view(), login_url=reverse_lazy('login'))
 tasks_unprocessed = login_required(AdminUnprocessedTasksView.as_view(), login_url=reverse_lazy('login'))
 tasks_finished = login_required(AdminFinishedTasksView.as_view(), login_url=reverse_lazy('login'))
 
@@ -39,21 +40,24 @@ task_approve = login_required(
 task_reject = login_required(
     permission_required('general.change_task', raise_exception=True)(AdminRejectTaskView.as_view()),
     login_url=reverse_lazy('login'))
-task_update = login_required(
-    permission_required('general.change_task', raise_exception=True)(UpdateTaskView.as_view()),
+task_suspect = login_required(
+    permission_required('general.change_task', raise_exception=True)(AdminSuspectTaskView.as_view()),
     login_url=reverse_lazy('login'))
 
 
 urlpatterns = patterns('',
     url(r'^$', task_list),
     url(r'^tasks/$', task_list, name='task_list'),
+    url(r'^tasks/active$', tasks_active, name='tasks_active'),
+    url(r'^tasks/rejected$', tasks_rejected, name='tasks_rejected'),
+    url(r'^tasks/suspicious$', tasks_suspicious, name='tasks_suspicious'),
+    url(r'^tasks/unprocessed$', tasks_unprocessed, name='tasks_unprocessed'),
+    url(r'^tasks/finished$', tasks_finished, name='tasks_finished'),
+
     url(r'^task/(?P<pk>\d+)/$', task_details, name='task_view'),
     url(r'^task/(?P<pk>\d+)/approve$', task_approve, name='task_approve'),
     url(r'^task/(?P<pk>\d+)/reject$', task_reject, name='task_reject'),
-    url(r'^tasks/active$', tasks_active, name='tasks_active'),
-    url(r'^tasks/rejected$', tasks_rejected, name='tasks_rejected'),
-    url(r'^tasks/unprocessed$', tasks_unprocessed, name='tasks_unprocessed'),
-    url(r'^tasks/finished$', tasks_finished, name='tasks_finished'),
+    url(r'^task/(?P<pk>\d+)/suspect$', task_suspect, name='task_suspect'),
 
     url(r'profile/new', user_new, name='user_new'),
     url(r'profile/(?P<pk>\d+)/$', user_details, name='user_details'),

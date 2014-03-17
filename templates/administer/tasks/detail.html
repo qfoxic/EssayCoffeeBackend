@@ -64,6 +64,12 @@
                       <input type="submit" value="{% trans "Reject" %}" class="btn btn-primary" />
                     </form>
                   </div>
+                  <div class="info-col">
+                    <form action="{% url "task_suspect" object.pk %}" method="POST">
+                      {% csrf_token %}
+                      <input type="submit" value="{% trans "Suspect" %}" class="btn btn-primary" />
+                    </form>
+                  </div>
                 </div>
             </div>
             <div class="comments">

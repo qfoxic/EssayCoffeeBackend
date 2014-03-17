@@ -73,3 +73,18 @@ class TaskRejectForm(ModelForm):
     if self.instance.status == co.UNPROCESSED:
       return co.REJECTED
     raise ValidationError('Could not reject task because it is not in appropriate state.')
+
+
+class TaskSuspectForm(ModelForm):
+  class Meta:
+    model = Task
+    fields = ['status']
+
+  def __init__(self, request=None, *args, **kwargs):
+    super(TaskSuspectForm, self).__init__(*args, **kwargs)
+    self.request = request
+
+  def clean_status(self):
+    if self.instance.status == co.UNPROCESSED:
+      return co.SUSPICIOUS
+    raise ValidationError('Could not suspect task because it is not in appropriate state.')
