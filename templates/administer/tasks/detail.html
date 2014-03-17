@@ -51,16 +51,20 @@
                         <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{object.created}}
                     </div>
                 </div>
-                {% if can_edit %}
                 <div class="info-row">
                   <div class="info-col">
-                    <form action="{% url 'task_submit' object.pk %}" method="POST">
+                    <form action="{% url "task_approve" object.pk %}" method="POST">
                       {% csrf_token %}
-                      <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
+                      <input type="submit" value="{% trans "Approve" %}" class="btn btn-primary" />
+                    </form>
+                  </div>
+                  <div class="info-col">
+                    <form action="{% url "task_reject" object.pk %}" method="POST">
+                      {% csrf_token %}
+                      <input type="submit" value="{% trans "Reject" %}" class="btn btn-primary" />
                     </form>
                   </div>
                 </div>
-                {% endif %}
             </div>
             <div class="comments">
                 <div class="lh">
@@ -85,34 +89,6 @@
                     {% endfor %}
                 </ul>
             </div>
-            {% if can_comment %}
-            <div class="comments-form" style="margin-right:100px">
-                {% if messages %}
-                  {% for message in messages %}
-                    {{message}}
-                  {% endfor %}
-                {% endif %}
-                <form action="{% url "comment_new" task_id=object.pk %}" method="post">
-                    {% csrf_token %}
-                    <!-- {{ form.non_field_errors }} -->
-                    <!-- {{ form.errors }} -->
-                    <div class="form-group{% if form.title.errors %} has-error{% endif %}">
-                        <!-- {{form.title.errors}} -->
-                        <label>{% trans "Title" %}</label>
-                        <input type="text" name="title" class="form-control" required/>
-                    </div>
-                    <div class="form-group{% if form.body.errors %} has-error{% endif %}">
-                        <!-- {{form.body.errors}} -->
-                        <label>{% trans "Body" %}</label>
-                        <textarea name="body" class="form-control" rows="5" required></textarea>
-                    </div>
-                    <input type="hidden" name="rating" value="0"/>
-                    <div class="form-group">
-                        <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
-                    </div>
-                </form>
-            </div>
-            {% endif  %}
         </div>
     </div>
 </section>
@@ -120,8 +96,5 @@
 {% block info_block %}
 <section class="info">
     <h2>{% trans "Task Details" %} 
-    {% if can_edit %}
-      <a href="{% url "task_edit" object.id %}" title="{% trans "Edit task" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a></h2>
-    {% endif  %}
 </section>
 {% endblock %}

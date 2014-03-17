@@ -1,19 +1,38 @@
 from general.models import Task
-from general.views import BaseView, TaskIndexView, DetailTaskView
-from userprofile.views import DetailProfileView,UpdateProfileView
+from general.views import TaskIndexView, DetailTaskView, UpdateTaskView
+from general.views import DetailTaskView, UpdateTaskView
+from general.forms import TaskApproveForm, TaskRejectForm 
+from userprofile.views import DetailProfileView, UpdateProfileView
+from userprofile.views import CreateProfileView
 import constants as co
 
-
-class AdminTasksView(TaskIndexView):
-  module_name = 'administer'
-  template_name = 'tasks/index.html'
-
-
+########task related views.
 class AdminDetailTaskView(DetailTaskView):
   module_name = 'administer'
   template_name = 'tasks/detail.html'
 
 
+class AdminApproveTaskView(UpdateTaskView):
+  form_class = TaskApproveForm 
+  module_name = 'administer'
+  template_name = 'tasks/detail.html'
+  owner_required = False
+  
+  def get_success_url(self):
+    return self.object.to_link()
+
+
+class AdminRejectTaskView(UpdateTaskView):
+  form_class = TaskRejectForm 
+  module_name = 'administer'
+  template_name = 'tasks/detail.html'
+  owner_required = False
+  
+  def get_success_url(self):
+    return self.object.to_link()
+
+
+###################admin profiles
 class AdminDetailProfileView(DetailProfileView):
   module_name = 'administer'
   template_name = 'userprofile/detail.html'
@@ -26,6 +45,11 @@ class AdminUpdateProfileView(UpdateProfileView):
   owner_required = True
 
 
+class AdminCreateProfileView(CreateProfileView):
+  module_name = 'administer'
+  group_name = co.ADMIN_GROUP
+
+#######################listings
 class AdminUnprocessedTasksView(TaskIndexView):
   module_name = 'administer'
   template_name = 'tasks/index.html'
@@ -64,3 +88,5 @@ class AdminFinishedTasksView(TaskIndexView):
     context = super(AdminFinishedTasksView, self).get_context_data(**kwargs)
     context['tasks'] = Task.objects.filter(status__exact=co.FINISHED)
     return context
+
+

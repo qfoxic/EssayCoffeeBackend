@@ -68,7 +68,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'administer_urls'
 
 WSGI_APPLICATION = 'admin_wsgi.application'
 

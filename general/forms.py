@@ -43,3 +43,33 @@ class TaskSubmitForm(ModelForm):
     if self.instance.status == co.DRAFT:
       return co.UNPROCESSED
     raise ValidationError('Could not submit task because it is not in appropriate state.')
+
+
+class TaskApproveForm(ModelForm):
+  class Meta:
+    model = Task
+    fields = ['status']
+
+  def __init__(self, request=None, *args, **kwargs):
+    super(TaskApproveForm, self).__init__(*args, **kwargs)
+    self.request = request
+
+  def clean_status(self):
+    if self.instance.status == co.UNPROCESSED:
+      return co.ACTIVE
+    raise ValidationError('Could not approve task because it is not in appropriate state.')
+
+
+class TaskRejectForm(ModelForm):
+  class Meta:
+    model = Task
+    fields = ['status']
+
+  def __init__(self, request=None, *args, **kwargs):
+    super(TaskRejectForm, self).__init__(*args, **kwargs)
+    self.request = request
+
+  def clean_status(self):
+    if self.instance.status == co.UNPROCESSED:
+      return co.REJECTED
+    raise ValidationError('Could not reject task because it is not in appropriate state.')
