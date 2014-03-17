@@ -37,7 +37,7 @@ user_edit = login_required(UpdateProfileCustomerView.as_view(), login_url=revers
 user_remove = login_required(RemoveProfileView.as_view(), login_url=reverse_lazy('login'))
 
 task_list = login_required(CustomerTaskView.as_view(), login_url=reverse_lazy('login'))
-task_details = CustomerDetailTaskView.as_view()
+task_details = login_required(CustomerDetailTaskView.as_view(), login_url=reverse_lazy('login'))
 task_new = login_required(
   permission_required('general.add_task', raise_exception=True)(CustomerCreateDraftTaskView.as_view()),
   login_url=reverse_lazy('login'))

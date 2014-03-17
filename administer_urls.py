@@ -33,7 +33,7 @@ tasks_suspicious = login_required(AdminSuspiciousTasksView.as_view(), login_url=
 tasks_unprocessed = login_required(AdminUnprocessedTasksView.as_view(), login_url=reverse_lazy('login'))
 tasks_finished = login_required(AdminFinishedTasksView.as_view(), login_url=reverse_lazy('login'))
 
-task_details = AdminDetailTaskView.as_view()
+task_details = login_required(AdminDetailTaskView.as_view(), login_url=reverse_lazy('login'))
 task_approve = login_required(
     permission_required('general.change_task', raise_exception=True)(AdminApproveTaskView.as_view()),
     login_url=reverse_lazy('login'))
