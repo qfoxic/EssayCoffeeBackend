@@ -1,6 +1,17 @@
 from general.models import Task
 from general.views import TaskIndexView
+
+from userprofile.models import UserProfile
+from userprofile.views import ListProfileView
 import constants as co
+
+
+class AdminWritersView(ListProfileView):
+  def get_context_data(self, **kwargs):
+    context = super(AdminWritersView, self).get_context_data(**kwargs)
+    context['writers'] = UserProfile.objects.filter(groups__name=co.WRITER_GROUP)
+    return context
+
 
 class AdminUnprocessedTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):

@@ -3,6 +3,7 @@ from django.contrib.auth.models import Group
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 from django.views.generic.edit import UpdateView
+from django.views.generic import TemplateView
 
 from general.views import BaseView
 from django.core.urlresolvers import reverse_lazy
@@ -53,6 +54,12 @@ class CreateProfileView(BaseView, CreateView):
     kwargs = super(CreateProfileView, self).get_form_kwargs()
     kwargs['group_name'] = self.group_name
     return kwargs
+
+
+class ListProfileView(BaseView, TemplateView):
+  module_name = ''
+  queryset = UserProfile.objects.all()
+  template_name = 'userprofile/index.html'
 
 
 class UpdateProfileView(BaseView, UpdateView):

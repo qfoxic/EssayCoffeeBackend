@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.core.exceptions import PermissionDenied
 
 from general.models import Task
+from userprofile.models import UserProfile
 from comments.models import Comment
 from general.forms import TaskForm, SwitchStatusForm
 
@@ -35,10 +36,6 @@ def check_mobile(request):
   return False
 
 
-def owner_required(user, owner_id):
-  """Checks whether user is owner of an entity."""
-  if not user.is_superuser and not owner_id == user.pk :
-    raise PermissionDenied
 
 
 class BaseView(View):
@@ -47,6 +44,7 @@ class BaseView(View):
   """
   module_name = 'default'
   owner_required = False # raise an Error if owner is required.
+  allowed_groups = [] # For these groups owner won't be checked.
 
   def __init__(self, **kwargs):
     super(BaseView, self).__init__(**kwargs)
@@ -59,9 +57,19 @@ class BaseView(View):
       print 'Could not read config files for module %s: %s' % (
           self.module_name, e)
 
+  def _owner_required(self, user, owner_id):
+    """Checks whether user is owner of an entity."""
+    user_groups = UserProfile.objects.get(
+        pk=owner_id).groups.values_list('name', flat=True)
+    skip_owner_check = set(self.allowed_groups).intersection(user_groups)
+    if skip_owner_check:
+      return
+    if not user.is_superuser and not owner_id == user.pk:
+      raise PermissionDenied
+
   def dispatch(self, request, *args, **kwargs):
     if self.owner_required:
-      owner_required(request.user, self.user_id())
+      self._owner_required(request.user, self.user_id())
     return super(BaseView, self).dispatch(request, *args, **kwargs)
 
   def render_to_response(self, context, **response_kwargs):
