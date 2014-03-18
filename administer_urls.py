@@ -1,53 +1,48 @@
 from django.conf.urls import patterns, include, url
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 from django.core.urlresolvers import reverse_lazy
 
-from django.contrib import admin
-admin.autodiscover()
+from general.views import SwitchStatusView,DetailTaskView
+
+from administer.views import AdminActiveTasksView,AdminRejectedTasksView,AdminUnprocessedTasksView,AdminFinishedTasksView 
+from administer.views import AdminSuspiciousTasksView
+
+from userprofile.views import CreateProfileView, UpdateProfileView
+
 import constants as co
 
-from general.views import UpdateTaskView
 
-from administer.views import AdminActiveTasksView, AdminRejectedTasksView, AdminUnprocessedTasksView, AdminFinishedTasksView 
-from administer.views import AdminDetailTaskView, AdminSuspiciousTasksView 
-from administer.views import AdminDetailProfileView,AdminUpdateProfileView,AdminCreateProfileView 
-from administer.views import AdminApproveTaskView, AdminRejectTaskView,AdminSuspectTaskView 
+user_new = CreateProfileView.as_view(module_name='administer',
+                                     group_name=co.ADMIN_GROUP)
+user_edit = login_required(UpdateProfileView.as_view(module_name='administer'),
+                           login_url=reverse_lazy('login'))
 
-from userprofile.views import RemoveProfileView
+tasks_list = login_required(AdminUnprocessedTasksView.as_view(module_name='administer'),
+                            login_url=reverse_lazy('login'))
+tasks_active = login_required(AdminActiveTasksView.as_view(module_name='administer'),
+                              login_url=reverse_lazy('login'))
+tasks_rejected = login_required(AdminRejectedTasksView.as_view(module_name='administer'),
+                                login_url=reverse_lazy('login'))
+tasks_suspicious = login_required(AdminSuspiciousTasksView.as_view(module_name='administer'),
+                                  login_url=reverse_lazy('login'))
+tasks_unprocessed = tasks_list
+tasks_finished = login_required(AdminFinishedTasksView.as_view(module_name='administer'),
+                                login_url=reverse_lazy('login'))
 
-from general.views import LoginView, LogoutView, ResetPswdView
-from general.views import ResetPswdDoneView, ResetPswdConfirmView, ResetPswdCompleteView
-
-
-user_new = AdminCreateProfileView.as_view()
-user_remove = login_required(RemoveProfileView.as_view(), login_url=reverse_lazy('login'))
-user_details = login_required(AdminDetailProfileView.as_view(), login_url=reverse_lazy('login'))
-user_edit = login_required(AdminUpdateProfileView.as_view(), login_url=reverse_lazy('login'))
-
-task_list = login_required(AdminUnprocessedTasksView.as_view(), login_url=reverse_lazy('login'))
-tasks_active = login_required(AdminActiveTasksView.as_view(), login_url=reverse_lazy('login'))
-tasks_rejected = login_required(AdminRejectedTasksView.as_view(), login_url=reverse_lazy('login'))
-tasks_suspicious = login_required(AdminSuspiciousTasksView.as_view(), login_url=reverse_lazy('login'))
-tasks_unprocessed = login_required(AdminUnprocessedTasksView.as_view(), login_url=reverse_lazy('login'))
-tasks_finished = login_required(AdminFinishedTasksView.as_view(), login_url=reverse_lazy('login'))
-
-task_details = login_required(AdminDetailTaskView.as_view(), login_url=reverse_lazy('login'))
+task_details = login_required(DetailTaskView.as_view(module_name='administer'),
+                              login_url=reverse_lazy('login'))
 task_approve = login_required(
-    permission_required('general.change_task', raise_exception=True)(AdminApproveTaskView.as_view()),
+    permission_required('general.change_task', raise_exception=True)
+      (SwitchStatusView.as_view(module_name='administer')),
     login_url=reverse_lazy('login'))
-task_reject = login_required(
-    permission_required('general.change_task', raise_exception=True)(AdminRejectTaskView.as_view()),
-    login_url=reverse_lazy('login'))
-task_suspect = login_required(
-    permission_required('general.change_task', raise_exception=True)(AdminSuspectTaskView.as_view()),
-    login_url=reverse_lazy('login'))
+task_reject = task_approve
+task_suspect = task_approve
 
 
 urlpatterns = patterns('',
-    url(r'^$', task_list),
-    url(r'^tasks/$', task_list, name='task_list'),
+    url(r'^$', tasks_list),
+    url(r'^tasks/$', tasks_list, name='task_list'),
     url(r'^tasks/active$', tasks_active, name='tasks_active'),
     url(r'^tasks/rejected$', tasks_rejected, name='tasks_rejected'),
     url(r'^tasks/suspicious$', tasks_suspicious, name='tasks_suspicious'),
@@ -60,23 +55,9 @@ urlpatterns = patterns('',
     url(r'^task/(?P<pk>\d+)/suspect$', task_suspect, name='task_suspect'),
 
     url(r'profile/new', user_new, name='user_new'),
-    url(r'profile/(?P<pk>\d+)/$', user_details, name='user_details'),
+    url(r'profile/(?P<pk>\d+)/$', user_edit, name='user_details'),
     url(r'profile/(?P<pk>\d+)/edit$', user_edit, name='user_edit'),
-    url(r'profile/(?P<pk>\d+)/remove', user_remove, name='user_remove'),
 
-    url(r'^login/$', LoginView.as_view(), name='login'),
-    url(r'^logout/$', LogoutView.as_view(), name='logout'),
-    url(r'^reset/$', ResetPswdView.as_view(), name='pswd_reset'),
-    url(r'^resetdone/$', ResetPswdDoneView.as_view(), name='pswd_reset_done'),
-    url(r'^resetconfirm/(?P<uidb64>.*)/(?P<token>.*)$', ResetPswdConfirmView.as_view(), name='pswd_reset_confirm'),
-    url(r'^resetcomplete/$', ResetPswdCompleteView.as_view(), name='pswd_reset_complete'),
-
-    url(r'^admin/', include(admin.site.urls)),
-)
-
-
-# Displays uploaded files.
-urlpatterns += patterns('',
-    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+    url(r'', include('common_urls')),
 )
 

@@ -1,51 +1,51 @@
 from django.conf.urls import patterns, include, url
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 from django.core.urlresolvers import reverse_lazy
 
-from django.contrib import admin
-admin.autodiscover()
+from general.views import RemoveTaskView,SwitchStatusView
+from general.views import CreateTaskView,UpdateTaskView,DetailTaskView
+from comments.views import CreateCommentView,RemoveCommentView 
+from customer.views import CustomerTaskView
+
+from userprofile.views import CreateProfileView, UpdateProfileView
+
 import constants as co
-
-from general.views import TaskIndexView, UpdateTaskView, CreateTaskView
-from general.views import RemoveTaskView, DetailTaskView
-from customer.views import CustomerTaskView,CustomerCreateDraftTaskView,CustomerUpdateTaskView
-from customer.views import CustomerDetailTaskView,CustomerSubmitTaskView,CreateProfileCustomerView
-from customer.views import UpdateProfileCustomerView 
-from customer.views import CustomerCreateCommentView, CustomerRemoveCommentView 
-
-from userprofile.views import CreateProfileWriterView, DetailProfileWriterView
-from userprofile.views import RemoveProfileView, UpdateProfileWriterView
-
-from general.views import LoginView, LogoutView, ResetPswdView
-from general.views import ResetPswdDoneView, ResetPswdConfirmView, ResetPswdCompleteView
 
 task_rm = login_required(
     permission_required('general.delete_task', raise_exception=True)(RemoveTaskView.as_view()),
     login_url=reverse_lazy('login'))
 
 comment_new = login_required(
-    permission_required('comments.add_comment', raise_exception=True)(CustomerCreateCommentView.as_view()),
+    permission_required('comments.add_comment', raise_exception=True)
+      (CreateCommentView.as_view(module_name='customer')),
     login_url=reverse_lazy('login'))
 comment_rm = login_required(
-    permission_required('comments.delete_comment', raise_exception=True)(CustomerRemoveCommentView.as_view()),
+    permission_required('comments.delete_comment', raise_exception=True)
+      (RemoveCommentView.as_view(module_name='customer')),
     login_url=reverse_lazy('login'))
 
-user_new = CreateProfileCustomerView.as_view()
-user_edit = login_required(UpdateProfileCustomerView.as_view(), login_url=reverse_lazy('login'))
-user_remove = login_required(RemoveProfileView.as_view(), login_url=reverse_lazy('login'))
 
-task_list = login_required(CustomerTaskView.as_view(), login_url=reverse_lazy('login'))
-task_details = login_required(CustomerDetailTaskView.as_view(), login_url=reverse_lazy('login'))
+user_new = CreateProfileView.as_view(module_name='customer',
+                                     group_name=co.CUSTOMER_GROUP)
+user_edit = login_required(UpdateProfileView.as_view(module_name='customer'),
+                           login_url=reverse_lazy('login'))
+
+task_list = login_required(CustomerTaskView.as_view(module_name='customer'),
+                           login_url=reverse_lazy('login'))
+task_details = login_required(DetailTaskView.as_view(module_name='customer'),
+                              login_url=reverse_lazy('login'))
 task_new = login_required(
-  permission_required('general.add_task', raise_exception=True)(CustomerCreateDraftTaskView.as_view()),
+  permission_required('general.add_task', raise_exception=True)
+    (CreateTaskView.as_view(module_name='customer')),
   login_url=reverse_lazy('login'))
 task_submit = login_required(
-  permission_required('general.change_task', raise_exception=True)(CustomerSubmitTaskView.as_view()),
+  permission_required('general.change_task', raise_exception=True)
+    (SwitchStatusView.as_view(module_name='customer')),
   login_url=reverse_lazy('login'))
 task_update = login_required(
-  permission_required('general.change_task', raise_exception=True)(CustomerUpdateTaskView.as_view()),
+  permission_required('general.change_task', raise_exception=True)
+    (UpdateTaskView.as_view(module_name='customer')),
   login_url=reverse_lazy('login'))
 
 urlpatterns = patterns('',
@@ -63,20 +63,7 @@ urlpatterns = patterns('',
     url(r'profile/new', user_new, name='user_new'),
     url(r'profile/(?P<pk>\d+)/$', user_edit, name='user_details'),
     url(r'profile/(?P<pk>\d+)/edit$', user_edit, name='user_edit'),
-    url(r'profile/(?P<pk>\d+)/remove', user_remove, name='user_remove'),
 
-    url(r'^login/$', LoginView.as_view(), name='login'),
-    url(r'^logout/$', LogoutView.as_view(), name='logout'),
-    url(r'^reset/$', ResetPswdView.as_view(), name='pswd_reset'),
-    url(r'^resetdone/$', ResetPswdDoneView.as_view(), name='pswd_reset_done'),
-    url(r'^resetconfirm/(?P<uidb64>.*)/(?P<token>.*)$', ResetPswdConfirmView.as_view(), name='pswd_reset_confirm'),
-    url(r'^resetcomplete/$', ResetPswdCompleteView.as_view(), name='pswd_reset_complete'),
-
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'', include('common_urls')),
 )
 
-
-# Displays uploaded files.
-urlpatterns += patterns('',
-    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-)

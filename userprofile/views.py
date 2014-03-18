@@ -3,7 +3,6 @@ from django.contrib.auth.models import Group
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 from django.views.generic.edit import UpdateView
-from django.views.generic import DetailView
 
 from general.views import BaseView
 from django.core.urlresolvers import reverse_lazy
@@ -73,12 +72,6 @@ class UpdateProfileView(BaseView, UpdateView):
     return self.get_object().pk
 
 
-class DetailProfileView(BaseView, DetailView):
-  queryset = UserProfile.objects.all()
-  template_name = 'userprofile/detail.html'
-  group_name = ''
-
-
 class RemoveProfileView(BaseView, DeleteView):
   queryset = UserProfile.objects.all()
   success_url = reverse_lazy('task_list')
@@ -87,19 +80,4 @@ class RemoveProfileView(BaseView, DeleteView):
 
   def user_id(self):
     return self.get_object().pk
-
-
-class DetailProfileWriterView(DetailProfileView):
-  group_name = co.WRITER_GROUP
-
-
-class CreateProfileWriterView(CreateProfileView):
-  group_name = co.WRITER_GROUP
-
-
-class UpdateProfileWriterView(UpdateProfileView):
-  group_name = co.WRITER_GROUP
-
-
-
 

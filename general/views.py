@@ -10,7 +10,7 @@ from django.core.exceptions import PermissionDenied
 
 from general.models import Task
 from comments.models import Comment
-from general.forms import TaskForm
+from general.forms import TaskForm, SwitchStatusForm
 
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import CreateView
@@ -166,12 +166,6 @@ class TaskIndexView(BaseView, TemplateView):
   """Displays all tasks for singned users."""
   template_name = 'tasks/index.html'
 
-  def get_context_data(self, **kwargs):
-    context = super(TaskIndexView, self).get_context_data(**kwargs)
-    if self.request.user.is_authenticated():
-      context['tasks'] = Task.objects.all()
-    return context
-
 
 class UpdateTaskView(BaseView, UpdateView):
   template_name = 'tasks/edit.html'
@@ -211,6 +205,9 @@ class DetailTaskView(BaseView, DetailView):
     context['can_edit'] = (self.object.status == co.DRAFT)
     return context
 
+  def user_id(self):
+    return self.get_object().owner.pk
+
 
 class RemoveTaskView(BaseView, DeleteView):
   queryset = Task.objects.all()
@@ -221,3 +218,11 @@ class RemoveTaskView(BaseView, DeleteView):
   def user_id(self):
     return self.get_object().owner.pk
 
+class SwitchStatusView(UpdateTaskView):
+  form_class = SwitchStatusForm 
+  module_name = None 
+  template_name = 'tasks/detail.html'
+  owner_required = False 
+  
+  def get_success_url(self):
+    return self.object.to_link()

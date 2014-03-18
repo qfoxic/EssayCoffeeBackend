@@ -57,6 +57,19 @@ TASK_STATUSES = (
 
 TASK_STATUSES_DICT = dict(TASK_STATUSES)
 
+# Main purpose of a table is do not allow to set
+# inconsistent status to an order.
+# Before status will be set we have to check whether
+# according record is here and status to set is within allowed.
+STATUS_SWITCH_TABLE = {
+  ACTIVE: [FINISHED],
+  UNPROCESSED: [ACTIVE,SUSPICIOUS,REJECTED],
+  SUSPICIOUS: [ACTIVE,REJECTED],
+  DRAFT: [UNPROCESSED],
+}
+
+
+
 MALE = 0
 FEMALE = 1
 GENDER = ((MALE, 'Mr.'),

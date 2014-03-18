@@ -57,7 +57,7 @@ CREATE TABLE `auth_group_permissions` (
   KEY `auth_group_permissions_83d7f98b` (`permission_id`),
   CONSTRAINT `group_id_refs_id_f4b32aac` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `permission_id_refs_id_6ba0f519` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=232 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=272 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `auth_group_permissions` (
 
 LOCK TABLES `auth_group_permissions` WRITE;
 /*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
-INSERT INTO `auth_group_permissions` VALUES (200,1,10),(199,1,11),(202,1,12),(207,1,19),(203,1,20),(204,1,21),(205,1,22),(206,1,23),(210,1,24),(209,1,25),(201,1,26),(208,1,27),(212,2,10),(211,2,11),(214,2,12),(219,2,19),(215,2,20),(216,2,21),(217,2,22),(218,2,23),(222,2,24),(221,2,25),(213,2,26),(220,2,27),(224,3,10),(223,3,11),(226,3,12),(230,3,19),(227,3,20),(228,3,21),(229,3,25),(225,3,26),(231,3,27);
+INSERT INTO `auth_group_permissions` VALUES (265,1,10),(266,1,11),(267,1,12),(268,1,23),(269,1,25),(270,1,26),(271,1,27),(245,2,10),(244,2,11),(247,2,12),(252,2,19),(248,2,20),(249,2,21),(250,2,22),(251,2,23),(255,2,24),(254,2,25),(246,2,26),(253,2,27),(257,3,10),(256,3,11),(259,3,12),(263,3,19),(260,3,20),(261,3,21),(262,3,25),(258,3,26),(264,3,27);
 /*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$6vyoJEMinmt2$8fmnzmCoXzFItnX8eGZpUhm4TrqlT7/Gtp6mKuJbg2w=','2014-03-12 15:35:35',1,'transport','','','qq@qq.xom',1,1,'2014-03-12 15:34:18'),(2,'pbkdf2_sha256$12000$inJ50TvPbeFS$8kd/q3arvkhdUbl6lLrCvsXPnOGAKxt6qKJnbww/dMQ=','2014-03-12 15:37:04',0,'customer','Customer','Customer','foxandkamarus@gmail.com',0,1,'2014-03-12 15:37:04'),(3,'pbkdf2_sha256$12000$WLIFiSFRMe1z$QpwzVSZ5twrUXV283CMcla5UhszFzzB3YQaBSXcIHt8=','2014-03-12 15:37:36',0,'admin','Admin','Admin','workforum@ukr.net',0,1,'2014-03-12 15:37:37'),(4,'pbkdf2_sha256$12000$PFwlPQSMhvb7$IcwIN6SjLixuZCErksFHG3OrNz3t+XCKSU/z7p5LPMU=','2014-03-12 15:37:58',0,'writer','Writer','Writer','cust@ukt.rnt',0,1,'2014-03-12 15:37:58');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$6vyoJEMinmt2$8fmnzmCoXzFItnX8eGZpUhm4TrqlT7/Gtp6mKuJbg2w=','2014-03-18 13:21:17',1,'transport','','','qq@qq.xom',1,1,'2014-03-12 15:34:18'),(2,'pbkdf2_sha256$12000$inJ50TvPbeFS$8kd/q3arvkhdUbl6lLrCvsXPnOGAKxt6qKJnbww/dMQ=','2014-03-17 12:13:55',0,'customer','Customer','Customer','foxandkamarus@gmail.com',0,1,'2014-03-12 15:37:04'),(3,'pbkdf2_sha256$12000$WLIFiSFRMe1z$QpwzVSZ5twrUXV283CMcla5UhszFzzB3YQaBSXcIHt8=','2014-03-17 12:24:19',0,'admin','Admin','Admin','workforum@ukr.net',0,1,'2014-03-12 15:37:37'),(4,'pbkdf2_sha256$12000$PFwlPQSMhvb7$IcwIN6SjLixuZCErksFHG3OrNz3t+XCKSU/z7p5LPMU=','2014-03-12 15:37:58',0,'writer','Writer','Writer','cust@ukt.rnt',0,1,'2014-03-12 15:37:58');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ CREATE TABLE `auth_user_groups` (
   KEY `auth_user_groups_5f412f9a` (`group_id`),
   CONSTRAINT `user_id_refs_id_40c41112` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `group_id_refs_id_274b862c` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `auth_user_groups` (
 
 LOCK TABLES `auth_user_groups` WRITE;
 /*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
-INSERT INTO `auth_user_groups` VALUES (40,2,2),(41,3,1),(42,4,3);
+INSERT INTO `auth_user_groups` VALUES (46,2,2),(47,3,1),(48,4,3);
 /*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +212,7 @@ CREATE TABLE `comments` (
   KEY `comments_cd0085cc` (`cowner_id`),
   CONSTRAINT `ctask_id_refs_id_7cfa6d9b` FOREIGN KEY (`ctask_id`) REFERENCES `tasks` (`id`),
   CONSTRAINT `cowner_id_refs_id_7e062414` FOREIGN KEY (`cowner_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -245,7 +245,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_37ef4eb4` (`content_type_id`),
   CONSTRAINT `content_type_id_refs_id_93d2d1f8` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `user_id_refs_id_c0d12874` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -254,7 +254,6 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2014-03-12 15:36:08',1,3,'1','admin',1,''),(2,'2014-03-12 15:36:37',1,3,'2','customer',1,''),(3,'2014-03-12 15:36:57',1,3,'3','writer',1,''),(4,'2014-03-12 15:37:30',1,9,'2','customer',1,''),(5,'2014-03-12 15:37:56',1,9,'3','admin',1,''),(6,'2014-03-12 15:38:24',1,9,'4','writer',1,''),(7,'2014-03-12 15:38:48',1,9,'1','transport',2,'Changed password.'),(8,'2014-03-12 15:39:05',1,9,'1','transport',2,'Changed password.'),(9,'2014-03-12 15:39:21',1,9,'1','transport',2,'Changed password.');
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -307,7 +306,6 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('ltju0eynifzb8gzsqyjyanfopi97boaz','NGM2OWE2OGZiM2I2YTE0MGNhYmE0ZGRkYzlmZDhiODBhNWE4YjBlMTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJwcm9maWxlLmF1dGguVXNlclByb2ZpbGVCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2014-03-26 15:35:35'),('qff2f06d0rawe127cto5gtyqb4eo77cu','OGI2YTYwYmQ5YTJmMjk5MzM0MTA5ZDdhNDBiZWJlOGFjNTAyYzNkNTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJwcm9maWxlLmF1dGguVXNlclByb2ZpbGVCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0=','2014-03-27 13:17:55');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -346,7 +344,7 @@ CREATE TABLE `tasks` (
   KEY `tasks_98516953` (`assignee_id`),
   CONSTRAINT `assignee_id_refs_id_ba4d12bb` FOREIGN KEY (`assignee_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `owner_id_refs_id_ba4d12bb` FOREIGN KEY (`owner_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -355,7 +353,6 @@ CREATE TABLE `tasks` (
 
 LOCK TABLES `tasks` WRITE;
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-INSERT INTO `tasks` VALUES (1,'2222','hs','es','hs',21600,1,2,1,2,'2222','','222',1,1,0,2,NULL,'2014-03-13 13:18:14','2014-03-13 13:18:16',NULL,0);
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -383,7 +380,7 @@ CREATE TABLE `user_profiles` (
 
 LOCK TABLES `user_profiles` WRITE;
 /*!40000 ALTER TABLE `user_profiles` DISABLE KEYS */;
-INSERT INTO `user_profiles` VALUES (1,1,'UA','123','2014-03-12 16:35:16'),(2,0,'AF','123','2014-03-12 15:37:30'),(3,0,'AF','123','2014-03-12 15:37:56'),(4,0,'AF','222','2014-03-12 15:38:24');
+INSERT INTO `user_profiles` VALUES (1,1,'UA','123','2014-03-12 16:35:16'),(2,0,'AF','123','2014-03-12 15:37:30'),(3,0,'AF','123','2014-03-17 11:31:26'),(4,0,'AF','222','2014-03-12 15:38:24');
 /*!40000 ALTER TABLE `user_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -396,4 +393,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-13 14:35:59
+-- Dump completed on 2014-03-18 14:28:41

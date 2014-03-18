@@ -55,18 +55,21 @@
                   <div class="info-col">
                     <form action="{% url "task_approve" object.pk %}" method="POST">
                       {% csrf_token %}
+                      <input type="hidden" value="{{co.ACTIVE}}" name="status" />
                       <input type="submit" value="{% trans "Approve" %}" class="btn btn-primary" />
                     </form>
                   </div>
                   <div class="info-col">
                     <form action="{% url "task_reject" object.pk %}" method="POST">
                       {% csrf_token %}
+                      <input type="hidden" value="{{co.REJECTED}}" name="status" />
                       <input type="submit" value="{% trans "Reject" %}" class="btn btn-primary" />
                     </form>
                   </div>
                   <div class="info-col">
                     <form action="{% url "task_suspect" object.pk %}" method="POST">
                       {% csrf_token %}
+                      <input type="hidden" value="{{co.SUSPICIOUS}}" name="status" />
                       <input type="submit" value="{% trans "Suspect" %}" class="btn btn-primary" />
                     </form>
                   </div>
