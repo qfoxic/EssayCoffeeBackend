@@ -20,12 +20,10 @@ PROJECT_DIR = os.path.join(BASE_DIR, 'transport')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '_w$x6+-q7hk1)5h6)w^pf(8&n3+dmi^hbc4_6_o+-)wfe&8!+*'
 
-#CSRF_COOKIE_NAME = 'csrfc'
-#SESSION_COOKIE_NAME = 'sessc'
-#CSRF_COOKIE_PATH = 'login'
-#SESSION_COOKIE_PATH = 'login'
-#CSRF_COOKIE_DOMAIN = '.fake.domain.com'
-
+CSRF_COOKIE_NAME = 'csrfc'
+SESSION_COOKIE_NAME = 'sessc'
+CSRF_COOKIE_DOMAIN = '.customers.yourseller.net'
+SESSION_COOKIE_DOMAIN = '.customers.yourseller.net'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -111,6 +109,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
