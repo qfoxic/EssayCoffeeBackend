@@ -10,7 +10,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/"><i class="fa fa-font fa-lg" style="margin-right:.5em"></i>Translation Portal <sup> <small>{% if site == 'customer' %}customer{% elif site == 'admin' %}admin{% elif site == 'writer' %}writer{% else %}unknown{% endif %}</small></sup></a>
+                <a class="navbar-brand" href="/"><i class="fa fa-font fa-lg" style="margin-right:.5em"></i>Translation Portal <sup> <small>{{site}}</small></sup></a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -61,7 +61,7 @@
                         </ul>
                     </li>
                     <li class="{% active request 'writers' %}">
-                        <a href="#"><i class='fa fa-pencil fa-lg' style="margin-right:.5em"></i>{% trans "Writers" %}</a>
+                        <a href="{% url 'writers'  %}"><i class='fa fa-pencil fa-lg' style="margin-right:.5em"></i>{% trans "Writers" %}</a>
                     </li>
                     {% endif %}
                     {% elif site == 'writer' %}

@@ -1,2 +1,3 @@
+site: ''
 layout: # to view
   skin_prefix: default # skin prefix [ customer, admin, writer ]

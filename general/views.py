@@ -89,7 +89,7 @@ class BaseView(View):
 
 
 class LoginView(BaseView, TemplateView):
-  template_name='login.html'
+  template_name='general/login.html'
 
   def render_to_response(self, context, **response_kwargs):
     context.update(self.settings)

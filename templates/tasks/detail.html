@@ -1,4 +1,4 @@
-{% extends layout.skin_prefix|add:"/layout.html" %}
+{% extends "layout.html" %}
 {% load i18n %}
 {% block pagetitle %}{% trans "Task Details" %}{% endblock %}
 {% block content %}
@@ -58,7 +58,9 @@
                     <div class="info-col">
                         <form action="{% url 'task_submit' object.pk %}" method="post">
                             {% csrf_token %}
-                            <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary" />
+                            <button type="submit" class="btn btn-primary btn-lg" role="button">
+                                {% trans "Submit" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
+                            </button>
                         </form>
                     </div>
                 </div>

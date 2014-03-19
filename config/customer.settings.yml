@@ -1,3 +1,1 @@
 site: customer
-layout: # to view
-  skin_prefix: customer # skin prefix [ customer, admin, writer ]
