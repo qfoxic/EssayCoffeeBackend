@@ -1,2 +1,3 @@
+site: admin
 layout: # to view
   skin_prefix: administer # skin prefix [ customer, admin, writer ]

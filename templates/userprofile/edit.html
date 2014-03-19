@@ -1,0 +1,210 @@
+{% extends layout.skin_prefix|add:"/layout.html" %}
+{% load i18n attr %}
+{% block pagetitle %}{% trans "User Profile" %}{% endblock %}
+{% block content %}
+<section class="container-fluid panel panel-default{% if form.errors %} panel-danger{% endif %}" style="width:70%;margin:3em auto 1em">
+    <div class="panel-heading">
+        <h2 class="panel-title"><i class="fa fa-user fa-lg" style="margin-right:1em"></i> {% trans "User profile" %}{% if object %}: <abbr title="user name">{{form.username.value}}</abbr>{% endif %}</h2>
+    </div>
+    <div class="panel-body">
+        <!-- {{form.errors}} -->
+        <form role="form" role="form" action="{% if object %}{% url "user_edit" object.pk %}{% else %}{% url "user_new" %}{% endif %}" method="post" enctype='multipart/form-data'>
+            {% csrf_token %}
+            {% if not object %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="well well-sm">
+                        {% trans "Account details" %}
+                    </div>
+                    <div class="form-group{% if form.username.errors %} has-error{% endif %}"
+                    {% if form.username.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: Username field is required" %}"{% endif %}>
+                        <label>{% trans "Username" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                         <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                         {% if form.username.value %}
+                           <input id="id_username" name="username" class="form-control"
+                                  placeholder="Enter a first name" value="{{form.username.value}}">
+                         {% else %}
+                           <input id="id_username" name="username" class="form-control" placeholder="Enter a first name">
+                         {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.password.errors %} has-error{% endif %}"
+                    {% if form.password.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: Password field is required" %}"{% endif %}>
+                        <label>{% trans "Password" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                            {% if form.password.value %}
+                              <input id="id_password" name="password"
+                                     type="password" class="form-control"
+                                     placeholder="Enter a password" value="{{form.password.value}}">
+                            {% else %}
+                              <input id="id_password" name="password"
+                                     type="password" class="form-control"
+                                     placeholder="Enter a password">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.confirm_pass.errors %} has-error{% endif %}"
+                    {% if form.password.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: Confirm password field is required" %}"{% endif %}>
+                        <label>{% trans "Confirm Password" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                            <input id="id_confirm_pass" name="confirm_pass" type="password" class="form-control" autocomplete="off" placeholder="{% trans "Confirm password" %}">
+                        </div>
+                    </div>
+                    <div class="form-group" style="text-align:center;margin-top: 7em">
+                        <button type="submit" class="btn btn-primary btn-lg" role="button">
+                            {% trans "Submit" %} <i class='fa fa-check-circle-o fa-lg'></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- .left column -->
+                <div class="col-md-6">
+                    <div class="well well-sm">
+                        {% trans "Personal information" %}
+                    </div>
+                    <div class="form-group{% if form.first_name.errors %} has-error{% endif %}"
+                    {% if form.first_name.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: First Name field is required" %}"{% endif %}>
+                        <label>{% trans "First Name" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            {{form.first_name|attr:"class:form-control,autocomplete:off,placeholder:Enter a first name"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.last_name.errors %} has-error{% endif %}"
+                    {% if form.last_name.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: Last Name field is required" %}"{% endif %}>
+                        <label>{% trans "Last Name" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            {{form.last_name|attr:"class:form-control,autocomplete:off,placeholder:Enter a last name"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.gender.errors %} has-error{% endif %}"
+                    {% if form.gender.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: Gender field is required" %}"{% endif %}>
+                        <label>{% trans "Gender" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-male fa-fw"></i></span>
+                            {{form.gender|attr:"class:form-control,autocomplete:off,placeholder:Gender"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.email.errors %} has-error{% endif %}"
+                    {% if form.email.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: Email field is required" %}"{% endif %}>
+                        <label>{% trans "Email" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                            {{form.email|attr:"class:form-control,autocomplete:off,placeholder:Email address"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.phone.errors %} has-error{% endif %}"
+                    {% if form.phone.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: Phone field is required" %}"{% endif %}>
+                        <label>{% trans "Phone" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+                            {{form.phone|attr:"type:tel,class:form-control,autocomplete:off,placeholder:Phone number"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.country.errors %} has-error{% endif %}"
+                    {% if form.country.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: Country field is required" %}"{% endif %}>
+                        <label>{% trans "Country" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-globe fa-fw"></i></span>
+                            {{form.country|attr:"class:form-control,autocomplete:off,placeholder:Contry"}}
+                        </div>
+                    </div>
+                </div><!-- .right column -->
+            </div>
+            {% else %}
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group{% if form.gender.errors %} has-error{% endif %}"
+                            {% if form.gender.errors %} data-toggle="tooltip" data-placement="left"
+                            title="{% trans "Error: Gender field is required" %}"{% endif %}>
+                                <label>{% trans "Gender" %}</label>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-male fa-fw"></i></span>
+                                    {{form.gender|attr:"class:form-control,autocomplete:off,placeholder:Gender"}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group{% if form.first_name.errors %} has-error{% endif %}"
+                            {% if form.first_name.errors %} data-toggle="tooltip" data-placement="left"
+                            title="{% trans "Error: First Name field is required" %}"{% endif %}>
+                                <label>{% trans "First Name" %}</label>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                                    {{form.first_name|attr:"class:form-control,autocomplete:off,placeholder:Enter a first name"}}
+                                </div>
+                            </div>
+                            <div class="form-group{% if form.last_name.errors %} has-error{% endif %}"
+                            {% if form.last_name.errors %} data-toggle="tooltip" data-placement="left"
+                            title="{% trans "Error: Last Name field is required" %}"{% endif %}>
+                                <label>{% trans "Last Name" %}</label>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                                    {{form.last_name|attr:"class:form-control,autocomplete:off,placeholder:Enter a last name"}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.email.errors %} has-error{% endif %}"
+                    {% if form.email.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: Email field is required" %}"{% endif %}>
+                        <label>{% trans "Email" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                            {{form.email|attr:"class:form-control,autocomplete:off,placeholder:Email address"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.phone.errors %} has-error{% endif %}"
+                    {% if form.phone.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: Phone field is required" %}"{% endif %}>
+                        <label>{% trans "Phone" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+                            {{form.phone|attr:"type:tel,class:form-control,autocomplete:off,placeholder:Phone number"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.country.errors %} has-error{% endif %}"
+                    {% if form.country.errors %} data-toggle="tooltip" data-placement="left"
+                    title="{% trans "Error: Country field is required" %}"{% endif %}>
+                        <label>{% trans "Country" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-globe fa-fw"></i></span>
+                            {{form.country|attr:"class:form-control,autocomplete:off,placeholder:Contry"}}
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:2em">
+                        <div class="col-md-6">
+                            <a href="{% url 'pswd_reset' %}" type="submit" class="btn btn-default btn-lg" role="button"> <i class='fa fa-key fa-lg' style='margin-right:1em'></i>{% trans "Reset Password" %} </a>
+                        </div>
+                        <div class="col-md-6" style="text-align:right">
+                            <button type="submit" class="btn btn-primary btn-lg" role="button">
+                                {% trans "Submit" %}<i class='fa fa-check-circle-o fa-lg' style='margin-left:1em'></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+</section>
+{% endblock %}
+{% block info_block %}
+<!-- <section class="info">
+<h2>{% trans "Edit Task" %}</h2>
+</section> -->
+{% endblock %}

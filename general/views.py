@@ -79,12 +79,12 @@ class BaseView(View):
     return super(BaseView, self).render_to_response(context, **response_kwargs)
 
   def get_template_names(self):
-    try:
-      skin_prefix = self.settings['layout']['skin_prefix']
-    except KeyError:
-      print 'Could not obtain skin prefix skipping to default.'
-      skin_prefix = co.DEFAULT_SKIN_PREFIX
-    self.template_name = os.path.join(skin_prefix, self.template_name)
+#     try:
+#       skin_prefix = self.settings['layout']['skin_prefix']
+#     except KeyError:
+#       print 'Could not obtain skin prefix skipping to default.'
+#       skin_prefix = co.DEFAULT_SKIN_PREFIX
+#     self.template_name = os.path.join(skin_prefix, self.template_name)
     return [self.template_name]
 
 
@@ -112,12 +112,13 @@ class ResetPswdView(BaseView, TemplateView):
   email_template_name='password_reset_email.html'
   
   def get_email_template(self):
-    try:
-      skin_prefix = self.settings['layout']['skin_prefix']
-    except KeyError:
-      print 'Could not obtain skin prefix skipping to default.'
-      skin_prefix = co.DEFAULT_SKIN_PREFIX
-    return os.path.join(skin_prefix, self.module_name, self.email_template_name)
+#     try:
+#       skin_prefix = self.settings['layout']['skin_prefix']
+#     except KeyError:
+#       print 'Could not obtain skin prefix skipping to default.'
+#       skin_prefix = co.DEFAULT_SKIN_PREFIX
+#     return os.path.join(skin_prefix, self.module_name, self.email_template_name)
+     return os.path.join(self.module_name, self.email_template_name)
 
   def render_to_response(self, context, **response_kwargs):
     context.update(self.settings)
