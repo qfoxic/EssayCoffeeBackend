@@ -108,8 +108,8 @@ class LogoutView(BaseView, TemplateView):
 
 
 class ResetPswdView(BaseView, TemplateView):
-  template_name='password_reset_form.html'
-  email_template_name='password_reset_email.html'
+  template_name='general/password_reset_form.html'
+  email_template_name='general/password_reset_email.html'
   
   def get_email_template(self):
 #     try:
@@ -136,7 +136,7 @@ class ResetPswdView(BaseView, TemplateView):
 
 
 class ResetPswdConfirmView(BaseView, TemplateView):
-  template_name='password_reset_confirm.html'
+  template_name='general/password_reset_confirm.html'
 
   def render_to_response(self, context, **response_kwargs):
     context.update(self.settings)
@@ -153,7 +153,7 @@ class ResetPswdConfirmView(BaseView, TemplateView):
 
 
 class ResetPswdCompleteView(BaseView, TemplateView):
-  template_name='password_reset_complete.html'
+  template_name='general/password_reset_complete.html'
 
   def render_to_response(self, context, **response_kwargs):
     context.update(self.settings)
@@ -162,7 +162,7 @@ class ResetPswdCompleteView(BaseView, TemplateView):
 
 
 class ResetPswdDoneView(BaseView, TemplateView):
-  template_name='password_reset_done.html'
+  template_name='general/password_reset_done.html'
 
   def render_to_response(self, context, **response_kwargs):
     context.update(self.settings)
