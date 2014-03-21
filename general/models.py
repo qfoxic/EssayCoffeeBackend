@@ -69,6 +69,49 @@ class Task(models.Model):
   get_level = lambda self: co.LEVELS_DICT.get(self.level)
   get_urgency = lambda self: co.URGENCY_DICT.get(self.urgency)  
   get_style = lambda self: co.STYLES_DICT.get(self.style) 
+  
+  @classmethod 
+  def get_finished_tasks(cls, count_only, **kwargs):
+    if count_only:
+      return cls.objects.filter(status__exact=co.FINISHED).filter(**kwargs).count()
+    return cls.objects.filter(status__exact=co.FINISHED).filter(**kwargs)
+  
+  @classmethod 
+  def get_unprocessed_tasks(cls, count_only, **kwargs):
+    if count_only:
+      return cls.objects.filter(status__exact=co.UNPROCESSED).filter(**kwargs).count()
+    return cls.objects.filter(status__exact=co.UNPROCESSED).filter(**kwargs)
+
+  @classmethod 
+  def get_suspicious_tasks(cls, count_only, **kwargs):
+    if count_only:
+      return cls.objects.filter(status__exact=co.SUSPICIOUS).filter(**kwargs).count()
+    return cls.objects.filter(status__exact=co.SUSPICIOUS).filter(**kwargs)
+
+  @classmethod 
+  def get_active_tasks(cls, count_only, **kwargs):
+    if count_only:
+      return cls.objects.filter(status__exact=co.ACTIVE).filter(**kwargs).count()
+    return cls.objects.filter(status__exact=co.ACTIVE).filter(**kwargs)
+
+  @classmethod 
+  def get_rejected_tasks(cls, count_only, **kwargs):
+    if count_only:
+      return cls.objects.filter(status__exact=co.REJECTED).filter(**kwargs).count()
+    return cls.objects.filter(status__exact=co.REJECTED).filter(**kwargs)
+
+  @classmethod 
+  def get_expired_tasks(cls, count_only, **kwargs):
+    hours_expired = '(urgency-TIMESTAMPDIFF(SECOND, created, now()))/3600'
+    days_expired = '(urgency-TIMESTAMPDIFF(SECOND, created, now()))/86400'
+    where = ['urgency-TIMESTAMPDIFF(SECOND, created, now()) <= 0']
+    expired_tasks = Task.objects.extra(
+        select={'hours_expired': hours_expired,
+                'days_expired': days_expired},
+        where=where).filter(status__exact=co.UNPROCESSED).filter(**kwargs).order_by('hours_expired')
+    if count_only:
+      return expired_tasks.count()
+    return expired_tasks
 
   @models.permalink
   def get_absolute_url(self):

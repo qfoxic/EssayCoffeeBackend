@@ -36,6 +36,17 @@ def check_mobile(request):
   return False
 
 
+def get_stats():
+  return {
+    'completed': Task.get_finished_tasks(1), 
+    'unproc': Task.get_unprocessed_tasks(1),
+    'suspect': Task.get_suspicious_tasks(1), 
+    'rejected': Task.get_rejected_tasks(1), 
+    'process_assigned': Task.get_active_tasks(1, **{'assignee__isnull': False}),
+    'process_unassigned': Task.get_active_tasks(1, **{'assignee__isnull': True}),
+    'expired_assigned': Task.get_expired_tasks(1, **{'assignee__isnull': False}),
+    'expired_unassigned': Task.get_expired_tasks(1, **{'assignee__isnull': True})
+  }
 
 
 class BaseView(View):
@@ -88,6 +99,7 @@ class BaseView(View):
       'can_do_admin_actions': co.CheckPermissions(self.request.user, obj, co.CAN_DO_ADMIN_ACTIONS)
       # approve, suspect, reject
     }
+    context['stats'] = get_stats()
     return super(BaseView, self).render_to_response(context, **response_kwargs)
 
   def get_template_names(self):

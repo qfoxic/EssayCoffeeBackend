@@ -27,35 +27,27 @@ class AdminCustomersView(ListProfileView):
 class AdminUnprocessedTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(AdminUnprocessedTasksView, self).get_context_data(**kwargs)
-    context['tasks'] = Task.objects.filter(status__exact=co.UNPROCESSED)
+    context['tasks'] = Task.get_unprocessed_tasks(0)
     return context
 
 
 class AdminRejectedTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(AdminRejectedTasksView, self).get_context_data(**kwargs)
-    context['tasks'] = Task.objects.filter(status__exact=co.REJECTED)
+    context['tasks'] = Task.get_rejected_tasks(0)
     return context
 
 
 class AdminExpiredTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(AdminExpiredTasksView, self).get_context_data(**kwargs)
-    hours_expired = '(urgency-TIMESTAMPDIFF(SECOND, created, now()))/3600'
-    days_expired = '(urgency-TIMESTAMPDIFF(SECOND, created, now()))/86400'
-    where = ['urgency-TIMESTAMPDIFF(SECOND, created, now()) <= 0']
     status = self.request.GET.get('status')
     if status == co.UNASSIGNED_ORDER:
-      filter_dict = {'status__exact': co.UNPROCESSED, 'assignee__isnull': True}
+      context['tasks'] = Task.get_expired_tasks(0, **{'assignee__isnull': True})
     elif status == co.ASSIGNED_ORDER:
-      filter_dict = {'status__exact': co.UNPROCESSED, 'assignee__isnull': False}
+      context['tasks'] = Task.get_expired_tasks(0, **{'assignee__isnull': False})
     else:
-      filter_dict = {'status__exact': co.UNPROCESSED}
-    expired_tasks = Task.objects.extra(
-        select={'hours_expired': hours_expired,
-                'days_expired': days_expired},
-        where=where).filter(**filter_dict).order_by('hours_expired')
-    context['tasks'] = expired_tasks
+      context['tasks'] = Task.get_expired_tasks(0)
     return context
 
 
@@ -64,27 +56,25 @@ class AdminActiveTasksView(TaskIndexView):
     context = super(AdminActiveTasksView, self).get_context_data(**kwargs)
     status = self.request.GET.get('status')
     if status == co.UNASSIGNED_ORDER:
-      context['tasks'] = Task.objects.filter(status__exact=co.ACTIVE,
-                                             assignee__isnull=True)
+      context['tasks'] = Task.get_active_tasks(0, **{'assignee__isnull': True})
     elif status == co.ASSIGNED_ORDER:
-      context['tasks'] = Task.objects.filter(status__exact=co.ACTIVE,
-                                             assignee__isnull=False)
+      context['tasks'] = Task.get_active_tasks(0, **{'assignee__isnull': False})
     else:
-      context['tasks'] = Task.objects.filter(status__exact=co.ACTIVE)
+      context['tasks'] = Task.get_active_tasks(0)
     return context
 
 
 class AdminSuspiciousTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(AdminSuspiciousTasksView, self).get_context_data(**kwargs)
-    context['tasks'] = Task.objects.filter(status__exact=co.SUSPICIOUS)
+    context['tasks'] = Task.get_suspicious_tasks(0)
     return context
 
 
 class AdminFinishedTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(AdminFinishedTasksView, self).get_context_data(**kwargs)
-    context['tasks'] = Task.objects.filter(status__exact=co.FINISHED)
+    context['tasks'] = Task.get_finished_tasks(0)
     return context
 
 
