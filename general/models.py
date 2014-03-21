@@ -31,7 +31,7 @@ class Task(models.Model):
   assigment = models.CharField(choices=co.ASSIGMENTS, max_length=co.TITLE_MAX_LEN,
                                default=co.ASSIGMENTS[0], validators=[ValidateEmptySelect])
   level = models.CharField(choices=co.LEVELS, max_length=co.TITLE_MAX_LEN, default=co.LEVELS[0])
-  urgency = models.SmallIntegerField(choices=co.URGENCY, default=co.URGENCY[0],
+  urgency = models.IntegerField(choices=co.URGENCY, default=co.URGENCY[0],
                                      validators=[ValidateEmptySelect])
   spacing = models.SmallIntegerField(choices=co.SPACING, default=co.SPACING[0],
                                      validators=[ValidateEmptySelect])
@@ -41,8 +41,7 @@ class Task(models.Model):
   source_number = models.SmallIntegerField()
   instructions = models.TextField(max_length=co.INSTRUCTION_MAX_LEN,
                                   validators=[ValidateMinSize(100)])
-  attach = models.FileField(upload_to=get_attach_path, max_length=co.MAX_FILE_LEN,
-                            blank=True, null=True)
+  attach = models.FileField(upload_to=get_attach_path, blank=True, null=True)
   discount = models.CharField(max_length=co.TITLE_MAX_LEN)
   accept_terms = models.BooleanField(validators=[ValidateTerms])
   #######################################

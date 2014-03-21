@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `auth_group`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auth_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) COLLATE utf16_unicode_ci NOT NULL,
+  `name` varchar(80) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,11 +53,10 @@ CREATE TABLE `auth_group_permissions` (
   `permission_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `group_id` (`group_id`,`permission_id`),
-  KEY `auth_group_permissions_5f412f9a` (`group_id`),
-  KEY `auth_group_permissions_83d7f98b` (`permission_id`),
+  KEY `permission_id_refs_id_6ba0f519` (`permission_id`),
   CONSTRAINT `group_id_refs_id_f4b32aac` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `permission_id_refs_id_6ba0f519` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=272 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +65,7 @@ CREATE TABLE `auth_group_permissions` (
 
 LOCK TABLES `auth_group_permissions` WRITE;
 /*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
-INSERT INTO `auth_group_permissions` VALUES (265,1,10),(266,1,11),(267,1,12),(268,1,23),(269,1,25),(270,1,26),(271,1,27),(245,2,10),(244,2,11),(247,2,12),(252,2,19),(248,2,20),(249,2,21),(250,2,22),(251,2,23),(255,2,24),(254,2,25),(246,2,26),(253,2,27),(257,3,10),(256,3,11),(259,3,12),(263,3,19),(260,3,20),(261,3,21),(262,3,25),(258,3,26),(264,3,27);
+INSERT INTO `auth_group_permissions` VALUES (29,1,10),(30,1,11),(31,1,12),(32,1,19),(33,1,20),(34,1,21),(35,1,22),(36,1,23),(37,1,24),(38,1,25),(39,1,26),(40,1,27),(9,2,10),(8,2,11),(11,2,12),(16,2,19),(12,2,20),(13,2,21),(14,2,22),(15,2,23),(19,2,24),(18,2,25),(10,2,26),(17,2,27),(21,3,10),(20,3,11),(23,3,12),(27,3,19),(24,3,20),(25,3,21),(26,3,25),(22,3,26),(28,3,27);
 /*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,14 +78,13 @@ DROP TABLE IF EXISTS `auth_permission`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auth_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf16_unicode_ci NOT NULL,
+  `name` varchar(50) NOT NULL,
   `content_type_id` int(11) NOT NULL,
-  `codename` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `codename` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `content_type_id` (`content_type_id`,`codename`),
-  KEY `auth_permission_37ef4eb4` (`content_type_id`),
   CONSTRAINT `content_type_id_refs_id_d043b34a` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,19 +106,19 @@ DROP TABLE IF EXISTS `auth_user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auth_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `password` varchar(128) COLLATE utf16_unicode_ci NOT NULL,
+  `password` varchar(128) NOT NULL,
   `last_login` datetime NOT NULL,
   `is_superuser` tinyint(1) NOT NULL,
-  `username` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
-  `first_name` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
-  `last_name` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
-  `email` varchar(75) COLLATE utf16_unicode_ci NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(30) NOT NULL,
+  `email` varchar(75) NOT NULL,
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +127,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$6vyoJEMinmt2$8fmnzmCoXzFItnX8eGZpUhm4TrqlT7/Gtp6mKuJbg2w=','2014-03-18 13:21:17',1,'transport','','','qq@qq.xom',1,1,'2014-03-12 15:34:18'),(2,'pbkdf2_sha256$12000$inJ50TvPbeFS$8kd/q3arvkhdUbl6lLrCvsXPnOGAKxt6qKJnbww/dMQ=','2014-03-17 12:13:55',0,'customer','Customer','Customer','foxandkamarus@gmail.com',0,1,'2014-03-12 15:37:04'),(3,'pbkdf2_sha256$12000$WLIFiSFRMe1z$QpwzVSZ5twrUXV283CMcla5UhszFzzB3YQaBSXcIHt8=','2014-03-17 12:24:19',0,'admin','Admin','Admin','workforum@ukr.net',0,1,'2014-03-12 15:37:37'),(4,'pbkdf2_sha256$12000$PFwlPQSMhvb7$IcwIN6SjLixuZCErksFHG3OrNz3t+XCKSU/z7p5LPMU=','2014-03-12 15:37:58',0,'writer','Writer','Writer','cust@ukt.rnt',0,1,'2014-03-12 15:37:58');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$6vyoJEMinmt2$8fmnzmCoXzFItnX8eGZpUhm4TrqlT7/Gtp6mKuJbg2w=','2014-03-21 10:01:29',1,'transport','','','qq@qq.xom',1,1,'2014-03-12 15:34:18'),(2,'pbkdf2_sha256$12000$inJ50TvPbeFS$8kd/q3arvkhdUbl6lLrCvsXPnOGAKxt6qKJnbww/dMQ=','2014-03-21 10:34:33',0,'customer','Customer','Customer','foxandkamarus@gmail.com',0,1,'2014-03-12 15:37:04'),(3,'pbkdf2_sha256$12000$WLIFiSFRMe1z$QpwzVSZ5twrUXV283CMcla5UhszFzzB3YQaBSXcIHt8=','2014-03-21 10:09:58',0,'admin','Admin','Admin','workforum@ukr.net',0,1,'2014-03-12 15:37:37'),(4,'pbkdf2_sha256$12000$PFwlPQSMhvb7$IcwIN6SjLixuZCErksFHG3OrNz3t+XCKSU/z7p5LPMU=','2014-03-12 15:37:58',0,'writer','Writer','Writer','cust@ukt.rnt',0,1,'2014-03-12 15:37:58');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,11 +144,10 @@ CREATE TABLE `auth_user_groups` (
   `group_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`,`group_id`),
-  KEY `auth_user_groups_6340c63c` (`user_id`),
-  KEY `auth_user_groups_5f412f9a` (`group_id`),
+  KEY `group_id_refs_id_274b862c` (`group_id`),
   CONSTRAINT `user_id_refs_id_40c41112` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `group_id_refs_id_274b862c` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +156,7 @@ CREATE TABLE `auth_user_groups` (
 
 LOCK TABLES `auth_user_groups` WRITE;
 /*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
-INSERT INTO `auth_user_groups` VALUES (46,2,2),(47,3,1),(48,4,3);
+INSERT INTO `auth_user_groups` VALUES (4,2,2),(5,3,1),(6,4,3);
 /*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,11 +173,10 @@ CREATE TABLE `auth_user_user_permissions` (
   `permission_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`,`permission_id`),
-  KEY `auth_user_user_permissions_6340c63c` (`user_id`),
-  KEY `auth_user_user_permissions_83d7f98b` (`permission_id`),
+  KEY `permission_id_refs_id_35d9ac25` (`permission_id`),
   CONSTRAINT `user_id_refs_id_4dc23c39` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `permission_id_refs_id_35d9ac25` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,18 +197,18 @@ DROP TABLE IF EXISTS `comments`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
-  `body` longtext COLLATE utf16_unicode_ci NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `body` longtext NOT NULL,
   `created` datetime NOT NULL,
   `rating` smallint(6) NOT NULL,
   `ctask_id` int(11) NOT NULL,
   `cowner_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `comments_7e324c1b` (`ctask_id`),
-  KEY `comments_cd0085cc` (`cowner_id`),
+  KEY `cowner_id_refs_id_7e062414` (`cowner_id`),
+  KEY `ctask_id_refs_id_7cfa6d9b` (`ctask_id`),
   CONSTRAINT `ctask_id_refs_id_7cfa6d9b` FOREIGN KEY (`ctask_id`) REFERENCES `tasks` (`id`),
   CONSTRAINT `cowner_id_refs_id_7e062414` FOREIGN KEY (`cowner_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,16 +232,16 @@ CREATE TABLE `django_admin_log` (
   `action_time` datetime NOT NULL,
   `user_id` int(11) NOT NULL,
   `content_type_id` int(11) DEFAULT NULL,
-  `object_id` longtext COLLATE utf16_unicode_ci,
-  `object_repr` varchar(200) COLLATE utf16_unicode_ci NOT NULL,
+  `object_id` longtext,
+  `object_repr` varchar(200) NOT NULL,
   `action_flag` smallint(5) unsigned NOT NULL,
-  `change_message` longtext COLLATE utf16_unicode_ci NOT NULL,
+  `change_message` longtext NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `django_admin_log_6340c63c` (`user_id`),
-  KEY `django_admin_log_37ef4eb4` (`content_type_id`),
+  KEY `user_id_refs_id_c0d12874` (`user_id`),
+  KEY `content_type_id_refs_id_93d2d1f8` (`content_type_id`),
   CONSTRAINT `content_type_id_refs_id_93d2d1f8` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `user_id_refs_id_c0d12874` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -254,6 +250,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+INSERT INTO `django_admin_log` VALUES (1,'2014-03-21 10:01:56',1,3,'1','admin',2,'Changed permissions.');
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,12 +263,12 @@ DROP TABLE IF EXISTS `django_content_type`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `django_content_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
-  `app_label` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
-  `model` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `app_label` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -292,12 +289,11 @@ DROP TABLE IF EXISTS `django_session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `django_session` (
-  `session_key` varchar(40) COLLATE utf16_unicode_ci NOT NULL,
-  `session_data` longtext COLLATE utf16_unicode_ci NOT NULL,
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
   `expire_date` datetime NOT NULL,
-  PRIMARY KEY (`session_key`),
-  KEY `django_session_b7b81f0c` (`expire_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+  PRIMARY KEY (`session_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -306,6 +302,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+INSERT INTO `django_session` VALUES ('m5g6j7b1gqnqnk0ib8c8chqbdegtiud6','ZGM1ZTVhNDg0YTQwOGQ3ZmM0MjgyMzVmMmJlYTdlZWE0ZGRkOWE4ZDp7fQ==','2014-04-04 10:08:56'),('y53llxmu99ran74x4nf69cxiqzreoi8d','OGI2YTYwYmQ5YTJmMjk5MzM0MTA5ZDdhNDBiZWJlOGFjNTAyYzNkNTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJwcm9maWxlLmF1dGguVXNlclByb2ZpbGVCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0=','2014-04-04 10:34:33');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -318,18 +315,18 @@ DROP TABLE IF EXISTS `tasks`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `paper_title` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
-  `discipline` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
-  `assigment` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
-  `level` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
-  `urgency` smallint(6) NOT NULL,
+  `paper_title` varchar(100) NOT NULL,
+  `discipline` varchar(100) NOT NULL,
+  `assigment` varchar(100) NOT NULL,
+  `level` varchar(100) NOT NULL,
+  `urgency` int(11) NOT NULL,
   `spacing` smallint(6) NOT NULL,
   `page_number` smallint(6) NOT NULL,
   `style` smallint(6) NOT NULL,
   `source_number` smallint(6) NOT NULL,
-  `instructions` longtext COLLATE utf16_unicode_ci,
-  `attach` varchar(100) COLLATE utf16_unicode_ci DEFAULT NULL,
-  `discount` varchar(100) COLLATE utf16_unicode_ci DEFAULT NULL,
+  `instructions` longtext NOT NULL,
+  `attach` varchar(100) DEFAULT NULL,
+  `discount` varchar(100) NOT NULL,
   `accept_terms` tinyint(1) NOT NULL,
   `ttype` smallint(6) NOT NULL,
   `access_level` smallint(6) NOT NULL,
@@ -340,11 +337,11 @@ CREATE TABLE `tasks` (
   `completed` datetime DEFAULT NULL,
   `status` smallint(6) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `tasks_cb902d83` (`owner_id`),
-  KEY `tasks_98516953` (`assignee_id`),
+  KEY `owner_id_refs_id_ba4d12bb` (`owner_id`),
+  KEY `assignee_id_refs_id_ba4d12bb` (`assignee_id`),
   CONSTRAINT `assignee_id_refs_id_ba4d12bb` FOREIGN KEY (`assignee_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `owner_id_refs_id_ba4d12bb` FOREIGN KEY (`owner_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -353,6 +350,7 @@ CREATE TABLE `tasks` (
 
 LOCK TABLES `tasks` WRITE;
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
+INSERT INTO `tasks` VALUES (1,'1234','hs','es','hs',21600,1,123,2,123,'2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222','','1234',1,1,0,2,NULL,'2014-03-21 10:06:45','2014-03-21 10:06:45',NULL,4),(2,'123456','ln','re','hs',21600,2,1234,3,123,'123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456','','12345',1,1,0,2,NULL,'2014-03-21 10:07:20','2014-03-21 10:07:20',NULL,4),(3,'3233','rg','cs','ms',518400,2,123,1,123,'3233323332333233323332333233323332333233323332333233323332333233323332333233323332333233323332333233323332333233\r\n3233323332333233323332333233323332333233323332333233323332333233323332333233323332333233323332333233\r\n3233323332333233323332333233323332333233323332333233323332333233323332333233323332333233323332333233\r\n32333233323332333233323332333233323332333233323332333233323332333233323332333233323332333233323332333233\r\n323332333233323332333233323332333233323332333233323332333233323332333233323332333233323332333233','','12345',1,1,0,2,NULL,'2014-03-21 10:08:02','2014-03-21 10:34:56',NULL,0),(4,'1234566666666','ln','re','co',21600,1,12345,2,1234,'1234566666666123456666666612345666666661234566666666123456666666612345666666661234566666666123456666666612345666666661234566666666\r\n123456666666612345666666661234566666666123456666666612345666666661234566666666\r\n12345666666661234566666666123456666666612345666666661234566666666123456666666612345666666661234566666666123456666666612345666666661234566666666\r\n123456666666612345666666661234566666666123456666666612345666666661234566666666123456666666612345666666661234566666666\r\n123456666666612345666666661234566666666123456666666612345666666661234566666666123456666666612345666666661234566666666\r\n12345666666661234566666666123456666666612345666666661234566666666123456666666612345666666661234566666666\r\n123456666666612345666666661234566666666123456666666612345666666661234566666666123456666666612345666666661234566666666\r\n123456666666612345666666661234566666666123456666666612345666666661234566666666123456666666612345666666661234566666666\r\n1234566666666123456666666612345666666661234566666666123456666666612345666666661234566666666123456666666612345666666661234566666666123456666666612345666666661234566666666','','123333',1,1,0,2,NULL,'2014-03-21 10:08:40','2014-03-21 10:35:02',NULL,0);
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -366,12 +364,12 @@ DROP TABLE IF EXISTS `user_profiles`;
 CREATE TABLE `user_profiles` (
   `user_ptr_id` int(11) NOT NULL,
   `gender` smallint(6) NOT NULL,
-  `country` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
-  `phone` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `country` varchar(100) NOT NULL,
+  `phone` varchar(100) NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`user_ptr_id`),
   CONSTRAINT `user_ptr_id_refs_id_738769bc` FOREIGN KEY (`user_ptr_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -393,4 +391,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-18 14:28:41
+-- Dump completed on 2014-03-21 11:36:58

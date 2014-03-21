@@ -59,9 +59,9 @@ class BaseView(View):
 
   def _owner_required(self, user, owner_id):
     """Checks whether user is owner of an entity."""
-    user_groups = UserProfile.objects.get(
-        pk=owner_id).groups.values_list('name', flat=True)
-    skip_owner_check = set(self.allowed_groups).intersection(user_groups)
+    user_group = UserProfile.objects.get(
+        pk=owner_id).get_group()
+    skip_owner_check = set(self.allowed_groups).intersection([user_group])
     if skip_owner_check:
       return
     if not user.is_superuser and not owner_id == user.pk:
@@ -76,6 +76,17 @@ class BaseView(View):
     context.update(self.settings)
     # Pass constants to templates.
     context['co'] = co
+    try:
+      obj = context.get('object') or self.instance
+    except:
+      obj = None
+    context['perm'] = {
+      'can_comment': co.CheckPermissions(self.request.user, obj, co.CAN_COMMENT),
+      'can_edit': co.CheckPermissions(self.request.user, obj, co.CAN_EDIT),
+      'can_see_comments': co.CheckPermissions(self.request.user, obj, co.CAN_SEE_COMMENTS),
+      'can_submit': co.CheckPermissions(self.request.user, obj, co.CAN_SUBMIT),
+      'can_do_admin_actions': co.CheckPermissions(self.request.user, obj, co.CAN_DO_ADMIN_ACTIONS)
+    }
     return super(BaseView, self).render_to_response(context, **response_kwargs)
 
   def get_template_names(self):
@@ -210,8 +221,6 @@ class DetailTaskView(BaseView, DetailView):
     context = super(DetailTaskView, self).get_context_data(**kwargs)
     task_id = self.kwargs.get('pk')
     context['comments'] = Comment.objects.filter(ctask_id__exact=task_id)
-    context['can_comment'] = (self.object.status != co.DRAFT)
-    context['can_edit'] = (self.object.status == co.DRAFT)
     return context
 
   def user_id(self):

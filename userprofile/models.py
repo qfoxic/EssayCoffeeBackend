@@ -20,6 +20,12 @@ class UserProfile(User):
   def get_absolute_url(self):
     return  ('user_details', (), {'pk': self.pk})
   to_link = get_absolute_url
+  
+  def get_group(self):
+    try:
+      return self.groups.values_list('name', flat=True)[0]
+    except:
+      return ''
 
   class Meta:
     db_table = 'user_profiles'

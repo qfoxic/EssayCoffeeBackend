@@ -32,10 +32,9 @@ class CommentForm(ModelForm):
   
   def check_permissions(self, cleaned_data):
     """Raises an exception if there are no permissions to save a form."""
-    if self.cleaned_data['ctask'].owner != self.request.user:
-      raise ValidationError('Only owners of this entity can leave comments.')
-    if self.cleaned_data['ctask'].status == co.DRAFT:
-      raise ValidationError('Items with a draft status can not be commented.') 
+    if not co.CheckPermissions(self.request.user,
+        self.cleaned_data['ctask'], co.CAN_COMMENT):
+      raise ValidationError('Item can not be commented.') 
  
   def clean(self):
     # Check some conditions before saving a form.

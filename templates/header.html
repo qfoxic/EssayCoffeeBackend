@@ -63,6 +63,9 @@
                     <li class="{% active request 'writers' %}">
                         <a href="{% url 'writers'  %}"><i class='fa fa-pencil fa-lg' style="margin-right:.5em"></i>{% trans "Writers" %}</a>
                     </li>
+                    <li class="{% active request 'customers' %}">
+                        <a href="{% url 'customers'  %}"><i class='fa fa-pencil fa-lg' style="margin-right:.5em"></i>{% trans "Customers" %}</a>
+                    </li>
                     {% endif %}
                     {% elif site == 'writer' %}
                     {% endif %}
@@ -73,13 +76,18 @@
                         <a href="{% url "user_edit" user.pk %}"><i class='fa fa-male fa-lg' style="margin-right:.5em"></i>{% trans "Profile" %} <sup style="border-bottom: 1px dotted">{{user.username}}</sup></a>
                     </li>
                     {% endif %}
-                    <li>
                         {% if user.username %}
-                        <a href="{% url 'logout' %}">{% trans "Log out" %}<i class='fa fa-sign-out fa-lg' style="margin-left:.5em"></i></a>
+                        <li>
+                          <a href="{% url 'logout' %}">{% trans "Log out" %}<i class='fa fa-sign-out fa-lg' style="margin-left:.5em"></i></a>
+                        </li>
                         {% else %}
-                        <a href="{% url 'login' %}">{% trans "Sign in" %}<i class='fa fa-sign-in fa-lg' style="margin-left:.5em"></i></a>
+                        <li>
+                          <a href="{% url 'user_new' %}">{% trans "Register" %}<i class='fa fa-lg' style="margin-left:.5em"></i></a>
+                        </li>
+                        <li>
+                          <a href="{% url 'login' %}">{% trans "Sign in" %}<i class='fa fa-sign-in fa-lg' style="margin-left:.5em"></i></a>
+                        </li>
                         {% endif %}
-                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

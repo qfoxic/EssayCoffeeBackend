@@ -20,6 +20,18 @@ class TaskForm(ModelForm):
     """Specifies default User parameter."""
     return self.request.user
 
+  def check_permissions(self, cleaned_data):
+    """Raise an exception if user can't perform a status change."""
+    user = self.request.user
+    if not co.CheckPermissions(user, self.instance, co.CAN_EDIT):
+      raise ValidationError('Operation can not be performed.')
+
+  def clean(self):
+    # Check some conditions before saving a form.
+    cleaned_data = super(TaskForm, self).clean()
+    self.check_permissions(cleaned_data)
+    return cleaned_data
+
   def save(self, *args, **kwargs):
     # send email
     mail = co.ORDER_MAIL % {'first_name': self.request.user.first_name,
@@ -52,11 +64,27 @@ class SwitchStatusForm(ModelForm):
     if not next_status in allowed:
       raise ValidationError('This status is inappropriate. You can not set to it.')
 
+  def check_permissions(self, cleaned_data):
+    """Raise an exception if user can't perform a status change."""
+    user = self.request.user
+    group = user.get_group()
+    if (group == co.CUSTOMER_GROUP
+        and not co.CheckPermissions(user, self.instance, co.CAN_SUBMIT)):
+      raise ValidationError('Operation can not be performed.')
+    elif (group == co.ADMIN_GROUP
+          and not co.CheckPermissions(user, self.instance, co.CAN_DO_ADMIN_ACTIONS)):
+      raise ValidationError('Operation can not be performed.')
+
   def clean_status(self):
     try:
       next_status = int(self.request.POST.get('status'))
     except TypeError, ValueError:
-      next_status = None 
+      next_status = None
     self.check_status_allowed(next_status)
     return next_status
 
+  def clean(self):
+    # Check some conditions before saving a form.
+    cleaned_data = super(SwitchStatusForm, self).clean()
+    self.check_permissions(cleaned_data)
+    return cleaned_data

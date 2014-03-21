@@ -40,7 +40,7 @@ INSTRUCTION_MAX_LEN = 10000
 MAX_FILE_LEN = 50 * 1024 * 1024 # 50 MB
 
 # Task related statuses.
-UNPROCESSED = 0
+UNPROCESSED = 0 
 ACTIVE = 1
 REJECTED = 2
 FINISHED = 3
@@ -69,6 +69,72 @@ STATUS_SWITCH_TABLE = {
 }
 
 
+CUSTOMER_GROUP = 'customer'
+WRITER_GROUP = 'writer'
+ADMIN_GROUP = 'admin'
+
+CAN_EDIT = 'can_edit'
+CAN_COMMENT = 'can_comment'
+CAN_SEE_COMMENTS = 'can_see_comments'
+CAN_SUBMIT = 'can_submit'
+CAN_DO_ADMIN_ACTIONS = 'can_do_admin_actions'
+# 3d table with different permissions for each action and each group.
+# If specific permissions wasn't found here then it is concerned as not allowed.
+PERMISSIONS_TABLE = {
+  # Draft permissions.
+  CUSTOMER_GROUP+str(DRAFT)+CAN_SEE_COMMENTS: 1,
+  CUSTOMER_GROUP+str(DRAFT)+CAN_SUBMIT: 1,
+  CUSTOMER_GROUP+str(DRAFT)+CAN_COMMENT: 1,
+  CUSTOMER_GROUP+str(DRAFT)+CAN_EDIT: 1,
+  ADMIN_GROUP+str(DRAFT)+CAN_SEE_COMMENTS: 1,
+  
+  # Unprocessed permissions.
+  CUSTOMER_GROUP+str(UNPROCESSED)+CAN_SEE_COMMENTS: 1,
+  CUSTOMER_GROUP+str(UNPROCESSED)+CAN_COMMENT: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_SEE_COMMENTS: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_COMMENT: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_EDIT: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_DO_ADMIN_ACTIONS: 1,
+
+  # Active or in progress permissions.
+  CUSTOMER_GROUP+str(ACTIVE)+CAN_SEE_COMMENTS: 1,
+  CUSTOMER_GROUP+str(ACTIVE)+CAN_COMMENT: 1,
+  ADMIN_GROUP+str(ACTIVE)+CAN_SEE_COMMENTS: 1,
+  ADMIN_GROUP+str(ACTIVE)+CAN_COMMENT: 1,
+  ADMIN_GROUP+str(ACTIVE)+CAN_EDIT: 1,
+  
+  # Suspicious permissions.
+  CUSTOMER_GROUP+str(SUSPICIOUS)+CAN_SEE_COMMENTS: 1,
+  CUSTOMER_GROUP+str(SUSPICIOUS)+CAN_COMMENT: 1,
+  CUSTOMER_GROUP+str(SUSPICIOUS)+CAN_EDIT: 1,
+  ADMIN_GROUP+str(SUSPICIOUS)+CAN_SEE_COMMENTS: 1,
+  ADMIN_GROUP+str(SUSPICIOUS)+CAN_COMMENT: 1,
+  ADMIN_GROUP+str(SUSPICIOUS)+CAN_EDIT: 1,
+
+  # Rejected.
+  CUSTOMER_GROUP+str(REJECTED)+CAN_SEE_COMMENTS: 1,
+  ADMIN_GROUP+str(REJECTED)+CAN_SEE_COMMENTS: 1,
+  ADMIN_GROUP+str(REJECTED)+CAN_COMMENT: 1,
+  ADMIN_GROUP+str(REJECTED)+CAN_EDIT: 1,
+
+  # Completed
+  CUSTOMER_GROUP+str(FINISHED)+CAN_SEE_COMMENTS: 1,
+  CUSTOMER_GROUP+str(FINISHED)+CAN_COMMENT: 1,
+  ADMIN_GROUP+str(FINISHED)+CAN_SEE_COMMENTS: 1,
+  ADMIN_GROUP+str(FINISHED)+CAN_COMMENT: 1,
+  ADMIN_GROUP+str(FINISHED)+CAN_EDIT: 1,
+  WRITER_GROUP+str(FINISHED)+CAN_SEE_COMMENTS: 1,
+  WRITER_GROUP+str(FINISHED)+CAN_COMMENT: 1,
+}
+
+def CheckPermissions(user, entity, action):
+  try:
+    group = user.groups.values_list('name')[0][0]
+    status = entity.status
+  except:
+    status, group = '', ''
+
+  return PERMISSIONS_TABLE.get(group+str(status)+action) is not None
 
 MALE = 0
 FEMALE = 1
@@ -207,9 +273,6 @@ ACCESS_LEVELS = ((PUBLIC_ACCESS, 'PUBLIC ACCESS'),
 COMMENT_RATINGS = ((0, 'NULL'), (1, 'ONE'), (2, 'TWO'), (3, 'THREE'),
                    (4, 'FOUR'), (5, 'FIVE'))
 
-CUSTOMER_GROUP = 'customer'
-WRITER_GROUP = 'writer'
-ADMIN_GROUP = 'admin'
 
 # Category related item types.
 # Task means task itself

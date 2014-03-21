@@ -128,7 +128,7 @@
                     </div>
                 </div>
                 <div class="col-md-5 form-group" style="text-align:right;padding-top:1em">
-                    {% if not object or object.status == co.DRAFT %}
+                    {% if not object or perm.can_edit %}
                     <a href="#" class="btn-cancel btn btn-default btn-lg" role="button" style="width:40%"> <i class='fa fa-times-circle-o fa-lg' style="margin-right:.5em"></i>{% trans "Cancel" %} </a>
                     <button type="submit" class="btn btn-primary btn-lg" role="button" style="width:40%">
                         {% trans "Next" %}<i class='fa fa-check-circle-o fa-lg' style="margin-left:.5em"></i>

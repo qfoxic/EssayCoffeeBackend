@@ -53,19 +53,44 @@
                         <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{object.created}}
                     </div>
                 </div>
-                {% if can_edit %}
                 <div class="info-row">
+                {% if perm.can_submit %}
                     <div class="info-col">
                         <form action="{% url 'task_submit' object.pk %}" method="post">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-primary btn-lg" role="button">
+                                <input type="hidden" value="{{co.UNPROCESSED}}" name="status" />
                                 {% trans "Submit" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
                             </button>
                         </form>
                     </div>
-                </div>
                 {% endif %}
+                {% if perm.can_do_admin_actions %}
+                  <div class="info-col">
+                    <form action="{% url "task_approve" object.pk %}" method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" value="{{co.ACTIVE}}" name="status" />
+                      <input type="submit" value="{% trans "Approve" %}" class="btn btn-primary" />
+                    </form>
+                  </div>
+                  <div class="info-col">
+                    <form action="{% url "task_reject" object.pk %}" method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" value="{{co.REJECTED}}" name="status" />
+                      <input type="submit" value="{% trans "Reject" %}" class="btn btn-primary" />
+                    </form>
+                  </div>
+                  <div class="info-col">
+                    <form action="{% url "task_suspect" object.pk %}" method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" value="{{co.SUSPICIOUS}}" name="status" />
+                      <input type="submit" value="{% trans "Suspect" %}" class="btn btn-primary" />
+                    </form>
+                  </div>
+                {% endif %}
+                </div>
             </div>
+            {% if perm.can_see_comments %}
             <div class="comments">
                 <div class="lh">
                     <i class="fa fa-comments-o"></i><span class="title">{% trans "Comments" %}</span><span class="badge">{{comments|length}}</span>
@@ -86,7 +111,8 @@
                     {% endfor %}
                 </ul>
             </div>
-            {% if can_comment %}
+            {% endif %}
+            {% if perm.can_comment %}
             <div class="comments-form" style="margin-right:100px">
                 {% if messages %}
                 {% for message in messages %}
@@ -123,7 +149,7 @@
 {% block info_block %}
 <section class="info">
     <h2>{% trans "Task Details" %}
-    {% if can_edit %} <a href="{% url "task_edit" object.id %}" title="{% trans "Edit task" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a></h2>
+    {% if perm.can_edit %} <a href="{% url "task_edit" object.id %}" title="{% trans "Edit task" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a></h2>
     {% endif  %}
 </section>
 {% endblock %}
