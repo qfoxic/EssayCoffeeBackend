@@ -69,6 +69,9 @@
                     <li class="{% active request 'customers' %}">
                         <a href="{% url 'customers'  %}"><i class='fa fa-pencil fa-lg' style="margin-right:.5em"></i>{% trans "Customers" %}</a>
                     </li>
+                    <li class="{% active request 'messages' %}">
+                        <a href="#"><i class='fa fa-pencil fa-lg' style="margin-right:.5em"></i>{% trans "Messages" %}</a>
+                    </li>
                     {% endif %}
                     {% elif site == 'writer' %}
                     {% endif %}
