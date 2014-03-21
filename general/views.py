@@ -86,6 +86,7 @@ class BaseView(View):
       'can_see_comments': co.CheckPermissions(self.request.user, obj, co.CAN_SEE_COMMENTS),
       'can_submit': co.CheckPermissions(self.request.user, obj, co.CAN_SUBMIT),
       'can_do_admin_actions': co.CheckPermissions(self.request.user, obj, co.CAN_DO_ADMIN_ACTIONS)
+      # approve, suspect, reject
     }
     return super(BaseView, self).render_to_response(context, **response_kwargs)
 
