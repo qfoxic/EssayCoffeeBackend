@@ -38,6 +38,27 @@ class AdminRejectedTasksView(TaskIndexView):
     return context
 
 
+class AdminExpiredTasksView(TaskIndexView):
+  def get_context_data(self, **kwargs):
+    context = super(AdminExpiredTasksView, self).get_context_data(**kwargs)
+    hours_expired = '(urgency-TIMESTAMPDIFF(SECOND, created, now()))/3600'
+    days_expired = '(urgency-TIMESTAMPDIFF(SECOND, created, now()))/86400'
+    where = ['urgency-TIMESTAMPDIFF(SECOND, created, now()) <= 0']
+    status = self.request.GET.get('status')
+    if status == co.UNASSIGNED_ORDER:
+      filter_dict = {'status__exact': co.UNPROCESSED, 'assignee__isnull': True}
+    elif status == co.ASSIGNED_ORDER:
+      filter_dict = {'status__exact': co.UNPROCESSED, 'assignee__isnull': False}
+    else:
+      filter_dict = {'status__exact': co.UNPROCESSED}
+    expired_tasks = Task.objects.extra(
+        select={'hours_expired': hours_expired,
+                'days_expired': days_expired},
+        where=where).filter(**filter_dict).order_by('hours_expired')
+    context['tasks'] = expired_tasks
+    return context
+
+
 class AdminActiveTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(AdminActiveTasksView, self).get_context_data(**kwargs)
