@@ -41,7 +41,15 @@ class AdminRejectedTasksView(TaskIndexView):
 class AdminActiveTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(AdminActiveTasksView, self).get_context_data(**kwargs)
-    context['tasks'] = Task.objects.filter(status__exact=co.ACTIVE)
+    status = self.request.GET.get('status')
+    if status == co.UNASSIGNED_ORDER:
+      context['tasks'] = Task.objects.filter(status__exact=co.ACTIVE,
+                                             assignee__isnull=True)
+    elif status == co.ASSIGNED_ORDER:
+      context['tasks'] = Task.objects.filter(status__exact=co.ACTIVE,
+                                             assignee__isnull=False)
+    else:
+      context['tasks'] = Task.objects.filter(status__exact=co.ACTIVE)
     return context
 
 
