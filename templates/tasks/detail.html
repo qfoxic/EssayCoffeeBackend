@@ -54,40 +54,48 @@
                     </div>
                 </div>
                 <div class="info-row">
-                {% if perm.can_submit %}
+                    {% if perm.can_submit %}
                     <div class="info-col">
                         <form action="{% url 'task_submit' object.pk %}" method="post">
                             {% csrf_token %}
+                            <input type="hidden" value="{{co.UNPROCESSED}}" name="status" />
                             <button type="submit" class="btn btn-primary btn-lg" role="button">
-                                <input type="hidden" value="{{co.UNPROCESSED}}" name="status" />
                                 {% trans "Submit" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
                             </button>
                         </form>
                     </div>
-                {% endif %}
-                {% if perm.can_do_admin_actions %}
-                  <div class="info-col">
-                    <form action="{% url "task_approve" object.pk %}" method="POST">
-                      {% csrf_token %}
-                      <input type="hidden" value="{{co.ACTIVE}}" name="status" />
-                      <input type="submit" value="{% trans "Approve" %}" class="btn btn-primary" />
-                    </form>
-                  </div>
-                  <div class="info-col">
-                    <form action="{% url "task_reject" object.pk %}" method="POST">
-                      {% csrf_token %}
-                      <input type="hidden" value="{{co.REJECTED}}" name="status" />
-                      <input type="submit" value="{% trans "Reject" %}" class="btn btn-primary" />
-                    </form>
-                  </div>
-                  <div class="info-col">
-                    <form action="{% url "task_suspect" object.pk %}" method="POST">
-                      {% csrf_token %}
-                      <input type="hidden" value="{{co.SUSPICIOUS}}" name="status" />
-                      <input type="submit" value="{% trans "Suspect" %}" class="btn btn-primary" />
-                    </form>
-                  </div>
-                {% endif %}
+                    {% endif %}
+                    {% if perm.can_do_admin_actions %}
+                    <div class="row" style="overflow:hidden">
+                        <div class="col-md-3 col-md-offset-1">
+                            <form action="{% url "task_reject" object.pk %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{co.REJECTED}}" name="status" />
+                                <button type="submit" class="btn btn-danger btn-lg" style="width:100%">
+                                    {% trans "Reject" %} <i class="fa fa-times-circle" style="margin-left:.5em"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-md-3">
+                            <form action="{% url "task_suspect" object.pk %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{co.SUSPICIOUS}}" name="status" />
+                                <button type="submit" class="btn btn-default btn-lg" style="width:100%">
+                                    {% trans "Suspect" %} <i class="fa fa-times-circle" style="margin-left:.5em"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <form action="{% url "task_approve" object.pk %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{co.ACTIVE}}" name="status" />
+                                <button type="submit" class="btn btn-primary btn-lg" style="width:100%">
+                                    {% trans "Approve" %} <i class="fa fa-check-circle" style="margin-left:.5em"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             {% if perm.can_see_comments %}

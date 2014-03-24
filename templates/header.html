@@ -70,13 +70,38 @@
                         <a href="{% url 'writers'  %}"><i class='fa fa-pencil fa-lg' style="margin-right:.5em"></i>{% trans "Writers" %}</a>
                     </li>
                     <li class="{% active request 'customers' %}">
-                        <a href="{% url 'customers'  %}"><i class='fa fa-pencil fa-lg' style="margin-right:.5em"></i>{% trans "Customers" %}</a>
+                        <a href="{% url 'customers'  %}"><i class='fa fa-users fa-lg' style="margin-right:.5em"></i>{% trans "Customers" %}</a>
                     </li>
                     <li class="{% active request 'messages' %}">
-                        <a href="#"><i class='fa fa-pencil fa-lg' style="margin-right:.5em"></i>{% trans "Messages" %}</a>
+                        <a href="#"><i class='fa fa-envelope fa-lg' style="margin-right:.5em"></i>{% trans "Messages" %}</a>
                     </li>
                     {% endif %}
                     {% elif site == 'writer' %}
+                    {% if user.username %}
+                    <li class="{% active request 'gudelines/' %}">
+                        <a href="#"><i class='fa fa-book fa-lg' style="margin-right:.5em"></i>{% trans "Guidelines" %}</a>
+                    </li>
+                    <li class="{% active request 'orders_free/' %}">
+                        <a href="#"><i class='fa fa-tasks fa-lg' style="margin-right:.5em"></i>{% trans "Free assignments" %}</a>
+                    </li>
+                    <li class="dropdown {% active request 'orders' %}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='fa fa-list fa-lg' style="margin-right:.5em"></i>{% trans "My assignments"%} <b class="caret"></b></a>
+                        <ul class="dropdown-menu" style="min-width:400px">
+                            <li>
+                                <a href="#"><span class="badge pull-right">{{stats.active_orders|default:0}}</span>{% trans "Active orders" %}</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="badge pull-right">{{stats.late_orders|default:0}}</span>{% trans "Late orders" %}</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="badge pull-right">{{stats.finished_orders|default:0}}</span>{% trans "Finished orders" %}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="{% active request 'payments/' %}">
+                        <a href="#"><i class='fa fa-money fa-lg' style="margin-right:.5em"></i>{% trans "Payments" %}</a>
+                    </li>
+                    {% endif %}
                     {% endif %}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -85,18 +110,18 @@
                         <a href="{% url "user_edit" user.pk %}"><i class='fa fa-male fa-lg' style="margin-right:.5em"></i>{% trans "Profile" %} <sup style="border-bottom: 1px dotted">{{user.username}}</sup></a>
                     </li>
                     {% endif %}
-                        {% if user.username %}
-                        <li>
-                          <a href="{% url 'logout' %}">{% trans "Log out" %}<i class='fa fa-sign-out fa-lg' style="margin-left:.5em"></i></a>
-                        </li>
-                        {% else %}
-                        <li>
-                          <a href="{% url 'user_new' %}">{% trans "Register" %}<i class='fa fa-lg' style="margin-left:.5em"></i></a>
-                        </li>
-                        <li>
-                          <a href="{% url 'login' %}">{% trans "Sign in" %}<i class='fa fa-sign-in fa-lg' style="margin-left:.5em"></i></a>
-                        </li>
-                        {% endif %}
+                    {% if user.username %}
+                    <li>
+                        <a href="{% url 'logout' %}">{% trans "Log out" %}<i class='fa fa-sign-out fa-lg' style="margin-left:.5em"></i></a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'user_new' %}">{% trans "Register" %}<i class='fa fa-lg' style="margin-left:.5em"></i></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'login' %}">{% trans "Sign in" %}<i class='fa fa-sign-in fa-lg' style="margin-left:.5em"></i></a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

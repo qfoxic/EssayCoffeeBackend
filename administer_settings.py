@@ -22,8 +22,8 @@ SECRET_KEY = '_w$x6+-q7hk1)5r6)w^pf(6&n9_dmi^hbc4_6_0+-)wfe&9!+*'
 
 CSRF_COOKIE_NAME = 'csrfa'
 SESSION_COOKIE_NAME = 'sessa'
-CSRF_COOKIE_DOMAIN = '.admins.yourseller.net'
-SESSION_COOKIE_DOMAIN = '.admins.yourseller.net'
+#CSRF_COOKIE_DOMAIN = '.admins.yourseller.net'
+#SESSION_COOKIE_DOMAIN = '.admins.yourseller.net'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

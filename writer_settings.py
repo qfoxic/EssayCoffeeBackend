@@ -18,12 +18,13 @@ PROJECT_DIR = os.path.join(BASE_DIR, 'transport')
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_w$x6+-q7hk1)5h6)w^pf(8&n3+dmi^hbc4_6_o+-)wfe&8!+*'
+SECRET_KEY = '_w$x6+-q7hk1)5r6)w^pf(6&n9_dmi^hbc4_6_0+-)wfe&9!+*'
 
-CSRF_COOKIE_NAME = 'csrfc'
-SESSION_COOKIE_NAME = 'sessc'
-#CSRF_COOKIE_DOMAIN = '.customers.yourseller.net'
-#SESSION_COOKIE_DOMAIN = '.customers.yourseller.net'
+CSRF_COOKIE_NAME = 'csrfa'
+SESSION_COOKIE_NAME = 'sessa'
+#CSRF_COOKIE_DOMAIN = '.admins.yourseller.net'
+#SESSION_COOKIE_DOMAIN = '.admins.yourseller.net'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -41,7 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'customer',
+    'administer',
     'general',
     'comments',
     'userprofile',
@@ -72,9 +73,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 
-ROOT_URLCONF = 'customer_urls'
+ROOT_URLCONF = 'writer_urls'
 
-WSGI_APPLICATION = 'customer_wsgi.application'
+WSGI_APPLICATION = 'writer_wsgi.application'
 
 
 # Database
@@ -108,7 +109,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_DIR, "static"),
@@ -119,5 +119,5 @@ LOGIN_REDIRECT_URL = '/'
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 MEDIA_URL = '/media/'
 
-ACTIVE_GROUP = 'customer'
+ACTIVE_GROUP = 'admin'
 CUSTOM_USER_MODEL = 'userprofile.UserProfile'
