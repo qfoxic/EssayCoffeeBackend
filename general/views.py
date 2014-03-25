@@ -36,17 +36,32 @@ def check_mobile(request):
   return False
 
 
-def get_stats():
-  return {
-    'completed': Task.get_finished_tasks(1), 
-    'unproc': Task.get_unprocessed_tasks(1),
-    'suspect': Task.get_suspicious_tasks(1), 
-    'rejected': Task.get_rejected_tasks(1), 
-    'process_assigned': Task.get_active_tasks(1, **{'assignee__isnull': False}),
-    'process_unassigned': Task.get_active_tasks(1, **{'assignee__isnull': True}),
-    'expired_assigned': Task.get_expired_tasks(1, **{'assignee__isnull': False}),
-    'expired_unassigned': Task.get_expired_tasks(1, **{'assignee__isnull': True})
-  }
+def get_stats(request):
+  user = request.user
+  group = request.user.get_group()
+  if group == co.WRITER_GROUP:
+    return {
+      'finished': Task.get_finished_tasks(1, **{'assignee': user}), 
+      'unprocessed': Task.get_unprocessed_tasks(1, **{'assignee': user}),
+      'active': Task.get_active_tasks(1, **{'assignee': user}),
+      'expired': Task.get_expired_tasks(1, **{'assignee': user,
+                                              'status__exact': co.ACTIVE}),
+    }
+  elif group == co.ADMIN_GROUP: 
+    return {
+      'completed': Task.get_finished_tasks(1), 
+      'unproc': Task.get_unprocessed_tasks(1),
+      'suspect': Task.get_suspicious_tasks(1), 
+      'rejected': Task.get_rejected_tasks(1), 
+      'process_assigned': Task.get_active_tasks(1, **{'assignee__isnull': False}),
+      'process_unassigned': Task.get_active_tasks(1, **{'assignee__isnull': True}),
+      'expired_assigned': Task.get_expired_tasks(1, **{'assignee__isnull': False,
+                                                       'status__exact': co.UNPROCESSED}),
+      'expired_unassigned': Task.get_expired_tasks(1, **{'assignee__isnull': True,
+                                                         'status__exact': co.UNPROCESSED})
+    }
+  else:
+    return {}
 
 
 class BaseView(View):
@@ -96,10 +111,14 @@ class BaseView(View):
       'can_edit': co.CheckPermissions(self.request.user, obj, co.CAN_EDIT),
       'can_see_comments': co.CheckPermissions(self.request.user, obj, co.CAN_SEE_COMMENTS),
       'can_submit': co.CheckPermissions(self.request.user, obj, co.CAN_SUBMIT),
-      'can_do_admin_actions': co.CheckPermissions(self.request.user, obj, co.CAN_DO_ADMIN_ACTIONS)
       # approve, suspect, reject
+      'can_do_admin_actions': co.CheckPermissions(self.request.user, obj, co.CAN_DO_ADMIN_ACTIONS),
+      # can writers assign an order to themselves.
+      'can_assign': co.CheckPermissions(self.request.user, obj, co.CAN_ASSIGN),
+      # can writers mark task as finished.
+      'can_finish': co.CheckPermissions(self.request.user, obj, co.CAN_FINISH)
     }
-    context['stats'] = get_stats()
+    context['stats'] = get_stats(self.request)
     return super(BaseView, self).render_to_response(context, **response_kwargs)
 
   def get_template_names(self):

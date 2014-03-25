@@ -76,11 +76,24 @@ CUSTOMER_GROUP = 'customer'
 WRITER_GROUP = 'writer'
 ADMIN_GROUP = 'admin'
 
+# Allow user to edit orders
 CAN_EDIT = 'can_edit'
+
 CAN_COMMENT = 'can_comment'
 CAN_SEE_COMMENTS = 'can_see_comments'
+
+# Allow owners to submit their orders.
 CAN_SUBMIT = 'can_submit'
+
+# Allow to do approve, reject, suspect 
 CAN_DO_ADMIN_ACTIONS = 'can_do_admin_actions'
+
+# Allow writers or other users to assign orders to themselves
+CAN_ASSIGN = 'can_assign'
+
+# Allow for writers to complete a user.
+CAN_FINISH = 'can_finish'
+
 # 3d table with different permissions for each action and each group.
 # If specific permissions wasn't found here then it is concerned as not allowed.
 PERMISSIONS_TABLE = {
@@ -98,6 +111,7 @@ PERMISSIONS_TABLE = {
   ADMIN_GROUP+str(UNPROCESSED)+CAN_COMMENT: 1,
   ADMIN_GROUP+str(UNPROCESSED)+CAN_EDIT: 1,
   ADMIN_GROUP+str(UNPROCESSED)+CAN_DO_ADMIN_ACTIONS: 1,
+  WRITER_GROUP+str(UNPROCESSED)+CAN_ASSIGN: 1,
 
   # Active or in progress permissions.
   CUSTOMER_GROUP+str(ACTIVE)+CAN_SEE_COMMENTS: 1,
@@ -105,6 +119,7 @@ PERMISSIONS_TABLE = {
   ADMIN_GROUP+str(ACTIVE)+CAN_SEE_COMMENTS: 1,
   ADMIN_GROUP+str(ACTIVE)+CAN_COMMENT: 1,
   ADMIN_GROUP+str(ACTIVE)+CAN_EDIT: 1,
+  WRITER_GROUP+str(ACTIVE)+CAN_FINISH: 1,
   
   # Suspicious permissions.
   CUSTOMER_GROUP+str(SUSPICIOUS)+CAN_SEE_COMMENTS: 1,

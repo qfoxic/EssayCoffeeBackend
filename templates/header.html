@@ -82,23 +82,23 @@
                         <a href="#"><i class='fa fa-book fa-lg' style="margin-right:.5em"></i>{% trans "Guidelines" %}</a>
                     </li>
                     <li class="{% active request 'orders_free/' %}">
-                        <a href="#"><i class='fa fa-tasks fa-lg' style="margin-right:.5em"></i>{% trans "Free assignments" %}</a>
+                        <a href="{% url 'tasks_unprocessed'  %}"><i class='fa fa-tasks fa-lg' style="margin-right:.5em"></i>{% trans "Free assignments" %}</a>
                     </li>
                     <li class="dropdown {% active request 'orders' %}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='fa fa-list fa-lg' style="margin-right:.5em"></i>{% trans "My assignments"%} <b class="caret"></b></a>
                         <ul class="dropdown-menu" style="min-width:400px">
                             <li>
-                                <a href="#"><span class="badge pull-right">{{stats.active_orders|default:0}}</span>{% trans "Active orders" %}</a>
+                                <a href="{% url 'tasks_active' %}"><span class="badge pull-right">{{stats.active|default:0}}</span>{% trans "Active orders" %}</a>
                             </li>
                             <li>
-                                <a href="#"><span class="badge pull-right">{{stats.late_orders|default:0}}</span>{% trans "Late orders" %}</a>
+                                <a href="{% url 'tasks_expired' %}"><span class="badge pull-right">{{stats.expired|default:0}}</span>{% trans "Late orders" %}</a>
                             </li>
                             <li>
-                                <a href="#"><span class="badge pull-right">{{stats.finished_orders|default:0}}</span>{% trans "Finished orders" %}</a>
+                                <a href="{% url 'tasks_finished' %}"><span class="badge pull-right">{{stats.finished|default:0}}</span>{% trans "Finished orders" %}</a>
                             </li>
                         </ul>
                     </li>
-                    <li class="{% active request 'payments/' %}">
+                    <li class="{% active request 'payments' %}">
                         <a href="#"><i class='fa fa-money fa-lg' style="margin-right:.5em"></i>{% trans "Payments" %}</a>
                     </li>
                     {% endif %}

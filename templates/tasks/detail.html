@@ -64,6 +64,28 @@
                             </button>
                         </form>
                     {% endif %}
+                    {% if perm.can_assign %}
+                    <div class="info-col">
+                        <form action="{% url 'task_assign' object.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{co.ACTIVE}}" name="status" />
+                            <button type="submit" class="btn btn-primary btn-lg" role="button">
+                                {% trans "Take It" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
+                            </button>
+                        </form>
+                    </div>
+                    {% endif %}
+                    {% if perm.can_finish %}
+                    <div class="info-col">
+                        <form action="{% url 'task_finish' object.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{co.FINISHED}}" name="status" >
+                            <button type="submit" class="btn btn-primary btn-lg" role="button">
+                                {% trans "Complete Task" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
+                            </button>
+                        </form>
+                    </div>
+                    {% endif %}
                     {% if perm.can_do_admin_actions %}
                         <form action="{% url "task_reject" object.pk %}" method="post" style="display:inline">
                             {% csrf_token %}

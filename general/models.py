@@ -108,7 +108,7 @@ class Task(models.Model):
     expired_tasks = Task.objects.extra(
         select={'hours_expired': hours_expired,
                 'days_expired': days_expired},
-        where=where).filter(status__exact=co.UNPROCESSED).filter(**kwargs).order_by('hours_expired')
+        where=where).filter(**kwargs).order_by('hours_expired')
     if count_only:
       return expired_tasks.count()
     return expired_tasks

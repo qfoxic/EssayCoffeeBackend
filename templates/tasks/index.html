@@ -18,7 +18,7 @@
                     <th>{% trans 'Owner' %}</th>
                     <th>{% trans 'Created' %}</th>
                     <th>{% trans 'Updated' %}</th>
-                    <th>{% trans 'Deadline' %}</th>
+                    <th>{% trans 'Deadline (Days)' %}</th>
                     <th>{% trans 'Unread msgs' %}</th>
                 </tr>
             </thead>
@@ -28,11 +28,11 @@
                     <td>{{task.id}}</td>
                     <td><a href="{% url 'task_view' task.id %}">{{task.paper_title}}</a></td>
                     <td>{{task.get_status}}</td>
-                    <td>{{task.assignee}}</td>
-                    <td><a href="{% url 'user_edit' task.owner.id %}">{{task.owner}}</a></td>
+                    <td>{% if task.assignee %}<a href="{% url 'user_edit' task.assignee.id %}">{{task.assignee}}</a>{% endif  %}</td>
+                    <td>{% if task.owner %}<a href="{% url 'user_edit' task.owner.id %}">{{task.owner}}</a>{% endif  %}</td>
                     <td>{{task.created}}</td>
                     <td>{{task.updated}}</td>
-                    <td>--</td>
+                    <td>{{task.days_expired|floatformat:"0"}}</td>
                     <td>--</td>
                 </tr>
                 {% endfor %}
