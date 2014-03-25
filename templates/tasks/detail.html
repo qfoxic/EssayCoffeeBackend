@@ -54,50 +54,41 @@
                         <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{object.created}}
                     </div>
                 </div>
-                <div class="info-row">
+                <div class="btn-group">
                     {% if perm.can_submit %}
-                    <div class="info-col">
-                        <form action="{% url 'task_submit' object.pk %}" method="post">
+                        <form action="{% url 'task_submit' object.pk %}" method="post" style="display:inline">
                             {% csrf_token %}
-                            <input type="hidden" value="{{co.UNPROCESSED}}" name="status" />
+                            <input type="hidden" value="{{co.UNPROCESSED}}" name="status">
                             <button type="submit" class="btn btn-primary btn-lg" role="button">
                                 {% trans "Submit" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
                             </button>
                         </form>
-                    </div>
                     {% endif %}
                     {% if perm.can_do_admin_actions %}
-                    <div class="row" style="overflow:hidden">
-                        <div class="col-md-3 col-md-offset-1">
-                            <form action="{% url "task_reject" object.pk %}" method="post">
-                                {% csrf_token %}
-                                <input type="hidden" value="{{co.REJECTED}}" name="status" />
-                                <button type="submit" class="btn btn-danger btn-lg" style="width:100%">
-                                    {% trans "Reject" %} <i class="fa fa-times-circle" style="margin-left:.5em"></i>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="col-md-3">
-                            <form action="{% url "task_suspect" object.pk %}" method="post">
-                                {% csrf_token %}
-                                <input type="hidden" value="{{co.SUSPICIOUS}}" name="status" />
-                                <button type="submit" class="btn btn-default btn-lg" style="width:100%">
-                                    {% trans "Suspect" %} <i class="fa fa-times-circle" style="margin-left:.5em"></i>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="col-md-4">
-                            <form action="{% url "task_approve" object.pk %}" method="post">
-                                {% csrf_token %}
-                                <input type="hidden" value="{{co.ACTIVE}}" name="status" />
-                                <button type="submit" class="btn btn-primary btn-lg" style="width:100%">
-                                    {% trans "Approve" %} <i class="fa fa-check-circle" style="margin-left:.5em"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+                        <form action="{% url "task_reject" object.pk %}" method="post" style="display:inline">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{co.REJECTED}}" name="status">
+                            <button type="submit" class="btn btn-danger btn-lg" role="button">
+                                {% trans "Reject" %} <i class="fa fa-times-circle" style="margin-left:.5em"></i>
+                            </button>
+                        </form>
+                        <form action="{% url "task_suspect" object.pk %}" method="post" style="display:inline">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{co.SUSPICIOUS}}" name="status">
+                            <button type="submit" class="btn btn-default btn-lg" role="button">
+                                {% trans "Suspect" %} <i class="fa fa-times-circle" style="margin-left:.5em"></i>
+                            </button>
+                        </form>
+                        <form action="{% url "task_approve" object.pk %}" method="post" style="display:inline">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{co.ACTIVE}}" name="status">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                {% trans "Approve" %} <i class="fa fa-check-circle" style="margin-left:.5em"></i>
+                            </button>
+                        </form>
                     {% endif %}
                 </div>
+                <!-- </div> -->
             </div>
             {% if perm.can_see_comments %}
             <div class="comments">
