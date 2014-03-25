@@ -21,7 +21,7 @@ customers = login_required(AdminCustomersView.as_view(module_name='administer'),
 user_new = CreateProfileView.as_view(module_name='administer',
                                      group_name=co.ADMIN_GROUP)
 user_edit = login_required(UpdateProfileView.as_view(module_name='administer',
-                                                     allowed_groups=[co.WRITER_GROUP]),
+                                                     allowed_groups=[co.WRITER_GROUP,co.CUSTOMER_GROUP]),
                            login_url=reverse_lazy('login'))
 
 comment_new = login_required(

@@ -18,7 +18,7 @@
                     <th>{% trans 'Owner' %}</th>
                     <th>{% trans 'Created' %}</th>
                     <th>{% trans 'Updated' %}</th>
-                    <th>{% trans 'Deadline (Days)' %}</th>
+                    <th>{% trans 'Deadline (Days/Hours)' %}</th>
                     <th>{% trans 'Unread msgs' %}</th>
                 </tr>
             </thead>
@@ -32,7 +32,7 @@
                     <td>{% if task.owner %}<a href="{% url 'user_edit' task.owner.id %}">{{task.owner}}</a>{% endif  %}</td>
                     <td>{{task.created}}</td>
                     <td>{{task.updated}}</td>
-                    <td>{{task.days_expired|floatformat:"0"}}</td>
+                    <td>{{task.days_expired|floatformat:"0"}}/{{task.hours_expired|floatformat:"0"}}</td>
                     <td>--</td>
                 </tr>
                 {% endfor %}

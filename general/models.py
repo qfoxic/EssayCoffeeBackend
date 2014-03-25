@@ -1,4 +1,5 @@
 import os
+import time
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -70,6 +71,12 @@ class Task(models.Model):
   get_urgency = lambda self: co.URGENCY_DICT.get(self.urgency)  
   get_style = lambda self: co.STYLES_DICT.get(self.style) 
   
+  def days_expired(self):
+    return (self.urgency-(time.time()-int(self.created.strftime('%s'))))/86400
+
+  def hours_expired(self):
+    return (self.urgency-(time.time()-int(self.created.strftime('%s'))))/3600
+   
   @classmethod 
   def get_finished_tasks(cls, count_only, **kwargs):
     if count_only:
@@ -103,16 +110,14 @@ class Task(models.Model):
   @classmethod 
   def get_expired_tasks(cls, count_only, **kwargs):
     hours_expired = '(urgency-TIMESTAMPDIFF(SECOND, created, now()))/3600'
-    days_expired = '(urgency-TIMESTAMPDIFF(SECOND, created, now()))/86400'
     where = ['urgency-TIMESTAMPDIFF(SECOND, created, now()) <= 0']
     expired_tasks = Task.objects.extra(
-        select={'hours_expired': hours_expired,
-                'days_expired': days_expired},
+        select={'hours_expired': hours_expired},
         where=where).filter(**kwargs).order_by('hours_expired')
     if count_only:
       return expired_tasks.count()
     return expired_tasks
-
+  
   @models.permalink
   def get_absolute_url(self):
     return  ('task_view', (), {'pk': self.id})
