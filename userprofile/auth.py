@@ -7,6 +7,8 @@ class UserProfileBackend(ModelBackend):
   def authenticate(self, username=None, password=None):
     try:
       user = self.user_class.objects.get(username=username)
+      if settings.ACTIVE_GROUP != user.get_group():
+        return None
       if user.check_password(password):
         return user
     except self.user_class.DoesNotExist:
