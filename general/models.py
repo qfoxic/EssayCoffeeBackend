@@ -1,5 +1,6 @@
 import os
-import datetime 
+import datetime
+import time
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -72,13 +73,13 @@ class Task(models.Model):
   get_style = lambda self: co.STYLES_DICT.get(self.style) 
   
   def days_expired(self):
-    delta = datetime.datetime.today() - self.created
-    return (self.urgency-delta.seconds())/86400
+    delta = time.time() - time.mktime(self.created.timetuple())
+    return (self.urgency-delta)/86400
 
   def hours_expired(self):
-    delta = datetime.datetime.today() - self.created
-    return (self.urgency-delta.seconds())/3600
-   
+    delta = time.time() - time.mktime(self.created.timetuple())
+    return (self.urgency-delta)/3600
+
   @classmethod 
   def get_finished_tasks(cls, count_only, **kwargs):
     if count_only:
