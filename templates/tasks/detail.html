@@ -1,6 +1,13 @@
 {% extends "layout.html" %}
 {% load i18n %}
 {% block pagetitle %}{% trans "Task Details" %}{% endblock %}
+{% block info_block %}
+<section class="info">
+    <h2><i class="fa fa-list-alt irm"></i> {% trans "Task Details" %}
+    {% if perm.can_edit %} <a href="{% url "task_edit" object.id %}" title="{% trans "Edit task" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a></h2>
+    {% endif  %}
+</section>
+{% endblock %}
 {% block content %}
 <section class="container-fluid task-details" style="margin: 0 auto">
     <div class="row">
@@ -162,12 +169,5 @@
             {% endif  %}
         </div>
     </div>
-</section>
-{% endblock %}
-{% block info_block %}
-<section class="info">
-    <h2>{% trans "Task Details" %}
-    {% if perm.can_edit %} <a href="{% url "task_edit" object.id %}" title="{% trans "Edit task" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a></h2>
-    {% endif  %}
 </section>
 {% endblock %}
