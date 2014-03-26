@@ -11,19 +11,14 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-#BASE_DIR = '/var/www'
+# BASE_DIR = '/var/www'
 PROJECT_DIR = os.path.join(BASE_DIR, 'transport')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_w$x6+-q7hk1)5r6)w^pf(6&n9_dmi^hbc4_6_0+-)wfe&9!+*'
-
-CSRF_COOKIE_NAME = 'csrfa'
-SESSION_COOKIE_NAME = 'sessa'
-#CSRF_COOKIE_DOMAIN = '.admins.yourseller.net'
-#SESSION_COOKIE_DOMAIN = '.admins.yourseller.net'
+SECRET_KEY = '_w$x6+-q4hk1)4h4)w^pf(8&n4+dmi^hbc4_6_o+-)wfe&4!+*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,9 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'administer',
-    'general',
+    'writer',
     'comments',
+    'general',
     'userprofile',
 )
 
@@ -83,12 +78,14 @@ WSGI_APPLICATION = 'writer_wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE':'django.db.backends.mysql',
-        'NAME': 'transport',
-        'USER': 'transport',
-        'PASSWORD': 'Secret677',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(PROJECT_DIR, 'db.sq3'),
+         'ENGINE':'django.db.backends.mysql',
+         'NAME': 'transport',
+         'USER': 'transport',
+         'PASSWORD': 'Secret677',
+         'HOST': '127.0.0.1',
+         'PORT': '3306',
     }
 }
 
@@ -119,5 +116,5 @@ LOGIN_REDIRECT_URL = '/'
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 MEDIA_URL = '/media/'
 
-ACTIVE_GROUP = 'admin'
+ACTIVE_GROUP = 'writer'
 CUSTOM_USER_MODEL = 'userprofile.UserProfile'
