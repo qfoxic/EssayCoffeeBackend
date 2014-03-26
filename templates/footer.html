@@ -1,7 +1,10 @@
+{% load i18n %}
 <footer class="navbar-fixed-bottom">
     <section>
         <div class="copy">
-            2014 &copy; Copyright Translation Portal
+            2013-{% now "Y" %} &copy; Copyright {{site_name}}
+            &bull; <a href="{% url "html" "privacy.html" %}">{% trans "Privacy Policy" %}</a>
+            &bull; <a href="{% url "html" "terms.html" %}">{% trans "Terms &amp; Conditions" %}</a>
         </div>
     </section>
 </footer>

@@ -6,7 +6,7 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
-from general.views import LoginView, LogoutView, ResetPswdView
+from general.views import LoginView, LogoutView, ResetPswdView, StaticHtmlView
 from general.views import ResetPswdDoneView, ResetPswdConfirmView, ResetPswdCompleteView
 
 from userprofile.views import RemoveProfileView
@@ -21,11 +21,9 @@ urlpatterns = patterns('',
     url(r'^resetdone/$', ResetPswdDoneView.as_view(), name='pswd_reset_done'),
     url(r'^resetconfirm/(?P<uidb64>.*)/(?P<token>.*)$', ResetPswdConfirmView.as_view(), name='pswd_reset_confirm'),
     url(r'^resetcomplete/$', ResetPswdCompleteView.as_view(), name='pswd_reset_complete'),
-
+    url(r'^html/(?P<path>.*)$', StaticHtmlView.as_view(), name='html'),
     url(r'^admin/', include(admin.site.urls)),
-
     url(r'profile/(?P<pk>\d+)/remove$', user_remove, name='user_remove'),
-
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
 

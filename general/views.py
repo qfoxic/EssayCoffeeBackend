@@ -68,7 +68,7 @@ class BaseView(View):
   """Base class for all views. In addition, it loads settings from "config/" 
   module's directory and then from database.
   """
-  module_name = 'default'
+  module_name = 'global'
   owner_required = False # raise an Error if owner is required.
   allowed_groups = [] # For these groups owner won't be checked.
 
@@ -276,3 +276,9 @@ class SwitchStatusView(UpdateTaskView):
   
   def get_success_url(self):
     return self.object.to_link()
+
+class StaticHtmlView(BaseView,TemplateView):
+  def get_template_names(self):
+    template_name = 'html/' + self.kwargs['path']  
+    return [template_name]
+
