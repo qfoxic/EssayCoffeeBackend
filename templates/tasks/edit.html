@@ -7,11 +7,13 @@
         <h3 class="panel-title">{% if object %}<i class="fa fa-edit fa-lg" style="margin-right:1em"></i>{% trans "Edit Order" %}{% else %}<i class="fa fa-asterisk fa-lg" style="margin-right:1em"></i>{% trans "New Order" %}{% endif %}</h3>
     </div>
     <div class="panel-body">
+{% comment %}
         {% if form.errors %}
         <div class="alert alert-danger">
             {{form.errors}}
         </div>
         {% endif %}
+{% endcomment %}
         <form role="form" action="{% if object %}{% url "task_edit" object.pk %}{% else %}{% url "task_new" %}{% endif %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <!-- {{ form.non_field_errors }} -->
