@@ -22,4 +22,17 @@ $( document ).ready( function( ) {
     $( '.has-error' ).tooltip( {
         container: 'body',
     } );
+    $( '.adm-report-ctrl' ).on( 'click', function( ) {
+        var bid = $( this ).data( 'body-id' );
+        var rbd = $( '#body-id-' + bid );
+        if( rbd.is( ':visible' ) ) {
+            rbd.hide( 'slow' );
+            $( this ).find( 'i' ).removeClass( 'fa-rotate-180' );
+            $('#rep-del-'+ bid).fadeOut('slow');
+        } else {
+            rbd.show( 'slow' );
+            $( this ).find( 'i' ).addClass( 'fa-rotate-180' );
+            $('#rep-del-'+ bid).fadeIn('slow');
+        }
+    } );
 } );
