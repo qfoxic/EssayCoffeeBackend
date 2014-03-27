@@ -94,6 +94,9 @@ CAN_ASSIGN = 'can_assign'
 # Allow for writers to complete a user.
 CAN_FINISH = 'can_finish'
 
+# Allow admins to put reports on tasks
+CAN_REPORT = 'can_report'
+
 # 3d table with different permissions for each action and each group.
 # If specific permissions wasn't found here then it is concerned as not allowed.
 PERMISSIONS_TABLE = {
@@ -111,6 +114,7 @@ PERMISSIONS_TABLE = {
   ADMIN_GROUP+str(UNPROCESSED)+CAN_COMMENT: 1,
   ADMIN_GROUP+str(UNPROCESSED)+CAN_EDIT: 1,
   ADMIN_GROUP+str(UNPROCESSED)+CAN_DO_ADMIN_ACTIONS: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_REPORT: 1,
   WRITER_GROUP+str(UNPROCESSED)+CAN_ASSIGN: 1,
 
   # Active or in progress permissions.
@@ -119,6 +123,7 @@ PERMISSIONS_TABLE = {
   ADMIN_GROUP+str(ACTIVE)+CAN_SEE_COMMENTS: 1,
   ADMIN_GROUP+str(ACTIVE)+CAN_COMMENT: 1,
   ADMIN_GROUP+str(ACTIVE)+CAN_EDIT: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_REPORT: 1,
   WRITER_GROUP+str(ACTIVE)+CAN_FINISH: 1,
   
   # Suspicious permissions.
@@ -128,12 +133,14 @@ PERMISSIONS_TABLE = {
   ADMIN_GROUP+str(SUSPICIOUS)+CAN_SEE_COMMENTS: 1,
   ADMIN_GROUP+str(SUSPICIOUS)+CAN_COMMENT: 1,
   ADMIN_GROUP+str(SUSPICIOUS)+CAN_EDIT: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_REPORT: 1,
 
   # Rejected.
   CUSTOMER_GROUP+str(REJECTED)+CAN_SEE_COMMENTS: 1,
   ADMIN_GROUP+str(REJECTED)+CAN_SEE_COMMENTS: 1,
   ADMIN_GROUP+str(REJECTED)+CAN_COMMENT: 1,
   ADMIN_GROUP+str(REJECTED)+CAN_EDIT: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_REPORT: 1,
 
   # Completed
   CUSTOMER_GROUP+str(FINISHED)+CAN_SEE_COMMENTS: 1,

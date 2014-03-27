@@ -11,6 +11,7 @@ from django.core.exceptions import PermissionDenied
 from general.models import Task
 from userprofile.models import UserProfile
 from comments.models import Comment
+from reports.models import Report
 from general.forms import TaskForm, SwitchStatusForm
 
 from django.views.generic.edit import UpdateView
@@ -58,7 +59,8 @@ def get_stats(request):
       'expired_assigned': Task.get_expired_tasks(1, **{'assignee__isnull': False,
                                                        'status__exact': co.UNPROCESSED}),
       'expired_unassigned': Task.get_expired_tasks(1, **{'assignee__isnull': True,
-                                                         'status__exact': co.UNPROCESSED})
+                                                         'status__exact': co.UNPROCESSED}),
+      'adm_reports': Report.objects.all().count() 
     }
   else:
     return {}
@@ -116,7 +118,9 @@ class BaseView(View):
       # can writers assign an order to themselves.
       'can_assign': co.CheckPermissions(self.request.user, obj, co.CAN_ASSIGN),
       # can writers mark task as finished.
-      'can_finish': co.CheckPermissions(self.request.user, obj, co.CAN_FINISH)
+      'can_finish': co.CheckPermissions(self.request.user, obj, co.CAN_FINISH),
+      # Can admins put reports on task.
+      'can_report': co.CheckPermissions(self.request.user, obj, co.CAN_REPORT)
     }
     context['stats'] = get_stats(self.request)
     return super(BaseView, self).render_to_response(context, **response_kwargs)
@@ -253,6 +257,7 @@ class DetailTaskView(BaseView, DetailView):
     context = super(DetailTaskView, self).get_context_data(**kwargs)
     task_id = self.kwargs.get('pk')
     context['comments'] = Comment.objects.filter(ctask_id__exact=task_id)
+    context['reports'] = Report.objects.filter(rtask_id__exact=task_id)
     return context
 
   def user_id(self):

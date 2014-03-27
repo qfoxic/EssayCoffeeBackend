@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'administer',
     'general',
     'comments',
+    'reports',
     'userprofile',
 )
 

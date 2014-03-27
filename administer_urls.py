@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse_lazy
 from general.views import SwitchStatusView,DetailTaskView
 
 from comments.views import CreateCommentView,RemoveCommentView 
+from reports.views import CreateReportView,RemoveReportView 
 
 from administer.views import AdminActiveTasksView,AdminRejectedTasksView,AdminUnprocessedTasksView,AdminFinishedTasksView 
 from administer.views import AdminSuspiciousTasksView,AdminWritersView,AdminUpdateTaskView,AdminCustomersView,AdminExpiredTasksView
@@ -26,11 +27,20 @@ user_edit = login_required(UpdateProfileView.as_view(module_name='administer',
 
 comment_new = login_required(
     permission_required('comments.add_comment', raise_exception=True)
-      (CreateCommentView.as_view(module_name='customer')),
+      (CreateCommentView.as_view(module_name='administer')),
     login_url=reverse_lazy('login'))
 comment_rm = login_required(
     permission_required('comments.delete_comment', raise_exception=True)
-      (RemoveCommentView.as_view(module_name='customer')),
+      (RemoveCommentView.as_view(module_name='administer')),
+    login_url=reverse_lazy('login'))
+
+report_new = login_required(
+    permission_required('reports.add_report', raise_exception=True)
+      (CreateReportView.as_view(module_name='administer')),
+    login_url=reverse_lazy('login'))
+report_rm = login_required(
+    permission_required('comments.delete_comment', raise_exception=True)
+      (RemoveReportView.as_view(module_name='administer')),
     login_url=reverse_lazy('login'))
 
 tasks_list = login_required(AdminUnprocessedTasksView.as_view(module_name='administer'),
@@ -80,6 +90,9 @@ urlpatterns = patterns('',
 
     url(r'^comment/(?P<task_id>\d+)/new$', comment_new, name='comment_new'),
     url(r'^comment/(?P<pk>\d+)/remove$', comment_rm, name='comment_remove'),
+
+    url(r'^report/(?P<task_id>\d+)/new$', report_new, name='report_new'),
+    url(r'^report/(?P<pk>\d+)/remove$', report_rm, name='report_remove'),
 
     url(r'profile/new', user_new, name='user_new'),
     url(r'profile/(?P<pk>\d+)/$', user_edit, name='user_details'),

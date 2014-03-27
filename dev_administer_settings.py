@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'administer',
     'general',
     'comments',
+    'reports',
     'userprofile',
 )
 
@@ -78,8 +79,6 @@ WSGI_APPLICATION = 'admin_wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join('/var/www/transport', 'db.sqlite3'),
         'ENGINE':'django.db.backends.mysql',
         'NAME': 'transport_vpaslav',
         'USER': 'transport',

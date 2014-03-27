@@ -168,30 +168,38 @@
             </div>
             {% endif  %}
         </div>
-        {% if perm.can_do_admin_actions %}
+        {% if perm.can_report %}
         <div class="col-md-3 admin-reports col-md-offset-1">
             <div class="well well-sm">
                 <a class="pull-right adm-report-add" href="#"><i class="fa fa-plus-circle"></i></a>
-                <strong>{% trans "Admin reports"%}</strong><span class="ilm badge">{{adm_reports|length}}</span>
+                <strong>{% trans "Admin reports"%}</strong><span class="ilm badge">{{stats.adm_reports}}</span>
                 <div id="report-form">
-                    <form>
-                    <input type="text" class="form-control">
-                    <textarea row="3" class="form-control"></textarea>
-                    <div style="text-align:right"><button type="submit" class="btn btn-primary">Post<i class="fa fa-play-circle-o ilm"></i></button></div>
+                    <form action="{% url "report_new" object.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="title" class="form-control" required>
+                    <textarea row="3" name="body" class="form-control" required></textarea>
+                    <div style="text-align:right">
+                      <button type="submit" class="btn btn-primary">Post<i class="fa fa-play-circle-o ilm"></i></button>
+                    </div>
                     </form>
                 </div>
             </div>
             <div id="adm-report-holder">
-                <!-- loop -->
+                {% for report in reports %}
                 <div class="panel panel-warning">
+                    <form id="report_remove" action="{% url "report_remove" report.pk %}" method="post">{% csrf_token %}</form>
                     <div class="panel-heading">
-                        <h3 class="panel-title"><a class="pull-right adm-report-ctrl" data-body-id="1" href="#"><i class="fa fa-caret-square-o-down"></i></a><a class="pull-right adm-report-del" id="rep-del-1" href="#" style="display:none"><i class="fa fa-times-circle"></i></a> Admin report #1 </h3>
+                        <h3 class="panel-title">
+                          <a class="pull-right adm-report-ctrl" data-body-id="{{report.pk}}" href="#"><i class="fa fa-caret-square-o-down"></i></a>
+                          <a class="pull-right adm-report-del" id="rep-del-{{report.pk}}" onclick="$('#report_remove').submit();" href="#" style="display:none">
+                            <i class="fa fa-times-circle"></i>
+                          </a> {{report.title}}</h3>
                     </div>
-                    <div id="body-id-1" class="panel-body small" style="display:none">
-                        In need of a replacement for Goldsmith, Grohl contacted Alanis Morissette's touring drummer Taylor Hawkins to see if he could recommend anybody. Grohl was surprised when Hawkins volunteered his own services as drummer.[4] Hawkins made his debut with the group in time for the release of its second album, The Colour and the Shape, in May 1997. The album included the singles "Monkey Wrench", "My Hero", and "Everlong".
+                    <div id="body-id-{{report.pk}}" class="panel-body small" style="display:none">
+                      {{report.body}}
                     </div>
                 </div>
-                <!-- .loop -->
+                {% endfor  %}
             </div>
         </div>
         {% endif %}

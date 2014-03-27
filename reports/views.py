@@ -2,7 +2,7 @@ from django.forms import ModelForm, ValidationError
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 
-from comments.models import Comment
+from reports.models import Report
 from general.models import Task
 from general.views import BaseView
 from django.core.urlresolvers import reverse
@@ -12,45 +12,45 @@ from django.contrib import messages
 import constants as co
 
 
-class CommentForm(ModelForm):
+class ReportForm(ModelForm):
   def __init__(self, request=None, task_id=None, *args, **kwargs):
-    super(CommentForm, self).__init__(*args, **kwargs)
+    super(ReportForm, self).__init__(*args, **kwargs)
     self.request = request
     self.task_id = task_id
 
   class Meta:
-    model = Comment
-    fields = ['title', 'body', 'rating', 'cowner', 'ctask']
+    model = Report 
+    fields = ['title', 'body', 'rowner', 'rtask']
 
-  def clean_cowner(self):
+  def clean_rowner(self):
     """Specifies default User parameter."""
     return self.request.user
 
-  def clean_ctask(self):
+  def clean_rtask(self):
     """Specifies default task for a comment."""
     return Task.objects.get(pk=self.task_id)
   
   def check_permissions(self, cleaned_data):
     """Raises an exception if there are no permissions to save a form."""
     if not co.CheckPermissions(self.request.user,
-        self.cleaned_data['ctask'], co.CAN_COMMENT):
-      raise ValidationError('Item can not be commented.') 
+        self.cleaned_data['rtask'], co.CAN_REPORT):
+      raise ValidationError('It is not allowed to put reports on a task.') 
  
   def clean(self):
     # Check some conditions before saving a form.
-    cleaned_data = super(CommentForm, self).clean()
+    cleaned_data = super(ReportForm, self).clean()
     self.check_permissions(cleaned_data)
     return cleaned_data
      
 
 
-class CreateCommentView(BaseView, CreateView):
+class CreateReportView(BaseView, CreateView):
   template_name = 'tasks/detail.html'
-  form_class = CommentForm
-  queryset = Comment.objects.all()
+  form_class = ReportForm
+  queryset = Report.objects.all()
 
   def get_form_kwargs(self):
-    kwargs = super(CreateCommentView, self).get_form_kwargs()
+    kwargs = super(CreateReportView, self).get_form_kwargs()
     kwargs['request'] = self.request
     kwargs['task_id'] = self.kwargs.get('task_id')
     return kwargs
@@ -64,14 +64,14 @@ class CreateCommentView(BaseView, CreateView):
     return HttpResponseRedirect(self.get_success_url())
 
 
-class RemoveCommentView(BaseView, DeleteView):
+class RemoveReportView(BaseView, DeleteView):
   template_name = 'tasks/delete.html'
-  queryset = Comment.objects.all()
+  queryset = Report.objects.all()
   owner_required = True
 
   def get_success_url(self):
-    task_id = self.object.ctask.pk
+    task_id = self.object.rtask.pk
     return reverse('task_view', kwargs={'pk': task_id})
 
   def user_id(self):
-    return self.get_object().cowner.pk
+    return self.get_object().rowner.pk
