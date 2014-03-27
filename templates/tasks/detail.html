@@ -173,13 +173,13 @@
             <div class="well well-sm">
                 <a class="pull-right adm-report-add" href="#"><i class="fa fa-plus-circle"></i></a>
                 <strong>{% trans "Admin reports"%}</strong><span class="ilm badge">{{stats.adm_reports}}</span>
-                <div id="report-form">
+                <div id="report-form" style="display:none">
                     <form action="{% url "report_new" object.pk %}" method="post">
                     {% csrf_token %}
-                    <input type="text" name="title" class="form-control" required>
-                    <textarea row="3" name="body" class="form-control" required></textarea>
+                    <input type="text" name="title" class="form-control" required placeholder="Report title">
+                    <textarea row="4" name="body" class="form-control" required placeholder="Report text"></textarea>
                     <div style="text-align:right">
-                      <button type="submit" class="btn btn-primary">Post<i class="fa fa-play-circle-o ilm"></i></button>
+                      <button type="submit" class="btn btn-primary">Post<i class="fa fa-check-square-o ilm"></i></button>
                     </div>
                     </form>
                 </div>

@@ -28,11 +28,21 @@ $( document ).ready( function( ) {
         if( rbd.is( ':visible' ) ) {
             rbd.hide( 'slow' );
             $( this ).find( 'i' ).removeClass( 'fa-rotate-180' );
-            $('#rep-del-'+ bid).fadeOut('slow');
+            $( '#rep-del-' + bid ).fadeOut( 'slow' );
         } else {
             rbd.show( 'slow' );
             $( this ).find( 'i' ).addClass( 'fa-rotate-180' );
-            $('#rep-del-'+ bid).fadeIn('slow');
+            $( '#rep-del-' + bid ).fadeIn( 'slow' );
+        }
+    } );
+    $( '.adm-report-add' ).on( 'click', function( ) {
+        var rbd = $( '#report-form' );
+        if( rbd.is( ':visible' ) ) {
+            rbd.hide( 'slow' );
+            $( this ).find( 'i' ).removeClass( 'fa-times-circle' ).addClass( 'fa-plus-circle' );
+        } else {
+            rbd.show( 'slow' );
+            $( this ).find( 'i' ).removeClass( 'fa-plus-circle' ).addClass('fa-times-circle');
         }
     } );
 } );
