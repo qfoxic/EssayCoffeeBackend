@@ -8,51 +8,11 @@
         <div class="lh">
             <i class="fa fa-tasks"></i><span class="title">{% trans "Tasks" %}</span><span class="badge">{{tasks|length}}</span>
         </div>
-        <table class="table tablesorter">
-            <thead>
-                <tr>
-                    <th class="sorter-digit">{% trans 'ID' %}</th>
-                    <th class="sorter-text">{% trans 'Order name' %}</th>
-                    <th class="sorter-text">{% trans 'Status' %}</th>
-                    <th class="sorter-text">{% trans 'Executor' %}</th>
-                    <th class="sorter-text">{% trans 'Owner' %}</th>
-                    <th class="sorter-usLongDate">{% trans 'Created' %}</th>
-                    <th class="sorter-usLongDate">{% trans 'Updated' %}</th>
-                    <th class="sorter-digit">{% trans 'Deadline (Days/Hours)' %}</th>
-                    <th class="sorter-digit">{% trans 'Unread msgs' %}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for task in tasks %}
-                <tr>
-                    <td>{{task.id}}</td>
-                    <td><a href="{% url 'task_view' task.id %}">{{task.paper_title}}</a></td>
-                    <td>{{task.get_status}}</td>
-                    <td>{% if task.assignee %}<a href="{% url 'user_edit' task.assignee.id %}">{{task.assignee}}</a>{% endif  %}</td>
-                    <td>{% if task.owner %}<a href="{% url 'user_edit' task.owner.id %}">{{task.owner}}</a>{% endif  %}</td>
-                    <td>{{task.created}}</td>
-                    <td>{{task.updated}}</td>
-                    <td>{{task.days_expired|floatformat:"0"}}/{{task.hours_expired|floatformat:"0"}}</td>
-                    <td>--</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr></tr>
-            </tfoot>
+        <table class="table tablesorter small">
+            {% with "tasks/"|add:site|add:"-tasks.html" as template %}
+            {% include template %}
+            {% endwith %}
         </table>
-        <!--
-        <ul class="fa-ul">
-        {% for task in tasks %}
-        <li>
-        <i class="fa-li fa fa-check-square-o"></i><a href="{{task.to_link}}">{{ task.paper_title }}-{{task.created|date:"U"}}</a>
-        </li>
-        {% empty %}
-        <li>
-        <i class="fa-li fa fa-square-o"></i>{% trans "No tasks yet" %}
-        </li>
-        {% endfor %}
-        </ul> -->
     </div>
 </div>
 {% endif  %}
