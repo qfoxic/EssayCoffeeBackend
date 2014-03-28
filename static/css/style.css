@@ -191,20 +191,27 @@ a.adm-report-del {
 	margin-right: 8px;
 }
 a.adm-report-add {
-    font-size: 24px;
-    line-height: 24px;
+	font-size: 24px;
+	line-height: 24px;
 	margin: -2px 3px 0 0;
-	padding:0;
+	padding: 0;
 }
 .admin-reports .panel {
-	margin-bottom:5px;
+	margin-bottom: 5px;
 }
 .admin-reports div.panel-body {
-	font-style:italic;
+	font-style: italic;
 }
 #report-form {
-    margin-top: 8px;
+	margin-top: 8px;
 }
 #report-form input, #report-form textarea {
-    margin-bottom:5px;
+	margin-bottom: 5px;
+}
+.panel-warning > .panel-footer {
+	/*background-image: linear-gradient(to bottom, #FCF8E3 0px, #FAF2CC 100%);
+	background-repeat: repeat-x;*/	
+	background-color: #FCF8E3;
+	border-color: #FAEBCC;
+	/*color: #8A6D3B;*/
 }

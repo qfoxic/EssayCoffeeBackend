@@ -198,6 +198,7 @@
                     <div id="body-id-{{report.pk}}" class="panel-body small" style="display:none">
                       {{report.body}}
                     </div>
+                    <div class="panel-footer small">by <a href="{% url "user_details" report.rowner.pk %}">{{report.rowner}}</a> <span class="pull-right"><i class="fa fa-1 fa-calendar irm"></i>{{report.created}}</span></div>
                 </div>
                 {% endfor  %}
             </div>
