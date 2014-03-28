@@ -8,18 +8,18 @@
         <div class="lh">
             <i class="fa fa-tasks"></i><span class="title">{% trans "Tasks" %}</span><span class="badge">{{tasks|length}}</span>
         </div>
-        <table class="table">
+        <table class="table tablesorter">
             <thead>
                 <tr>
-                    <th>{% trans 'ID' %}</th>
-                    <th>{% trans 'Order name' %}</th>
-                    <th>{% trans 'Status' %}</th>
-                    <th>{% trans 'Executor' %}</th>
-                    <th>{% trans 'Owner' %}</th>
-                    <th>{% trans 'Created' %}</th>
-                    <th>{% trans 'Updated' %}</th>
-                    <th>{% trans 'Deadline (Days/Hours)' %}</th>
-                    <th>{% trans 'Unread msgs' %}</th>
+                    <th class="sorter-digit">{% trans 'ID' %}</th>
+                    <th class="sorter-text">{% trans 'Order name' %}</th>
+                    <th class="sorter-text">{% trans 'Status' %}</th>
+                    <th class="sorter-text">{% trans 'Executor' %}</th>
+                    <th class="sorter-text">{% trans 'Owner' %}</th>
+                    <th class="sorter-usLongDate">{% trans 'Created' %}</th>
+                    <th class="sorter-usLongDate">{% trans 'Updated' %}</th>
+                    <th class="sorter-digit">{% trans 'Deadline (Days/Hours)' %}</th>
+                    <th class="sorter-digit">{% trans 'Unread msgs' %}</th>
                 </tr>
             </thead>
             <tbody>
