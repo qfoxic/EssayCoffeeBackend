@@ -58,11 +58,11 @@ class AdminActiveTasksView(TaskIndexView):
     context = super(AdminActiveTasksView, self).get_context_data(**kwargs)
     status = self.request.GET.get('status')
     if status == co.UNASSIGNED_ORDER:
-      context['tasks'] = Task.get_active_tasks(0, **{'assignee__isnull': True})
+      context['tasks'] = Task.get_processing_tasks(0, **{'assignee__isnull': True})
     elif status == co.ASSIGNED_ORDER:
-      context['tasks'] = Task.get_active_tasks(0, **{'assignee__isnull': False})
+      context['tasks'] = Task.get_processing_tasks(0, **{'assignee__isnull': False})
     else:
-      context['tasks'] = Task.get_active_tasks(0)
+      context['tasks'] = Task.get_processing_tasks(0)
     return context
 
 

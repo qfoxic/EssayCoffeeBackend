@@ -66,7 +66,7 @@ CREATE TABLE `auth_group_permissions` (
 
 LOCK TABLES `auth_group_permissions` WRITE;
 /*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
-INSERT INTO `auth_group_permissions` VALUES (1,1,10),(2,1,11),(3,1,12),(4,1,19),(5,1,20),(6,1,21),(7,1,22),(8,1,23),(9,1,24),(10,1,25),(11,1,26),(12,1,27),(13,1,28),(14,1,29),(15,1,30),(16,2,10),(17,2,11),(18,2,12),(19,2,19),(20,2,20),(21,2,21),(22,2,22),(23,2,23),(24,2,24),(25,2,28),(26,2,29),(27,2,30),(28,3,10),(29,3,11),(30,3,12),(31,3,19),(32,3,20),(33,3,21),(34,3,22),(35,3,23),(36,3,24),(37,3,28),(38,3,29),(39,3,30);
+INSERT INTO `auth_group_permissions` VALUES (2,1,10),(1,1,11),(4,1,12),(9,1,19),(5,1,20),(6,1,21),(7,1,22),(8,1,23),(15,1,24),(14,1,25),(3,1,26),(13,1,27),(11,1,28),(12,1,29),(10,1,30),(17,2,10),(16,2,11),(18,2,12),(23,2,19),(19,2,20),(20,2,21),(21,2,22),(22,2,23),(27,2,24),(25,2,28),(26,2,29),(24,2,30),(29,3,10),(28,3,11),(30,3,12),(35,3,19),(31,3,20),(32,3,21),(33,3,22),(34,3,23),(39,3,24),(37,3,28),(38,3,29),(36,3,30);
 /*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +129,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$hqf4r49QUzju$bhfwiyL/u9UhjnIidXB97lpDcsi9rs2NDqH3/xPEdjo=','2014-03-27 16:00:43',1,'transport','','','qqqq@qqq.qq',1,1,'2014-03-27 15:28:20'),(2,'pbkdf2_sha256$12000$FCTwXQsa18o0$yMeHLlk1dJs0ZZvlkt58pY9pUHnZKjkEuBVWHVlbYhs=','2014-03-27 15:40:24',0,'admin','Admin','Admin','qqq@admin.ukr',0,1,'2014-03-27 15:32:13'),(3,'pbkdf2_sha256$12000$8xJoplG7vwxJ$eSHhnkUyH5nm9muPL3yQfDL42rsK8HNa8pAoc7MzqvI=','2014-03-27 15:35:30',0,'customer','Customer','Customer','foxandkamarus@gmail.com',0,1,'2014-03-27 15:33:09'),(4,'pbkdf2_sha256$12000$GIK34V3KktbZ$7NSjQoXcy4B6G0u89y072En0fdC2aWYf51DtazxfU7I=','2014-03-27 15:33:53',0,'writer','Writer','Writer','employer@tr.com',0,1,'2014-03-27 15:33:53');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$hqf4r49QUzju$bhfwiyL/u9UhjnIidXB97lpDcsi9rs2NDqH3/xPEdjo=','2014-03-27 15:30:40',1,'transport','','','qqqq@qqq.qq',1,1,'2014-03-27 15:28:20'),(2,'pbkdf2_sha256$12000$FCTwXQsa18o0$yMeHLlk1dJs0ZZvlkt58pY9pUHnZKjkEuBVWHVlbYhs=','2014-03-27 15:32:13',0,'admin','Admin','Admin','qqq@admin.ukr',0,1,'2014-03-27 15:32:13'),(3,'pbkdf2_sha256$12000$8xJoplG7vwxJ$eSHhnkUyH5nm9muPL3yQfDL42rsK8HNa8pAoc7MzqvI=','2014-03-28 15:11:41',0,'customer','Customer','Customer','foxandkamarus@gmail.com',0,1,'2014-03-27 15:33:09'),(4,'pbkdf2_sha256$12000$GIK34V3KktbZ$7NSjQoXcy4B6G0u89y072En0fdC2aWYf51DtazxfU7I=','2014-03-27 15:33:53',0,'writer','Writer','Writer','employer@tr.com',0,1,'2014-03-27 15:33:53');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ CREATE TABLE `auth_user_groups` (
   KEY `auth_user_groups_5f412f9a` (`group_id`),
   CONSTRAINT `user_id_refs_id_40c41112` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `group_id_refs_id_274b862c` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `auth_user_groups` (
 
 LOCK TABLES `auth_user_groups` WRITE;
 /*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
-INSERT INTO `auth_user_groups` VALUES (1,2,1),(2,3,2),(3,4,3);
+INSERT INTO `auth_user_groups` VALUES (4,2,1),(5,3,2),(6,4,3);
 /*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,7 +245,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_37ef4eb4` (`content_type_id`),
   CONSTRAINT `content_type_id_refs_id_93d2d1f8` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `user_id_refs_id_c0d12874` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -254,7 +254,6 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2014-03-27 15:31:17',1,3,'1','admin',1,''),(2,'2014-03-27 15:31:42',1,3,'2','customer',1,''),(3,'2014-03-27 15:32:08',1,3,'3','writer',1,''),(4,'2014-03-27 15:32:40',1,10,'2','admin',1,''),(5,'2014-03-27 15:33:02',1,10,'1','transport',2,'Changed password.'),(6,'2014-03-27 15:33:25',1,10,'3','customer',1,''),(7,'2014-03-27 15:33:41',1,10,'1','transport',2,'Changed password.'),(8,'2014-03-27 15:34:26',1,10,'4','writer',1,''),(9,'2014-03-27 15:34:46',1,10,'1','transport',2,'Changed password.');
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -307,7 +306,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('f7fbmr7bgkfhdb50g1x22nyc6g69qtqn','NGM2OWE2OGZiM2I2YTE0MGNhYmE0ZGRkYzlmZDhiODBhNWE4YjBlMTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJwcm9maWxlLmF1dGguVXNlclByb2ZpbGVCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2014-04-10 16:00:44');
+INSERT INTO `django_session` VALUES ('mjzwzfj0culkuka0m9tumfnosjm9wj7x','ZDUyZTNlYmMxMzUyNDgxYWFiYzg2YWFmNTUzMzYzMzgzYmUyOTNhNjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJwcm9maWxlLmF1dGguVXNlclByb2ZpbGVCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6M30=','2014-04-11 15:11:41');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,7 +329,7 @@ CREATE TABLE `reports` (
   KEY `reports_d05831e3` (`rowner_id`),
   CONSTRAINT `rtask_id_refs_id_032139a7` FOREIGN KEY (`rtask_id`) REFERENCES `tasks` (`id`),
   CONSTRAINT `rowner_id_refs_id_204a6768` FOREIGN KEY (`rowner_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -339,7 +338,6 @@ CREATE TABLE `reports` (
 
 LOCK TABLES `reports` WRITE;
 /*!40000 ALTER TABLE `reports` DISABLE KEYS */;
-INSERT INTO `reports` VALUES (5,'aaaaaaaaaaaaa','aaaaaaaaaaaa','2014-03-27 15:56:41',1,2);
 /*!40000 ALTER TABLE `reports` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -361,14 +359,21 @@ CREATE TABLE `tasks` (
   `page_number` smallint(6) NOT NULL,
   `style` smallint(6) NOT NULL,
   `source_number` smallint(6) NOT NULL,
+  `mark` decimal(3,2) DEFAULT NULL,
   `instructions` longtext NOT NULL,
   `attach` varchar(100) DEFAULT NULL,
   `discount` varchar(100) NOT NULL,
   `accept_terms` tinyint(1) NOT NULL,
+  `payment_status` smallint(6) NOT NULL,
+  `priority` smallint(6) NOT NULL,
+  `site` longtext,
   `ttype` smallint(6) NOT NULL,
   `access_level` smallint(6) NOT NULL,
+  `in_review` tinyint(1) NOT NULL,
   `owner_id` int(11) NOT NULL,
   `assignee_id` int(11) DEFAULT NULL,
+  `manager_id` int(11) DEFAULT NULL,
+  `editor_id` int(11) DEFAULT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   `completed` datetime DEFAULT NULL,
@@ -376,9 +381,13 @@ CREATE TABLE `tasks` (
   PRIMARY KEY (`id`),
   KEY `tasks_cb902d83` (`owner_id`),
   KEY `tasks_98516953` (`assignee_id`),
+  KEY `tasks_68afd4a7` (`manager_id`),
+  KEY `tasks_c2be667f` (`editor_id`),
+  CONSTRAINT `editor_id_refs_id_ba4d12bb` FOREIGN KEY (`editor_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `assignee_id_refs_id_ba4d12bb` FOREIGN KEY (`assignee_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `manager_id_refs_id_ba4d12bb` FOREIGN KEY (`manager_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `owner_id_refs_id_ba4d12bb` FOREIGN KEY (`owner_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -387,7 +396,7 @@ CREATE TABLE `tasks` (
 
 LOCK TABLES `tasks` WRITE;
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-INSERT INTO `tasks` VALUES (1,'Title1','hs','es','hs',43200,1,123,1,111,'QAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZ\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQ\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQA\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQA','','123',1,1,0,3,NULL,'2014-03-27 15:36:31','2014-03-27 15:36:33',NULL,0),(2,'Title2','ln','re','hs',21600,1,123,1,123,'wsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx','','123',1,1,0,3,NULL,'2014-03-27 15:37:05','2014-03-27 15:37:07',NULL,0),(3,'Title3','ln','re','hs',21600,1,12,1,12,'wsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx','','123',1,1,0,3,NULL,'2014-03-27 15:37:39','2014-03-27 15:37:41',NULL,0),(4,'Title4','ln','re','hs',86400,1,12,2,223,'qazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqaz','','1234',1,1,0,3,NULL,'2014-03-27 15:38:14','2014-03-27 15:38:15',NULL,0);
+INSERT INTO `tasks` VALUES (1,'Title1','hs','es','hs',43200,1,123,1,111,NULL,'QAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZ\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQ\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQA\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQA','','123',1,1,2,NULL,1,0,0,3,NULL,NULL,NULL,'2014-03-27 15:36:31','2014-03-27 15:36:33',NULL,0),(2,'Title2','ln','re','hs',21600,1,123,1,123,NULL,'wsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx','','123',1,1,2,NULL,1,0,0,3,NULL,NULL,NULL,'2014-03-27 15:37:05','2014-03-27 15:37:07',NULL,0),(3,'Title3','ln','re','hs',21600,1,12,1,12,NULL,'wsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx','','123',1,1,2,NULL,1,0,0,3,NULL,NULL,NULL,'2014-03-27 15:37:39','2014-03-27 15:37:41',NULL,0),(4,'Title4','ln','re','hs',86400,1,12,2,223,NULL,'qazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqaz','','1234',1,1,2,NULL,1,0,0,3,NULL,NULL,NULL,'2014-03-27 15:38:14','2014-03-27 15:38:15',NULL,0),(5,'22222','hs','es','hs',21600,1,7,1,6,2.06,'222222222222222222222222222222222222222222222222222222222222\r\n22222222222222222222222222222222222222222222222222222222222222222\r\n22222222222222222222222222222222222222222222222222222222222222222\r\n222222222222222222222222222222222222222222222222222222222222222222222222222\r\n222222222222222222222222222222222222222222222222222222222222','','123',1,1,2,'85.17.249.125:8089',1,0,0,3,NULL,NULL,NULL,'2014-03-28 15:21:13','2014-03-28 15:21:13',NULL,4);
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -428,4 +437,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-27 17:01:33
+-- Dump completed on 2014-03-28 16:30:34

@@ -15,7 +15,7 @@ class WriterActiveTasksView(TaskIndexView):
     context = super(WriterActiveTasksView, self).get_context_data(**kwargs)
     status = self.request.GET.get('status')
     cur_user = self.request.user
-    context['tasks'] = Task.get_active_tasks(0, **{'assignee': cur_user})
+    context['tasks'] = Task.get_processing_tasks(0, **{'assignee': cur_user})
     return context
 
 
@@ -24,7 +24,7 @@ class WriterExpiredTasksView(TaskIndexView):
     context = super(WriterExpiredTasksView, self).get_context_data(**kwargs)
     cur_user = self.request.user
     context['tasks'] = Task.get_expired_tasks(0, **{'assignee': cur_user,
-                                                    'status__exact': co.ACTIVE})
+                                                    'status__exact': co.PROCESSING})
     return context
 
 

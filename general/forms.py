@@ -10,15 +10,24 @@ class TaskForm(ModelForm):
 
   class Meta:
     model = Task
-    fields = [
+    fields = ['site',
               'paper_title', 'discipline', 'assigment', 'level', 'urgency',
               'spacing', 'page_number', 'style', 'source_number',
               'instructions', 'attach', 'discount', 'accept_terms',
-              'owner']
+              'owner',
+              'priority', 'access_level', 'in_review', 'mark']
 
   def clean_owner(self):
     """Specifies default User parameter."""
+    if self.initial.get('owner'):
+      return self.initial.get('owner')
     return self.request.user
+
+  def clean_site(self):
+    """Specifies default Host parameter."""
+    if self.initial.get('site'):
+      return self.initial.get('site')
+    return self.request.get_host()
 
   def check_permissions(self, cleaned_data):
     """Raise an exception if user can't perform a status change."""

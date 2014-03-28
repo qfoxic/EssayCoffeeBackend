@@ -29,6 +29,20 @@
                             {{form.assigment|attr:"class:form-control,autocomplete:off,placeholder:Assigment Type"}}
                         </div>
                     </div>
+                    <div class="form-group{% if form.priority.errors %} has-error{% endif %}">
+                        <label>{% trans "Priority" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-list-alt fa-fw"></i></span>
+                            {{form.priority|attr:"class:form-control,autocomplete:off,placeholder:Priority"}}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.access_level.errors %} has-error{% endif %}">
+                        <label>{% trans "Access Level" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-list-alt fa-fw"></i></span>
+                            {{form.access_level|attr:"class:form-control,autocomplete:off,placeholder:Access Level"}}
+                        </div>
+                    </div>
                     <div class="form-group{% if form.urgency.errors %} has-error{% endif %}">
                         <!-- {{form.title.errors}} -->
                         <label>{% trans "Urgency" %}</label>
@@ -87,6 +101,13 @@
                             {{form.source_number|attr:"class:form-control,autocomplete:off,placeholder:Number of sources/references"}}
                         </div>
                     </div>
+                    <div class="form-group{% if form.mark.errors %} has-error{% endif %}">
+                        <label>{% trans "Mark" %}</label>
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-bars fa-fw"></i></span>
+                            {{form.mark|attr:"class:form-control,autocomplete:off,placeholder:Mark"}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -125,6 +146,12 @@
                             {{form.accept_terms|attr:"class:accept-chk"}}
                         </span>
                         <span class="form-control" style="overflow:auto">{% trans "I accept terms and conditions" %}</span>
+                    </div>
+                    <div class="form-group input-group margin-bottom-sm {% if form.in_review.errors %} has-error{% endif %}">
+                        <span class="input-group-addon">
+                            {{form.in_review|attr:"class:accept-chk"}}
+                        </span>
+                        <span class="form-control" style="overflow:auto">{% trans "Mark as in review" %}</span>
                     </div>
                     <div class="form-group input-group margin-bottom-sm">
                         <span class="input-group-addon"><i class="fa fa-barcode fa-fw"></i></span>
