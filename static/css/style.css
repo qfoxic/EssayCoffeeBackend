@@ -1,217 +1,232 @@
 html, body {
-	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 html, body {
-	height: 100%;
-	margin: 0px;
-	padding: 0px;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
 }
 a, button, select, input {
-	outline: 0 !important;
+    outline: 0 !important;
 }
 section.panel {
-	margin: 2em auto;
-	padding: 0;
-	width: 90%;
+    margin: 2em auto;
+    padding: 0;
+    width: 90%;
 }
 section.info {
-	background-color: rgba(232, 232, 232, .35);
-	border: 1px solid rgba(232, 232, 232, 1);
-	margin-top: 50px;
-	padding: 1.5em;
-	color: #0C304E;
-	text-shadow: 0 1px 1px #FFF;
-	width: 100%;
+    background-color: rgba(232, 232, 232, .35);
+    border: 1px solid rgba(232, 232, 232, 1);
+    margin-top: 50px;
+    padding: 1.5em;
+    color: #0C304E;
+    text-shadow: 0 1px 1px #FFF;
+    width: 100%;
 }
 section.info h2 {
-	font-weight: 700;
-	font-size: 2.5em;
-	letter-spacing: -1px;
-	text-shadow: 3px 2px 0 rgb(232, 232, 232), 5px 4px 0 rgba(0, 0, 0, 0.15);
+    font-weight: 700;
+    font-size: 2.5em;
+    letter-spacing: -1px;
+    text-shadow: 3px 2px 0 rgb(232, 232, 232), 5px 4px 0 rgba(0, 0, 0, 0.15);
 }
 footer {
-	/*min-height: 150px;*/
-	box-shadow: 0 -2px 10px -2px rgba(0, 0, 0, 0.3);
-	background-color: #777;
-	padding: 0;
-	color: #FFF;
-	/*z-index: 1000000;*/
+    /*min-height: 150px;*/
+    box-shadow: 0 -2px 10px -2px rgba(0, 0, 0, 0.3);
+    background-color: #777;
+    padding: 0;
+    color: #FFF;
+    /*z-index: 1000000;*/
 }
 footer a {
-	color: #fff;
-	font-weight: 400;
+    color: #fff;
+    font-weight: 400;
 }
 footer a:hover {
-	color: #FFFFE0;
+    color: #FFFFE0;
 }
 div.copy {
-	text-align: center;
-	font-size: .85em;
-	vertical-align: middle;
-	width: 50%;
-	margin: 5px auto;
-	text-shadow: 0px 1px 0 rgba(0, 0, 0, 0.5);
-	font-weight: 200;
+    text-align: center;
+    font-size: .85em;
+    vertical-align: middle;
+    width: 50%;
+    margin: 5px auto;
+    text-shadow: 0px 1px 0 rgba(0, 0, 0, 0.5);
+    font-weight: 200;
 }
 .task-details .overview {
-	font-weight: 300;
-	line-height: 160%;
-	padding: 2em .5em;
-	text-align: justify;
+    font-weight: 300;
+    line-height: 160%;
+    padding: 2em .5em;
+    text-align: justify;
 }
 .task-details .price {
-	float: right;
-	margin-left: 20px;
-	border: 1px solid rgb(212, 244, 219);
-	padding: 3px 8px 0;
-	background-color: rgba(212, 244, 219, .5);
-	font-size: 1.5em;
-	font-family: Georgia, Geneva, Times, "Times New Roman", serif;
-	box-shadow: 1px 3px 5px rgba(0,0,0,.1);
+    float: right;
+    margin-left: 20px;
+    border: 1px solid rgb(212, 244, 219);
+    padding: 3px 8px 0;
+    background-color: rgba(212, 244, 219, .5);
+    font-size: 1.5em;
+    font-family: Georgia, Geneva, Times, "Times New Roman", serif;
+    box-shadow: 1px 3px 5px rgba(0,0,0,.1);
 }
 .task-details .price i {
-	margin-right: .3em;
-	color: rgba(133,187,101,.7);
-	vertical-align: middle;
+    margin-right: .3em;
+    color: rgba(133,187,101,.7);
+    vertical-align: middle;
 }
 .task-details-inner {
-	box-shadow: 0 30px 25px -30px rgba(0, 0, 0, 0.1);
-	padding-bottom: 2em;
+    box-shadow: 0 30px 25px -30px rgba(0, 0, 0, 0.1);
+    padding-bottom: 2em;
 }
 .task-details .owner {
-	/*float: left;*/
-	/*margin: 0 1.5em 0 0;*/
-	/*text-align: center;*/
+    /*float: left;*/
+    /*margin: 0 1.5em 0 0;*/
+    /*text-align: center;*/
 }
 .task-details .owner > img {
-	width: 100px;
-	height: 100px;
+    width: 100px;
+    height: 100px;
 }
 .ilm {
-	margin-left: 12px !important
+    margin-left: 12px !important
 }
 .irm {
-	margin-right: 12px !important
+    margin-right: 12px !important
 }
 .accept-chk {
-	margin: auto 3px !important;
+    margin: auto 3px !important;
 }
 .task-details div.info-row > div.info-col {
-	color: #888;
-	white-space: nowrap;
-	width: auto;
-	float: left;
-	padding: 0 2em 0 0;
-	margin-bottom: .5em;
+    color: #888;
+    white-space: nowrap;
+    width: auto;
+    float: left;
+    padding: 0 2em 0 0;
+    margin-bottom: .5em;
 }
 .task-details div.info-row > div.info-col > i {
-	margin-right: .4em;
-	color: #555;
+    margin-right: .4em;
+    color: #555;
 }
 .task-details div.info-row {
-	clear: both;
-	overflow: auto;
-	margin-bottom: 1.5em;
-	font-size: .9em;
+    clear: both;
+    overflow: auto;
+    margin-bottom: 1.5em;
+    font-size: .9em;
 }
 div.lh {
-	padding: 5px 10px;
-	margin-top: 1em;
-	color: #555;
-	font-size: 1.5em;
-	font-weight: 300;
-	letter-spacing: 1px;
+    padding: 5px 10px;
+    margin-top: 1em;
+    color: #555;
+    font-size: 1.5em;
+    font-weight: 300;
+    letter-spacing: 1px;
 }
 div.lh span.badge {
-	vertical-align: middle;
+    vertical-align: middle;
 }
 div.lh span.title {
-	padding: 0 15px 0 10px;
+    padding: 0 15px 0 10px;
 }
 li > a {
-	/*margin-top: .5em;*/
-	font-size: 1.1em;
-	font-weight: 300;
-	/*padding: 3px 10px 3px 42px;*/
-	letter-spacing: 1px;
-	/*font-family: Tahoma, Arial, Helvetica, sans-serif;*/
-	/*font-variant: small-caps;*/
+    /*margin-top: .5em;*/
+    font-size: 1.1em;
+    font-weight: 300;
+    /*padding: 3px 10px 3px 42px;*/
+    letter-spacing: 1px;
+    /*font-family: Tahoma, Arial, Helvetica, sans-serif;*/
+    /*font-variant: small-caps;*/
 
 }
 .file-input {
-	margin: 1.7em 0 0 !important;
+    margin: 1.7em 0 0 !important;
 }
 .file-input.form-control {
-	padding: 0;
-	border-collapse: collapse;
+    padding: 0;
+    border-collapse: collapse;
 }
 .file-input .input-group-addon {
-	border: none;
+    border: none;
 }
 .file-input-wrapper {
-	border-top: none;
-	border-bottom: none;
-	border-radius: 0;
+    border-top: none;
+    border-bottom: none;
+    border-radius: 0;
 }
 label {
-	font-weight: 400;
-	font-size: .9em
+    font-weight: 400;
+    font-size: .9em
 }
 div.plain-text > p {
-	text-align: justify
+    text-align: justify
 }
 div.plain-text > p > em {
-	color: #18609C;
+    color: #18609C;
 }
 div.plain-text > ul.fa-ul > li > i {
-	color: #18609C
+    color: #18609C
 }
 /*
  div.plain-text > h3:before {
  content: "\2688\20";
  }*/
 div.plain-text > h3 {
-	font-size: 1.5em;
-	font-weight: 700;
-	color: #0C304E;
-	text-shadow: 1px 1px 2px rgba(158, 158, 158, 0.5);
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #0C304E;
+    text-shadow: 1px 1px 2px rgba(158, 158, 158, 0.5);
 }
 div.plain-text > h2 {
-	font-size: 1.8em;
-	font-weight: 700;
-	color: #000;
-	text-shadow: 1px 1px 2px rgba(158, 158, 158, 0.5);
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #000;
+    text-shadow: 1px 1px 2px rgba(158, 158, 158, 0.5);
 }
 .adm-report-ctrl > i {
-	font-weight: lighter !important;
-	color: #333
+    font-weight: lighter !important;
+    color: #333
 }
 a.adm-report-del {
-	color: #800;
-	margin-right: 8px;
+    color: #800;
+    margin-right: 8px;
 }
 a.adm-report-add {
-	font-size: 24px;
-	line-height: 24px;
-	margin: -2px 3px 0 0;
-	padding: 0;
+    font-size: 24px;
+    line-height: 24px;
+    margin: -2px 3px 0 0;
+    padding: 0;
 }
 .admin-reports .panel {
-	margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 .admin-reports div.panel-body {
-	font-style: italic;
+    font-style: italic;
 }
 #report-form {
-	margin-top: 8px;
+    margin-top: 8px;
 }
 #report-form input, #report-form textarea {
-	margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 .panel-warning > .panel-footer {
-	/*background-image: linear-gradient(to bottom, #FCF8E3 0px, #FAF2CC 100%);
-	background-repeat: repeat-x;*/	
-	background-color: #FCF8E3;
-	border-color: #FAEBCC;
-	/*color: #8A6D3B;*/
+    /*background-image: linear-gradient(to bottom, #FCF8E3 0px, #FAF2CC 100%);
+     background-repeat: repeat-x;*/
+    background-color: #FCF8E3;
+    border-color: #FAEBCC;
+    /*color: #8A6D3B;*/
+}
+.rotate {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    /* Should be unset in IE9+ I think. */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }

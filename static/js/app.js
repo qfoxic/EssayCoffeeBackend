@@ -45,15 +45,18 @@ $( document ).ready( function( ) {
             $( this ).find( 'i' ).removeClass( 'fa-plus-circle' ).addClass( 'fa-times-circle' );
         }
     } );
-
     $( '.tablesorter' ).tablesorter( {
+        theme: 'default',
+    } );
+
+    $( '.tablesorter0-' ).tablesorter( {
         // *** APPEARANCE ***
         // Add a theme - try 'blackice', 'blue', 'dark', 'default'
         //  'dropbox', 'green', 'grey' or 'ice'
         // to use 'bootstrap' or 'jui', you'll need to add the "uitheme"
         // widget and also set it to the same name
         // this option only adds a table class name "tablesorter-{theme}"
-        theme: 'bootstrap',
+        theme: 'dropbox',
 
         // fix the column widths
         widthFixed: false,
@@ -106,23 +109,23 @@ $( document ).ready( function( ) {
         // These are detected by default,
         // but you can change or disable them
         // these can also be set using data-attributes or class names
-/*
+        /*
         headers: {
-            // set "sorter : false" (no quotes) to disable the column
-            0: {
-                sorter: "text"
-            },
-            1: {
-                sorter: "digit"
-            },
-            2: {
-                sorter: "text"
-            },
-            3: {
-                sorter: "url"
-            }
+        // set "sorter : false" (no quotes) to disable the column
+        0: {
+        sorter: "text"
         },
-*/
+        1: {
+        sorter: "digit"
+        },
+        2: {
+        sorter: "text"
+        },
+        3: {
+        sorter: "url"
+        }
+        },
+        */
         // ignore case while sorting
         ignoreCase: true,
 
@@ -281,7 +284,7 @@ $( document ).ready( function( ) {
         },
 
         // *** CSS CLASS NAMES ***
- /*
+        /*
         tableClass: 'tablesorter',
         cssAsc: "tablesorter-headerSortUp",
         cssDesc: "tablesorter-headerSortDown",
@@ -291,7 +294,7 @@ $( document ).ready( function( ) {
         cssChildRow: "tablesorter-childRow",
         cssInfoBlock: "tablesorter-infoOnly",
         cssProcessing: "tablesorter-processing",
-*/
+        */
         // *** SELECTORS ***
         // jQuery selectors used to find the header cells.
         selectorHeaders: '> thead th, > thead td',
