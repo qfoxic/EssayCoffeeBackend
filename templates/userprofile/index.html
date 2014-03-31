@@ -1,14 +1,16 @@
 {% extends "layout.html" %}
 {% load i18n %}
 {% block pagetitle %}All Users{% endblock %}
+{% block info_block %}
+<section class="info">
+    <h2><i class="fa fa-users irm"></i> {{action_label}} <span class="badge" style="font-size:.6em;text-shadow:none;margin-left:1em;vertical-align:middle">{{users|length}}</span></h2>
+</section>
+{% endblock %}
 {% block content %}
 {% if users %}
 <div class="row">
-    <div class="col-md-9">
-        <div class="lh">
-            <i class="fa fa-tasks"></i><span class="title">{% trans "Writers" %}</span><span class="badge">{{writers|length}}</span>
-        </div>
-        <table class="table">
+    <div class="col-md-12">
+        <table class="table table-hover tablesorter">
             <thead>
                 <tr>
                     <th>{% trans 'Username' %}</th>
@@ -30,9 +32,4 @@
     </div>
 </div>
 {% endif  %}
-{% endblock %}
-{% block info_block %}
-<section class="info">
-    - Hello! This is writers index -
-</section>
 {% endblock %}

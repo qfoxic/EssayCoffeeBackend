@@ -19,20 +19,19 @@ def render_status(value):
 render_status.is_safe = False  
 
 def _unprocessed():
-  return '<i class="fa fa-square-o" style="font-size:1.5em"></i>'
+  return '<i class="fa fa-square-o has_tooltip" style="font-size:1.5em" data-placement="right" title="Unprocessed"></i>'
 
 def _completed():
-  return '<i class="fa fa-check-square-o" style="font-size:1.5em;color:#008F00"></i>'  
+  return '<i class="fa fa-check-square-o has_tooltip" style="font-size:1.5em;color:#008F00" data-placement="right" title="Completed"></i>'
   
 def _suspicious():
-  return '<i class="fa fa-exclamation-triangle" style="font-size:1.5em;color:#BF6000"></i>'    
+  return '<i class="fa fa-exclamation-triangle has_tooltip" style="font-size:1.5em;color:#BF6000" data-placement="right" title="Suspicious"></i>'
   
 def _processing():
-  return '<i class="fa fa-play-circle" style="font-size:1.5em;color:#2080D0"></i>'
+  return '<i class="fa fa-play-circle has_tooltip" style="font-size:1.5em;color:#2080D0" data-placement="right" title="Processing"></i>'
   
 def _rejected():
-  return '<i class="fa fa-times-circle" style="font-size:1.5em;color:#A04040"></i>'
+  return '<i class="fa fa-times-circle has_tooltip" style="font-size:1.5em;color:#A04040" data-placement="right" title="Rejected"></i>'
 
 def _draft():
-  return '<i class="fa fa-file-o" style="font-size:1.5em;color:#2080D0"></i>'
-      
+  return '<i class="fa fa-file-o has_tooltip" style="font-size:1.5em;color:#2080D0" data-placement="right" title="Draft"></i>'

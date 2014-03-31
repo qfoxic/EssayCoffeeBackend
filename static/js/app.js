@@ -19,7 +19,7 @@ $( document ).ready( function( ) {
         } );
     } );
     $( '.upload-file' ).bootstrapFileInput( );
-    $( '.has-error' ).tooltip( {
+    $( '.has-error, .has_tooltip' ).tooltip( {
         container: 'body',
     } );
     $( '.adm-report-ctrl' ).on( 'click', function( ) {

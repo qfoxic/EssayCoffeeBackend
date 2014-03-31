@@ -11,7 +11,7 @@
 <div class="row">
     {{ PATH_IFNO }}
     <div class="col-md-12">
-        <table class="table tablesorter small">
+        <table class="tablesorter table table-hover table-condensed">
             {% with "tasks/"|add:site|add:"-tasks.html" as template %}
             {% include template %}
             {% endwith %}
