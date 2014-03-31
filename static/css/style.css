@@ -230,3 +230,6 @@ a.adm-report-add {
     /* Should be unset in IE9+ I think. */
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
+thead > tr > th > div {
+	vertical-align: middle !important;
+}

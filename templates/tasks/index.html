@@ -1,13 +1,16 @@
 {% extends "layout.html" %}
 {% load i18n %}
-{% block pagetitle %}All Tasks{% endblock %}
+{% block pagetitle %}Tasks{% endblock %}
+{% block info_block %}
+<section class="info">
+    <h2><i class="fa fa-tasks irm"></i> {% trans "Tasks List" %} <span class="badge" style="font-size:.6em;text-shadow:none;margin-left:1em;vertical-align:middle">{{action_label}}: {{tasks|length}}</span></h2>
+</section>
+{% endblock %}
 {% block content %}
 {% if tasks %}
 <div class="row">
-    <div class="col-md-12 /*col-md-offset-1*/">
-        <div class="lh">
-            <i class="fa fa-tasks"></i><span class="title">{% trans "Tasks" %}</span><span class="badge">{{tasks|length}}</span>
-        </div>
+    {{ PATH_IFNO }}
+    <div class="col-md-12">
         <table class="table tablesorter small">
             {% with "tasks/"|add:site|add:"-tasks.html" as template %}
             {% include template %}
@@ -16,9 +19,4 @@
     </div>
 </div>
 {% endif  %}
-{% endblock %}
-{% block info_block %}
-<section class="info">
-    - Hello! This is tasks view -
-</section>
 {% endblock %}
