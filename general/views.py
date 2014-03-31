@@ -54,12 +54,14 @@ def get_stats(request):
       'unproc': Task.get_unprocessed_tasks(1),
       'suspect': Task.get_suspicious_tasks(1), 
       'rejected': Task.get_rejected_tasks(1), 
-      'process_assigned': Task.get_processing_tasks(1, **{'assignee__isnull': False}),
-      'process_unassigned': Task.get_processing_tasks(1, **{'assignee__isnull': True}),
-      'expired_assigned': Task.get_expired_tasks(1, **{'assignee__isnull': False,
-                                                       'status__exact': co.UNPROCESSED}),
-      'expired_unassigned': Task.get_expired_tasks(1, **{'assignee__isnull': True,
-                                                         'status__exact': co.UNPROCESSED}),
+      'process': Task.get_processing_tasks(1),
+      #'process_assigned': Task.get_processing_tasks(1, **{'assignee__isnull': False}),
+      #'process_unassigned': Task.get_processing_tasks(1, **{'assignee__isnull': True}),
+      #'expired_assigned': Task.get_expired_tasks(1, **{'assignee__isnull': False,
+      #                                                 'status__exact': co.UNPROCESSED}),
+      #'expired_unassigned': Task.get_expired_tasks(1, **{'assignee__isnull': True,
+      #                                                   'status__exact': co.UNPROCESSED}),
+      'expired': Task.get_expired_tasks(1, **{'status__exact': co.UNPROCESSED}),
       'adm_reports': Report.objects.all().count() 
     }
   else:

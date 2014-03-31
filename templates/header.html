@@ -46,16 +46,10 @@
                                 <strong style="margin-left: .8em;font-size:1.2em;">{% trans "Active orders" %}</strong>
                             </li>
                             <li>
-                                <a href="{% url 'tasks_active' %}?status={{co.ASSIGNED_ORDER}}"><span class="badge pull-right">{{stats.process_assigned|default:0}}</span> {% trans "Processing orders (Assigned)" %}</a>
+                                <a href="{% url 'tasks_active' %}"><span class="badge pull-right">{{stats.process|default:0}}</span> {% trans "Processing orders" %}</a>
                             </li>
                             <li>
-                                <a href="{% url 'tasks_active' %}?status={{co.UNASSIGNED_ORDER}}"><span class="badge pull-right">{{stats.process_unassigned|default:0}}</span> {% trans "Processing orders (No writers)" %}</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'tasks_expired' %}?status={{co.ASSIGNED_ORDER}}"><span class="badge pull-right">{{stats.expired_assigned|default:0}}</span> {% trans "Expired orders (Assigned)" %}</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'tasks_expired' %}?status={{co.UNASSIGNED_ORDER}}"><span class="badge pull-right">{{stats.expired_unassigned|default:0}}</span> {% trans "Expired orders (No writers)" %}</a>
+                                <a href="{% url 'tasks_expired' %}"><span class="badge pull-right">{{stats.expired|default:0}}</span> {% trans "Expired orders" %}</a>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -88,7 +82,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='fa fa-list fa-lg' style="margin-right:.5em"></i>{% trans "My assignments"%} <b class="caret"></b></a>
                         <ul class="dropdown-menu" style="min-width:400px">
                             <li>
-                                <a href="{% url 'tasks_active' %}"><span class="badge pull-right">{{stats.active|default:0}}</span>{% trans "Active orders" %}</a>
+                                <a href="{% url 'tasks_active' %}"><span class="badge pull-right">{{stats.active|default:0}}</span>{% trans "Processing orders" %}</a>
                             </li>
                             <li>
                                 <a href="{% url 'tasks_expired' %}"><span class="badge pull-right">{{stats.expired|default:0}}</span>{% trans "Late orders" %}</a>

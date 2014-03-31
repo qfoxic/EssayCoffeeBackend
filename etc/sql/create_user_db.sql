@@ -1,8 +1,7 @@
-/*CREATE USER 'transport'@'localhost' IDENTIFIED BY 'Secret677';
+CREATE USER 'transport'@'localhost' IDENTIFIED BY 'Secret677';
 
 GRANT ALL PRIVILEGES ON * . * TO 'transport'@'localhost' IDENTIFIED BY 'Secret677' WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
-*/
+DROP DATABASE transport;
 CREATE DATABASE IF NOT EXISTS `transport` CHARACTER SET utf16 COLLATE utf16_unicode_ci;
-/*
 GRANT ALL PRIVILEGES ON `transport` . * TO 'transport'@'localhost';
-*/
+

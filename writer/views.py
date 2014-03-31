@@ -13,7 +13,6 @@ class WriterTaskView(TaskIndexView):
 class WriterActiveTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(WriterActiveTasksView, self).get_context_data(**kwargs)
-    status = self.request.GET.get('status')
     cur_user = self.request.user
     context['tasks'] = Task.get_processing_tasks(0, **{'assignee': cur_user})
     return context
