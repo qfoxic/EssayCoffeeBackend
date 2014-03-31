@@ -35,17 +35,17 @@
         <th class="sorter-text">{% trans 'Admin' %}</th>
         <th class="sorter-text">{% trans 'Writer' %}</th>
         <th class="sorter-text">{% trans 'Editor' %}</th>
-        <th class="sorter-text">{% trans 'Local time' %}</th>
+        <!-- <th class="sorter-text">{% trans 'Local time' %}</th> -->
         <th class="sorter-text">{% trans 'Created' %}</th>
-        <th class="sorter-text">{% trans 'Updated' %}</th>
+        <!-- <th class="sorter-text">{% trans 'Updated' %}</th> -->
         <th class="sorter-text">{% trans 'Urgency' %}</th>
         <th class="sorter-text">{% trans 'Full Deadline' %}</th>
         <th class="sorter-text">{% trans 'Writer deadline' %}</th>
-        <th class="sorter-text">{% trans 'Order type' %}</th>
+        <!-- <th class="sorter-text">{% trans 'Order type' %}</th> -->
         <th class="sorter-text">{% trans 'In review' %}</th>
-        <th class="sorter-text">{% trans 'Discount (%)' %}</th>
+        <!-- <th class="sorter-text">{% trans 'Discount (%)' %}</th> -->
         <th class="sorter-text">{% trans 'Payment status' %}</th>
-        <th class="sorter-text">{% trans 'Price' %}</th>
+        <th class="sorter-text">{% trans 'Price+D' %}</th>
         <th class="sorter-text">{% trans 'Priority' %}</th>
     </tr>
 </thead>
@@ -54,7 +54,7 @@
     <tr>
         <td>{{task.id}}</td>
         <td><a href="{% url 'task_view' task.id %}">{{task.paper_title}}</a></td>
-        <td>{{task.get_status}}</td>
+        <td>{{task.status}}</td>
         <td>{{task.get_status}}</td>
         <td>{% if task.assignee %}<a href="{% url 'user_edit' task.assignee.id %}">{{task.assignee}}</a>{% endif  %}</td>
         <td>{% if task.owner %}<a href="{% url 'user_edit' task.owner.id %}">{{task.owner}}</a>{% endif  %}</td>
@@ -70,10 +70,10 @@
         <td>-</td>
         <td>-</td>
         <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
+        <!-- <td>-</td> -->
+        <!-- <td>-</td> -->
+        <!-- <td>-</td> -->
+        <!-- <td>-</td> -->
     </tr>
     {% endfor %}
 </tbody>
