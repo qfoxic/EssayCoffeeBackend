@@ -19,8 +19,6 @@
 -- Table structure for table `auth_group`
 --
 
-
-
 DROP TABLE IF EXISTS `auth_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -131,7 +129,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$hqf4r49QUzju$bhfwiyL/u9UhjnIidXB97lpDcsi9rs2NDqH3/xPEdjo=','2014-03-27 15:30:40',1,'transport','','','qqqq@qqq.qq',1,1,'2014-03-27 15:28:20'),(2,'pbkdf2_sha256$12000$FCTwXQsa18o0$yMeHLlk1dJs0ZZvlkt58pY9pUHnZKjkEuBVWHVlbYhs=','2014-03-27 15:32:13',0,'admin','Admin','Admin','qqq@admin.ukr',0,1,'2014-03-27 15:32:13'),(3,'pbkdf2_sha256$12000$8xJoplG7vwxJ$eSHhnkUyH5nm9muPL3yQfDL42rsK8HNa8pAoc7MzqvI=','2014-03-28 15:11:41',0,'customer','Customer','Customer','foxandkamarus@gmail.com',0,1,'2014-03-27 15:33:09'),(4,'pbkdf2_sha256$12000$GIK34V3KktbZ$7NSjQoXcy4B6G0u89y072En0fdC2aWYf51DtazxfU7I=','2014-03-27 15:33:53',0,'writer','Writer','Writer','employer@tr.com',0,1,'2014-03-27 15:33:53');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$hqf4r49QUzju$bhfwiyL/u9UhjnIidXB97lpDcsi9rs2NDqH3/xPEdjo=','2014-03-27 15:30:40',1,'transport','','','qqqq@qqq.qq',1,1,'2014-03-27 15:28:20'),(2,'pbkdf2_sha256$12000$FCTwXQsa18o0$yMeHLlk1dJs0ZZvlkt58pY9pUHnZKjkEuBVWHVlbYhs=','2014-03-31 12:53:54',0,'admin','Admin','Admin','qqq@admin.ukr',0,1,'2014-03-27 15:32:13'),(3,'pbkdf2_sha256$12000$8xJoplG7vwxJ$eSHhnkUyH5nm9muPL3yQfDL42rsK8HNa8pAoc7MzqvI=','2014-03-31 12:50:09',0,'customer','Customer','Customer','foxandkamarus@gmail.com',0,1,'2014-03-27 15:33:09'),(4,'pbkdf2_sha256$12000$GIK34V3KktbZ$7NSjQoXcy4B6G0u89y072En0fdC2aWYf51DtazxfU7I=','2014-03-31 12:53:06',0,'writer','Writer','Writer','employer@tr.com',0,1,'2014-03-27 15:33:53');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,7 +306,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('mjzwzfj0culkuka0m9tumfnosjm9wj7x','ZDUyZTNlYmMxMzUyNDgxYWFiYzg2YWFmNTUzMzYzMzgzYmUyOTNhNjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJwcm9maWxlLmF1dGguVXNlclByb2ZpbGVCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6M30=','2014-04-11 15:11:41');
+INSERT INTO `django_session` VALUES ('9z1nhtl9fwi4py4rrgoq9jy3ixpcjfk4','OGI2YTYwYmQ5YTJmMjk5MzM0MTA5ZDdhNDBiZWJlOGFjNTAyYzNkNTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJwcm9maWxlLmF1dGguVXNlclByb2ZpbGVCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0=','2014-04-14 12:53:54');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -331,7 +329,7 @@ CREATE TABLE `reports` (
   KEY `reports_d05831e3` (`rowner_id`),
   CONSTRAINT `rtask_id_refs_id_032139a7` FOREIGN KEY (`rtask_id`) REFERENCES `tasks` (`id`),
   CONSTRAINT `rowner_id_refs_id_204a6768` FOREIGN KEY (`rowner_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -389,7 +387,7 @@ CREATE TABLE `tasks` (
   CONSTRAINT `assignee_id_refs_id_ba4d12bb` FOREIGN KEY (`assignee_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `manager_id_refs_id_ba4d12bb` FOREIGN KEY (`manager_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `owner_id_refs_id_ba4d12bb` FOREIGN KEY (`owner_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -398,7 +396,7 @@ CREATE TABLE `tasks` (
 
 LOCK TABLES `tasks` WRITE;
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-INSERT INTO `tasks` VALUES (1,'Title1','hs','es','hs',43200,1,123,1,111,NULL,'QAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZ\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQ\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQA\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQA','','123',1,1,2,NULL,1,0,0,3,NULL,NULL,NULL,'2014-03-27 15:36:31','2014-03-27 15:36:33',NULL,0),(2,'Title2','ln','re','hs',21600,1,123,1,123,NULL,'wsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx','','123',1,1,2,NULL,1,0,0,3,NULL,NULL,NULL,'2014-03-27 15:37:05','2014-03-27 15:37:07',NULL,0),(3,'Title3','ln','re','hs',21600,1,12,1,12,NULL,'wsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx','','123',1,1,2,NULL,1,0,0,3,NULL,NULL,NULL,'2014-03-27 15:37:39','2014-03-27 15:37:41',NULL,0),(4,'Title4','ln','re','hs',86400,1,12,2,223,NULL,'qazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqaz','','1234',1,1,2,NULL,1,0,0,3,NULL,NULL,NULL,'2014-03-27 15:38:14','2014-03-27 15:38:15',NULL,0),(5,'22222','hs','es','hs',21600,1,7,1,6,2.06,'222222222222222222222222222222222222222222222222222222222222\r\n22222222222222222222222222222222222222222222222222222222222222222\r\n22222222222222222222222222222222222222222222222222222222222222222\r\n222222222222222222222222222222222222222222222222222222222222222222222222222\r\n222222222222222222222222222222222222222222222222222222222222','','123',1,1,2,'85.17.249.125:8089',1,0,0,3,NULL,NULL,NULL,'2014-03-28 15:21:13','2014-03-28 15:21:13',NULL,4);
+INSERT INTO `tasks` VALUES (1,'Title1','hs','es','hs',43200,1,123,1,111,NULL,'QAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZ\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQ\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQA\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQA','','123',1,1,2,NULL,1,0,0,3,4,NULL,NULL,'2014-03-27 15:36:31','2014-03-31 12:04:33',NULL,1),(2,'Title2','ln','re','hs',21600,1,123,1,123,NULL,'wsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx','','123',1,1,2,NULL,1,0,0,3,NULL,NULL,NULL,'2014-03-27 15:37:05','2014-03-31 12:48:57',NULL,2),(3,'Title3','ln','re','hs',21600,1,12,1,12,NULL,'wsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx','','123',1,1,2,NULL,1,0,0,3,NULL,NULL,NULL,'2014-03-27 15:37:39','2014-03-31 12:49:09',NULL,5),(4,'Title4','ln','re','hs',86400,1,12,2,223,NULL,'qazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqaz','','1234',1,1,2,NULL,1,0,0,3,NULL,NULL,NULL,'2014-03-27 15:38:14','2014-03-27 15:38:15',NULL,0),(6,'title234','ln','re','hs',21600,1,33,1,233,2.22,'title234title234title234title234title234title234title234title234title234title234title234title234title234title234\r\ntitle234title234title234title234title234title234title234title234title234title234title234title234title234title234\r\ntitle234title234title234title234title234title234title234title234title234title234title234title234title234title234\r\ntitle234title234title234title234title234title234title234title234title234title234title234title234title234title234\r\ntitle234title234title234title234title234title234title234title234title234title234title234title234title234title234','','1234',1,1,2,'85.17.249.125:8089',1,0,0,3,4,NULL,NULL,'2014-03-31 12:51:07','2014-03-31 12:53:16',NULL,3);
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -439,4 +437,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-28 16:30:34
+-- Dump completed on 2014-03-31 14:54:48
