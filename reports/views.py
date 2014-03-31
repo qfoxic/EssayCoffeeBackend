@@ -45,7 +45,7 @@ class ReportForm(ModelForm):
 
 
 class CreateReportView(BaseView, CreateView):
-  template_name = 'tasks/detail.html'
+  template_name = 'tasks/details.html'
   form_class = ReportForm
   queryset = Report.objects.all()
 

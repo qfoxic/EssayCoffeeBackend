@@ -251,7 +251,7 @@ class CreateTaskView(BaseView, CreateView):
 
 class DetailTaskView(BaseView, DetailView):
   queryset = Task.objects.all()
-  template_name = 'tasks/detail.html'
+  template_name = 'tasks/details.html'
 
   def get_context_data(self, **kwargs):
     context = super(DetailTaskView, self).get_context_data(**kwargs)
@@ -276,7 +276,7 @@ class RemoveTaskView(BaseView, DeleteView):
 class SwitchStatusView(UpdateTaskView):
   form_class = SwitchStatusForm 
   module_name = None 
-  template_name = 'tasks/detail.html'
+  template_name = 'tasks/details.html'
   owner_required = False 
   
   def get_success_url(self):

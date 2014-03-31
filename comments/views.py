@@ -45,7 +45,7 @@ class CommentForm(ModelForm):
 
 
 class CreateCommentView(BaseView, CreateView):
-  template_name = 'tasks/detail.html'
+  template_name = 'tasks/details.html'
   form_class = CommentForm
   queryset = Comment.objects.all()
 
