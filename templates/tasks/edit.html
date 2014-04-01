@@ -9,7 +9,7 @@
     <div class="panel-body">
         <form role="form" action="{% if object %}{% url "task_edit" object.pk %}{% else %}{% url "task_new" %}{% endif %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {% if site != 'customer' or site != 'writer' %}
+            {% if site == "admin" %}
             <div class="row">
                 <div class="col-md-8">
             {% endif %}
@@ -124,7 +124,7 @@
                             {% endif %}
                         </div>
                     </div>
-               {% if site != "customer" and site != "writer" %}
+               {% if site == "admin" %}
                 </div>
                 <div class="col-md-4"><br>
                     <div class="panel panel-default">
