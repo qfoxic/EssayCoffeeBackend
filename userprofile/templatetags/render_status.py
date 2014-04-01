@@ -19,10 +19,10 @@ def render_status(value):
 render_status.is_safe = False  
 
 def _unprocessed():
-  return '<i class="fa fa-square-o has_tooltip" style="font-size:1.5em" data-placement="right" title="Unprocessed"></i>'
+  return '<i class="fa fa-square-o has_tooltip" style="font-size:1.5em;color:#CFCFCF" data-placement="right" title="Unprocessed"></i>'
 
 def _completed():
-  return '<i class="fa fa-check-square-o has_tooltip" style="font-size:1.5em;color:#008F00" data-placement="right" title="Completed"></i>'
+  return '<i class="fa fa-check-square-o has_tooltip" style="font-size:1.5em;color:#2080D0" data-placement="right" title="Completed"></i>'
   
 def _suspicious():
   return '<i class="fa fa-exclamation-triangle has_tooltip" style="font-size:1.5em;color:#BF6000" data-placement="right" title="Suspicious"></i>'

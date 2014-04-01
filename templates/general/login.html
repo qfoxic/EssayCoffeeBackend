@@ -9,20 +9,20 @@
 {% block content %}
 <div class="panel panel-default" style="width:430px;margin:3em auto">
     <!-- Default panel contents -->
-    <div class="panel-heading">
-        <i class="fa fa-key fa-lg" style="margin-right:1em"></i> {% trans "Login" %}
+    <div class="panel-heading" style="font-size:1.5em">
+        <i class="fa fa-key" style="margin-right:1em;font-size:1.2em"></i> {% trans "Login" %}
     </div>
     <div class="panel-body">
         <form action="{% url "login" %}" method="post" class="form-horizontal" role="form">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{next}}">
-            <div class="form-group">
+            <div class="form-group{% if form.username.errors %} has-error{% endif %}">
                 <div class="input-group margin-bottom-sm"  style="width:90%;margin:.5em auto">
                     <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                     <input id="user_input" type="text" name="username" class="form-control" placeholder="{% trans "Enter username" %}">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group{% if form.password.errors %} has-error{% endif %}">
                 <div class="input-group margin-bottom-sm"  style="width:90%;margin: 0 auto">
                     <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                     <input id="passwd_input" type="password" name="password" class="form-control" placeholder="{% trans "Enter password" %}">
@@ -34,12 +34,12 @@
                         {% trans "Sign in" %}<i class='fa fa-sign-in fa-lg' style="margin-left:.5em"></i>
                     </button>
                 </div>
-            </div>
+            </div><!--
             {% if form.errors %}
             <div class="alert alert-danger" style="margin-bottom:.2em">
                 {{form.errors}}
             </div>
-            {% endif %}
+            {% endif %}-->
         </form>
     </div>
 </div>
