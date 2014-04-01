@@ -35,14 +35,14 @@
         <th class="sorter-text">{% trans 'Admin' %}</th>
         <th class="sorter-text">{% trans 'Writer' %}</th>
         <th class="sorter-text">{% trans 'Editor' %}</th>
-        <!-- <th class="sorter-text">{% trans 'Local time' %}</th> -->
         <th class="sorter-text">{% trans 'Created' %}</th>
         <!-- <th class="sorter-text">{% trans 'Updated' %}</th> -->
         <th class="sorter-text">{% trans 'Urgency' %}</th>
+        <th class="sorter-text">{% trans 'Loc. time' %}</th>
         <th class="sorter-text">{% trans 'Full DL' %}</th>
         <th class="sorter-text">{% trans 'Writer DL' %}</th>
-        <!-- <th class="sorter-text">{% trans 'Order type' %}</th> -->
-        <th class="sorter-text">{% trans 'In review' %}</th>
+        <th class="sorter-text">{% trans 'Order type' %}</th>
+        <th class="sorter-text">{% trans 'Revision' %}</th>
         <!-- <th class="sorter-text">{% trans 'Discount (%)' %}</th> -->
         <th class="sorter-text">{% trans 'Payment status' %}</th>
         <th class="sorter-text">{% trans 'Price+D' %}</th>
@@ -64,9 +64,10 @@
         <td>-</td>
         <td>-</td>
         <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
+        <td>loc.time</td>
+        <td class="momdl">{{task.admin_deadline}}</td>
+        <td class="momdl">{{task.writer_deadline}}</td>
+        <td>ord.type</td>
         <td>-</td>
         <td>-</td>
         <td>-</td>

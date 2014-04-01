@@ -22,6 +22,11 @@ $( document ).ready( function( ) {
     $( '.has-error, .has_tooltip' ).tooltip( {
         container: 'body',
     } );
+    $( 'td.momdl' ).each( function( ) {
+        var ts = $( this ).html( );
+        // console.log( moment( ts, 'X' ).fromNow( ) );
+        $( this ).html( moment( ts, 'X' ).fromNow( ) );
+    } );
     $( '.adm-report-ctrl' ).on( 'click', function( ) {
         var bid = $( this ).data( 'body-id' );
         var rbd = $( '#body-id-' + bid );
@@ -45,8 +50,23 @@ $( document ).ready( function( ) {
             $( this ).find( 'i' ).removeClass( 'fa-plus-circle' ).addClass( 'fa-times-circle' );
         }
     } );
+    $.tablesorter.addParser( {
+        id: 'status',
+        is: function( s ) {
+            // return false so this parser is not auto detected
+            return false;
+        },
+        format: function( s, table, cell, cellIndex ) {
+            return $( cell ).data('status');
+        },
+        // flag for filter widget (true = ALWAYS search parsed values; false = search cell text)
+        parsed: false,
+        // set type, either numeric or text
+        type: 'numeric'
+    } );
     $( '.tablesorter' ).tablesorter( {
         theme: 'default',
+        dateFormat : "MMDDYYYY"/*March 27, 2014, 5:37 p.m.*/,
     } );
 
     $( '.tablesorter0-' ).tablesorter( {
