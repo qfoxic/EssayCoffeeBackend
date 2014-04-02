@@ -39,7 +39,7 @@ def check_mobile(request):
 
 def get_stats(request):
   user = request.user
-  group = request.user.get_group()
+  group = user.is_anonymous() or request.user.get_group()
   if group == co.WRITER_GROUP:
     return {
       'finished': Task.get_finished_tasks(1, **{'assignee': user}), 
