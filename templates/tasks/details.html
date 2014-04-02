@@ -77,19 +77,27 @@
                     <div class="row small highlight">
                         <div class="col-md-3">
                             {{object.status|render_status}}<strong class="ilm">{% trans "Status" %}</strong>
-                            <div style="margin-left:2.5em">{{object.get_status}}</div>
+                            <div style="margin-left:2.5em">
+                                {{object.get_status}}
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <i class="fa fa-calendar irm" style="font-size:1.5em;"></i><strong>{% trans "Created" %}</strong>
-                            <div style="margin-left:2.5em">{{object.created}}</div>
+                            <div style="margin-left:2.5em">
+                                {{object.created}}
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <i class="fa fa-clock-o irm" style="font-size:1.5em;"></i><strong>{% trans "Updated" %}</strong>
-                            <div style="margin-left:2.5em">{{object.created}}</div>
+                            <div style="margin-left:2.5em">
+                                {{object.created}}
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <i class="fa fa-clock-o irm" style="font-size:1.5em;color:#800"></i><strong>{% trans "Deadline" %}</strong>
-                            <div style="margin-left:2.5em">{{object.created}}</div>
+                            <div style="margin-left:2.5em">
+                                {{object.created}}
+                            </div>
                         </div>
                     </div>
                     <i class="fa fa-tag fa-fw irm"></i><strong>{% trans "Paper Title" %}</strong>
