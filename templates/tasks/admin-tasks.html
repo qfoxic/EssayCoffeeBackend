@@ -45,7 +45,7 @@
         <th class="sorter-text">{% trans 'Revision' %}</th>
         <!-- <th class="sorter-text">{% trans 'Discount (%)' %}</th> -->
         <th class="sorter-text">{% trans 'Payment status' %}</th>
-        <th class="sorter-text">{% trans 'Price+D' %}</th>
+        <th class="sorter-text">{% trans 'Price / Discount' %}</th>
         <th class="sorter-text">{% trans 'Priority' %}</th>
     </tr>
 </thead>
@@ -70,7 +70,7 @@
         <td>{{task.get_access_level}}</td>
         <td>{{task.revision}}</td>
         <td>{{task.payment_status}}</td>
-        <td>{{task.price}}/{{task.discount}}</td>
+        <td>{{task.price}}/{{task.discount}} %</td>
         <td>{{task.get_priority}}</td>
     </tr>
     {% endfor %}

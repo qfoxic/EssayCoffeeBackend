@@ -3,7 +3,7 @@
 {% block pagetitle %}Tasks{% endblock %}
 {% block info_block %}
 <section class="info">
-    <h2><i class="fa fa-tasks irm"></i> {% trans "Tasks List" %} <span class="badge" style="font-size:.6em;text-shadow:none;margin-left:1em;vertical-align:middle">{{action_label}}: {{tasks|length}}</span></h2>
+    <h2><i class="fa fa-tasks irm"></i> {% trans "Tasks List" %}  <small style="color:#333;margin-left:0.5em">{{action_label}} <sup><span class="badge" style="font-size:.6em;text-shadow:none;margin-left:.5em;background-color:#08F">{{tasks|length}}</span></sup></small></h2>
 </section>
 {% endblock %}
 {% block content %}
