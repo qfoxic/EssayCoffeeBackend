@@ -44,8 +44,7 @@ comment_rm = login_required(
     login_url=reverse_lazy('login'))
 
 task_finish = login_required(
-    permission_required('general.change_task', raise_exception=True)
-      (SwitchStatusView.as_view(module_name='writer')),
+      SwitchStatusView.as_view(module_name='writer'),
     login_url=reverse_lazy('login'))
 
 urlpatterns = patterns('',

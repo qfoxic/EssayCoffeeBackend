@@ -107,7 +107,7 @@ class SwitchStatusForm(BaseForm):
         and not co.CheckPermissions(user, self.instance, co.CAN_SUBMIT)):
       raise ValidationError('Operation can not be performed.')
     elif group == co.ADMIN_GROUP:
-      if s == co.APPROVED and not co.CheckPermissions(user, self.instance, co.CAN_APPROVE):
+      if s == co.PROCESSING and not co.CheckPermissions(user, self.instance, co.CAN_APPROVE):
         raise ValidationError('Operation can not be performed.')
       elif s == co.REJECTED and not co.CheckPermissions(user, self.instance, co.CAN_REJECT):
         raise ValidationError('Operation can not be performed.')
