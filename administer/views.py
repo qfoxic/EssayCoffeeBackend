@@ -28,6 +28,7 @@ class AdminUnprocessedTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(AdminUnprocessedTasksView, self).get_context_data(**kwargs)
     context['tasks'] = Task.get_unprocessed_tasks(0)
+    context['action_label'] = 'unprocessed'
     return context
 
 
@@ -35,6 +36,7 @@ class AdminRejectedTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(AdminRejectedTasksView, self).get_context_data(**kwargs)
     context['tasks'] = Task.get_rejected_tasks(0)
+    context['action_label'] = 'rejected'
     return context
 
 
@@ -50,6 +52,7 @@ class AdminExpiredTasksView(TaskIndexView):
                                                       'status__exact': co.UNPROCESSED})
     else:
       context['tasks'] = Task.get_expired_tasks(0, **{'status__exact': co.UNPROCESSED})
+    context['action_label'] = 'expired'
     return context
 
 
@@ -63,6 +66,7 @@ class AdminActiveTasksView(TaskIndexView):
       context['tasks'] = Task.get_processing_tasks(0, **{'assignee__isnull': False})
     else:
       context['tasks'] = Task.get_processing_tasks(0)
+    context['action_label'] = 'processing'
     return context
 
 
@@ -70,6 +74,7 @@ class AdminSuspiciousTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(AdminSuspiciousTasksView, self).get_context_data(**kwargs)
     context['tasks'] = Task.get_suspicious_tasks(0)
+    context['action_label'] = 'suspicious'
     return context
 
 
@@ -77,6 +82,7 @@ class AdminFinishedTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(AdminFinishedTasksView, self).get_context_data(**kwargs)
     context['tasks'] = Task.get_finished_tasks(0)
+    context['action_label'] = 'completed'
     return context
 
 

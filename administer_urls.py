@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 from django.core.urlresolvers import reverse_lazy
 
-from general.views import SwitchStatusView,DetailTaskView
+from general.views import DetailTaskView,SwitchStatusView,LockTaskView,UnlockTaskView
 
 from comments.views import CreateCommentView,RemoveCommentView 
 from reports.views import CreateReportView,RemoveReportView 
@@ -70,7 +70,10 @@ task_approve = login_required(
     login_url=reverse_lazy('login'))
 task_reject = task_approve
 task_suspect = task_approve
-
+task_lock = login_required(LockTaskView.as_view(module_name='administer'),
+                           login_url=reverse_lazy('login'))
+task_unlock = login_required(UnlockTaskView.as_view(module_name='administer'),
+                             login_url=reverse_lazy('login'))
 
 urlpatterns = patterns('',
     url(r'^$', tasks_list),
@@ -87,6 +90,8 @@ urlpatterns = patterns('',
     url(r'^task/(?P<pk>\d+)/reject$', task_reject, name='task_reject'),
     url(r'^task/(?P<pk>\d+)/suspect$', task_suspect, name='task_suspect'),
     url(r'^task/(?P<pk>\d+)/edit$', task_update, name='task_edit'),
+    url(r'^task/(?P<pk>\d+)/lock$', task_lock, name='task_lock'),
+    url(r'^task/(?P<pk>\d+)/unlock$', task_unlock, name='task_unlock'),
 
     url(r'^comment/(?P<task_id>\d+)/new$', comment_new, name='comment_new'),
     url(r'^comment/(?P<pk>\d+)/remove$', comment_rm, name='comment_remove'),

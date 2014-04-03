@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 from django.core.urlresolvers import reverse_lazy
 
-from general.views import DetailTaskView,SwitchStatusView
+from general.views import DetailTaskView,SwitchStatusView,LockTaskView
 from writer.views import WriterTaskView,WriterActiveTasksView
-from writer.views import WriterExpiredTasksView,WriterFinishedTasksView,WriterSwitchStatusView
+from writer.views import WriterExpiredTasksView,WriterFinishedTasksView
 
 from comments.views import CreateCommentView,RemoveCommentView 
 from userprofile.views import CreateProfileView, UpdateProfileView
@@ -31,6 +31,9 @@ tasks_expired = login_required(WriterExpiredTasksView.as_view(module_name='write
 task_details = login_required(DetailTaskView.as_view(module_name='writer'),
                               login_url=reverse_lazy('login'))
 
+task_lock = login_required(LockTaskView.as_view(module_name='writer'),
+                           login_url=reverse_lazy('login'))
+
 comment_new = login_required(
     permission_required('comments.add_comment', raise_exception=True)
       (CreateCommentView.as_view(module_name='writer')),
@@ -38,11 +41,6 @@ comment_new = login_required(
 comment_rm = login_required(
     permission_required('comments.delete_comment', raise_exception=True)
       (RemoveCommentView.as_view(module_name='writer')),
-    login_url=reverse_lazy('login'))
-
-task_assign = login_required(
-    permission_required('general.change_task', raise_exception=True)
-      (WriterSwitchStatusView.as_view(module_name='writer')),
     login_url=reverse_lazy('login'))
 
 task_finish = login_required(
@@ -62,8 +60,8 @@ urlpatterns = patterns('',
     url(r'^comment/(?P<pk>\d+)/remove$', comment_rm, name='comment_remove'),
 
     url(r'^task/(?P<pk>\d+)/$', task_details, name='task_view'),
-    url(r'^task/(?P<pk>\d+)/assign$', task_assign, name='task_assign'),
     url(r'^task/(?P<pk>\d+)/finish$', task_finish, name='task_finish'),
+    url(r'^task/(?P<pk>\d+)/lock$', task_lock, name='task_lock'),
 
     url(r'profile/new', user_new, name='user_new'),
     url(r'profile/(?P<pk>\d+)/$', user_edit, name='user_details'),

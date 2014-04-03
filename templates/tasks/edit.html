@@ -9,6 +9,11 @@
     <div class="panel-body">
         <form role="form" action="{% if object %}{% url "task_edit" object.pk %}{% else %}{% url "task_new" %}{% endif %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            <!--
+            {% if form.errors  %}
+              {{form.errors}}
+            {% endif  %}
+            -->
             {% if site == "admin" %}
             <div class="row">
                 <div class="col-md-8">
@@ -132,11 +137,11 @@
                             Attributes
                         </div>
                         <div class="panel-body">
-                            <div class="form-group{% if form.writer.errors %} has-error{% endif %}">
+                            <div class="form-group{% if form.assignee.errors %} has-error{% endif %}">
                                 <label>{% trans "Writer" %}</label>
                                 <div class="input-group margin-bottom-sm">
                                     <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                                    {{form.owner|attr:"class:form-control,autocomplete:off,placeholder:Writer"}}
+                                    {{form.assignee|attr:"class:form-control,autocomplete:off,placeholder:Writer"}}
                                 </div>
                             </div>
                             <div class="form-group{% if form.mark.errors %} has-error{% endif %}">
@@ -160,10 +165,10 @@
                                     {{form.priority|attr:"class:form-control,autocomplete:off,placeholder:Priority"}}
                                 </div>
                             </div>
-                            <div class="form-group{% if form.in_review.errors %} has-error{% endif %}">
+                            <div class="form-group{% if form.revision.errors %} has-error{% endif %}">
                                 <label>&nbsp;</label>
                                 <div class="input-group margin-bottom-sm">
-                                    <span class="input-group-addon"> {{form.in_review|attr:"class:accept-chk"}} </span>
+                                    <span class="input-group-addon"> {{form.revision|attr:"class:accept-chk"}} </span>
                                     <span class="form-control" style="overflow:auto;width:100%">{% trans "In review" %}</span>
                                 </div>
                             </div>

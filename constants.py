@@ -70,9 +70,9 @@ PAYMENT_STATUS = (
 )
 PAYMENT_STATUS_DICT = dict(PAYMENT_STATUS)
 
-HIGH = 0
-MEDIUM = 1
-LOW = 2
+HIGH = '0'
+MEDIUM = '1'
+LOW = '2'
 TASK_PRIORITY = (
   (LOW, 'Low'),
   (MEDIUM, 'Medium'),
@@ -85,7 +85,7 @@ TASK_PRIORITY_DICT = dict(TASK_PRIORITY)
 # Before status will be set we have to check whether
 # according record is here and status to set is within allowed.
 STATUS_SWITCH_TABLE = {
-  PROCESSING: [COMPLETED],
+  PROCESSING: [SUSPICIOUS,REJECTED],
   UNPROCESSED: [PROCESSING,SUSPICIOUS,REJECTED],
   SUSPICIOUS: [PROCESSING,REJECTED],
   DRAFT: [UNPROCESSED],
@@ -95,6 +95,7 @@ STATUS_SWITCH_TABLE = {
 CUSTOMER_GROUP = 'customer'
 WRITER_GROUP = 'writer'
 ADMIN_GROUP = 'admin'
+EDITOR_GROUP = 'editor'
 
 # Allow user to edit orders
 CAN_EDIT = 'can_edit'
@@ -106,16 +107,20 @@ CAN_SEE_COMMENTS = 'can_see_comments'
 CAN_SUBMIT = 'can_submit'
 
 # Allow to do approve, reject, suspect 
-CAN_DO_ADMIN_ACTIONS = 'can_do_admin_actions'
-
-# Allow writers or other users to assign orders to themselves
-CAN_ASSIGN = 'can_assign'
+CAN_APPROVE = 'can_approve'
+CAN_REJECT = 'can_reject'
+CAN_SUSPECT = 'can_suspect'
 
 # Allow for writers to complete a user.
 CAN_FINISH = 'can_finish'
 
 # Allow admins to put reports on tasks
 CAN_REPORT = 'can_report'
+
+# Whether anyone can lock a task.
+CAN_LOCK = 'can_lock'
+CAN_UNLOCK = 'can_unlock'
+CAN_REVISION = 'can_revision'
 
 # 3d table with different permissions for each action and each group.
 # If specific permissions wasn't found here then it is concerned as not allowed.
@@ -133,9 +138,13 @@ PERMISSIONS_TABLE = {
   ADMIN_GROUP+str(UNPROCESSED)+CAN_SEE_COMMENTS: 1,
   ADMIN_GROUP+str(UNPROCESSED)+CAN_COMMENT: 1,
   ADMIN_GROUP+str(UNPROCESSED)+CAN_EDIT: 1,
-  ADMIN_GROUP+str(UNPROCESSED)+CAN_DO_ADMIN_ACTIONS: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_APPROVE: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_REJECT: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_SUSPECT: 1,
   ADMIN_GROUP+str(UNPROCESSED)+CAN_REPORT: 1,
-  WRITER_GROUP+str(UNPROCESSED)+CAN_ASSIGN: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_LOCK: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_UNLOCK: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_REVISION: 1,
 
   # Active or in progress permissions.
   CUSTOMER_GROUP+str(PROCESSING)+CAN_SEE_COMMENTS: 1,
@@ -143,7 +152,12 @@ PERMISSIONS_TABLE = {
   ADMIN_GROUP+str(PROCESSING)+CAN_SEE_COMMENTS: 1,
   ADMIN_GROUP+str(PROCESSING)+CAN_COMMENT: 1,
   ADMIN_GROUP+str(PROCESSING)+CAN_EDIT: 1,
-  WRITER_GROUP+str(PROCESSING)+CAN_FINISH: 1,
+  ADMIN_GROUP+str(PROCESSING)+CAN_LOCK: 1,
+  ADMIN_GROUP+str(PROCESSING)+CAN_UNLOCK: 1,
+  ADMIN_GROUP+str(PROCESSING)+CAN_REJECT: 1,
+  ADMIN_GROUP+str(PROCESSING)+CAN_SUSPECT: 1,
+  ADMIN_GROUP+str(PROCESSING)+CAN_REVISION: 1,
+  WRITER_GROUP+str(PROCESSING)+CAN_LOCK: 1,
   
   # Suspicious permissions.
   CUSTOMER_GROUP+str(SUSPICIOUS)+CAN_SEE_COMMENTS: 1,
@@ -152,12 +166,18 @@ PERMISSIONS_TABLE = {
   ADMIN_GROUP+str(SUSPICIOUS)+CAN_SEE_COMMENTS: 1,
   ADMIN_GROUP+str(SUSPICIOUS)+CAN_COMMENT: 1,
   ADMIN_GROUP+str(SUSPICIOUS)+CAN_EDIT: 1,
+  ADMIN_GROUP+str(SUSPICIOUS)+CAN_LOCK: 1,
+  ADMIN_GROUP+str(SUSPICIOUS)+CAN_UNLOCK: 1,
+  ADMIN_GROUP+str(SUSPICIOUS)+CAN_SUSPECT: 1,
+  ADMIN_GROUP+str(SUSPICIOUS)+CAN_REVISION: 1,
 
   # Rejected.
   CUSTOMER_GROUP+str(REJECTED)+CAN_SEE_COMMENTS: 1,
   ADMIN_GROUP+str(REJECTED)+CAN_SEE_COMMENTS: 1,
   ADMIN_GROUP+str(REJECTED)+CAN_COMMENT: 1,
   ADMIN_GROUP+str(REJECTED)+CAN_EDIT: 1,
+  ADMIN_GROUP+str(REJECTED)+CAN_LOCK: 1,
+  ADMIN_GROUP+str(REJECTED)+CAN_UNLOCK: 1,
 
   # Completed
   CUSTOMER_GROUP+str(COMPLETED)+CAN_SEE_COMMENTS: 1,
@@ -165,6 +185,9 @@ PERMISSIONS_TABLE = {
   ADMIN_GROUP+str(COMPLETED)+CAN_SEE_COMMENTS: 1,
   ADMIN_GROUP+str(COMPLETED)+CAN_COMMENT: 1,
   ADMIN_GROUP+str(COMPLETED)+CAN_EDIT: 1,
+  ADMIN_GROUP+str(COMPLETED)+CAN_LOCK: 1,
+  ADMIN_GROUP+str(COMPLETED)+CAN_UNLOCK: 1,
+  ADMIN_GROUP+str(COMPLETED)+CAN_REVISION: 1,
   WRITER_GROUP+str(COMPLETED)+CAN_SEE_COMMENTS: 1,
   WRITER_GROUP+str(COMPLETED)+CAN_COMMENT: 1,
 }
@@ -306,8 +329,8 @@ DISCIPLINES_DICT = dict(DISCIPLINES)
 
 # If task has public access then it will be visible to everyone.
 # private tasks are visible only for users from private group.
-PUBLIC_ACCESS = 0
-PRIVATE_ACCESS = 1
+PUBLIC_ACCESS = '0'
+PRIVATE_ACCESS = '1'
 ACCESS_LEVELS = ((PUBLIC_ACCESS, 'Public'),
                  (PRIVATE_ACCESS, 'Private'))
 ACCESS_LEVELS_DICT = dict(ACCESS_LEVELS)

@@ -6,7 +6,8 @@ import constants as co
 class WriterTaskView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(WriterTaskView, self).get_context_data(**kwargs)
-    context['tasks'] = Task.get_unprocessed_tasks(0, **{'assignee__isnull': True})
+    context['tasks'] = Task.get_processing_tasks(0, **{'assignee__isnull': True})
+    context['action_label'] = 'processing'
     return context
 
 
@@ -15,6 +16,7 @@ class WriterActiveTasksView(TaskIndexView):
     context = super(WriterActiveTasksView, self).get_context_data(**kwargs)
     cur_user = self.request.user
     context['tasks'] = Task.get_processing_tasks(0, **{'assignee': cur_user})
+    context['action_label'] = 'my processing'
     return context
 
 
@@ -24,6 +26,7 @@ class WriterExpiredTasksView(TaskIndexView):
     cur_user = self.request.user
     context['tasks'] = Task.get_expired_tasks(0, **{'assignee': cur_user,
                                                     'status__exact': co.PROCESSING})
+    context['action_label'] = 'my expired'
     return context
 
 
@@ -32,11 +35,5 @@ class WriterFinishedTasksView(TaskIndexView):
     context = super(WriterFinishedTasksView, self).get_context_data(**kwargs)
     cur_user = self.request.user
     context['tasks'] = Task.get_finished_tasks(0, **{'assignee': cur_user})
+    context['action_label'] = 'my completed'
     return context
-
-
-class WriterSwitchStatusView(SwitchStatusView):
-  def form_valid(self, form):
-    """If form is valid assign user to a task."""
-    self.object.assignee = self.request.user
-    return super(WriterSwitchStatusView, self).form_valid(form) 

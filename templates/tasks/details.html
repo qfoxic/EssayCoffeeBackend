@@ -38,7 +38,7 @@
                     <br>
                     <i class="fa fa-eye fa-fw irm"></i><strong>{% trans "Access" %}</strong>: <em>{{object.get_access_level}}</em>
                     <br>
-                    <i class="fa fa-lock fa-fw irm"></i><strong>{% trans "Revision" %}</strong>: <em>{{object.in_review}}</em>
+                    <i class="fa fa-lock fa-fw irm"></i><strong>{% trans "Revision" %}</strong>: <em>{{object.revision}}</em>
                     <br>
                     <i class="fa fa-barcode fa-fw irm"></i><strong>{% trans "Discount" %}</strong>: <em>{{object.discount}}</em>
                     <br>
@@ -51,7 +51,7 @@
                     {% elif site == 'customer' %}
                     <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em>{{object.writer}}</em>
                     <br>
-                    <i class="fa fa-lock fa-fw irm"></i><strong>{% trans "Revision" %}</strong>: <em>{{object.in_review}}</em>
+                    <i class="fa fa-lock fa-fw irm"></i><strong>{% trans "Revision" %}</strong>: <em>{{object.revision}}</em>
                     <br>
                     <i class="fa fa-credit-card fa-fw irm"></i><strong>{% trans "Payment" %}</strong>: <em>{{object.payment}}</em>
                     <br>
@@ -62,7 +62,7 @@
                     <br>
                     <i class="fa fa-clock-o fa-fw irm"></i><strong>{% trans "Writer DL" %}</strong>: <em>{{object.writer_dl}}</em>
                     <br>
-                    <i class="fa fa-lock fa-fw irm"></i><strong>{% trans "Revision" %}</strong>: <em>{{object.in_review}}</em>
+                    <i class="fa fa-lock fa-fw irm"></i><strong>{% trans "Revision" %}</strong>: <em>{{object.revision}}</em>
                     <br>
                     <i class="fa fa-exclamation-circle fa-fw irm"></i><strong>{% trans "Priority" %}</strong>: <em>{{object.get_priority}}</em>
                     <br>
@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-{% if perm.can_do_admin_actions %}6{% else %}9{% endif %}">
+        <div class="col-md-{% if perm.can_approve or perm.can_reject or perm.can_suspect %}6{% else %}9{% endif %}">
             <!-- <div class="task-details-inner"> -->
             <div class="row">
                 <div class="col-md-12">
@@ -159,15 +159,6 @@
                     </button>
                 </form>
                 {% endif %}
-                {% if perm.can_assign %}
-                <form action="{% url 'task_assign' object.pk %}" method="post" style="display:inline">
-                    {% csrf_token %}
-                    <input type="hidden" value="{{co.PROCESSING}}" name="status" />
-                    <button type="submit" class="btn btn-primary btn-lg" role="button">
-                        {% trans "Take It" %}<i class='fa fa-download' style="margin-left:.5em"></i>
-                    </button>
-                </form>
-                {% endif %}
                 {% if perm.can_finish %}
                 <form action="{% url 'task_finish' object.pk %}" method="post" style="display:inline">
                     {% csrf_token %}
@@ -177,7 +168,23 @@
                     </button>
                 </form>
                 {% endif %}
-                {% if perm.can_do_admin_actions %}
+                {% if perm.can_lock %}
+                <form action="{% url 'task_lock' object.pk %}" method="post" style="display:inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary btn-lg" role="button">
+                        {% trans "Lock" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
+                    </button>
+                </form>
+                {% endif %}
+                {% if perm.can_unlock %}
+                <form action="{% url 'task_unlock' object.pk %}" method="post" style="display:inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary btn-lg" role="button">
+                        {% trans "Unlock" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
+                    </button>
+                </form>
+                {% endif %}
+                {% if perm.can_reject %}
                 <form action="{% url "task_reject" object.pk %}" method="post" style="display:inline">
                     {% csrf_token %}
                     <input type="hidden" value="{{co.REJECTED}}" name="status">
@@ -185,6 +192,8 @@
                         {% trans "Reject" %} <i class="fa fa-thumbs-o-down" style="margin-left:.5em"></i>
                     </button>
                 </form>
+                {% endif %}
+                {% if perm.can_suspect %}
                 <form action="{% url "task_suspect" object.pk %}" method="post" style="display:inline">
                     {% csrf_token %}
                     <input type="hidden" value="{{co.SUSPICIOUS}}" name="status">
@@ -192,6 +201,8 @@
                         {% trans "Suspect" %} <i class="fa fa-warning" style="margin-left:.5em"></i>
                     </button>
                 </form>
+                {% endif %}
+                {% if perm.can_approve %}
                 <form action="{% url "task_approve" object.pk %}" method="post" style="display:inline">
                     {% csrf_token %}
                     <input type="hidden" value="{{co.PROCESSING}}" name="status">

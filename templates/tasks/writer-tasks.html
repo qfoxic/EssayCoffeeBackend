@@ -20,7 +20,7 @@
         <td>{{task.get_assigment}}</td>
         <td data-status="{{task.status}}">{{task.status|render_status}}</td>
         <td>{{task.mark}}</td>
-        <td>{{task.days_expired|floatformat:"0"}}/{{task.hours_expired|floatformat:"0"}}</td>
+        <td class="momdl">{{task.writer_deadline}}</td>
         <td>{{task.updated}}</td>
         <td>{{task.revision}}</td>
         <td>{{task.price}}</td>

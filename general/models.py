@@ -7,20 +7,24 @@ from django.core.exceptions import ValidationError
 
 import constants as co
 
+  
 
 def ValidateTerms(value):
   if not value:
     raise ValidationError('Please accept terms.')
 
+
 def ValidateEmptySelect(value):
   if not value:
     raise ValidationError('Please select an option.')
+
 
 def ValidateMinSize(size):
   def Validate(value):
     if len(value) < size:
       raise ValidationError('Size should be at least %s' % size)
   return Validate
+
 
 def get_attach_path(instance, filename):
   return os.path.join(instance.owner.username, 'attach', filename)
@@ -34,7 +38,7 @@ class Task(models.Model):
                                default=co.ASSIGMENTS[0], validators=[ValidateEmptySelect])
   level = models.CharField(choices=co.LEVELS, max_length=co.TITLE_MAX_LEN, default=co.LEVELS[0])
   urgency = models.IntegerField(choices=co.URGENCY, default=co.URGENCY[0],
-                                validators=[ValidateEmptySelect])
+                               validators=[ValidateEmptySelect])
   spacing = models.SmallIntegerField(choices=co.SPACING, default=co.SPACING[0],
                                      validators=[ValidateEmptySelect])
   page_number = models.SmallIntegerField()
@@ -48,15 +52,15 @@ class Task(models.Model):
   discount = models.CharField(max_length=co.TITLE_MAX_LEN)
   accept_terms = models.BooleanField(validators=[ValidateTerms])
   payment_status = models.SmallIntegerField(choices=co.PAYMENT_STATUS, default=co.UNPAID)
-  priority = models.SmallIntegerField(choices=co.TASK_PRIORITY, default=co.LOW,
-                                      validators=[ValidateEmptySelect])
+  priority = models.CharField(choices=co.TASK_PRIORITY, default=co.LOW,
+                              blank=True, max_length=1)
   #######################################
   site = models.TextField(blank=True,null=True)
   ttype = models.SmallIntegerField(choices=co.TASK_TYPES, blank=True,
                                    default=co.TYPE_TASK)
-  access_level = models.SmallIntegerField(choices=co.ACCESS_LEVELS,
-                                          default=co.PUBLIC_ACCESS)
-  in_review = models.BooleanField(default=False)
+  access_level = models.CharField(choices=co.ACCESS_LEVELS, blank=True,
+                                  default=co.PUBLIC_ACCESS, max_length=1)
+  revision = models.BooleanField(default=False, blank=True)
   # Users
   owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True,
                             related_name='owner')
@@ -91,8 +95,36 @@ class Task(models.Model):
     return deadline
 
   def writer_deadline(self):
-    deadline = time.mktime(self.created.timetuple())+self.urgency
-    return deadline * co.WRITER_DEADLINE_PERCENT
+    deadline = time.mktime(self.created.timetuple())+(
+        self.urgency * co.WRITER_DEADLINE_PERCENT)
+    return deadline
+  
+  def is_locked(self, user, by_user=False):
+    """If by_user is specified then check whether it is locked by that user."""
+    group = user.get_group()
+    if group == co.WRITER_GROUP:
+      return self.assignee == user if by_user else self.assignee is not None
+    elif group == co.ADMIN_GROUP:
+      return self.manager == user if by_user else self.manager is not None
+    elif group == co.EDITOR_GROUP:
+      return self.editor == user if by_user else self.editor is not None
+    return False
+  
+  def lock(self, user):
+    group = user.get_group()
+    if group == co.WRITER_GROUP:
+      self.assignee = user 
+    elif group == co.ADMIN_GROUP:
+      self.manager = user
+    elif group == co.EDITOR_GROUP:
+      self.editor = user
+   
+  def unlock(self, user):
+    group = user.get_group()
+    if group == co.ADMIN_GROUP:
+      self.manager = None 
+    elif group == co.EDITOR_GROUP:
+      self.editor = None
 
   @classmethod 
   def get_finished_tasks(cls, count_only, **kwargs):
@@ -137,7 +169,15 @@ class Task(models.Model):
     return  ('task_view', (), {'pk': self.id})
   to_link = get_absolute_url
 
-
   class Meta:
     db_table = 'tasks'
+  
+  def save(self, *args, **kwargs):
+    flds = set(self._meta.get_all_field_names())
+    if self.pk or self.id:
+      # Don't update fields below.
+      flds = flds.difference(['owner', 'site', 'id', 'ctask', 'rtask'])
+      kwargs.update({'update_fields': flds})
+      return super(Task, self).save(*args, **kwargs)
+    return super(Task, self).save(*args, **kwargs)
 

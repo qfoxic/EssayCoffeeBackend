@@ -12,7 +12,7 @@ from general.models import Task
 from userprofile.models import UserProfile
 from comments.models import Comment
 from reports.models import Report
-from general.forms import TaskForm, SwitchStatusForm
+from general.forms import TaskForm, SwitchStatusForm, LockTaskForm, UnlockTaskForm
 
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import CreateView
@@ -75,7 +75,6 @@ class BaseView(View):
   module_name = 'global'
   owner_required = False # raise an Error if owner is required.
   allowed_groups = [] # For these groups owner won't be checked.
-
   def __init__(self, **kwargs):
     super(BaseView, self).__init__(**kwargs)
     global_settings = conf.load(co.GLOBAL_MODULE_NAME)
@@ -104,6 +103,7 @@ class BaseView(View):
 
   def render_to_response(self, context, **response_kwargs):
     context.update(self.settings)
+    user = self.request.user
     # Pass constants to templates.
     context['co'] = co
     try:
@@ -111,20 +111,23 @@ class BaseView(View):
     except:
       obj = None
     context['perm'] = {
-      'can_comment': co.CheckPermissions(self.request.user, obj, co.CAN_COMMENT),
-      'can_edit': co.CheckPermissions(self.request.user, obj, co.CAN_EDIT),
-      'can_see_comments': co.CheckPermissions(self.request.user, obj, co.CAN_SEE_COMMENTS),
-      'can_submit': co.CheckPermissions(self.request.user, obj, co.CAN_SUBMIT),
+      'can_comment': co.CheckPermissions(user, obj, co.CAN_COMMENT),
+      'can_edit': co.CheckPermissions(user, obj, co.CAN_EDIT),
+      'can_see_comments': co.CheckPermissions(user, obj, co.CAN_SEE_COMMENTS),
+      'can_submit': co.CheckPermissions(user, obj, co.CAN_SUBMIT),
       # approve, suspect, reject
-      'can_do_admin_actions': co.CheckPermissions(self.request.user, obj, co.CAN_DO_ADMIN_ACTIONS),
-      # can writers assign an order to themselves.
-      'can_assign': co.CheckPermissions(self.request.user, obj, co.CAN_ASSIGN),
+      'can_approve': co.CheckPermissions(user, obj, co.CAN_APPROVE),
+      'can_reject': co.CheckPermissions(user, obj, co.CAN_REJECT),
+      'can_suspect': co.CheckPermissions(user, obj, co.CAN_SUSPECT),
       # can writers mark task as finished.
-      'can_finish': co.CheckPermissions(self.request.user, obj, co.CAN_FINISH),
+      'can_finish': co.CheckPermissions(user, obj, co.CAN_FINISH),
       # Can admins put reports on task.
-      'can_report': co.CheckPermissions(self.request.user, obj, co.CAN_REPORT)
+      'can_report': co.CheckPermissions(user, obj, co.CAN_REPORT),
+      'can_lock': co.CheckPermissions(user, obj, co.CAN_LOCK) and not obj.is_locked(user),
+      'can_unlock': co.CheckPermissions(user, obj, co.CAN_UNLOCK) and obj.is_locked(user, by_user=True)
     }
     context['stats'] = get_stats(self.request)
+    context.setdefault('action_label', 'all')
     return super(BaseView, self).render_to_response(context, **response_kwargs)
 
   def get_template_names(self):
@@ -230,6 +233,12 @@ class UpdateTaskView(BaseView, UpdateView):
   form_class = TaskForm
   queryset = Task.objects.all()
   owner_required = True
+  
+  def render_to_response(self, context, **response_kwargs):
+    obj = context['object'] or self.instance
+    if not co.CheckPermissions(self.request.user, obj, co.CAN_EDIT):
+      raise PermissionDenied
+    return super(UpdateTaskView, self).render_to_response(context, **response_kwargs)
 
   def get_form_kwargs(self):
     kwargs = super(UpdateTaskView, self).get_form_kwargs()
@@ -275,14 +284,33 @@ class RemoveTaskView(BaseView, DeleteView):
   def user_id(self):
     return self.get_object().owner.pk
 
+
 class SwitchStatusView(UpdateTaskView):
   form_class = SwitchStatusForm 
-  module_name = None 
   template_name = 'tasks/details.html'
   owner_required = False 
   
   def get_success_url(self):
     return self.object.to_link()
+
+
+class LockTaskView(UpdateTaskView):
+  form_class = LockTaskForm 
+  template_name = 'tasks/details.html'
+  owner_required = False 
+  
+  def get_success_url(self):
+    return self.object.to_link()
+
+
+class UnlockTaskView(UpdateTaskView):
+  form_class = UnlockTaskForm 
+  template_name = 'tasks/details.html'
+  owner_required = False 
+  
+  def get_success_url(self):
+    return self.object.to_link()
+
 
 class StaticHtmlView(BaseView,TemplateView):
   def get_template_names(self):

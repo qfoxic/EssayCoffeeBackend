@@ -363,7 +363,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-03-31T12:53:54Z", 
+    "last_login": "2014-04-03T13:44:39Z", 
     "groups": [
       1
     ], 
@@ -378,12 +378,12 @@
   "model": "auth.user", 
   "fields": {
     "username": "customer", 
-    "first_name": "Customer", 
-    "last_name": "Customer", 
+    "first_name": "Customer1", 
+    "last_name": "Customer1", 
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-03-31T12:50:09Z", 
+    "last_login": "2014-04-03T12:51:16Z", 
     "groups": [
       2
     ], 
@@ -403,7 +403,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-03-31T12:53:06Z", 
+    "last_login": "2014-04-03T12:49:18Z", 
     "groups": [
       3
     ], 
@@ -411,6 +411,66 @@
     "password": "pbkdf2_sha256$12000$GIK34V3KktbZ$7NSjQoXcy4B6G0u89y072En0fdC2aWYf51DtazxfU7I=", 
     "email": "employer@tr.com", 
     "date_joined": "2014-03-27T15:33:53Z"
+  }
+},
+{
+  "pk": 5, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "customer1", 
+    "first_name": "Cust1", 
+    "last_name": "Cust1", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": false, 
+    "last_login": "2014-04-03T11:47:09Z", 
+    "groups": [
+      2
+    ], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$12000$FWrYa9ZxVEqd$z0KRdE+gYL3U6HnN6LcfAaEhm7fwnPqif4unC89JlJM=", 
+    "email": "wowowow@ss.ss", 
+    "date_joined": "2014-04-03T11:47:00Z"
+  }
+},
+{
+  "pk": 6, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "writer1", 
+    "first_name": "wririrr", 
+    "last_name": "wririrr", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": false, 
+    "last_login": "2014-04-03T11:49:50Z", 
+    "groups": [
+      3
+    ], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$12000$7hNhFjV1vVFH$V8244nGQQdb6YsCUBwKSR5Grv6aguCEBHL1Rlh52FtA=", 
+    "email": "qqqqqq@qq.com", 
+    "date_joined": "2014-04-03T11:49:40Z"
+  }
+},
+{
+  "pk": 7, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "admin1", 
+    "first_name": "Admin1", 
+    "last_name": "Admin1", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": false, 
+    "last_login": "2014-04-03T13:27:26Z", 
+    "groups": [
+      1
+    ], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$12000$NZWt9DmGCVme$EBuBbv/RKjm6fAkpLAK+SMPLF05mjtS0cRmUjGTntJ0=", 
+    "email": "wowowoww@ss.ss", 
+    "date_joined": "2014-04-03T13:27:16Z"
   }
 },
 {
@@ -426,16 +486,16 @@
     "discipline": "hs", 
     "style": 1, 
     "assigment": "es", 
-    "access_level": 0, 
+    "access_level": "0", 
     "mark": null, 
-    "priority": 2, 
+    "priority": "2", 
     "attach": "", 
     "page_number": 123, 
     "editor": null, 
     "ttype": 1, 
+    "revision": false, 
     "status": 1, 
-    "updated": "2014-03-31T12:04:33Z", 
-    "in_review": false, 
+    "updated": "2014-04-03T12:35:39Z", 
     "completed": null, 
     "spacing": 1, 
     "discount": "123", 
@@ -460,16 +520,16 @@
     "discipline": "ln", 
     "style": 1, 
     "assigment": "re", 
-    "access_level": 0, 
+    "access_level": "0", 
     "mark": null, 
-    "priority": 2, 
+    "priority": "2", 
     "attach": "", 
     "page_number": 123, 
     "editor": null, 
     "ttype": 1, 
+    "revision": false, 
     "status": 2, 
     "updated": "2014-03-31T12:48:57Z", 
-    "in_review": false, 
     "completed": null, 
     "spacing": 1, 
     "discount": "123", 
@@ -494,16 +554,16 @@
     "discipline": "ln", 
     "style": 1, 
     "assigment": "re", 
-    "access_level": 0, 
+    "access_level": "0", 
     "mark": null, 
-    "priority": 2, 
+    "priority": "2", 
     "attach": "", 
     "page_number": 12, 
     "editor": null, 
     "ttype": 1, 
+    "revision": false, 
     "status": 5, 
     "updated": "2014-03-31T12:49:09Z", 
-    "in_review": false, 
     "completed": null, 
     "spacing": 1, 
     "discount": "123", 
@@ -521,23 +581,23 @@
   "fields": {
     "payment_status": 1, 
     "site": null, 
-    "assignee": null, 
+    "assignee": 4, 
     "manager": null, 
     "source_number": 223, 
     "owner": 3, 
     "discipline": "ln", 
     "style": 2, 
     "assigment": "re", 
-    "access_level": 0, 
+    "access_level": "0", 
     "mark": null, 
-    "priority": 2, 
+    "priority": "2", 
     "attach": "", 
     "page_number": 12, 
     "editor": null, 
     "ttype": 1, 
-    "status": 0, 
-    "updated": "2014-03-27T15:38:15Z", 
-    "in_review": false, 
+    "revision": false, 
+    "status": 1, 
+    "updated": "2014-04-03T12:38:32Z", 
     "completed": null, 
     "spacing": 1, 
     "discount": "1234", 
@@ -562,16 +622,16 @@
     "discipline": "ln", 
     "style": 1, 
     "assigment": "re", 
-    "access_level": 0, 
+    "access_level": "0", 
     "mark": "2.22", 
-    "priority": 2, 
+    "priority": "2", 
     "attach": "", 
     "page_number": 33, 
     "editor": null, 
     "ttype": 1, 
+    "revision": true, 
     "status": 3, 
-    "updated": "2014-03-31T12:53:16Z", 
-    "in_review": false, 
+    "updated": "2014-04-03T14:29:20Z", 
     "completed": null, 
     "spacing": 1, 
     "discount": "1234", 
@@ -581,6 +641,142 @@
     "created": "2014-03-31T12:51:07Z", 
     "urgency": 21600, 
     "paper_title": "title234"
+  }
+},
+{
+  "pk": 8, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "85.17.249.125:8089", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 123, 
+    "owner": 3, 
+    "discipline": "lt", 
+    "style": 2, 
+    "assigment": "es", 
+    "access_level": "", 
+    "mark": null, 
+    "priority": "", 
+    "attach": "", 
+    "page_number": 123, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 4, 
+    "updated": "2014-04-02T12:45:36Z", 
+    "completed": null, 
+    "spacing": 1, 
+    "discount": "123", 
+    "accept_terms": true, 
+    "instructions": "Schools were left shocked by poor results for exams taken in January, which will contribute towards pupils' final marks this summer.\r\n\r\nTeachers and parents reacted angrily to what they claimed were \"unexpectedly low grades\" for exams.\r\n\r\nThe Conservatives said the report was little short of a \"whitewash\".\r\n\r\nThe report found no one single aspect contributed to the poor results.\r\n\r\nEducation Minister Huw Lewis admitted \"marking was severe\" in his response to the report to AMs on Tuesday and added that the \"results will stand but lessons will be learned\".\r\n\r\nHe called on teachers to \"exercise increased caution when predicting grades for learners\", saying that data in the report showed \"only in a minority of cases do teacher estimates match actual outcomes\".", 
+    "level": "co", 
+    "created": "2014-04-02T12:45:25Z", 
+    "urgency": 21600, 
+    "paper_title": "paepr123"
+  }
+},
+{
+  "pk": 9, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "85.17.249.125:8089", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 123, 
+    "owner": 3, 
+    "discipline": "ln", 
+    "style": 1, 
+    "assigment": "re", 
+    "access_level": "", 
+    "mark": null, 
+    "priority": "", 
+    "attach": "", 
+    "page_number": 123, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 4, 
+    "updated": "2014-04-02T12:49:08Z", 
+    "completed": null, 
+    "spacing": 1, 
+    "discount": "123", 
+    "accept_terms": true, 
+    "instructions": "Schools were left shocked by poor results for exams taken in January, which will contribute towards pupils' final marks this summer.\r\n\r\nTeachers and parents reacted angrily to what they claimed were \"unexpectedly low grades\" for exams.\r\n\r\nThe Conservatives said the report was little short of a \"whitewash\".\r\n\r\nThe report found no one single aspect contributed to the poor results.\r\n\r\nEducation Minister Huw Lewis admitted \"marking was severe\" in his response to the report to AMs on Tuesday and added that the \"results will stand but lessons will be learned\".\r\n\r\nHe called on teachers to \"exercise increased caution when predicting grades for learners\", saying that data in the report showed \"only in a minority of cases do teacher estimates match actual outcomes\".", 
+    "level": "hs", 
+    "created": "2014-04-02T12:49:08Z", 
+    "urgency": 43200, 
+    "paper_title": "paer123"
+  }
+},
+{
+  "pk": 10, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "85.17.249.125:8089", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 123, 
+    "owner": 3, 
+    "discipline": "ln", 
+    "style": 2, 
+    "assigment": "es", 
+    "access_level": "", 
+    "mark": null, 
+    "priority": "", 
+    "attach": "", 
+    "page_number": 123, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 0, 
+    "updated": "2014-04-03T13:51:58Z", 
+    "completed": null, 
+    "spacing": 1, 
+    "discount": "123", 
+    "accept_terms": true, 
+    "instructions": "Schools were left shocked by poor results for exams taken in January, which will contribute towards pupils' final marks this summer.\r\n\r\nTeachers and parents reacted angrily to what they claimed were \"unexpectedly low grades\" for exams.\r\n\r\nThe Conservatives said the report was little short of a \"whitewash\".\r\n\r\nThe report found no one single aspect contributed to the poor results.\r\n\r\nEducation Minister Huw Lewis admitted \"marking was severe\" in his response to the report to AMs on Tuesday and added that the \"results will stand but lessons will be learned\".\r\n\r\nHe called on teachers to \"exercise increased caution when predicting grades for learners\", saying that data in the report showed \"only in a minority of cases do teacher estimates match actual outcomes\".", 
+    "level": "hs", 
+    "created": "2014-04-02T13:26:24Z", 
+    "urgency": 259200, 
+    "paper_title": "paper123"
+  }
+},
+{
+  "pk": 11, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "85.17.249.125:8089", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 222, 
+    "owner": 3, 
+    "discipline": "hs", 
+    "style": 1, 
+    "assigment": "es", 
+    "access_level": "", 
+    "mark": null, 
+    "priority": "", 
+    "attach": "", 
+    "page_number": 222, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 0, 
+    "updated": "2014-04-02T14:12:24Z", 
+    "completed": null, 
+    "spacing": 1, 
+    "discount": "123", 
+    "accept_terms": true, 
+    "instructions": "Schools were left shocked by poor results for exams taken in January, which will contribute towards pupils' final marks this summer.\r\n\r\nTeachers and parents reacted angrily to what they claimed were \"unexpectedly low grades\" for exams.\r\n\r\nThe Conservatives said the report was little short of a \"whitewash\".\r\n\r\nThe report found no one single aspect contributed to the poor results.\r\n\r\nEducation Minister Huw Lewis admitted \"marking was severe\" in his response to the report to AMs on Tuesday and added that the \"results will stand but lessons will be learned\".\r\n\r\nHe called on teachers to \"exercise increased caution when predicting grades for learners\", saying that data in the report showed \"only in a minority of cases do teacher estimates match actual outcomes\".", 
+    "level": "co", 
+    "created": "2014-04-02T14:11:57Z", 
+    "urgency": 21600, 
+    "paper_title": "papeeppeppe"
   }
 },
 {
@@ -613,7 +809,7 @@
   "pk": 3, 
   "model": "userprofile.userprofile", 
   "fields": {
-    "updated": "2014-03-27T15:33:25Z", 
+    "updated": "2014-04-02T14:20:14Z", 
     "gender": 0, 
     "phone": "222", 
     "groups": [
@@ -634,6 +830,48 @@
       3
     ], 
     "country": "AF", 
+    "user_permissions": []
+  }
+},
+{
+  "pk": 5, 
+  "model": "userprofile.userprofile", 
+  "fields": {
+    "updated": "2014-04-03T11:47:00Z", 
+    "gender": 0, 
+    "phone": "123", 
+    "groups": [
+      2
+    ], 
+    "country": "BY", 
+    "user_permissions": []
+  }
+},
+{
+  "pk": 6, 
+  "model": "userprofile.userprofile", 
+  "fields": {
+    "updated": "2014-04-03T11:50:02Z", 
+    "gender": 0, 
+    "phone": "1234", 
+    "groups": [
+      3
+    ], 
+    "country": "AT", 
+    "user_permissions": []
+  }
+},
+{
+  "pk": 7, 
+  "model": "userprofile.userprofile", 
+  "fields": {
+    "updated": "2014-04-03T13:27:21Z", 
+    "gender": 0, 
+    "phone": "12345", 
+    "groups": [
+      1
+    ], 
+    "country": "BY", 
     "user_permissions": []
   }
 }

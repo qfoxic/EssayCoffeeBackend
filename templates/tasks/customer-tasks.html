@@ -23,8 +23,8 @@
         <td data-status="{{task.status}}">{{task.status|render_status}}</td>
         <td>{% if task.assignee %}{{task.assignee}}{% endif %}</td>
         <td>{{task.created}}</td>
-        <td>{{task.urgency}}</td>
-        <td>{{task.days_expired|floatformat:"0"}}/{{task.hours_expired|floatformat:"0"}}</td>
+        <td>{{task.get_urgency}}</td>
+        <td class="momdl">{{task.writer_deadline}}</td>
         <td>{{task.review}}</td>
         <td>{{task.payment_status}}</td>
         <td>{{task.price}}</td>
