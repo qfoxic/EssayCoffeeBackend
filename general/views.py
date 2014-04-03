@@ -22,6 +22,8 @@ from django.core.mail import send_mail
 
 from django.views.generic import TemplateView
 from django.core.urlresolvers import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 import lib.confreader as conf
 import constants as co
@@ -236,14 +238,17 @@ class UpdateTaskView(BaseView, UpdateView):
   
   def render_to_response(self, context, **response_kwargs):
     obj = context['object'] or self.instance
-    if not co.CheckPermissions(self.request.user, obj, co.CAN_EDIT):
-      raise PermissionDenied
     return super(UpdateTaskView, self).render_to_response(context, **response_kwargs)
 
   def get_form_kwargs(self):
     kwargs = super(UpdateTaskView, self).get_form_kwargs()
     kwargs['request'] = self.request
     return kwargs
+
+  def form_invalid(self, form):
+    # If form is invalid redirect to task details with an error.
+    messages.add_message(self.request, messages.ERROR, str(form.errors))
+    return HttpResponseRedirect(self.get_success_url())
 
   def user_id(self):
     return self.get_object().owner.pk

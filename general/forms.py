@@ -113,6 +113,10 @@ class SwitchStatusForm(BaseForm):
         raise ValidationError('Operation can not be performed.')
       elif s == co.SUSPICIOUS and not co.CheckPermissions(user, self.instance, co.CAN_SUSPECT):
         raise ValidationError('Operation can not be performed.')
+    elif group == co.WRITER_GROUP:
+      if s == co.COMPLETED and not co.CheckPermissions(user, self.instance, co.CAN_FINISH):
+        raise ValidationError('Operation can not be performed.')
+         
 
   def clean_status(self):
     try:

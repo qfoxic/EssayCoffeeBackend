@@ -85,7 +85,7 @@ TASK_PRIORITY_DICT = dict(TASK_PRIORITY)
 # Before status will be set we have to check whether
 # according record is here and status to set is within allowed.
 STATUS_SWITCH_TABLE = {
-  PROCESSING: [SUSPICIOUS,REJECTED],
+  PROCESSING: [SUSPICIOUS,REJECTED,COMPLETED],
   UNPROCESSED: [PROCESSING,SUSPICIOUS,REJECTED],
   SUSPICIOUS: [PROCESSING,REJECTED],
   DRAFT: [UNPROCESSED],
