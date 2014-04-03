@@ -22,7 +22,7 @@ $( document ).ready( function( ) {
     $( '.has-error, .has_tooltip' ).tooltip( {
         container: 'body',
     } );
-    $( 'td.momdl' ).each( function( ) {
+    $( '.momdl' ).each( function( ) {
         var ts = $( this ).html( );
         // console.log( moment( ts, 'X' ).fromNow( ) );
         $( this ).html( moment( ts, 'X' ).fromNow( ) );
