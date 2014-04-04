@@ -336,6 +336,33 @@
   }
 },
 {
+  "pk": 4, 
+  "model": "auth.group", 
+  "fields": {
+    "name": "editor", 
+    "permissions": [
+      10, 
+      11, 
+      12, 
+      22, 
+      23, 
+      24, 
+      13, 
+      14, 
+      15, 
+      19, 
+      20, 
+      21, 
+      25, 
+      26, 
+      27, 
+      28, 
+      29, 
+      30
+    ]
+  }
+},
+{
   "pk": 1, 
   "model": "auth.user", 
   "fields": {
@@ -345,7 +372,7 @@
     "is_active": true, 
     "is_superuser": true, 
     "is_staff": true, 
-    "last_login": "2014-03-27T15:30:40Z", 
+    "last_login": "2014-04-04T12:09:31Z", 
     "groups": [], 
     "user_permissions": [], 
     "password": "pbkdf2_sha256$12000$hqf4r49QUzju$bhfwiyL/u9UhjnIidXB97lpDcsi9rs2NDqH3/xPEdjo=", 
@@ -363,7 +390,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-04-03T13:44:39Z", 
+    "last_login": "2014-04-04T11:29:35Z", 
     "groups": [
       1
     ], 
@@ -383,7 +410,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-04-03T12:51:16Z", 
+    "last_login": "2014-04-04T11:40:46Z", 
     "groups": [
       2
     ], 
@@ -471,6 +498,26 @@
     "password": "pbkdf2_sha256$12000$NZWt9DmGCVme$EBuBbv/RKjm6fAkpLAK+SMPLF05mjtS0cRmUjGTntJ0=", 
     "email": "wowowoww@ss.ss", 
     "date_joined": "2014-04-03T13:27:16Z"
+  }
+},
+{
+  "pk": 8, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "editor", 
+    "first_name": "Editor", 
+    "last_name": "Editor", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": false, 
+    "last_login": "2014-04-04T12:10:16Z", 
+    "groups": [
+      4
+    ], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$12000$YUVeBOlPSN1t$APxtMYiMqOvqu08801g4I8ne2bg+b1RX0hB0EdfsbK8=", 
+    "email": "wwwww@ss.ss", 
+    "date_joined": "2014-04-04T12:10:17Z"
   }
 },
 {
@@ -758,7 +805,7 @@
     "discipline": "hs", 
     "style": 1, 
     "assigment": "es", 
-    "access_level": "", 
+    "access_level": "1", 
     "mark": null, 
     "priority": "", 
     "attach": "", 
@@ -767,12 +814,12 @@
     "ttype": 1, 
     "revision": false, 
     "status": 0, 
-    "updated": "2014-04-02T14:12:24Z", 
+    "updated": "2014-04-04T11:30:00Z", 
     "completed": null, 
     "spacing": 1, 
     "discount": "123", 
     "accept_terms": true, 
-    "instructions": "Schools were left shocked by poor results for exams taken in January, which will contribute towards pupils' final marks this summer.\r\n\r\nTeachers and parents reacted angrily to what they claimed were \"unexpectedly low grades\" for exams.\r\n\r\nThe Conservatives said the report was little short of a \"whitewash\".\r\n\r\nThe report found no one single aspect contributed to the poor results.\r\n\r\nEducation Minister Huw Lewis admitted \"marking was severe\" in his response to the report to AMs on Tuesday and added that the \"results will stand but lessons will be learned\".\r\n\r\nHe called on teachers to \"exercise increased caution when predicting grades for learners\", saying that data in the report showed \"only in a minority of cases do teacher estimates match actual outcomes\".", 
+    "instructions": "Alaska, in her trusty snowmobile. \u201cI\u2019m always looking for ways to get more business\u2014and ways to help folks in the most challenging situations,\u201d says Mock, 26, regarding the pervasive distressed sales in her area. She\u2019s also drawn to out-of-the-ordinary transactions. \u201cSome properties will have four barns and chickens and lambs. And you\u2019ll think, \u2018How am I going to market this?\u2019\u2009\u201d", 
     "level": "co", 
     "created": "2014-04-02T14:11:57Z", 
     "urgency": 21600, 
@@ -872,6 +919,20 @@
       1
     ], 
     "country": "BY", 
+    "user_permissions": []
+  }
+},
+{
+  "pk": 8, 
+  "model": "userprofile.userprofile", 
+  "fields": {
+    "updated": "2014-04-04T12:10:44Z", 
+    "gender": 0, 
+    "phone": "123", 
+    "groups": [
+      4
+    ], 
+    "country": "AF", 
     "user_permissions": []
   }
 }

@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `auth_group`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auth_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) NOT NULL,
+  `name` varchar(80) COLLATE utf16_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `auth_group` (
 
 LOCK TABLES `auth_group` WRITE;
 /*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
-INSERT INTO `auth_group` VALUES (1,'admin'),(2,'customer'),(3,'writer');
+INSERT INTO `auth_group` VALUES (1,'admin'),(2,'customer'),(4,'editor'),(3,'writer');
 /*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ CREATE TABLE `auth_group_permissions` (
   KEY `auth_group_permissions_83d7f98b` (`permission_id`),
   CONSTRAINT `group_id_refs_id_f4b32aac` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `permission_id_refs_id_6ba0f519` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `auth_group_permissions` (
 
 LOCK TABLES `auth_group_permissions` WRITE;
 /*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
-INSERT INTO `auth_group_permissions` VALUES (2,1,10),(1,1,11),(4,1,12),(9,1,19),(5,1,20),(6,1,21),(7,1,22),(8,1,23),(15,1,24),(14,1,25),(3,1,26),(13,1,27),(11,1,28),(12,1,29),(10,1,30),(17,2,10),(16,2,11),(18,2,12),(23,2,19),(19,2,20),(20,2,21),(21,2,22),(22,2,23),(27,2,24),(25,2,28),(26,2,29),(24,2,30),(29,3,10),(28,3,11),(30,3,12),(35,3,19),(31,3,20),(32,3,21),(33,3,22),(34,3,23),(39,3,24),(37,3,28),(38,3,29),(36,3,30);
+INSERT INTO `auth_group_permissions` VALUES (2,1,10),(1,1,11),(4,1,12),(9,1,19),(5,1,20),(6,1,21),(7,1,22),(8,1,23),(15,1,24),(14,1,25),(3,1,26),(13,1,27),(11,1,28),(12,1,29),(10,1,30),(17,2,10),(16,2,11),(18,2,12),(23,2,19),(19,2,20),(20,2,21),(21,2,22),(22,2,23),(27,2,24),(25,2,28),(26,2,29),(24,2,30),(29,3,10),(28,3,11),(30,3,12),(35,3,19),(31,3,20),(32,3,21),(33,3,22),(34,3,23),(39,3,24),(37,3,28),(38,3,29),(36,3,30),(40,4,10),(41,4,11),(42,4,12),(43,4,13),(44,4,14),(45,4,15),(46,4,19),(47,4,20),(48,4,21),(49,4,22),(50,4,23),(51,4,24),(52,4,25),(53,4,26),(54,4,27),(55,4,28),(56,4,29),(57,4,30);
 /*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,14 +79,14 @@ DROP TABLE IF EXISTS `auth_permission`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auth_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
+  `name` varchar(50) COLLATE utf16_unicode_ci NOT NULL,
   `content_type_id` int(11) NOT NULL,
-  `codename` varchar(100) NOT NULL,
+  `codename` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `content_type_id` (`content_type_id`,`codename`),
   KEY `auth_permission_37ef4eb4` (`content_type_id`),
   CONSTRAINT `content_type_id_refs_id_d043b34a` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,19 +108,19 @@ DROP TABLE IF EXISTS `auth_user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auth_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `password` varchar(128) NOT NULL,
+  `password` varchar(128) COLLATE utf16_unicode_ci NOT NULL,
   `last_login` datetime NOT NULL,
   `is_superuser` tinyint(1) NOT NULL,
-  `username` varchar(30) NOT NULL,
-  `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(30) NOT NULL,
-  `email` varchar(75) NOT NULL,
+  `username` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `first_name` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `last_name` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `email` varchar(75) COLLATE utf16_unicode_ci NOT NULL,
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$hqf4r49QUzju$bhfwiyL/u9UhjnIidXB97lpDcsi9rs2NDqH3/xPEdjo=','2014-03-27 15:30:40',1,'transport','','','qqqq@qqq.qq',1,1,'2014-03-27 15:28:20'),(2,'pbkdf2_sha256$12000$FCTwXQsa18o0$yMeHLlk1dJs0ZZvlkt58pY9pUHnZKjkEuBVWHVlbYhs=','2014-04-03 13:44:39',0,'admin','Admin','Admin','qqq@admin.ukr',0,1,'2014-03-27 15:32:13'),(3,'pbkdf2_sha256$12000$8xJoplG7vwxJ$eSHhnkUyH5nm9muPL3yQfDL42rsK8HNa8pAoc7MzqvI=','2014-04-03 12:51:16',0,'customer','Customer1','Customer1','foxandkamarus@gmail.com',0,1,'2014-03-27 15:33:09'),(4,'pbkdf2_sha256$12000$GIK34V3KktbZ$7NSjQoXcy4B6G0u89y072En0fdC2aWYf51DtazxfU7I=','2014-04-03 12:49:18',0,'writer','Writer','Writer','employer@tr.com',0,1,'2014-03-27 15:33:53'),(5,'pbkdf2_sha256$12000$FWrYa9ZxVEqd$z0KRdE+gYL3U6HnN6LcfAaEhm7fwnPqif4unC89JlJM=','2014-04-03 11:47:09',0,'customer1','Cust1','Cust1','wowowow@ss.ss',0,1,'2014-04-03 11:47:00'),(6,'pbkdf2_sha256$12000$7hNhFjV1vVFH$V8244nGQQdb6YsCUBwKSR5Grv6aguCEBHL1Rlh52FtA=','2014-04-03 11:49:50',0,'writer1','wririrr','wririrr','qqqqqq@qq.com',0,1,'2014-04-03 11:49:40'),(7,'pbkdf2_sha256$12000$NZWt9DmGCVme$EBuBbv/RKjm6fAkpLAK+SMPLF05mjtS0cRmUjGTntJ0=','2014-04-03 13:27:26',0,'admin1','Admin1','Admin1','wowowoww@ss.ss',0,1,'2014-04-03 13:27:16');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$hqf4r49QUzju$bhfwiyL/u9UhjnIidXB97lpDcsi9rs2NDqH3/xPEdjo=','2014-04-04 12:09:31',1,'transport','','','qqqq@qqq.qq',1,1,'2014-03-27 15:28:20'),(2,'pbkdf2_sha256$12000$FCTwXQsa18o0$yMeHLlk1dJs0ZZvlkt58pY9pUHnZKjkEuBVWHVlbYhs=','2014-04-04 11:29:35',0,'admin','Admin','Admin','qqq@admin.ukr',0,1,'2014-03-27 15:32:13'),(3,'pbkdf2_sha256$12000$8xJoplG7vwxJ$eSHhnkUyH5nm9muPL3yQfDL42rsK8HNa8pAoc7MzqvI=','2014-04-04 11:40:46',0,'customer','Customer1','Customer1','foxandkamarus@gmail.com',0,1,'2014-03-27 15:33:09'),(4,'pbkdf2_sha256$12000$GIK34V3KktbZ$7NSjQoXcy4B6G0u89y072En0fdC2aWYf51DtazxfU7I=','2014-04-03 12:49:18',0,'writer','Writer','Writer','employer@tr.com',0,1,'2014-03-27 15:33:53'),(5,'pbkdf2_sha256$12000$FWrYa9ZxVEqd$z0KRdE+gYL3U6HnN6LcfAaEhm7fwnPqif4unC89JlJM=','2014-04-03 11:47:09',0,'customer1','Cust1','Cust1','wowowow@ss.ss',0,1,'2014-04-03 11:47:00'),(6,'pbkdf2_sha256$12000$7hNhFjV1vVFH$V8244nGQQdb6YsCUBwKSR5Grv6aguCEBHL1Rlh52FtA=','2014-04-03 11:49:50',0,'writer1','wririrr','wririrr','qqqqqq@qq.com',0,1,'2014-04-03 11:49:40'),(7,'pbkdf2_sha256$12000$NZWt9DmGCVme$EBuBbv/RKjm6fAkpLAK+SMPLF05mjtS0cRmUjGTntJ0=','2014-04-03 13:27:26',0,'admin1','Admin1','Admin1','wowowoww@ss.ss',0,1,'2014-04-03 13:27:16'),(8,'pbkdf2_sha256$12000$YUVeBOlPSN1t$APxtMYiMqOvqu08801g4I8ne2bg+b1RX0hB0EdfsbK8=','2014-04-04 12:10:16',0,'editor','Editor','Editor','wwwww@ss.ss',0,1,'2014-04-04 12:10:17');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ CREATE TABLE `auth_user_groups` (
   KEY `auth_user_groups_5f412f9a` (`group_id`),
   CONSTRAINT `user_id_refs_id_40c41112` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `group_id_refs_id_274b862c` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `auth_user_groups` (
 
 LOCK TABLES `auth_user_groups` WRITE;
 /*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
-INSERT INTO `auth_user_groups` VALUES (4,2,1),(5,3,2),(6,4,3),(7,5,2),(8,6,3),(9,7,1);
+INSERT INTO `auth_user_groups` VALUES (7,2,1),(8,3,2),(9,4,3),(10,5,2),(11,6,3),(12,7,1),(13,8,4);
 /*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +180,7 @@ CREATE TABLE `auth_user_user_permissions` (
   KEY `auth_user_user_permissions_83d7f98b` (`permission_id`),
   CONSTRAINT `user_id_refs_id_4dc23c39` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `permission_id_refs_id_35d9ac25` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,8 +201,8 @@ DROP TABLE IF EXISTS `comments`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) NOT NULL,
-  `body` longtext NOT NULL,
+  `title` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `body` longtext COLLATE utf16_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
   `rating` smallint(6) NOT NULL,
   `ctask_id` int(11) NOT NULL,
@@ -212,7 +212,7 @@ CREATE TABLE `comments` (
   KEY `comments_cd0085cc` (`cowner_id`),
   CONSTRAINT `ctask_id_refs_id_7cfa6d9b` FOREIGN KEY (`ctask_id`) REFERENCES `tasks` (`id`),
   CONSTRAINT `cowner_id_refs_id_7e062414` FOREIGN KEY (`cowner_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,16 +236,16 @@ CREATE TABLE `django_admin_log` (
   `action_time` datetime NOT NULL,
   `user_id` int(11) NOT NULL,
   `content_type_id` int(11) DEFAULT NULL,
-  `object_id` longtext,
-  `object_repr` varchar(200) NOT NULL,
+  `object_id` longtext COLLATE utf16_unicode_ci,
+  `object_repr` varchar(200) COLLATE utf16_unicode_ci NOT NULL,
   `action_flag` smallint(5) unsigned NOT NULL,
-  `change_message` longtext NOT NULL,
+  `change_message` longtext COLLATE utf16_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `django_admin_log_6340c63c` (`user_id`),
   KEY `django_admin_log_37ef4eb4` (`content_type_id`),
   CONSTRAINT `content_type_id_refs_id_93d2d1f8` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `user_id_refs_id_c0d12874` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -254,6 +254,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+INSERT INTO `django_admin_log` VALUES (1,'2014-04-04 12:10:10',1,3,'4','editor',1,''),(2,'2014-04-04 12:10:44',1,10,'8','editor',1,''),(3,'2014-04-04 12:11:06',1,10,'1','transport',2,'Changed password.');
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,12 +267,12 @@ DROP TABLE IF EXISTS `django_content_type`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `django_content_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `app_label` varchar(100) NOT NULL,
-  `model` varchar(100) NOT NULL,
+  `name` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `app_label` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `model` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `app_label` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -292,12 +293,12 @@ DROP TABLE IF EXISTS `django_session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `django_session` (
-  `session_key` varchar(40) NOT NULL,
-  `session_data` longtext NOT NULL,
+  `session_key` varchar(40) COLLATE utf16_unicode_ci NOT NULL,
+  `session_data` longtext COLLATE utf16_unicode_ci NOT NULL,
   `expire_date` datetime NOT NULL,
   PRIMARY KEY (`session_key`),
   KEY `django_session_b7b81f0c` (`expire_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -306,7 +307,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('tud68rsk01ukwz6t6pkc88aaleg2c8ok','OGI2YTYwYmQ5YTJmMjk5MzM0MTA5ZDdhNDBiZWJlOGFjNTAyYzNkNTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJwcm9maWxlLmF1dGguVXNlclByb2ZpbGVCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0=','2014-04-17 13:44:40');
+INSERT INTO `django_session` VALUES ('yqc1hwgamot8vmaed2ljx7tzf07s1q2q','NGM2OWE2OGZiM2I2YTE0MGNhYmE0ZGRkYzlmZDhiODBhNWE4YjBlMTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJwcm9maWxlLmF1dGguVXNlclByb2ZpbGVCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2014-04-18 12:09:31');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,8 +320,8 @@ DROP TABLE IF EXISTS `reports`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reports` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) NOT NULL,
-  `body` longtext NOT NULL,
+  `title` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `body` longtext COLLATE utf16_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
   `rtask_id` int(11) NOT NULL,
   `rowner_id` int(11) NOT NULL,
@@ -329,7 +330,7 @@ CREATE TABLE `reports` (
   KEY `reports_d05831e3` (`rowner_id`),
   CONSTRAINT `rtask_id_refs_id_032139a7` FOREIGN KEY (`rtask_id`) REFERENCES `tasks` (`id`),
   CONSTRAINT `rowner_id_refs_id_204a6768` FOREIGN KEY (`rowner_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -350,25 +351,25 @@ DROP TABLE IF EXISTS `tasks`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `paper_title` varchar(100) NOT NULL,
-  `discipline` varchar(100) NOT NULL,
-  `assigment` varchar(100) NOT NULL,
-  `level` varchar(100) NOT NULL,
+  `paper_title` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `discipline` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `assigment` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `level` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
   `urgency` int(11) NOT NULL,
   `spacing` smallint(6) NOT NULL,
   `page_number` smallint(6) NOT NULL,
   `style` smallint(6) NOT NULL,
   `source_number` smallint(6) NOT NULL,
   `mark` decimal(3,2) DEFAULT NULL,
-  `instructions` longtext NOT NULL,
-  `attach` varchar(100) DEFAULT NULL,
-  `discount` varchar(100) NOT NULL,
+  `instructions` longtext COLLATE utf16_unicode_ci NOT NULL,
+  `attach` varchar(100) COLLATE utf16_unicode_ci DEFAULT NULL,
+  `discount` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
   `accept_terms` tinyint(1) NOT NULL,
   `payment_status` smallint(6) NOT NULL,
-  `priority` varchar(1) NOT NULL,
-  `site` longtext,
+  `priority` varchar(1) COLLATE utf16_unicode_ci NOT NULL,
+  `site` longtext COLLATE utf16_unicode_ci,
   `ttype` smallint(6) NOT NULL,
-  `access_level` varchar(1) NOT NULL,
+  `access_level` varchar(1) COLLATE utf16_unicode_ci NOT NULL,
   `revision` tinyint(1) NOT NULL,
   `owner_id` int(11) NOT NULL,
   `assignee_id` int(11) DEFAULT NULL,
@@ -387,7 +388,7 @@ CREATE TABLE `tasks` (
   CONSTRAINT `assignee_id_refs_id_ba4d12bb` FOREIGN KEY (`assignee_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `manager_id_refs_id_ba4d12bb` FOREIGN KEY (`manager_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `owner_id_refs_id_ba4d12bb` FOREIGN KEY (`owner_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -396,7 +397,7 @@ CREATE TABLE `tasks` (
 
 LOCK TABLES `tasks` WRITE;
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-INSERT INTO `tasks` VALUES (1,'Title1','hs','es','hs',43200,1,123,1,111,NULL,'QAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZ\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQ\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQA\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQA','','123',1,1,'2',NULL,1,'0',0,3,4,NULL,NULL,'2014-03-27 15:36:31','2014-04-03 12:35:39',NULL,1),(2,'Title2','ln','re','hs',21600,1,123,1,123,NULL,'wsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx','','123',1,1,'2',NULL,1,'0',0,3,NULL,NULL,NULL,'2014-03-27 15:37:05','2014-03-31 12:48:57',NULL,2),(3,'Title3','ln','re','hs',21600,1,12,1,12,NULL,'wsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx','','123',1,1,'2',NULL,1,'0',0,3,NULL,NULL,NULL,'2014-03-27 15:37:39','2014-03-31 12:49:09',NULL,5),(4,'Title4','ln','re','hs',86400,1,12,2,223,NULL,'qazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqaz','','1234',1,1,'2',NULL,1,'0',0,3,4,NULL,NULL,'2014-03-27 15:38:14','2014-04-03 12:38:32',NULL,1),(6,'title234','ln','re','hs',21600,1,33,1,233,2.22,'title234title234title234title234title234title234title234title234title234title234title234title234title234title234\r\ntitle234title234title234title234title234title234title234title234title234title234title234title234title234title234\r\ntitle234title234title234title234title234title234title234title234title234title234title234title234title234title234\r\ntitle234title234title234title234title234title234title234title234title234title234title234title234title234title234\r\ntitle234title234title234title234title234title234title234title234title234title234title234title234title234title234','','1234',1,1,'2','85.17.249.125:8089',1,'0',1,3,4,NULL,NULL,'2014-03-31 12:51:07','2014-04-03 14:29:20',NULL,3),(8,'paepr123','lt','es','co',21600,1,123,2,123,NULL,'Schools were left shocked by poor results for exams taken in January, which will contribute towards pupils\' final marks this summer.\r\n\r\nTeachers and parents reacted angrily to what they claimed were \"unexpectedly low grades\" for exams.\r\n\r\nThe Conservatives said the report was little short of a \"whitewash\".\r\n\r\nThe report found no one single aspect contributed to the poor results.\r\n\r\nEducation Minister Huw Lewis admitted \"marking was severe\" in his response to the report to AMs on Tuesday and added that the \"results will stand but lessons will be learned\".\r\n\r\nHe called on teachers to \"exercise increased caution when predicting grades for learners\", saying that data in the report showed \"only in a minority of cases do teacher estimates match actual outcomes\".','','123',1,1,'','85.17.249.125:8089',1,'',0,3,NULL,NULL,NULL,'2014-04-02 12:45:25','2014-04-02 12:45:36',NULL,4),(9,'paer123','ln','re','hs',43200,1,123,1,123,NULL,'Schools were left shocked by poor results for exams taken in January, which will contribute towards pupils\' final marks this summer.\r\n\r\nTeachers and parents reacted angrily to what they claimed were \"unexpectedly low grades\" for exams.\r\n\r\nThe Conservatives said the report was little short of a \"whitewash\".\r\n\r\nThe report found no one single aspect contributed to the poor results.\r\n\r\nEducation Minister Huw Lewis admitted \"marking was severe\" in his response to the report to AMs on Tuesday and added that the \"results will stand but lessons will be learned\".\r\n\r\nHe called on teachers to \"exercise increased caution when predicting grades for learners\", saying that data in the report showed \"only in a minority of cases do teacher estimates match actual outcomes\".','','123',1,1,'','85.17.249.125:8089',1,'',0,3,NULL,NULL,NULL,'2014-04-02 12:49:08','2014-04-02 12:49:08',NULL,4),(10,'paper123','ln','es','hs',259200,1,123,2,123,NULL,'Schools were left shocked by poor results for exams taken in January, which will contribute towards pupils\' final marks this summer.\r\n\r\nTeachers and parents reacted angrily to what they claimed were \"unexpectedly low grades\" for exams.\r\n\r\nThe Conservatives said the report was little short of a \"whitewash\".\r\n\r\nThe report found no one single aspect contributed to the poor results.\r\n\r\nEducation Minister Huw Lewis admitted \"marking was severe\" in his response to the report to AMs on Tuesday and added that the \"results will stand but lessons will be learned\".\r\n\r\nHe called on teachers to \"exercise increased caution when predicting grades for learners\", saying that data in the report showed \"only in a minority of cases do teacher estimates match actual outcomes\".','','123',1,1,'','85.17.249.125:8089',1,'',0,3,NULL,NULL,NULL,'2014-04-02 13:26:24','2014-04-03 13:51:58',NULL,0),(11,'papeeppeppe','hs','es','co',21600,1,222,1,222,NULL,'Schools were left shocked by poor results for exams taken in January, which will contribute towards pupils\' final marks this summer.\r\n\r\nTeachers and parents reacted angrily to what they claimed were \"unexpectedly low grades\" for exams.\r\n\r\nThe Conservatives said the report was little short of a \"whitewash\".\r\n\r\nThe report found no one single aspect contributed to the poor results.\r\n\r\nEducation Minister Huw Lewis admitted \"marking was severe\" in his response to the report to AMs on Tuesday and added that the \"results will stand but lessons will be learned\".\r\n\r\nHe called on teachers to \"exercise increased caution when predicting grades for learners\", saying that data in the report showed \"only in a minority of cases do teacher estimates match actual outcomes\".','','123',1,1,'','85.17.249.125:8089',1,'',0,3,NULL,NULL,NULL,'2014-04-02 14:11:57','2014-04-02 14:12:24',NULL,0);
+INSERT INTO `tasks` VALUES (1,'Title1','hs','es','hs',43200,1,123,1,111,NULL,'QAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZ\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQ\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQA\r\nQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQAZQA','','123',1,1,'2',NULL,1,'0',0,3,4,NULL,NULL,'2014-03-27 15:36:31','2014-04-03 12:35:39',NULL,1),(2,'Title2','ln','re','hs',21600,1,123,1,123,NULL,'wsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx','','123',1,1,'2',NULL,1,'0',0,3,NULL,NULL,NULL,'2014-03-27 15:37:05','2014-03-31 12:48:57',NULL,2),(3,'Title3','ln','re','hs',21600,1,12,1,12,NULL,'wsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx\r\nwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsxwsx','','123',1,1,'2',NULL,1,'0',0,3,NULL,NULL,NULL,'2014-03-27 15:37:39','2014-03-31 12:49:09',NULL,5),(4,'Title4','ln','re','hs',86400,1,12,2,223,NULL,'qazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqazqaz\r\nqazqazqazqazqazqazqazqazqazqaz','','1234',1,1,'2',NULL,1,'0',0,3,4,NULL,NULL,'2014-03-27 15:38:14','2014-04-03 12:38:32',NULL,1),(6,'title234','ln','re','hs',21600,1,33,1,233,2.22,'title234title234title234title234title234title234title234title234title234title234title234title234title234title234\r\ntitle234title234title234title234title234title234title234title234title234title234title234title234title234title234\r\ntitle234title234title234title234title234title234title234title234title234title234title234title234title234title234\r\ntitle234title234title234title234title234title234title234title234title234title234title234title234title234title234\r\ntitle234title234title234title234title234title234title234title234title234title234title234title234title234title234','','1234',1,1,'2','85.17.249.125:8089',1,'0',1,3,4,NULL,NULL,'2014-03-31 12:51:07','2014-04-03 14:29:20',NULL,3),(8,'paepr123','lt','es','co',21600,1,123,2,123,NULL,'Schools were left shocked by poor results for exams taken in January, which will contribute towards pupils\' final marks this summer.\r\n\r\nTeachers and parents reacted angrily to what they claimed were \"unexpectedly low grades\" for exams.\r\n\r\nThe Conservatives said the report was little short of a \"whitewash\".\r\n\r\nThe report found no one single aspect contributed to the poor results.\r\n\r\nEducation Minister Huw Lewis admitted \"marking was severe\" in his response to the report to AMs on Tuesday and added that the \"results will stand but lessons will be learned\".\r\n\r\nHe called on teachers to \"exercise increased caution when predicting grades for learners\", saying that data in the report showed \"only in a minority of cases do teacher estimates match actual outcomes\".','','123',1,1,'','85.17.249.125:8089',1,'',0,3,NULL,NULL,NULL,'2014-04-02 12:45:25','2014-04-02 12:45:36',NULL,4),(9,'paer123','ln','re','hs',43200,1,123,1,123,NULL,'Schools were left shocked by poor results for exams taken in January, which will contribute towards pupils\' final marks this summer.\r\n\r\nTeachers and parents reacted angrily to what they claimed were \"unexpectedly low grades\" for exams.\r\n\r\nThe Conservatives said the report was little short of a \"whitewash\".\r\n\r\nThe report found no one single aspect contributed to the poor results.\r\n\r\nEducation Minister Huw Lewis admitted \"marking was severe\" in his response to the report to AMs on Tuesday and added that the \"results will stand but lessons will be learned\".\r\n\r\nHe called on teachers to \"exercise increased caution when predicting grades for learners\", saying that data in the report showed \"only in a minority of cases do teacher estimates match actual outcomes\".','','123',1,1,'','85.17.249.125:8089',1,'',0,3,NULL,NULL,NULL,'2014-04-02 12:49:08','2014-04-02 12:49:08',NULL,4),(10,'paper123','ln','es','hs',259200,1,123,2,123,NULL,'Schools were left shocked by poor results for exams taken in January, which will contribute towards pupils\' final marks this summer.\r\n\r\nTeachers and parents reacted angrily to what they claimed were \"unexpectedly low grades\" for exams.\r\n\r\nThe Conservatives said the report was little short of a \"whitewash\".\r\n\r\nThe report found no one single aspect contributed to the poor results.\r\n\r\nEducation Minister Huw Lewis admitted \"marking was severe\" in his response to the report to AMs on Tuesday and added that the \"results will stand but lessons will be learned\".\r\n\r\nHe called on teachers to \"exercise increased caution when predicting grades for learners\", saying that data in the report showed \"only in a minority of cases do teacher estimates match actual outcomes\".','','123',1,1,'','85.17.249.125:8089',1,'',0,3,NULL,NULL,NULL,'2014-04-02 13:26:24','2014-04-03 13:51:58',NULL,0),(11,'papeeppeppe','hs','es','co',21600,1,222,1,222,NULL,'Alaska, in her trusty snowmobile. “I’m always looking for ways to get more business—and ways to help folks in the most challenging situations,” says Mock, 26, regarding the pervasive distressed sales in her area. She’s also drawn to out-of-the-ordinary transactions. “Some properties will have four barns and chickens and lambs. And you’ll think, ‘How am I going to market this?’ ”','','123',1,1,'','85.17.249.125:8089',1,'1',0,3,NULL,NULL,NULL,'2014-04-02 14:11:57','2014-04-04 11:30:00',NULL,0);
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -410,12 +411,12 @@ DROP TABLE IF EXISTS `user_profiles`;
 CREATE TABLE `user_profiles` (
   `user_ptr_id` int(11) NOT NULL,
   `gender` smallint(6) NOT NULL,
-  `country` varchar(100) NOT NULL,
-  `phone` varchar(100) NOT NULL,
+  `country` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `phone` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`user_ptr_id`),
   CONSTRAINT `user_ptr_id_refs_id_738769bc` FOREIGN KEY (`user_ptr_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -424,7 +425,7 @@ CREATE TABLE `user_profiles` (
 
 LOCK TABLES `user_profiles` WRITE;
 /*!40000 ALTER TABLE `user_profiles` DISABLE KEYS */;
-INSERT INTO `user_profiles` VALUES (1,1,'ua','123','2014-03-27 16:30:36'),(2,0,'AF','123','2014-03-27 15:32:40'),(3,0,'AF','222','2014-04-02 14:20:14'),(4,0,'AF','123','2014-03-27 15:34:26'),(5,0,'BY','123','2014-04-03 11:47:00'),(6,0,'AT','1234','2014-04-03 11:50:02'),(7,0,'BY','12345','2014-04-03 13:27:21');
+INSERT INTO `user_profiles` VALUES (1,1,'ua','123','2014-03-27 16:30:36'),(2,0,'AF','123','2014-03-27 15:32:40'),(3,0,'AF','222','2014-04-02 14:20:14'),(4,0,'AF','123','2014-03-27 15:34:26'),(5,0,'BY','123','2014-04-03 11:47:00'),(6,0,'AT','1234','2014-04-03 11:50:02'),(7,0,'BY','12345','2014-04-03 13:27:21'),(8,0,'AF','123','2014-04-04 12:10:44');
 /*!40000 ALTER TABLE `user_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -437,4 +438,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-04-03 16:32:11
+-- Dump completed on 2014-04-04 14:11:44
