@@ -19,6 +19,10 @@
                 <div class="col-md-8">
             {% endif %}
                     <div class="row">
+                        <!-- pass some hidden fields to a customer -->
+                        {% if site == 'customer' %}
+                        <input type="hidden" name="access_level" value="{{co.PRIVATE_ACCESS}}">
+                        {% endif %}
                         <!-- left column -->
                         <div class="{% if site == 'customer' or site == 'writer' %}col-md-5 col-md-offset-1{% else %}col-md-6{% endif %}">
                             <div class="form-group{% if form.assigment.errors %} has-error{% endif %}">

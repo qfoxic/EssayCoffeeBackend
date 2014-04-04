@@ -332,8 +332,8 @@ DISCIPLINES_DICT = dict(DISCIPLINES)
 # private tasks are visible only for users from private group.
 PUBLIC_ACCESS = '0'
 PRIVATE_ACCESS = '1'
-ACCESS_LEVELS = ((PUBLIC_ACCESS, 'Public'),
-                 (PRIVATE_ACCESS, 'Private'))
+ACCESS_LEVELS = ((PRIVATE_ACCESS, 'Private'),
+                 (PUBLIC_ACCESS, 'Public'))
 ACCESS_LEVELS_DICT = dict(ACCESS_LEVELS)
 
 # Available ratings for a comments.

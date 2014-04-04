@@ -30,6 +30,9 @@ class TaskForm(BaseForm):
               'revision', 'mark'
               )
 
+  def __init__(self, request=None, *args, **kwargs):
+    super(TaskForm, self).__init__(request, *args, **kwargs)
+
   def clean_owner(self):
     """Specifies default User parameter."""
     return self.request.user
@@ -37,7 +40,7 @@ class TaskForm(BaseForm):
   def clean_site(self):
     """Specifies default Host parameter."""
     return self.request.get_host()
-
+  
   def check_permissions(self, cleaned_data):
     """Raise an exception if user can't perform a status change."""
     user = self.request.user

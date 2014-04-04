@@ -58,8 +58,9 @@ class Task(models.Model):
   site = models.TextField(blank=True,null=True)
   ttype = models.SmallIntegerField(choices=co.TASK_TYPES, blank=True,
                                    default=co.TYPE_TASK)
-  access_level = models.CharField(choices=co.ACCESS_LEVELS, blank=True,
-                                  default=co.PUBLIC_ACCESS, max_length=1)
+  access_level = models.CharField(choices=co.ACCESS_LEVELS,
+                                  default=co.PRIVATE_ACCESS,
+                                  max_length=1)
   revision = models.BooleanField(default=False, blank=True)
   # Users
   owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True,
