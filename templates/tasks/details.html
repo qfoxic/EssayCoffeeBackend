@@ -57,28 +57,31 @@
                     <form action="#" method="post" id="admin_actions">
                         {% csrf_token %}
                         <div class="btn-group">
-                            <button id="admin_actions_button" type="button" style="min-width:240px" class="btn btn-primary btn-lg" data-action="">
-                                Select action
+                            <button id="admin_actions_button" type="button" style="min-width:245px" class="btn btn-default btn-lg" data-status="">
+                                Select status
                             </button>
                             <button type="button" class="btn btn-info btn-lg dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
-                            <ul class="dropdown-menu" role="menu" id="admin_actions_list" style="min-width:240px">
+                            <ul class="dropdown-menu" role="menu" id="admin_actions_list" style="min-width:245px">
                                 <li>
-                                    <a href="#" data-action="approve"><i class="fa fa-thumbs-o-up irm"></i>Approve</a>
+                                    <a href="#" data-status="{{co.UNPROCESSED}}">{{co.UNPROCESSED|render_status}}<span class="ilm">Unprocessed</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" data-action="reject"><i class="fa fa-thumbs-o-down irm"></i>Reject</a>
+                                    <a href="#" data-status="{{co.PROCESSING}}">{{co.PROCESSING|render_status}}<span class="ilm">Processing</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" data-action="send"><i class="fa fa-share-square-o irm"></i>Send</a>
+                                    <a href="#" data-status="{{co.REJECTED}}">{{co.REJECTED|render_status}}<span class="ilm">Rejected</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" data-action="suspect"><i class="fa fa-warning irm"></i>Suspect</a>
+                                    <a href="#" data-status="{{co.SUSPICIOUS}}">{{co.SUSPICIOUS|render_status}}<span class="ilm">Suspicious</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" data-action="lock"><i class="fa fa-lock irm" ></i>Lock</a>
+                                    <a href="#" data-status="{{co.DRAFT}}">{{co.DRAFT|render_status}}<span class="ilm">Draft</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" data-status="{{co.COMPLETED}}">{{co.COMPLETED|render_status}}<span class="ilm">Completed</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -109,7 +112,7 @@
                 <div class="col-md-12">
                     <div class="row small highlight">
                         <div class="col-md-3">
-                            {{object.status|render_status}}<strong class="ilm">{% trans "Status" %}</strong>
+                            <span style="font-size:1.6em">{{object.status|render_status}}</span><strong class="ilm">{% trans "Status" %}</strong>
                             <div style="margin-left:2.5em">
                                 {{object.get_status}}
                             </div>
@@ -121,13 +124,13 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <i class="fa fa-clock-o irm" style="font-size:1.5em;"></i><strong>{% trans "Updated" %}</strong>
+                            <i class="fa fa-clock-o irm" style="font-size:1.6em;"></i><strong>{% trans "Updated" %}</strong>
                             <div style="margin-left:2.5em">
                                 {{object.updated}}
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <i class="fa fa-clock-o irm" style="font-size:1.5em;color:#800"></i><strong>{% trans "Full Deadline" %}</strong>
+                            <i class="fa fa-clock-o irm" style="font-size:1.6em;color:#800"></i><strong>{% trans "Full Deadline" %}</strong>
                             <div style="margin-left:2.5em" class="momdl">
                                 {{object.admin_deadline}}
                             </div>
@@ -171,16 +174,6 @@
                 </div>
             </div>
             <hr>
-            <!--
-            <div class="info-row">
-            <div class="info-col">
-            <i class="fa fa-lg fa-check-square-o"></i>{% trans "Status" %}: [{{object.get_status}}]
-            </div>
-            <div class="info-col">
-            <i class="fa fa-lg fa-calendar"></i>{% trans "Created" %}: {{object.created}}
-            </div>
-            </div>
-            -->
             <!-- buttons -->
             <div class="btn-group">
                 {% if perm.can_submit %}

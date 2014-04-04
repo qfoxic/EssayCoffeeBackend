@@ -19,9 +19,7 @@ $( document ).ready( function( ) {
         } );
     } );
     $( '.upload-file' ).bootstrapFileInput( );
-    $( '.has-error, .has_tooltip' ).tooltip( {
-        container: 'body',
-    } );
+
     $( '.momdl' ).each( function( ) {
         var ts = $( this ).html( );
         // console.log( moment( ts, 'X' ).fromNow( ) );
@@ -55,12 +53,19 @@ $( document ).ready( function( ) {
     if( $( '#admin_actions' ).length ) {
         $( '#admin_actions_list' ).find( 'a' ).on( 'click', function( ev ) {
             ev.preventDefault( );
-            $( '#admin_actions_button' ).html( $( this ).html( ) ).data( "action", $( this ).data( 'action' ) );
+            $( '#admin_actions_button' ).html( $( this ).html( ) ).data( "status", $( this ).data( 'status' ) );
         } );
+        $( '#admin_actions_list' ).find( 'i' ).classRemove( 'has_tooltip' ).removeAttr( 'style' ).removeAttr( 'title' );
     }
     $( '#admin_actions_button' ).on( 'click', function( ev ) {
         ev.preventDefault( );
-        $( '#admin_actions' ).append( '<input type="hidden" name="action" value="' + $( this ).data( 'action' ) + '">' ).submit( );
+        if( $( this ).data( 'status' ) ) {
+            $( '#admin_actions' ).append( '<input type="hidden" name="status" value="' + $( this ).data( 'status' ) + '">' ).submit( );
+        }
+    } );
+
+    $( '.has-error, .has_tooltip' ).tooltip( {
+        container: 'body',
     } );
 
     // tablesorter section
