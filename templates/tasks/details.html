@@ -33,7 +33,7 @@
                     <br>
                     <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Manager" %}</strong>: <em>{{object.manager}}</em>
                     <br>
-                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em>{{object.writer}}</em>
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em>{{object.assignee}}</em>
                     <br>
                     <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Editor" %}</strong>: <em>{{object.writer}}</em>
                     <br>
@@ -54,7 +54,7 @@
                     <i class="fa fa-exclamation-circle fa-fw irm"></i><strong>{% trans "Priority" %}</strong>: <em>{{object.get_priority}}</em>
                     <br>
                     {% elif site == 'customer' %}
-                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em>{{object.writer}}</em>
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em>{{object.assignee}}</em>
                     <br>
                     <i class="fa fa-lock fa-fw irm"></i><strong>{% trans "Revision" %}</strong>: <em>{{object.revision}}</em>
                     <br>
