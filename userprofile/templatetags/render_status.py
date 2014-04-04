@@ -15,6 +15,7 @@ def render_status(value):
     constants.COMPLETED   : _completed,
     constants.DRAFT       : _draft,
     constants.SUSPICIOUS  : _suspicious,
+    constants.SENT  : _sent,
   }  
 
   return  mark_safe(options[value]())
@@ -26,6 +27,9 @@ def _unprocessed():
 
 def _completed():
   return '<i class="fa fa-check-square-o has_tooltip" style="font-size:1.5em;color:#2080D0" data-placement="right" title="Completed"></i>'
+
+def _sent():
+  return '<i class="fa fa-check-square-o has_tooltip" style="font-size:1.5em;color:#2080D0" data-placement="right" title="Sent"></i>'
   
 def _suspicious():
   return '<i class="fa fa-exclamation-triangle has_tooltip" style="font-size:1.5em;color:#BF6000" data-placement="right" title="Suspicious"></i>'

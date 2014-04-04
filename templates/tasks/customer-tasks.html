@@ -9,7 +9,7 @@
         <th>{% trans 'Created' %}</th>
         <th class="sorter-text">{% trans 'Urgency' %}</th>
         <th class="sorter-text">{% trans 'Full DL' %}</th>
-        <th class="sorter-text">{% trans 'Review' %}</th>
+        <th class="sorter-text">{% trans 'Revision' %}</th>
         <th class="sorter-text">{% trans 'Payment status' %}</th>
         <th class="sorter-text">{% trans 'Price' %}</th>
     </tr>
@@ -26,7 +26,7 @@
         <td>{{task.get_urgency}}</td>
         <td class="momdl">{{task.admin_deadline}}</td>
         <td>{{task.review}}</td>
-        <td>{{task.payment_status}}</td>
+        <td>{{task.get_payment_status}}</td>
         <td>{{task.price}}</td>
     </tr>
     {% endfor %}

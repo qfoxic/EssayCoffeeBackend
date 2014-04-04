@@ -8,7 +8,7 @@ from general.views import DetailTaskView,SwitchStatusView,LockTaskView,UnlockTas
 from comments.views import CreateCommentView,RemoveCommentView 
 from reports.views import CreateReportView,RemoveReportView 
 
-from administer.views import AdminActiveTasksView,AdminRejectedTasksView,AdminUnprocessedTasksView,AdminFinishedTasksView 
+from administer.views import AdminActiveTasksView,AdminRejectedTasksView,AdminUnprocessedTasksView,AdminFinishedTasksView,AdminSentTasksView 
 from administer.views import AdminSuspiciousTasksView,AdminWritersView,AdminUpdateTaskView,AdminCustomersView,AdminExpiredTasksView
 
 from userprofile.views import CreateProfileView, UpdateProfileView
@@ -54,6 +54,8 @@ tasks_suspicious = login_required(AdminSuspiciousTasksView.as_view(module_name='
 tasks_unprocessed = tasks_list
 tasks_finished = login_required(AdminFinishedTasksView.as_view(module_name='administer'),
                                 login_url=reverse_lazy('login'))
+tasks_sent = login_required(AdminSentTasksView.as_view(module_name='administer'),
+                                login_url=reverse_lazy('login'))
 tasks_expired = login_required(AdminExpiredTasksView.as_view(module_name='administer'),
                                login_url=reverse_lazy('login'))
 
@@ -83,6 +85,7 @@ urlpatterns = patterns('',
     url(r'^tasks/suspicious$', tasks_suspicious, name='tasks_suspicious'),
     url(r'^tasks/unprocessed$', tasks_unprocessed, name='tasks_unprocessed'),
     url(r'^tasks/finished$', tasks_finished, name='tasks_finished'),
+    url(r'^tasks/sent$', tasks_sent, name='tasks_sent'),
     url(r'^tasks/expired$', tasks_expired, name='tasks_expired'),
 
     url(r'^task/(?P<pk>\d+)/$', task_details, name='task_view'),

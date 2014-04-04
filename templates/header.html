@@ -29,10 +29,6 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='fa fa-tasks fa-lg' style="margin-right:.5em"></i>{% trans "Orders "%} <b class="caret"></b></a>
                         <ul class="dropdown-menu" style="min-width:400px">
                             <li>
-                                <a href="{% url 'tasks_finished' %}"><span class="badge pull-right">{{stats.completed|default:0}}</span>{% trans "Completed orders" %}</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
                                 <strong style="margin-left: .8em;font-size:1.2em;">{% trans "Free orders" %}</strong>
                             </li>
                             <li>
@@ -50,6 +46,16 @@
                             </li>
                             <li>
                                 <a href="{% url 'tasks_expired' %}"><span class="badge pull-right">{{stats.expired|default:0}}</span> {% trans "Expired orders" %}</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <strong style="margin-left: .8em;font-size:1.2em;">{% trans "Done orders" %}</strong>
+                            </li>
+                            <li>
+                                <a href="{% url 'tasks_finished' %}"><span class="badge pull-right">{{stats.completed|default:0}}</span>{% trans "Completed orders" %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'tasks_sent' %}"><span class="badge pull-right">{{stats.sent|default:0}}</span>{% trans "Sent orders" %}</a>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -89,6 +95,9 @@
                             </li>
                             <li>
                                 <a href="{% url 'tasks_finished' %}"><span class="badge pull-right">{{stats.finished|default:0}}</span>{% trans "Finished orders" %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'tasks_sent' %}"><span class="badge pull-right">{{stats.sent|default:0}}</span>{% trans "Sent orders" %}</a>
                             </li>
                         </ul>
                     </li>

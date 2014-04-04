@@ -32,7 +32,7 @@
         <th class="sorter-text">{% trans 'Mark' %}</th>
         <th class="sorter-text">{% trans 'Site' %}</th>
         <th class="sorter-text">{% trans 'Owner' %}</th>
-        <th class="sorter-text">{% trans 'Admin' %}</th>
+        <th class="sorter-text">{% trans 'Manager' %}</th>
         <th class="sorter-text">{% trans 'Writer' %}</th>
         <th class="sorter-text">{% trans 'Editor' %}</th>
         <th class="sorter-text">{% trans 'Created' %}</th>
@@ -41,7 +41,7 @@
         <th class="sorter-text">{% trans 'Loc. time' %}</th>
         <th class="sorter-text">{% trans 'Full DL' %}</th>
         <th class="sorter-text">{% trans 'Writer DL' %}</th>
-        <th class="sorter-text">{% trans 'Order type' %}</th>
+        <th class="sorter-text">{% trans 'Access' %}</th>
         <th class="sorter-text">{% trans 'Revision' %}</th>
         <!-- <th class="sorter-text">{% trans 'Discount (%)' %}</th> -->
         <th class="sorter-text">{% trans 'Payment status' %}</th>
@@ -69,7 +69,7 @@
         <td class="momdl">{{task.writer_deadline}}</td>
         <td>{{task.get_access_level}}</td>
         <td>{{task.revision}}</td>
-        <td>{{task.payment_status}}</td>
+        <td>{{task.get_payment_status}}</td>
         <td>{{task.price}}/{{task.discount}} %</td>
         <td>{{task.get_priority}}</td>
     </tr>

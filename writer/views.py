@@ -38,3 +38,12 @@ class WriterFinishedTasksView(TaskIndexView):
     context['tasks'] = Task.get_finished_tasks(0, **{'assignee': cur_user})
     context['action_label'] = 'my completed'
     return context
+
+
+class WriterSentTasksView(TaskIndexView):
+  def get_context_data(self, **kwargs):
+    context = super(WriterSentTasksView, self).get_context_data(**kwargs)
+    cur_user = self.request.user
+    context['tasks'] = Task.get_sent_tasks(0, **{'assignee': cur_user})
+    context['action_label'] = 'my sent'
+    return context

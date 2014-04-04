@@ -45,6 +45,7 @@ def get_stats(request):
   if group == co.WRITER_GROUP:
     return {
       'finished': Task.get_finished_tasks(1, **{'assignee': user}), 
+      'sent': Task.get_sent_tasks(1, **{'assignee': user}), 
       'unprocessed': Task.get_unprocessed_tasks(1, **{'assignee': user}),
       'active': Task.get_processing_tasks(1, **{'assignee': user}),
       'expired': Task.get_expired_tasks(1, **{'assignee': user,
@@ -53,6 +54,7 @@ def get_stats(request):
   elif group == co.ADMIN_GROUP: 
     return {
       'completed': Task.get_finished_tasks(1), 
+      'sent': Task.get_sent_tasks(1), 
       'unproc': Task.get_unprocessed_tasks(1),
       'suspect': Task.get_suspicious_tasks(1), 
       'rejected': Task.get_rejected_tasks(1), 
@@ -121,8 +123,8 @@ class BaseView(View):
       'can_approve': co.CheckPermissions(user, obj, co.CAN_APPROVE),
       'can_reject': co.CheckPermissions(user, obj, co.CAN_REJECT),
       'can_suspect': co.CheckPermissions(user, obj, co.CAN_SUSPECT),
-      # can writers mark task as finished.
-      'can_finish': co.CheckPermissions(user, obj, co.CAN_FINISH),
+      # can writers mark task as sent.
+      'can_send': co.CheckPermissions(user, obj, co.CAN_SEND),
       # Can admins put reports on task.
       'can_report': co.CheckPermissions(user, obj, co.CAN_REPORT),
       'can_lock': co.CheckPermissions(user, obj, co.CAN_LOCK) and not obj.is_locked(user),

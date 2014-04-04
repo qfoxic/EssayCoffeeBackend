@@ -29,7 +29,7 @@
                     {% if site == 'admin' %}
                     <i class="fa fa-globe fa-fw irm"></i><strong>{% trans "Site" %}</strong>: <em>{{object.site}}</em>
                     <br>
-                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Owner" %}</strong>: <em>{{object.owner}}</em>
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Owner" %}</strong>: <em><a href="{% url 'user_edit' object.owner.id %}">{{object.owner}}</a></em>
                     <br>
                     <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Manager" %}</strong>: <em>{{object.manager}}</em>
                     <br>
@@ -97,9 +97,9 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <i class="fa fa-clock-o irm" style="font-size:1.5em;color:#800"></i><strong>{% trans "Writer Deadline" %}</strong>
+                            <i class="fa fa-clock-o irm" style="font-size:1.5em;color:#800"></i><strong>{% trans "Full Deadline" %}</strong>
                             <div style="margin-left:2.5em" class="momdl">
-                                {{object.writer_deadline}}
+                                {{object.admin_deadline}}
                             </div>
                         </div>
                     </div>
@@ -168,6 +168,15 @@
                     <input type="hidden" value="{{co.COMPLETED}}" name="status" >
                     <button type="submit" class="btn btn-primary btn-lg" role="button">
                         {% trans "Complete Task" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
+                    </button>
+                </form>
+                {% endif %}
+                {% if perm.can_send %}
+                <form action="{% url 'task_send' object.pk %}" method="post" style="display:inline">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{co.SENT}}" name="status" >
+                    <button type="submit" class="btn btn-primary btn-lg" role="button">
+                        {% trans "Send" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
                     </button>
                 </form>
                 {% endif %}
