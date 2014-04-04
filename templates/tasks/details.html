@@ -47,7 +47,7 @@
                     <br>
                     <i class="fa fa-barcode fa-fw irm"></i><strong>{% trans "Discount" %}</strong>: <em>{{object.discount}}</em>
                     <br>
-                    <i class="fa fa-credit-card fa-fw irm"></i><strong>{% trans "Payment" %}</strong>: <em>{{object.payment}}</em>
+                    <i class="fa fa-credit-card fa-fw irm"></i><strong>{% trans "Payment" %}</strong>: <em>{{object.get_payment_status}}</em>
                     <br>
                     <i class="fa fa-money fa-fw irm"></i><strong>{% trans "Price" %}</strong>: <em>{{object.price}}</em>
                     <br>
@@ -58,7 +58,7 @@
                     <br>
                     <i class="fa fa-lock fa-fw irm"></i><strong>{% trans "Revision" %}</strong>: <em>{{object.revision}}</em>
                     <br>
-                    <i class="fa fa-credit-card fa-fw irm"></i><strong>{% trans "Payment" %}</strong>: <em>{{object.payment}}</em>
+                    <i class="fa fa-credit-card fa-fw irm"></i><strong>{% trans "Payment" %}</strong>: <em>{{object.get_payment_status}}</em>
                     <br>
                     <i class="fa fa-money fa-fw irm"></i><strong>{% trans "Price" %}</strong>: <em>{{object.price}}</em>
                     <br>
