@@ -6,7 +6,8 @@ import constants as co
 class WriterTaskView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(WriterTaskView, self).get_context_data(**kwargs)
-    context['tasks'] = Task.get_processing_tasks(0, **{'assignee__isnull': True})
+    params = {'assignee__isnull': True, 'access_level__in': [co.PUBLIC_ACCESS]}
+    context['tasks'] = Task.get_processing_tasks(0, **params)
     context['action_label'] = 'processing'
     return context
 

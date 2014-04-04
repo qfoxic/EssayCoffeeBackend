@@ -51,7 +51,7 @@ urlpatterns = patterns('',
     url(r'^$', tasks_list),
     url(r'^tasks/$', tasks_list, name='task_list'),
     url(r'^tasks/active$', tasks_active, name='tasks_active'),
-    url(r'^tasks/unprocessed$', tasks_unprocessed, name='tasks_unprocessed'),
+    url(r'^tasks/processing$', tasks_unprocessed, name='tasks_unprocessed'),
     url(r'^tasks/finished$', tasks_finished, name='tasks_finished'),
     url(r'^tasks/expired$', tasks_expired, name='tasks_expired'),
 

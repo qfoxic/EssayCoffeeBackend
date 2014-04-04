@@ -14,6 +14,7 @@ class AdminWritersView(ListProfileView):
   def get_context_data(self, **kwargs):
     context = super(AdminWritersView, self).get_context_data(**kwargs)
     context['users'] = UserProfile.objects.filter(groups__name=co.WRITER_GROUP)
+    context['action_label'] = 'writers'
     return context
 
 
@@ -21,6 +22,7 @@ class AdminCustomersView(ListProfileView):
   def get_context_data(self, **kwargs):
     context = super(AdminCustomersView, self).get_context_data(**kwargs)
     context['users'] = UserProfile.objects.filter(groups__name=co.CUSTOMER_GROUP)
+    context['action_label'] = 'customers'
     return context
 
 
