@@ -50,6 +50,20 @@ $( document ).ready( function( ) {
             $( this ).find( 'i' ).removeClass( 'fa-plus-circle' ).addClass( 'fa-times-circle' );
         }
     } );
+
+    // admin actions
+    if( $( '#admin_actions' ).length ) {
+        $( '#admin_actions_list' ).find( 'a' ).on( 'click', function( ev ) {
+            ev.preventDefault( );
+            $( '#admin_actions_button' ).html( $( this ).html( ) ).data( "action", $( this ).data( 'action' ) );
+        } );
+    }
+    $( '#admin_actions_button' ).on( 'click', function( ev ) {
+        ev.preventDefault( );
+        $( '#admin_actions' ).append( '<input type="hidden" name="action" value="' + $( this ).data( 'action' ) + '">' ).submit( );
+    } );
+
+    // tablesorter section
     $.tablesorter.addParser( {
         id: 'status',
         is: function( s ) {
@@ -57,7 +71,7 @@ $( document ).ready( function( ) {
             return false;
         },
         format: function( s, table, cell, cellIndex ) {
-            return $( cell ).data('status');
+            return $( cell ).data( 'status' );
         },
         // flag for filter widget (true = ALWAYS search parsed values; false = search cell text)
         parsed: false,
@@ -66,7 +80,7 @@ $( document ).ready( function( ) {
     } );
     $( '.tablesorter' ).tablesorter( {
         theme: 'default',
-        dateFormat : "MMDDYYYY"/*March 27, 2014, 5:37 p.m.*/,
+        dateFormat: "MMDDYYYY"/*March 27, 2014, 5:37 p.m.*/,
     } );
 
     $( '.tablesorter0-' ).tablesorter( {
