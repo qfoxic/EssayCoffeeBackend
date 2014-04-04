@@ -39,8 +39,6 @@
                     <br>
                     <i class="fa fa-clock-o fa-fw irm"></i><strong>{% trans "Local time" %}</strong>: <em>{{object.local_time}}</em>
                     <br>
-                    <i class="fa fa-clock-o fa-fw irm"></i><strong>{% trans "Writer DL" %}</strong>: <em>{{object.writer_dl}}</em>
-                    <br>
                     <i class="fa fa-star-half-o fa-fw irm"></i><strong>{% trans "Mark" %}</strong>: <em>{{object.mark}}</em>
                     <br>
                     <i class="fa fa-eye fa-fw irm"></i><strong>{% trans "Access" %}</strong>: <em>{{object.get_access_level}}</em>
@@ -66,8 +64,6 @@
                     <br>
                     {% elif site == 'writer' %}
                     <i class="fa fa-star-half-o fa-fw irm"></i><strong>{% trans "Mark" %}</strong>: <em>{{object.mark}}</em>
-                    <br>
-                    <i class="fa fa-clock-o fa-fw irm"></i><strong>{% trans "Writer DL" %}</strong>: <em>{{object.writer_dl}}</em>
                     <br>
                     <i class="fa fa-lock fa-fw irm"></i><strong>{% trans "Revision" %}</strong>: <em>{{object.revision}}</em>
                     <br>
@@ -101,7 +97,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <i class="fa fa-clock-o irm" style="font-size:1.5em;color:#800"></i><strong>{% trans "Deadline" %}</strong>
+                            <i class="fa fa-clock-o irm" style="font-size:1.5em;color:#800"></i><strong>{% trans "Writer Deadline" %}</strong>
                             <div style="margin-left:2.5em" class="momdl">
                                 {{object.writer_deadline}}
                             </div>
