@@ -57,19 +57,22 @@
                     <form action="#" method="post" id="admin_actions">
                         {% csrf_token %}
                         <div class="btn-group">
-                            <button id="admin_actions_button" type="button" style="min-width:245px" class="btn btn-default btn-lg" data-status="">
+                            <button id="admin_actions_button" type="button" style="min-width:190px" class="btn btn-default btn-lg" data-status="">
                                 Select status
                             </button>
                             <button type="button" class="btn btn-info btn-lg dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
-                            <ul class="dropdown-menu" role="menu" id="admin_actions_list" style="min-width:245px">
+                            <ul class="dropdown-menu" role="menu" id="admin_actions_list" style="min-width:190px"> <!-- style="min-width:245px" -->
                                 <li>
                                     <a href="#" data-status="{{co.UNPROCESSED}}">{{co.UNPROCESSED|render_status}}<span class="ilm">Unprocessed</span></a>
                                 </li>
                                 <li>
                                     <a href="#" data-status="{{co.PROCESSING}}">{{co.PROCESSING|render_status}}<span class="ilm">Processing</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" data-status="{{co.COMPLETED}}">{{co.COMPLETED|render_status}}<span class="ilm">Completed</span></a>
                                 </li>
                                 <li>
                                     <a href="#" data-status="{{co.REJECTED}}">{{co.REJECTED|render_status}}<span class="ilm">Rejected</span></a>
@@ -81,7 +84,7 @@
                                     <a href="#" data-status="{{co.DRAFT}}">{{co.DRAFT|render_status}}<span class="ilm">Draft</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" data-status="{{co.COMPLETED}}">{{co.COMPLETED|render_status}}<span class="ilm">Completed</span></a>
+                                    <a href="#" data-status="{{co.SENT}}">{{co.SENT|render_status}}<span class="ilm">Sent</span></a>
                                 </li>
                             </ul>
                         </div>
