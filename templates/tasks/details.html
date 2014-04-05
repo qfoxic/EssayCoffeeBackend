@@ -64,27 +64,28 @@
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
-                            <ul class="dropdown-menu" role="menu" id="admin_actions_list" style="min-width:190px"> <!-- style="min-width:245px" -->
+                            <ul class="dropdown-menu" role="menu" id="admin_actions_list" style="min-width:190px">
+                                <!-- style="min-width:245px" -->
                                 <li>
-                                    <a href="#" data-status="{{co.UNPROCESSED}}">{{co.UNPROCESSED|render_status}}<span class="ilm">Unprocessed</span></a>
+                                    <a href="#" data-status="{{co.UNPROCESSED}}">{{co.UNPROCESSED|render_status}}<span class="ilm">{% trans "Unprocessed" %}</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" data-status="{{co.PROCESSING}}">{{co.PROCESSING|render_status}}<span class="ilm">Processing</span></a>
+                                    <a href="#" data-status="{{co.PROCESSING}}">{{co.PROCESSING|render_status}}<span class="ilm">{% trans "Processing" %}</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" data-status="{{co.COMPLETED}}">{{co.COMPLETED|render_status}}<span class="ilm">Completed</span></a>
+                                    <a href="#" data-status="{{co.COMPLETED}}">{{co.COMPLETED|render_status}}<span class="ilm">{% trans "Completed" %}</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" data-status="{{co.REJECTED}}">{{co.REJECTED|render_status}}<span class="ilm">Rejected</span></a>
+                                    <a href="#" data-status="{{co.REJECTED}}">{{co.REJECTED|render_status}}<span class="ilm">{% trans "Rejected" %}</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" data-status="{{co.SUSPICIOUS}}">{{co.SUSPICIOUS|render_status}}<span class="ilm">Suspicious</span></a>
+                                    <a href="#" data-status="{{co.SUSPICIOUS}}">{{co.SUSPICIOUS|render_status}}<span class="ilm">{% trans "Suspicious" %}</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" data-status="{{co.DRAFT}}">{{co.DRAFT|render_status}}<span class="ilm">Draft</span></a>
+                                    <a href="#" data-status="{{co.DRAFT}}">{{co.DRAFT|render_status}}<span class="ilm">{% trans "Draft" %}</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" data-status="{{co.SENT}}">{{co.SENT|render_status}}<span class="ilm">Sent</span></a>
+                                    <a href="#" data-status="{{co.SENT}}">{{co.SENT|render_status}}<span class="ilm">{% trans "Sent" %}</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -250,6 +251,53 @@
                 </form>
                 {% endif %}
             </div>
+            <hr>
+            test single form
+            <form action="#{{object.pk}}" method="post">
+                {% csrf_token %}
+                <div class="btn-group">
+                    {% if perm.can_submit %}
+                    <button type="submit" class="btn btn-primary btn-lg" role="button">
+                        {% trans "Submit" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
+                    </button>
+                    {% endif %}
+                    {% if perm.can_finish %}
+                    <button type="button" data-status="{{co.COMPLETED}}" class="btn btn-primary btn-lg" role="button">
+                        {% trans "Complete Task" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
+                    </button>
+                    {% endif %}
+                    {% if perm.can_send %}
+                    <button type="button" data-status="{{co.SENT}}" class="btn btn-primary btn-lg" role="button">
+                        {% trans "Send" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
+                    </button>
+                    {% endif %}
+                    {% if perm.can_lock %}
+                    <button type="button" data-status="?" class="btn btn-primary btn-lg" role="button">
+                        {% trans "Lock" %}<i class='fa fa-lock' style="margin-left:.5em"></i>
+                    </button>
+                    {% endif %}
+                    {% if perm.can_unlock %}
+                    <button type="button" data-status="?" class="btn btn-primary btn-lg" role="button">
+                        {% trans "Unlock" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
+                    </button>
+                    {% endif %}
+                    {% if perm.can_reject %}
+                    <button type="button" data-status="{{co.REJECTED}}" class="btn btn-danger btn-lg" role="button">
+                        {% trans "Reject" %} <i class="fa fa-thumbs-o-down" style="margin-left:.5em"></i>
+                    </button>
+                    {% endif %}
+                    {% if perm.can_suspect %}
+                    <button type="button" data-status="{{co.SUSPICIOUS}}" class="btn btn-default btn-lg" role="button">
+                        {% trans "Suspect" %} <i class="fa fa-warning" style="margin-left:.5em"></i>
+                    </button>
+                    {% endif %}
+                    {% if perm.can_approve %}
+                    <button type="button" data-status="{{co.PROCESSING}}" class="btn btn-primary btn-lg">
+                        {% trans "Approve" %} <i class="fa fa-thumbs-o-up" style="margin-left:.5em"></i>
+                    </button>
+                    {% endif %}
+                </div>
+            </form>
             <!-- .buttons -->
             <!-- </div> -->
         </div>
