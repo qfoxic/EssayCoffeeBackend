@@ -32,9 +32,19 @@
                     <br>
                     <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Owner" %}</strong>: <em><a href="{% url 'user_edit' object.owner.id %}">{{object.owner}}</a></em>
                     <br>
-                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Manager" %}</strong>: <em>{{object.manager}}</em>
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Manager" %}</strong>:
+                      <em>
+                       {% if object.manager %}
+                         <a href="{% url 'user_edit' object.manager.id %}">{{object.manager}}</a>
+                       {% endif %}
+                      </em>
                     <br>
-                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em>{{object.assignee}}</em>
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>:
+                      <em>
+                       {% if object.assignee %}
+                         <a href="{% url 'user_edit' object.assignee.id %}">{{object.assignee}}</a>
+                       {% endif %}
+                      </em>
                     <br>
                     <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Editor" %}</strong>: <em>{{object.writer}}</em>
                     <br>
