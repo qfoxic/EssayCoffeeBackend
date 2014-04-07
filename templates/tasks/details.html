@@ -32,19 +32,9 @@
                     <br>
                     <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Owner" %}</strong>: <em><a href="{% url 'user_edit' object.owner.id %}">{{object.owner}}</a></em>
                     <br>
-                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Manager" %}</strong>:
-                      <em>
-                       {% if object.manager %}
-                         <a href="{% url 'user_edit' object.manager.id %}">{{object.manager}}</a>
-                       {% endif %}
-                      </em>
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Manager" %}</strong>: <em> {% if object.manager %} <a href="{% url 'user_edit' object.manager.id %}">{{object.manager}}</a> {% endif %} </em>
                     <br>
-                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>:
-                      <em>
-                       {% if object.assignee %}
-                         <a href="{% url 'user_edit' object.assignee.id %}">{{object.assignee}}</a>
-                       {% endif %}
-                      </em>
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em> {% if object.assignee %} <a href="{% url 'user_edit' object.assignee.id %}">{{object.assignee}}</a> {% endif %} </em>
                     <br>
                     <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Editor" %}</strong>: <em>{{object.writer}}</em>
                     <br>
@@ -186,7 +176,7 @@
             </div>
             <hr>
             <!-- buttons -->
-            <form action="#{{object.pk}}" method="post"  id="admin_flat_form">
+            <form action="#" method="post"  id="admin_flat_form">
                 {% csrf_token %}
                 <div class="btn-group" id="admin_flat_buttons">
                     {% if perm.can_delete %}
@@ -195,7 +185,7 @@
                     </button>
                     {% endif %}
                     {% if perm.can_submit %}
-                    <button type="submit" data-status="{{co.UNPROCESSED}}" data-url="{% url 'task_status'  object.pk %}" class="btn btn-primary btn-lg" role="button">
+                    <button type="submit" data-status="{{co.UNPROCESSED}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg" role="button">
                         {% trans "Submit" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
                     </button>
                     {% endif %}
@@ -205,9 +195,7 @@
                     </button>
                     {% endif %}
                     {% if perm.can_send %}
-                    <button type="button" data-status="{{co.SENT}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg" role="button">
-                        {% trans "Send" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
-                    </button>
+                    <a data-status="{{co.SENT}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg send" role="button"> {% trans "Send" %}<i class='fa fa-upload' style="margin-left:.5em"></i> </a>
                     {% endif %}
                     {% if perm.can_lock %}
                     <button type="button" data-status="1000" data-url="{% url 'task_lock' object.pk %}" class="btn btn-primary btn-lg" role="button">
@@ -237,7 +225,6 @@
                 </div>
             </form>
             <!-- .buttons -->
-            <!-- </div> -->
         </div>
         {% if perm.can_report %}
         <div class="col-md-3 admin-reports">
@@ -278,5 +265,38 @@
         </div>
         {% endif %}
     </div>
+    {% if site == "writer" %}
+    <!-- Writer send file modal popup-->
+    <div class="modal fade" id="writer-send" tabindex="-1" role="dialog" aria-labelledby="writer-send-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle"></i>
+                    </button>
+                    <h4 class="modal-title" id="writer-send-label">{% trans "Send a file" %}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group{% if form.attach.errors %} has-error{% endif %}">
+                        <div class="file-input form-control">
+                            <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon"><i class="fa fa-paperclip fa-fw"></i></span>
+                                <input id="writer-attach" class="upload-file" type="file" title="Browse" name="attach">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {% trans "Close" %}<i class="fa fa-times-circle ilm"></i>
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        {% trans "Send" %}<i class="fa fa-upload ilm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 </section>
 {% endblock %}

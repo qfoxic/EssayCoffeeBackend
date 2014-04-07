@@ -55,7 +55,7 @@ $( document ).ready( function( ) {
             ev.preventDefault( );
             $( '#admin_actions_button' ).html( $( this ).html( ) ).data( "status", $( this ).data( 'status' ) );
         } );
-        // $( '#admin_actions_list' ).find( 'i' ).classRemove( 'has_tooltip' ).removeAttr( 'style' ).removeAttr( 'title' );
+        $( '#admin_actions_list' ).find( 'i' ).classRemove( 'has_tooltip' ).removeAttr( 'style' ).removeAttr( 'title' );
     }
     $( '#admin_actions_button' ).on( 'click', function( ev ) {
         ev.preventDefault( );
@@ -63,15 +63,26 @@ $( document ).ready( function( ) {
             $( '#admin_actions' ).append( '<input type="hidden" name="status" value="' + $( this ).data( 'status' ) + '">' ).submit( );
         }
     } );
-    
+
     if( $( '#admin_flat_buttons' ).length ) {
         $( '#admin_flat_buttons > button' ).on( 'click', function( ev ) {
             ev.preventDefault( );
             if( $( this ).data( 'status' ) ) {
-                $( '#admin_flat_form' ).append( '<input type="hidden" name="status" value="' + $( this ).data( 'status' ) + '">' ).attr('action', $( this ).data( 'url' )).submit( );
+                $( '#admin_flat_form' ).append( '<input type="hidden" name="status" value="' + $( this ).data( 'status' ) + '">' ).attr( 'action', $( this ).data( 'url' ) ).submit( );
+            }
+        } );
+
+        $( '#admin_flat_buttons > a.send' ).on( 'click', function( ev ) {
+            ev.preventDefault( );
+            if( $( this ).data( 'status' ) ) {
+                //     $( '#admin_flat_form' ).append( '<input type="hidden" name="status" value="' + $( this ).data( 'status' ) + '">' ).attr('action', $( this ).data( 'url' )).submit( );
+                console.log( 'dialog show' );
+                $( '#writer-send' ).modal( 'show' );
             }
         } );
     }
+
+    // $( '#writer-send' ).modal( );
 
     $( '.has-error, .has_tooltip' ).tooltip( {
         container: 'body',
