@@ -40,7 +40,7 @@ INSTRUCTION_MAX_LEN = 10000
 MAX_FILE_LEN = 50 * 1024 * 1024 # 50 MB
 
 # Task related statuses.
-UNPROCESSED = 0 
+UNPROCESSED = 7
 PROCESSING = 1
 REJECTED = 2
 COMPLETED = 3
@@ -72,16 +72,6 @@ PAYMENT_STATUS = (
 )
 PAYMENT_STATUS_DICT = dict(PAYMENT_STATUS)
 
-HIGH = '0'
-MEDIUM = '1'
-LOW = '2'
-TASK_PRIORITY = (
-  (LOW, 'Low'),
-  (MEDIUM, 'Medium'),
-  (HIGH, 'High'),
-)
-TASK_PRIORITY_DICT = dict(TASK_PRIORITY)
-
 # Main purpose of a table is do not allow to set
 # inconsistent status to an order.
 # Before status will be set we have to check whether
@@ -101,6 +91,7 @@ EDITOR_GROUP = 'editor'
 
 # Allow user to edit orders
 CAN_EDIT = 'can_edit'
+CAN_DELETE = 'can_delete'
 
 CAN_COMMENT = 'can_comment'
 CAN_SEE_COMMENTS = 'can_see_comments'
@@ -134,6 +125,7 @@ PERMISSIONS_TABLE = {
   CUSTOMER_GROUP+str(DRAFT)+CAN_SUBMIT: 1,
   CUSTOMER_GROUP+str(DRAFT)+CAN_COMMENT: 1,
   CUSTOMER_GROUP+str(DRAFT)+CAN_EDIT: 1,
+  CUSTOMER_GROUP+str(DRAFT)+CAN_DELETE: 1,
   ADMIN_GROUP+str(DRAFT)+CAN_SEE_COMMENTS: 1,
   
   # Unprocessed permissions.

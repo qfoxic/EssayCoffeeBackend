@@ -52,10 +52,9 @@
                     <br>
                     <i class="fa fa-money fa-fw irm"></i><strong>{% trans "Price" %}</strong>: <em>{{object.price}}</em>
                     <br>
-                    <i class="fa fa-exclamation-circle fa-fw irm"></i><strong>{% trans "Priority" %}</strong>: <em>{{object.get_priority}}</em>
+                    <i class="fa fa-exclamation-circle fa-fw irm"></i><strong>{% trans "Priority" %}</strong>: <em>{{object.priority}}</em>
                     <hr>
-                    <form action="{% url 'task_status' object.pk %}" method="post" id="admin_actions">
-                        <input type="hidden" name="force" value="1">
+                    <form action="{% url 'task_force_status' object.pk %}" method="post" id="admin_actions">
                         {% csrf_token %}
                         <div class="btn-group">
                             <button id="admin_actions_button" type="button" style="min-width:190px" class="btn btn-default btn-lg" data-status="">
@@ -102,7 +101,7 @@
                     <br>
                     <i class="fa fa-lock fa-fw irm"></i><strong>{% trans "Revision" %}</strong>: <em>{{object.revision}}</em>
                     <br>
-                    <i class="fa fa-exclamation-circle fa-fw irm"></i><strong>{% trans "Priority" %}</strong>: <em>{{object.get_priority}}</em>
+                    <i class="fa fa-exclamation-circle fa-fw irm"></i><strong>{% trans "Priority" %}</strong>: <em>{{object.priority}}</em>
                     <br>
                     {% endif %}
                 </div>
@@ -180,6 +179,11 @@
             <form action="#{{object.pk}}" method="post"  id="admin_flat_form">
                 {% csrf_token %}
                 <div class="btn-group" id="admin_flat_buttons">
+                    {% if perm.can_delete %}
+                    <button type="submit" data-status="1000" data-url="{% url 'task_remove'  object.pk %}" class="btn btn-primary btn-lg" role="button">
+                        {% trans "Delete" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
+                    </button>
+                    {% endif %}
                     {% if perm.can_submit %}
                     <button type="submit" data-status="{{co.UNPROCESSED}}" data-url="{% url 'task_status'  object.pk %}" class="btn btn-primary btn-lg" role="button">
                         {% trans "Submit" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>

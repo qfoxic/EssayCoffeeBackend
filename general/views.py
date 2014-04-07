@@ -89,7 +89,11 @@ class BaseView(View):
       self.settings = {}
       print 'Could not read config files for module %s: %s' % (
           self.module_name, e)
-
+  
+  def _check_permissions(self):
+    # Do nothing by default should be overloaded for different groups.
+    pass
+  
   def _owner_required(self, user, owner_id):
     """Checks whether user is owner of an entity."""
     user_group = UserProfile.objects.get(
@@ -103,6 +107,7 @@ class BaseView(View):
   def dispatch(self, request, *args, **kwargs):
     if self.owner_required:
       self._owner_required(request.user, self.user_id())
+    self._check_permissions()
     return super(BaseView, self).dispatch(request, *args, **kwargs)
 
   def render_to_response(self, context, **response_kwargs):
@@ -111,7 +116,7 @@ class BaseView(View):
     # Pass constants to templates.
     context['co'] = co
     try:
-      obj = context.get('object') or self.instance
+      obj = context.get('object') or self.get_object()
     except:
       obj = None
     context['perm'] = {
@@ -128,7 +133,8 @@ class BaseView(View):
       # Can admins put reports on task.
       'can_report': co.CheckPermissions(user, obj, co.CAN_REPORT),
       'can_lock': co.CheckPermissions(user, obj, co.CAN_LOCK) and not obj.is_locked(user),
-      'can_unlock': co.CheckPermissions(user, obj, co.CAN_UNLOCK) and obj.is_locked(user, by_user=True)
+      'can_unlock': co.CheckPermissions(user, obj, co.CAN_UNLOCK) and obj.is_locked(user, by_user=True),
+      'can_delete': co.CheckPermissions(user, obj, co.CAN_DELETE)
     }
     context['stats'] = get_stats(self.request)
     context.setdefault('action_label', 'all')
@@ -270,7 +276,20 @@ class CreateTaskView(BaseView, CreateView):
 class DetailTaskView(BaseView, DetailView):
   queryset = Task.objects.all()
   template_name = 'tasks/details.html'
-
+  
+  def _check_permissions(self):
+    user = self.request.user
+    group = user.get_group()
+    try:
+      obj = self.get_object()
+    except:
+      obj = None
+    if group == co.WRITER_GROUP:
+      # For writers we should check whether task
+      # has been already assigned to another writer.
+      if obj and obj.assignee and user.id != obj.assignee.id:
+        raise PermissionDenied
+ 
   def get_context_data(self, **kwargs):
     context = super(DetailTaskView, self).get_context_data(**kwargs)
     task_id = self.kwargs.get('pk')
@@ -287,6 +306,18 @@ class RemoveTaskView(BaseView, DeleteView):
   success_url = reverse_lazy('task_list')
   template_name = 'tasks/delete.html'
   owner_required = True
+
+  def _check_permissions(self):
+    user = self.request.user
+    group = user.get_group()
+    try:
+      obj = self.get_object()
+    except:
+      obj = None
+    if group in co.CUSTOMER_GROUP:
+      # We can remove task only in draft version.
+      if not co.CheckPermissions(user, obj, co.CAN_DELETE):
+        raise PermissionDenied
 
   def user_id(self):
     return self.get_object().owner.pk

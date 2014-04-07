@@ -1,5 +1,6 @@
 from django.forms import ModelForm, ValidationError
 from general.models import Task
+from userprofile.models import UserProfile
 
 import constants as co
 
@@ -32,6 +33,8 @@ class TaskForm(BaseForm):
 
   def __init__(self, request=None, *args, **kwargs):
     super(TaskForm, self).__init__(request, *args, **kwargs)
+    self.writers = UserProfile.objects.filter(groups__name=co.WRITER_GROUP)
+    self.fields['assignee'].queryset = self.writers
 
   def clean_owner(self):
     """Specifies default User parameter."""
@@ -127,3 +130,20 @@ class SwitchStatusForm(BaseForm):
       next_status = None
     self.check_status_allowed(next_status)
     return next_status
+
+
+class ForceSwitchStatusForm(BaseForm):
+  class Meta(BaseForm.Meta):
+    fields = ('status',)
+  
+  def clean_status(self):
+    try:
+      status = int(self.request.POST.get('status'))
+      # Very simple verification.
+      co.TASK_STATUSES_DICT[status]
+    except (TypeError, ValueError, KeyError):
+      raise ValidationError('Status does not exists.') 
+    return status
+  
+  def check_permissions(self, cleaned_data):
+    pass

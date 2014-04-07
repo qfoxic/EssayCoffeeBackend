@@ -1,5 +1,6 @@
 from general.models import Task
 from general.views import TaskIndexView,UpdateTaskView
+from general.forms import ForceSwitchStatusForm
 
 from userprofile.models import UserProfile
 from userprofile.views import ListProfileView
@@ -9,6 +10,14 @@ import constants as co
 class AdminUpdateTaskView(UpdateTaskView):
   owner_required=False
 
+
+class AdminForceSwitchStatusView(UpdateTaskView):
+  form_class = ForceSwitchStatusForm 
+  template_name = 'tasks/details.html'
+  owner_required = False 
+  
+  def get_success_url(self):
+    return self.object.to_link()
 
 class AdminWritersView(ListProfileView):
   def get_context_data(self, **kwargs):

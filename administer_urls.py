@@ -9,7 +9,8 @@ from comments.views import CreateCommentView,RemoveCommentView
 from reports.views import CreateReportView,RemoveReportView 
 
 from administer.views import AdminActiveTasksView,AdminRejectedTasksView,AdminUnprocessedTasksView,AdminFinishedTasksView,AdminSentTasksView 
-from administer.views import AdminSuspiciousTasksView,AdminWritersView,AdminUpdateTaskView,AdminCustomersView,AdminExpiredTasksView
+from administer.views import AdminCustomersView,AdminExpiredTasksView,AdminForceSwitchStatusView
+from administer.views import AdminSuspiciousTasksView,AdminWritersView,AdminUpdateTaskView,AdminCustomersView
 
 from userprofile.views import CreateProfileView, UpdateProfileView
 
@@ -71,6 +72,11 @@ task_status = login_required(
       (SwitchStatusView.as_view(module_name='administer')),
     login_url=reverse_lazy('login'))
 
+task_force_status = login_required(
+    permission_required('general.change_task', raise_exception=True)
+      (AdminForceSwitchStatusView.as_view(module_name='administer')),
+    login_url=reverse_lazy('login'))
+
 task_lock = login_required(LockTaskView.as_view(module_name='administer'),
                            login_url=reverse_lazy('login'))
 task_unlock = login_required(UnlockTaskView.as_view(module_name='administer'),
@@ -89,6 +95,7 @@ urlpatterns = patterns('',
 
     url(r'^task/(?P<pk>\d+)/$', task_details, name='task_view'),
     url(r'^task/(?P<pk>\d+)/status$', task_status, name='task_status'),
+    url(r'^task/(?P<pk>\d+)/fstatus$', task_force_status, name='task_force_status'),
     url(r'^task/(?P<pk>\d+)/edit$', task_update, name='task_edit'),
     url(r'^task/(?P<pk>\d+)/lock$', task_lock, name='task_lock'),
     url(r'^task/(?P<pk>\d+)/unlock$', task_unlock, name='task_unlock'),
