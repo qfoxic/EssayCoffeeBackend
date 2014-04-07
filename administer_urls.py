@@ -66,12 +66,11 @@ task_update = login_required(
     (AdminUpdateTaskView.as_view(module_name='administer')),
   login_url=reverse_lazy('login'))
 
-task_approve = login_required(
+task_status = login_required(
     permission_required('general.change_task', raise_exception=True)
       (SwitchStatusView.as_view(module_name='administer')),
     login_url=reverse_lazy('login'))
-task_reject = task_approve
-task_suspect = task_approve
+
 task_lock = login_required(LockTaskView.as_view(module_name='administer'),
                            login_url=reverse_lazy('login'))
 task_unlock = login_required(UnlockTaskView.as_view(module_name='administer'),
@@ -89,9 +88,7 @@ urlpatterns = patterns('',
     url(r'^tasks/expired$', tasks_expired, name='tasks_expired'),
 
     url(r'^task/(?P<pk>\d+)/$', task_details, name='task_view'),
-    url(r'^task/(?P<pk>\d+)/approve$', task_approve, name='task_approve'),
-    url(r'^task/(?P<pk>\d+)/reject$', task_reject, name='task_reject'),
-    url(r'^task/(?P<pk>\d+)/suspect$', task_suspect, name='task_suspect'),
+    url(r'^task/(?P<pk>\d+)/status$', task_status, name='task_status'),
     url(r'^task/(?P<pk>\d+)/edit$', task_update, name='task_edit'),
     url(r'^task/(?P<pk>\d+)/lock$', task_lock, name='task_lock'),
     url(r'^task/(?P<pk>\d+)/unlock$', task_unlock, name='task_unlock'),

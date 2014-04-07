@@ -54,7 +54,8 @@
                     <br>
                     <i class="fa fa-exclamation-circle fa-fw irm"></i><strong>{% trans "Priority" %}</strong>: <em>{{object.get_priority}}</em>
                     <hr>
-                    <form action="#" method="post" id="admin_actions">
+                    <form action="{% url 'task_status' object.pk %}" method="post" id="admin_actions">
+                        <input type="hidden" name="force" value="1">
                         {% csrf_token %}
                         <div class="btn-group">
                             <button id="admin_actions_button" type="button" style="min-width:190px" class="btn btn-default btn-lg" data-status="">
@@ -80,9 +81,6 @@
                                 </li>
                                 <li>
                                     <a href="#" data-status="{{co.SUSPICIOUS}}">{{co.SUSPICIOUS|render_status}}<span class="ilm">{% trans "Suspicious" %}</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" data-status="{{co.DRAFT}}">{{co.DRAFT|render_status}}<span class="ilm">{% trans "Draft" %}</span></a>
                                 </li>
                                 <li>
                                     <a href="#" data-status="{{co.SENT}}">{{co.SENT|render_status}}<span class="ilm">{% trans "Sent" %}</span></a>
@@ -179,120 +177,46 @@
             </div>
             <hr>
             <!-- buttons -->
-            <div class="btn-group">
-                {% if perm.can_submit %}
-                <form action="{% url 'task_submit' object.pk %}" method="post" style="display:inline">
-                    {% csrf_token %}
-                    <input type="hidden" value="{{co.UNPROCESSED}}" name="status">
-                    <button type="submit" class="btn btn-primary btn-lg" role="button">
-                        {% trans "Submit" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
-                    </button>
-                </form>
-                {% endif %}
-                {% if perm.can_finish %}
-                <form action="{% url 'task_finish' object.pk %}" method="post" style="display:inline">
-                    {% csrf_token %}
-                    <input type="hidden" value="{{co.COMPLETED}}" name="status" >
-                    <button type="submit" class="btn btn-primary btn-lg" role="button">
-                        {% trans "Complete Task" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
-                    </button>
-                </form>
-                {% endif %}
-                {% if perm.can_send %}
-                <form action="{% url 'task_send' object.pk %}" method="post" style="display:inline">
-                    {% csrf_token %}
-                    <input type="hidden" value="{{co.SENT}}" name="status" >
-                    <button type="submit" class="btn btn-primary btn-lg" role="button">
-                        {% trans "Send" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
-                    </button>
-                </form>
-                {% endif %}
-                {% if perm.can_lock %}
-                <form action="{% url 'task_lock' object.pk %}" method="post" style="display:inline">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary btn-lg" role="button">
-                        {% trans "Lock" %}<i class='fa fa-lock' style="margin-left:.5em"></i>
-                    </button>
-                </form>
-                {% endif %}
-                {% if perm.can_unlock %}
-                <form action="{% url 'task_unlock' object.pk %}" method="post" style="display:inline">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary btn-lg" role="button">
-                        {% trans "Unlock" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
-                    </button>
-                </form>
-                {% endif %}
-                {% if perm.can_reject %}
-                <form action="{% url "task_reject" object.pk %}" method="post" style="display:inline">
-                    {% csrf_token %}
-                    <input type="hidden" value="{{co.REJECTED}}" name="status">
-                    <button type="submit" class="btn btn-danger btn-lg" role="button">
-                        {% trans "Reject" %} <i class="fa fa-thumbs-o-down" style="margin-left:.5em"></i>
-                    </button>
-                </form>
-                {% endif %}
-                {% if perm.can_suspect %}
-                <form action="{% url "task_suspect" object.pk %}" method="post" style="display:inline">
-                    {% csrf_token %}
-                    <input type="hidden" value="{{co.SUSPICIOUS}}" name="status">
-                    <button type="submit" class="btn btn-default btn-lg" role="button">
-                        {% trans "Suspect" %} <i class="fa fa-warning" style="margin-left:.5em"></i>
-                    </button>
-                </form>
-                {% endif %}
-                {% if perm.can_approve %}
-                <form action="{% url "task_approve" object.pk %}" method="post" style="display:inline">
-                    {% csrf_token %}
-                    <input type="hidden" value="{{co.PROCESSING}}" name="status">
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        {% trans "Approve" %} <i class="fa fa-thumbs-o-up" style="margin-left:.5em"></i>
-                    </button>
-                </form>
-                {% endif %}
-            </div>
-            <hr>
-            test single form
-            <form action="#{{object.pk}}" method="post">
+            <form action="#{{object.pk}}" method="post"  id="admin_flat_form">
                 {% csrf_token %}
-                <div class="btn-group">
+                <div class="btn-group" id="admin_flat_buttons">
                     {% if perm.can_submit %}
-                    <button type="submit" class="btn btn-primary btn-lg" role="button">
+                    <button type="submit" data-status="{{co.UNPROCESSED}}" data-url="{% url 'task_status'  object.pk %}" class="btn btn-primary btn-lg" role="button">
                         {% trans "Submit" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
                     </button>
                     {% endif %}
                     {% if perm.can_finish %}
-                    <button type="button" data-status="{{co.COMPLETED}}" class="btn btn-primary btn-lg" role="button">
+                    <button type="button" data-status="{{co.COMPLETED}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg" role="button">
                         {% trans "Complete Task" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
                     </button>
                     {% endif %}
                     {% if perm.can_send %}
-                    <button type="button" data-status="{{co.SENT}}" class="btn btn-primary btn-lg" role="button">
+                    <button type="button" data-status="{{co.SENT}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg" role="button">
                         {% trans "Send" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
                     </button>
                     {% endif %}
                     {% if perm.can_lock %}
-                    <button type="button" data-status="?" class="btn btn-primary btn-lg" role="button">
+                    <button type="button" data-status="1000" data-url="{% url 'task_lock' object.pk %}" class="btn btn-primary btn-lg" role="button">
                         {% trans "Lock" %}<i class='fa fa-lock' style="margin-left:.5em"></i>
                     </button>
                     {% endif %}
                     {% if perm.can_unlock %}
-                    <button type="button" data-status="?" class="btn btn-primary btn-lg" role="button">
+                    <button type="button" data-status="1000"  data-url="{% url 'task_unlock' object.pk %}" class="btn btn-primary btn-lg" role="button">
                         {% trans "Unlock" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
                     </button>
                     {% endif %}
                     {% if perm.can_reject %}
-                    <button type="button" data-status="{{co.REJECTED}}" class="btn btn-danger btn-lg" role="button">
+                    <button type="button" data-status="{{co.REJECTED}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-danger btn-lg" role="button">
                         {% trans "Reject" %} <i class="fa fa-thumbs-o-down" style="margin-left:.5em"></i>
                     </button>
                     {% endif %}
                     {% if perm.can_suspect %}
-                    <button type="button" data-status="{{co.SUSPICIOUS}}" class="btn btn-default btn-lg" role="button">
+                    <button type="button" data-status="{{co.SUSPICIOUS}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-default btn-lg" role="button">
                         {% trans "Suspect" %} <i class="fa fa-warning" style="margin-left:.5em"></i>
                     </button>
                     {% endif %}
                     {% if perm.can_approve %}
-                    <button type="button" data-status="{{co.PROCESSING}}" class="btn btn-primary btn-lg">
+                    <button type="button" data-status="{{co.PROCESSING}}"  data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg">
                         {% trans "Approve" %} <i class="fa fa-thumbs-o-up" style="margin-left:.5em"></i>
                     </button>
                     {% endif %}

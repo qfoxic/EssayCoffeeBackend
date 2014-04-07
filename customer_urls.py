@@ -39,7 +39,7 @@ task_new = login_required(
   permission_required('general.add_task', raise_exception=True)
     (CreateTaskView.as_view(module_name='customer')),
   login_url=reverse_lazy('login'))
-task_submit = login_required(
+task_status = login_required(
   permission_required('general.change_task', raise_exception=True)
     (SwitchStatusView.as_view(module_name='customer')),
   login_url=reverse_lazy('login'))
@@ -55,7 +55,7 @@ urlpatterns = patterns('',
     url(r'^task/(?P<pk>\d+)/remove$', task_rm, name='task_remove'),
     url(r'^task/new$', task_new, name='task_new'),
     url(r'^task/(?P<pk>\d+)/edit$', task_update, name='task_edit'),
-    url(r'^task/(?P<pk>\d+)/submit$', task_submit, name='task_submit'),
+    url(r'^task/(?P<pk>\d+)/status$', task_status, name='task_status'),
 
     url(r'^comment/(?P<task_id>\d+)/new$', comment_new, name='comment_new'),
     url(r'^comment/(?P<pk>\d+)/remove$', comment_rm, name='comment_remove'),

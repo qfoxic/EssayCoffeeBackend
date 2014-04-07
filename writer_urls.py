@@ -45,7 +45,7 @@ comment_rm = login_required(
       (RemoveCommentView.as_view(module_name='writer')),
     login_url=reverse_lazy('login'))
 
-task_send = login_required(
+task_status = login_required(
       SwitchStatusView.as_view(module_name='writer'),
     login_url=reverse_lazy('login'))
 
@@ -62,7 +62,7 @@ urlpatterns = patterns('',
     url(r'^comment/(?P<pk>\d+)/remove$', comment_rm, name='comment_remove'),
 
     url(r'^task/(?P<pk>\d+)/$', task_details, name='task_view'),
-    url(r'^task/(?P<pk>\d+)/send$', task_send, name='task_send'),
+    url(r'^task/(?P<pk>\d+)/status$', task_status, name='task_status'),
     url(r'^task/(?P<pk>\d+)/lock$', task_lock, name='task_lock'),
 
     url(r'profile/new', user_new, name='user_new'),
