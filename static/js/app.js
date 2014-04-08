@@ -55,7 +55,7 @@ $( document ).ready( function( ) {
             ev.preventDefault( );
             $( '#admin_actions_button' ).html( $( this ).html( ) ).data( "status", $( this ).data( 'status' ) );
         } );
-        $( '#admin_actions_list' ).find( 'i' ).classRemove( 'has_tooltip' ).removeAttr( 'style' ).removeAttr( 'title' );
+        $( '#admin_actions_list' ).find( 'i' ).removeAttr( 'style' ).removeAttr( 'title' );
     }
     $( '#admin_actions_button' ).on( 'click', function( ev ) {
         ev.preventDefault( );

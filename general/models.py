@@ -135,6 +135,12 @@ class Task(models.Model):
     if count_only:
       return cls.objects.filter(status__exact=co.SENT).filter(**kwargs).count()
     return cls.objects.filter(status__exact=co.SENT).filter(**kwargs)
+
+  @classmethod 
+  def get_all_tasks(cls, count_only, **kwargs):
+    if count_only:
+      return cls.objects.filter(**kwargs).count()
+    return cls.objects.filter(**kwargs)
   
   @classmethod 
   def get_unprocessed_tasks(cls, count_only, **kwargs):

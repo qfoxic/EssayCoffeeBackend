@@ -32,9 +32,8 @@ user_edit = login_required(UpdateProfileView.as_view(module_name='customer'),
                            login_url=reverse_lazy('login'))
 
 task_list = lambda request: login_required(
-    TaskIndexView.as_view(module_name='customer',
-                          queryset=Task.objects.filter(owner__exact=request.user),
-                          action_label='my orders'),
+    TaskIndexView.as_view(module_name='customer', action_label='my orders',
+                          queryset=Task.get_all_tasks(0, **{'owner__id': request.user.id})),
     login_url=reverse_lazy('login'))(request)
 task_details = login_required(DetailTaskView.as_view(module_name='customer'),
                               login_url=reverse_lazy('login'))
