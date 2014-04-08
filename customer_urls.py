@@ -4,9 +4,9 @@ from django.contrib.auth.decorators import permission_required
 from django.core.urlresolvers import reverse_lazy
 
 from general.views import RemoveTaskView,SwitchStatusView
-from general.views import CreateTaskView,UpdateTaskView,DetailTaskView
+from general.views import CreateTaskView,UpdateTaskView,DetailTaskView,TaskIndexView
+from general.models import Task
 from comments.views import CreateCommentView,RemoveCommentView 
-from customer.views import CustomerTaskView
 
 from userprofile.views import CreateProfileView, UpdateProfileView
 
@@ -31,8 +31,11 @@ user_new = CreateProfileView.as_view(module_name='customer',
 user_edit = login_required(UpdateProfileView.as_view(module_name='customer'),
                            login_url=reverse_lazy('login'))
 
-task_list = login_required(CustomerTaskView.as_view(module_name='customer'),
-                           login_url=reverse_lazy('login'))
+task_list = lambda request: login_required(
+    TaskIndexView.as_view(module_name='customer',
+                          queryset=Task.objects.filter(owner__exact=request.user),
+                          action_label='my orders'),
+    login_url=reverse_lazy('login'))(request)
 task_details = login_required(DetailTaskView.as_view(module_name='customer'),
                               login_url=reverse_lazy('login'))
 task_new = login_required(
