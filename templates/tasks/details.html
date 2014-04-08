@@ -195,7 +195,7 @@
                     </button>
                     {% endif %}
                     {% if perm.can_send %}
-                    <a data-status="{{co.SENT}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg send" role="button"> {% trans "Send" %}<i class='fa fa-upload' style="margin-left:.5em"></i> </a>
+                    <a data-status="{{co.SENT}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg send" role="button"> {% trans "Send" %}&hellip; <i class='fa fa-upload' style="margin-left:.5em"></i> </a>
                     {% endif %}
                     {% if perm.can_lock %}
                     <button type="button" data-status="1000" data-url="{% url 'task_lock' object.pk %}" class="btn btn-primary btn-lg" role="button">
@@ -276,24 +276,27 @@
                     </button>
                     <h4 class="modal-title" id="writer-send-label">{% trans "Send a file" %}</h4>
                 </div>
-                <div class="modal-body">
-                    <div class="form-group{% if form.attach.errors %} has-error{% endif %}">
-                        <div class="file-input form-control">
-                            <div class="input-group margin-bottom-sm">
-                                <span class="input-group-addon"><i class="fa fa-paperclip fa-fw"></i></span>
-                                <input id="writer-attach" class="upload-file" type="file" title="Browse" name="attach">
+                <form action="#" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="form-group{% if form.attach.errors %} has-error{% endif %}">
+                            <div class="file-input form-control">
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-paperclip fa-fw"></i></span>
+                                    <input id="writer-attach" class="upload-file" type="file" title="Browse" name="attach" required>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        {% trans "Close" %}<i class="fa fa-times-circle ilm"></i>
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        {% trans "Send" %}<i class="fa fa-upload ilm"></i>
-                    </button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {% trans "Close" %}<i class="fa fa-times-circle ilm"></i>
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            {% trans "Send" %}<i class="fa fa-upload ilm"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
