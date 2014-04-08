@@ -128,7 +128,8 @@ class BaseView(View):
       'can_report': co.CheckPermissions(user, obj, co.CAN_REPORT),
       'can_lock': co.CheckPermissions(user, obj, co.CAN_LOCK) and not obj.is_locked(user),
       'can_unlock': co.CheckPermissions(user, obj, co.CAN_UNLOCK) and obj.is_locked(user, by_user=True),
-      'can_delete': co.CheckPermissions(user, obj, co.CAN_DELETE)
+      'can_delete': co.CheckPermissions(user, obj, co.CAN_DELETE),
+      'can_complete': co.CheckPermissions(user, obj, co.CAN_COMPLETE)
     }
     context['stats'] = get_stats(self.request)
     context.setdefault('action_label', 'all')

@@ -96,6 +96,7 @@ class AdminFinishedTasksView(TaskIndexView):
     context['action_label'] = 'completed'
     return context
 
+
 class AdminSentTasksView(TaskIndexView):
   def get_context_data(self, **kwargs):
     context = super(AdminSentTasksView, self).get_context_data(**kwargs)
