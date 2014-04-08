@@ -4,21 +4,26 @@ from django.contrib.auth.decorators import permission_required
 from django.core.urlresolvers import reverse_lazy
 
 from general.views import DetailTaskView,SwitchStatusView,LockTaskView,UnlockTaskView
+from general.views import TaskIndexView,UpdateTaskView
+from general.models import Task
 
 from comments.views import CreateCommentView,RemoveCommentView 
 from reports.views import CreateReportView,RemoveReportView 
 
-from administer.views import AdminActiveTasksView,AdminRejectedTasksView,AdminUnprocessedTasksView,AdminFinishedTasksView,AdminSentTasksView 
-from administer.views import AdminCustomersView,AdminExpiredTasksView,AdminForceSwitchStatusView
-from administer.views import AdminSuspiciousTasksView,AdminWritersView,AdminUpdateTaskView,AdminCustomersView
+from administer.views import AdminForceSwitchStatusView
 
-from userprofile.views import CreateProfileView, UpdateProfileView
+from userprofile.views import CreateProfileView, UpdateProfileView, ListProfileView
+from userprofile.models import UserProfile
 
 import constants as co
 
-writers = login_required(AdminWritersView.as_view(module_name='administer'),
+writers = login_required(ListProfileView.as_view(module_name='administer',
+                         queryset=UserProfile.objects.filter(groups__name=co.WRITER_GROUP),
+                         action_label='writers', context_object_name='users'),
                          login_url=reverse_lazy('login'))
-customers = login_required(AdminCustomersView.as_view(module_name='administer'),
+customers = login_required(ListProfileView.as_view(module_name='administer',
+                           queryset=UserProfile.objects.filter(groups__name=co.CUSTOMER_GROUP),
+                           action_label='customers', context_object_name='users'),
                            login_url=reverse_lazy('login'))
 user_new = CreateProfileView.as_view(module_name='administer',
                                      group_name=co.ADMIN_GROUP)
@@ -44,27 +49,41 @@ report_rm = login_required(
       (RemoveReportView.as_view(module_name='administer')),
     login_url=reverse_lazy('login'))
 
-tasks_list = login_required(AdminUnprocessedTasksView.as_view(module_name='administer'),
+tasks_list = login_required(TaskIndexView.as_view(module_name='administer',
+                                                  queryset=Task.get_unprocessed_tasks(0),
+                                                  action_label='unprocessed'),
                             login_url=reverse_lazy('login'))
-tasks_active = login_required(AdminActiveTasksView.as_view(module_name='administer'),
+tasks_active = login_required(TaskIndexView.as_view(module_name='administer',
+                                                    queryset=Task.get_processing_tasks(0),
+                                                    action_label='active'),
                               login_url=reverse_lazy('login'))
-tasks_rejected = login_required(AdminRejectedTasksView.as_view(module_name='administer'),
+tasks_rejected = login_required(TaskIndexView.as_view(module_name='administer',
+                                                      queryset=Task.get_rejected_tasks(0),
+                                                      action_label='rejected'),
                                 login_url=reverse_lazy('login'))
-tasks_suspicious = login_required(AdminSuspiciousTasksView.as_view(module_name='administer'),
+tasks_suspicious = login_required(TaskIndexView.as_view(module_name='administer',
+                                                      queryset=Task.get_suspicious_tasks(0),
+                                                      action_label='suspicious'),
                                   login_url=reverse_lazy('login'))
 tasks_unprocessed = tasks_list
-tasks_finished = login_required(AdminFinishedTasksView.as_view(module_name='administer'),
+tasks_finished = login_required(TaskIndexView.as_view(module_name='administer',
+                                                      queryset=Task.get_finished_tasks(0),
+                                                      action_label='finished'),
                                 login_url=reverse_lazy('login'))
-tasks_sent = login_required(AdminSentTasksView.as_view(module_name='administer'),
-                                login_url=reverse_lazy('login'))
-tasks_expired = login_required(AdminExpiredTasksView.as_view(module_name='administer'),
+tasks_sent = login_required(TaskIndexView.as_view(module_name='administer',
+                                                  queryset=Task.get_sent_tasks(0),
+                                                  action_label='sent'),
+                            login_url=reverse_lazy('login'))
+tasks_expired = login_required(TaskIndexView.as_view(module_name='administer',
+                                                     queryset=Task.get_expired_tasks(0),
+                                                     action_label='expired'),
                                login_url=reverse_lazy('login'))
 
 task_details = login_required(DetailTaskView.as_view(module_name='administer'),
                               login_url=reverse_lazy('login'))
 task_update = login_required(
   permission_required('general.change_task', raise_exception=True)
-    (AdminUpdateTaskView.as_view(module_name='administer')),
+    (UpdateTaskView.as_view(module_name='administer', owner_required=False)),
   login_url=reverse_lazy('login'))
 
 task_status = login_required(

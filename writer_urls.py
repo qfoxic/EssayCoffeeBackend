@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import permission_required
 from django.core.urlresolvers import reverse_lazy
 
 from general.views import DetailTaskView,SwitchStatusView,LockTaskView
-from writer.views import WriterTaskView,WriterActiveTasksView
-from writer.views import WriterExpiredTasksView,WriterFinishedTasksView,WriterSentTasksView
+from general.views import TaskIndexView
+from general.models import Task
 
 from comments.views import CreateCommentView,RemoveCommentView 
 from userprofile.views import CreateProfileView, UpdateProfileView
@@ -18,17 +18,31 @@ user_edit = login_required(UpdateProfileView.as_view(module_name='writer',
                                                      allowed_groups=[]),
                            login_url=reverse_lazy('login'))
 
-tasks_list = login_required(WriterTaskView.as_view(module_name='writer'),
+tasks_list = login_required(TaskIndexView.as_view(module_name='writer',
+                                                  queryset=Task.get_processing_tasks(0,
+                                                    **{'assignee__isnull': True, 'access_level__in': [co.PUBLIC_ACCESS]}),
+                                                  action_label='processing'),
                             login_url=reverse_lazy('login'))
-tasks_active = login_required(WriterActiveTasksView.as_view(module_name='writer'),
-                              login_url=reverse_lazy('login'))
 tasks_unprocessed = tasks_list
-tasks_finished = login_required(WriterFinishedTasksView.as_view(module_name='writer'),
-                                login_url=reverse_lazy('login'))
-tasks_sent = login_required(WriterSentTasksView.as_view(module_name='writer'),
-                                login_url=reverse_lazy('login'))
-tasks_expired = login_required(WriterExpiredTasksView.as_view(module_name='writer'),
-                               login_url=reverse_lazy('login'))
+tasks_active = lambda request: login_required(
+    TaskIndexView.as_view(module_name='writer', action_label='my processing',
+                          queryset=Task.get_processing_tasks(0, **{'assignee': request.user})),
+    login_url=reverse_lazy('login'))(request)
+
+tasks_finished = lambda request: login_required(
+    TaskIndexView.as_view(module_name='writer', action_label='my finished',
+                          queryset=Task.get_finished_tasks(0, **{'assignee': request.user})),
+    login_url=reverse_lazy('login'))(request)
+
+tasks_sent = lambda request: login_required(
+    TaskIndexView.as_view(module_name='writer', action_label='my sent',
+                          queryset=Task.get_sent_tasks(0, **{'assignee': request.user})),
+    login_url=reverse_lazy('login'))(request)
+
+tasks_expired = lambda request: login_required(
+    TaskIndexView.as_view(module_name='writer', action_label='my sent',
+                          queryset=Task.get_expired_tasks(0, **{'assignee': request.user})),
+    login_url=reverse_lazy('login'))(request)
 
 task_details = login_required(DetailTaskView.as_view(module_name='writer'),
                               login_url=reverse_lazy('login'))

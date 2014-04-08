@@ -3,6 +3,7 @@ import os
 from django.conf import settings
 from django.utils import translation
 from django.views.generic import TemplateView, View
+from django.views.generic import ListView
 from django.contrib.auth.views import login, logout, password_reset
 from django.contrib.auth.views import password_reset_done, password_reset_confirm, password_reset_complete
 from django.core.urlresolvers import reverse_lazy
@@ -48,8 +49,7 @@ def get_stats(request):
       'sent': Task.get_sent_tasks(1, **{'assignee': user}), 
       'unprocessed': Task.get_unprocessed_tasks(1, **{'assignee': user}),
       'active': Task.get_processing_tasks(1, **{'assignee': user}),
-      'expired': Task.get_expired_tasks(1, **{'assignee': user,
-                                              'status__exact': co.PROCESSING}),
+      'expired': Task.get_expired_tasks(1, **{'assignee': user}),
     }
   elif group == co.ADMIN_GROUP or group == co.EDITOR_GROUP: 
     return {
@@ -59,7 +59,7 @@ def get_stats(request):
       'suspect': Task.get_suspicious_tasks(1), 
       'rejected': Task.get_rejected_tasks(1), 
       'process': Task.get_processing_tasks(1),
-      'expired': Task.get_expired_tasks(1, **{'status__exact': co.UNPROCESSED}),
+      'expired': Task.get_expired_tasks(1),
       'adm_reports': Report.objects.all().count() 
     }
   else:
@@ -73,6 +73,8 @@ class BaseView(View):
   module_name = 'global'
   owner_required = False # raise an Error if owner is required.
   allowed_groups = [] # For these groups owner won't be checked.
+  action_label = 'all'
+
   def __init__(self, **kwargs):
     super(BaseView, self).__init__(**kwargs)
     global_settings = conf.load(co.GLOBAL_MODULE_NAME)
@@ -132,7 +134,7 @@ class BaseView(View):
       'can_complete': co.CheckPermissions(user, obj, co.CAN_COMPLETE)
     }
     context['stats'] = get_stats(self.request)
-    context.setdefault('action_label', 'all')
+    context['action_label'] = self.action_label
     return super(BaseView, self).render_to_response(context, **response_kwargs)
 
   def get_template_names(self):
@@ -216,10 +218,11 @@ class ResetPswdDoneView(BaseView, TemplateView):
                                extra_context=context)
 
 
-class TaskIndexView(BaseView, TemplateView):
-  """Displays all tasks for singned users."""
+class TaskIndexView(BaseView, ListView):
+  """Displays all tasks for signed users."""
   template_name = 'tasks/index.html'
-
+  context_object_name = 'tasks'
+  
 
 class UpdateTaskView(BaseView, UpdateView):
   template_name = 'tasks/edit.html'
