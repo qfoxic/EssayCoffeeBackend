@@ -87,6 +87,19 @@
                             </ul>
                         </div>
                     </form>
+                    {% elif site == 'editor' %}
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em> {% if object.assignee %} <a href="{% url 'user_edit' object.assignee.id %}">{{object.assignee}}</a> {% endif %} </em>
+                    <br>
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Editor" %}</strong>: <em> {% if object.editor %} <a href="{% url 'user_edit' object.editor.id %}">{{object.editor}}</a> {% endif %} </em>
+                    <br>
+                    <i class="fa fa-clock-o fa-fw irm"></i><strong>{% trans "Local time" %}</strong>: <em>{{object.local_time}}</em>
+                    <br>
+                    <i class="fa fa-star-half-o fa-fw irm"></i><strong>{% trans "Mark" %}</strong>: <em>{{object.mark}}</em>
+                    <br>
+                    <i class="fa fa-lock fa-fw irm"></i><strong>{% trans "Revision" %}</strong>: <em>{{object.revision}}</em>
+                    <br>
+                    <i class="fa fa-exclamation-circle fa-fw irm"></i><strong>{% trans "Priority" %}</strong>: <em>{{object.priority}}</em>
+                    <br>
                     {% elif site == 'customer' %}
                     <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em>{{object.assignee}}</em>
                     <br>

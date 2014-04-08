@@ -14,7 +14,7 @@
               {{form.errors}}
             {% endif  %}
             -->
-            {% if site == "admin" %}
+            {% if site == "admin" or site == "editor" %}
             <div class="row">
                 <div class="col-md-8">
             {% endif %}
@@ -133,7 +133,7 @@
                             {% endif %}
                         </div>
                     </div>
-               {% if site == "admin" %}
+               {% if site == "admin" or site == "editor" %}
                 </div>
                 <div class="col-md-4"><br>
                     <div class="panel panel-default">
@@ -155,6 +155,7 @@
                                     {{form.mark|attr:"class:form-control,autocomplete:off,placeholder:Mark"}}
                                 </div>
                             </div>
+                            {% if site == "admin" %}
                             <div class="form-group{% if form.access_level.errors %} has-error{% endif %}">
                                 <label>{% trans "Access Level" %}</label>
                                 <div class="input-group margin-bottom-sm">
@@ -162,6 +163,7 @@
                                     {{form.access_level|attr:"class:form-control,autocomplete:off,placeholder:Access Level"}}
                                 </div>
                             </div>
+                            {% endif %}
                             <div class="form-group{% if form.priority.errors %} has-error{% endif %}">
                                 <label>&nbsp;</label>
                                 <div class="input-group margin-bottom-sm">
