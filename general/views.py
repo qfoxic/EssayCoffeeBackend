@@ -1,7 +1,5 @@
 import os
 
-from django.conf import settings
-from django.utils import translation
 from django.views.generic import TemplateView, View
 from django.views.generic import ListView
 from django.contrib.auth.views import login, logout, password_reset
@@ -19,10 +17,7 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 from django.views.generic import DetailView
-from django.core.mail import send_mail
 
-from django.views.generic import TemplateView
-from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
@@ -85,11 +80,11 @@ class BaseView(View):
       self.settings = {}
       print 'Could not read config files for module %s: %s' % (
           self.module_name, e)
-  
+
   def _check_permissions(self):
     # Do nothing by default should be overloaded for different groups.
     pass
-  
+
   def _owner_required(self, user, owner_id):
     """Checks whether user is owner of an entity."""
     user_group = UserProfile.objects.get(
@@ -163,9 +158,9 @@ class LogoutView(BaseView, TemplateView):
 class ResetPswdView(BaseView, TemplateView):
   template_name='general/password_reset_form.html'
   email_template_name='general/password_reset_email.html'
-  
+
   def get_email_template(self):
-     return os.path.join(self.module_name, self.email_template_name)
+    return os.path.join(self.module_name, self.email_template_name)
 
   def render_to_response(self, context, **response_kwargs):
     context.update(self.settings)
@@ -231,7 +226,6 @@ class UpdateTaskView(BaseView, UpdateView):
   owner_required = True
   
   def render_to_response(self, context, **response_kwargs):
-    obj = context['object'] or self.instance
     return super(UpdateTaskView, self).render_to_response(context, **response_kwargs)
 
   def get_form_kwargs(self):
@@ -275,7 +269,7 @@ class DetailTaskView(BaseView, DetailView):
       # has been already assigned to another writer.
       if obj and obj.assignee and user.id != obj.assignee.id:
         raise PermissionDenied
- 
+
   def get_context_data(self, **kwargs):
     context = super(DetailTaskView, self).get_context_data(**kwargs)
     task_id = self.kwargs.get('pk')
@@ -336,7 +330,7 @@ class UnlockTaskView(UpdateTaskView):
     return self.object.to_link()
 
 
-class StaticHtmlView(BaseView,TemplateView):
+class StaticHtmlView(BaseView, TemplateView):
   def get_template_names(self):
     template_name = 'html/' + self.kwargs['path']  
     return [template_name]

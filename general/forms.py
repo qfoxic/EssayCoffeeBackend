@@ -52,11 +52,11 @@ class TaskForm(BaseForm):
 
   def save(self, *args, **kwargs):
     # send email
-    mail = co.ORDER_MAIL % {'first_name': self.request.user.first_name,
-                            'domain': co.ADMIN_DOMAIN}
-# TODO: this is a bug!!!!
-#    send_mail(co.ORDER_MAIL_SUBJECT, mail, co.ADMIN_EMAIL,
-#              [self.request.user.email])
+    #mail = co.ORDER_MAIL % {'first_name': self.request.user.first_name,
+    #                        'domain': co.ADMIN_DOMAIN}
+    # TODO: this is a bug!!!!
+    #    send_mail(co.ORDER_MAIL_SUBJECT, mail, co.ADMIN_EMAIL,
+    #              [self.request.user.email])
     return super(TaskForm, self).save(*args, **kwargs)
 
 
@@ -126,7 +126,7 @@ class SwitchStatusForm(BaseForm):
   def clean_status(self):
     try:
       next_status = int(self.request.POST.get('status'))
-    except TypeError, ValueError:
+    except (TypeError, ValueError):
       next_status = None
     self.check_status_allowed(next_status)
     return next_status
