@@ -23,7 +23,7 @@
                         <a href="{% url "task_new" %}"><i class='fa fa-asterisk fa-lg' style="margin-right:.5em"></i>{% trans "Order Now" %}</a>
                     </li>
                     {% endif %}
-                    {% elif site == 'admin' %}
+                    {% elif site == 'admin' or site == 'editor' %}
                     {% if user.username %}
                     <li class="dropdown {% active request 'order' %}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='fa fa-tasks fa-lg' style="margin-right:.5em"></i>{% trans "Orders "%} <b class="caret"></b></a>
@@ -31,9 +31,11 @@
                             <li>
                                 <strong style="margin-left: .8em;font-size:1.2em;">{% trans "Free orders" %}</strong>
                             </li>
+                            {% if site == 'admin' %}
                             <li>
                                 <a href="{% url 'tasks_unprocessed' %}"><span class="badge pull-right">{{stats.unproc|default:0}}</span> {% trans "Unprocessed orders" %}</a>
                             </li>
+                            {% endif  %}
                             <li>
                                 <a href="{% url 'tasks_suspicious' %}"><span class="badge pull-right">{{stats.suspect|default:0}}</span> {% trans "Suspicious/Untrustworthy/Incomplete"%} </a>
                             </li>
@@ -69,9 +71,11 @@
                     <li class="{% active request 'writers' %}">
                         <a href="{% url 'writers'  %}"><i class='fa fa-pencil fa-lg' style="margin-right:.5em"></i>{% trans "Writers" %}</a>
                     </li>
+                    {% if site == 'admin'  %}
                     <li class="{% active request 'customers' %}">
                         <a href="{% url 'customers'  %}"><i class='fa fa-users fa-lg' style="margin-right:.5em"></i>{% trans "Customers" %}</a>
                     </li>
+                    {% endif %}
                     <li class="{% active request 'messages' %}">
                         <a href="#"><i class='fa fa-envelope fa-lg' style="margin-right:.5em"></i>{% trans "Messages" %}</a>
                     </li>

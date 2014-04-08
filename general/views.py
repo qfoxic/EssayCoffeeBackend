@@ -51,7 +51,7 @@ def get_stats(request):
       'expired': Task.get_expired_tasks(1, **{'assignee': user,
                                               'status__exact': co.PROCESSING}),
     }
-  elif group == co.ADMIN_GROUP: 
+  elif group == co.ADMIN_GROUP or group == co.EDITOR_GROUP: 
     return {
       'completed': Task.get_finished_tasks(1), 
       'sent': Task.get_sent_tasks(1), 
@@ -59,12 +59,6 @@ def get_stats(request):
       'suspect': Task.get_suspicious_tasks(1), 
       'rejected': Task.get_rejected_tasks(1), 
       'process': Task.get_processing_tasks(1),
-      #'process_assigned': Task.get_processing_tasks(1, **{'assignee__isnull': False}),
-      #'process_unassigned': Task.get_processing_tasks(1, **{'assignee__isnull': True}),
-      #'expired_assigned': Task.get_expired_tasks(1, **{'assignee__isnull': False,
-      #                                                 'status__exact': co.UNPROCESSED}),
-      #'expired_unassigned': Task.get_expired_tasks(1, **{'assignee__isnull': True,
-      #                                                   'status__exact': co.UNPROCESSED}),
       'expired': Task.get_expired_tasks(1, **{'status__exact': co.UNPROCESSED}),
       'adm_reports': Report.objects.all().count() 
     }
@@ -141,12 +135,6 @@ class BaseView(View):
     return super(BaseView, self).render_to_response(context, **response_kwargs)
 
   def get_template_names(self):
-#     try:
-#       skin_prefix = self.settings['layout']['skin_prefix']
-#     except KeyError:
-#       print 'Could not obtain skin prefix skipping to default.'
-#       skin_prefix = co.DEFAULT_SKIN_PREFIX
-#     self.template_name = os.path.join(skin_prefix, self.template_name)
     return [self.template_name]
 
 
@@ -174,12 +162,6 @@ class ResetPswdView(BaseView, TemplateView):
   email_template_name='general/password_reset_email.html'
   
   def get_email_template(self):
-#     try:
-#       skin_prefix = self.settings['layout']['skin_prefix']
-#     except KeyError:
-#       print 'Could not obtain skin prefix skipping to default.'
-#       skin_prefix = co.DEFAULT_SKIN_PREFIX
-#     return os.path.join(skin_prefix, self.module_name, self.email_template_name)
      return os.path.join(self.module_name, self.email_template_name)
 
   def render_to_response(self, context, **response_kwargs):

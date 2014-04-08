@@ -8,81 +8,80 @@ from general.views import DetailTaskView,SwitchStatusView,LockTaskView,UnlockTas
 from comments.views import CreateCommentView,RemoveCommentView 
 from reports.views import CreateReportView,RemoveReportView 
 
-from administer.views import AdminActiveTasksView,AdminRejectedTasksView,AdminUnprocessedTasksView,AdminFinishedTasksView 
+from administer.views import AdminActiveTasksView,AdminRejectedTasksView,AdminFinishedTasksView,AdminSentTasksView
 from administer.views import AdminSuspiciousTasksView,AdminWritersView,AdminUpdateTaskView,AdminCustomersView,AdminExpiredTasksView
 
 from userprofile.views import CreateProfileView, UpdateProfileView
 
 import constants as co
 
-writers = login_required(AdminWritersView.as_view(module_name='administer'),
+writers = login_required(AdminWritersView.as_view(module_name='editor'),
                          login_url=reverse_lazy('login'))
-customers = login_required(AdminCustomersView.as_view(module_name='administer'),
+customers = login_required(AdminCustomersView.as_view(module_name='editor'),
                            login_url=reverse_lazy('login'))
-user_new = CreateProfileView.as_view(module_name='administer',
-                                     group_name=co.ADMIN_GROUP)
-user_edit = login_required(UpdateProfileView.as_view(module_name='administer',
-                                                     allowed_groups=[co.WRITER_GROUP,co.CUSTOMER_GROUP]),
+user_new = CreateProfileView.as_view(module_name='editor',
+                                     group_name=co.EDITOR_GROUP)
+user_edit = login_required(UpdateProfileView.as_view(module_name='editor',
+                                                     allowed_groups=[co.WRITER_GROUP]),
                            login_url=reverse_lazy('login'))
 
 comment_new = login_required(
     permission_required('comments.add_comment', raise_exception=True)
-      (CreateCommentView.as_view(module_name='administer')),
+      (CreateCommentView.as_view(module_name='editor')),
     login_url=reverse_lazy('login'))
 comment_rm = login_required(
     permission_required('comments.delete_comment', raise_exception=True)
-      (RemoveCommentView.as_view(module_name='administer')),
+      (RemoveCommentView.as_view(module_name='editor')),
     login_url=reverse_lazy('login'))
 
 report_new = login_required(
     permission_required('reports.add_report', raise_exception=True)
-      (CreateReportView.as_view(module_name='administer')),
+      (CreateReportView.as_view(module_name='editor')),
     login_url=reverse_lazy('login'))
 report_rm = login_required(
     permission_required('comments.delete_comment', raise_exception=True)
-      (RemoveReportView.as_view(module_name='administer')),
+      (RemoveReportView.as_view(module_name='editor')),
     login_url=reverse_lazy('login'))
 
-tasks_list = login_required(AdminUnprocessedTasksView.as_view(module_name='administer'),
+tasks_sent = login_required(AdminSentTasksView.as_view(module_name='editor'),
                             login_url=reverse_lazy('login'))
-tasks_active = login_required(AdminActiveTasksView.as_view(module_name='administer'),
+tasks_active = login_required(AdminActiveTasksView.as_view(module_name='editor'),
                               login_url=reverse_lazy('login'))
-tasks_rejected = login_required(AdminRejectedTasksView.as_view(module_name='administer'),
+tasks_rejected = login_required(AdminRejectedTasksView.as_view(module_name='editor'),
                                 login_url=reverse_lazy('login'))
-tasks_suspicious = login_required(AdminSuspiciousTasksView.as_view(module_name='administer'),
+tasks_suspicious = login_required(AdminSuspiciousTasksView.as_view(module_name='editor'),
                                   login_url=reverse_lazy('login'))
-tasks_unprocessed = tasks_list
-tasks_finished = login_required(AdminFinishedTasksView.as_view(module_name='administer'),
+tasks_finished = login_required(AdminFinishedTasksView.as_view(module_name='editor'),
                                 login_url=reverse_lazy('login'))
-tasks_expired = login_required(AdminExpiredTasksView.as_view(module_name='administer'),
+tasks_expired = login_required(AdminExpiredTasksView.as_view(module_name='editor'),
                                login_url=reverse_lazy('login'))
 
-task_details = login_required(DetailTaskView.as_view(module_name='administer'),
+task_details = login_required(DetailTaskView.as_view(module_name='editor'),
                               login_url=reverse_lazy('login'))
 task_update = login_required(
   permission_required('general.change_task', raise_exception=True)
-    (AdminUpdateTaskView.as_view(module_name='administer')),
+    (AdminUpdateTaskView.as_view(module_name='editor')),
   login_url=reverse_lazy('login'))
 
 task_approve = login_required(
     permission_required('general.change_task', raise_exception=True)
-      (SwitchStatusView.as_view(module_name='administer')),
+      (SwitchStatusView.as_view(module_name='editor')),
     login_url=reverse_lazy('login'))
 task_reject = task_approve
 task_suspect = task_approve
-task_lock = login_required(LockTaskView.as_view(module_name='administer'),
+task_lock = login_required(LockTaskView.as_view(module_name='editor'),
                            login_url=reverse_lazy('login'))
-task_unlock = login_required(UnlockTaskView.as_view(module_name='administer'),
+task_unlock = login_required(UnlockTaskView.as_view(module_name='editor'),
                              login_url=reverse_lazy('login'))
 
 urlpatterns = patterns('',
-    url(r'^$', tasks_list),
-    url(r'^tasks/$', tasks_list, name='task_list'),
+    url(r'^$', tasks_sent),
+    url(r'^tasks/$', tasks_sent, name='task_list'),
     url(r'^tasks/active$', tasks_active, name='tasks_active'),
     url(r'^tasks/rejected$', tasks_rejected, name='tasks_rejected'),
     url(r'^tasks/suspicious$', tasks_suspicious, name='tasks_suspicious'),
-    url(r'^tasks/unprocessed$', tasks_unprocessed, name='tasks_unprocessed'),
     url(r'^tasks/finished$', tasks_finished, name='tasks_finished'),
+    url(r'^tasks/sent$', tasks_sent, name='tasks_sent'),
     url(r'^tasks/expired$', tasks_expired, name='tasks_expired'),
 
     url(r'^task/(?P<pk>\d+)/$', task_details, name='task_view'),
