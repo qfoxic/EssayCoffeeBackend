@@ -76,7 +76,7 @@ $( document ).ready( function( ) {
             ev.preventDefault( );
             if( $( this ).data( 'status' ) ) {
                 //     $( '#admin_flat_form' ).append( '<input type="hidden" name="status" value="' + $( this ).data( 'status' ) + '">' ).attr('action', $( this ).data( 'url' )).submit( );
-                console.log( 'dialog show' );
+               // console.log( 'dialog show' );
                 $( '#writer-send' ).modal( 'show' );
             }
         } );

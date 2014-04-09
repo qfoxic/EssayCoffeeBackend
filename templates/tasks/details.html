@@ -56,7 +56,7 @@
                     <hr>
                     <form action="{% url 'task_force_status' object.pk %}" method="post" id="admin_actions">
                         {% csrf_token %}
-                        <div class="btn-group">
+                        <div class="btn-group dropup">
                             <button id="admin_actions_button" type="button" style="min-width:190px" class="btn btn-default btn-lg" data-status="">
                                 Select status
                             </button>
