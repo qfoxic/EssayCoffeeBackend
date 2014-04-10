@@ -25,6 +25,14 @@ customers = login_required(ListProfileView.as_view(module_name='administer',
                            queryset=UserProfile.objects.filter(groups__name=co.CUSTOMER_GROUP),
                            action_label='customers', context_object_name='users'),
                            login_url=reverse_lazy('login'))
+editors = login_required(ListProfileView.as_view(module_name='administer',
+                         queryset=UserProfile.objects.filter(groups__name=co.EDITOR_GROUP),
+                         action_label='editors', context_object_name='users'),
+                         login_url=reverse_lazy('login'))
+admins = login_required(ListProfileView.as_view(module_name='administer',
+                        queryset=UserProfile.objects.filter(groups__name=co.ADMIN_GROUP),
+                        action_label='admins', context_object_name='users'),
+                        login_url=reverse_lazy('login'))
 user_new = CreateProfileView.as_view(module_name='administer',
                                      group_name=co.ADMIN_GROUP)
 user_edit = login_required(UpdateProfileView.as_view(module_name='administer',
@@ -131,6 +139,8 @@ urlpatterns = patterns('',
 
     url(r'^writers/$', writers, name='writers'),
     url(r'^customers/$', customers, name='customers'),
+    url(r'^editors/$', editors, name='editors'),
+    url(r'^admins/$', admins, name='admins'),
 
     url(r'', include('common_urls')),
 )

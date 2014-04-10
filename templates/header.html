@@ -75,6 +75,12 @@
                     <li class="{% active request 'customers' %}">
                         <a href="{% url 'customers'  %}"><i class='fa fa-users fa-lg' style="margin-right:.5em"></i>{% trans "Customers" %}</a>
                     </li>
+                    <li class="{% active request 'customers' %}">
+                        <a href="{% url 'editors'  %}"><i class='fa fa-users fa-lg' style="margin-right:.5em"></i>{% trans "Editors" %}</a>
+                    </li>
+                    <li class="{% active request 'customers' %}">
+                        <a href="{% url 'admins'  %}"><i class='fa fa-users fa-lg' style="margin-right:.5em"></i>{% trans "Admins" %}</a>
+                    </li>
                     {% endif %}
                     <li class="{% active request 'messages' %}">
                         <a href="#"><i class='fa fa-envelope fa-lg' style="margin-right:.5em"></i>{% trans "Messages" %}</a>
