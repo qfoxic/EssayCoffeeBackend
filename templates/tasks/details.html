@@ -22,9 +22,10 @@
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
+                    <a class="pull-right attr-ctrl" href="#"><i class="fa fa-toggle-up"></i></a>
                     Attributes
                 </div>
-                <div class="panel-body" style="line-height: 160%">
+                <div class="panel-body attr-body" style="line-height: 160%">
                     <i class="fa fa-info-circle fa-fw irm"></i><strong>{% trans "ID" %}</strong>: <em>{{object.id}}</em>
                     <br>
                     {% if site == 'admin' %}
@@ -53,40 +54,6 @@
                     <i class="fa fa-money fa-fw irm"></i><strong>{% trans "Price" %}</strong>: <em>{{object.price}}</em>
                     <br>
                     <i class="fa fa-exclamation-circle fa-fw irm"></i><strong>{% trans "Priority" %}</strong>: <em>{{object.priority}}</em>
-                    <hr>
-                    <form action="{% url 'task_force_status' object.pk %}" method="post" id="admin_actions">
-                        {% csrf_token %}
-                        <div class="btn-group dropup">
-                            <button id="admin_actions_button" type="button" style="min-width:190px" class="btn btn-default btn-lg" data-status="">
-                                Select status
-                            </button>
-                            <button type="button" class="btn btn-info btn-lg dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu" id="admin_actions_list" style="min-width:190px">
-                                <!-- style="min-width:245px" -->
-                                <li>
-                                    <a href="#" data-status="{{co.UNPROCESSED}}">{{co.UNPROCESSED|render_status}}<span class="ilm">{% trans "Unprocessed" %}</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" data-status="{{co.PROCESSING}}">{{co.PROCESSING|render_status}}<span class="ilm">{% trans "Processing" %}</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" data-status="{{co.COMPLETED}}">{{co.COMPLETED|render_status}}<span class="ilm">{% trans "Completed" %}</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" data-status="{{co.REJECTED}}">{{co.REJECTED|render_status}}<span class="ilm">{% trans "Rejected" %}</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" data-status="{{co.SUSPICIOUS}}">{{co.SUSPICIOUS|render_status}}<span class="ilm">{% trans "Suspicious" %}</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" data-status="{{co.SENT}}">{{co.SENT|render_status}}<span class="ilm">{% trans "Sent" %}</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </form>
                     {% elif site == 'editor' %}
                     <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em> {% if object.assignee %} <a href="{% url 'user_edit' object.assignee.id %}">{{object.assignee}}</a> {% endif %} </em>
                     <br>
@@ -117,6 +84,51 @@
                     <i class="fa fa-exclamation-circle fa-fw irm"></i><strong>{% trans "Priority" %}</strong>: <em>{{object.priority}}</em>
                     <br>
                     {% endif %}
+                </div>
+            </div>
+            <div id="uploads">
+                <div class="well well-sm">
+                    <a class="pull-right uploads-add" href="#"><i class="fa fa-plus-circle"></i></a>
+                    <strong>{% trans "Upload a file" %}&hellip;</strong><span class="ilm badge">{{stats.uploads}}</span>
+                    <div id="uploads-form" style="display:none; margin-top:-10px">
+                        <form action="#" method="post">
+                            {% csrf_token %}
+                            <div class="form-group{% if form.attach.errors %} has-error{% endif %}">
+                                <div class="file-input form-control">
+                                    <div class="input-group margin-bottom-sm">
+                                        <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
+                                        <input id="id_attach" class="upload-file" type="file" title="Browse" name="attach">
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="text-align:right">
+                                <button type="submit" class="btn btn-primary">
+                                    Upload<i class="fa fa-upload ilm"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="uploads-holder">
+                    <form id="upload_remove" action="#" method="post">
+                        {% csrf_token %}
+                    </form>
+                    <h5>Customer uploads</h5>
+                    <!-- dijango for customer uploads -->
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><a class="pull-right uploads-ctrl" data-body-id="1" href="#"><i class="fa fa-caret-square-o-down"></i></a><a class="pull-right uploads-del" id="upload-del-1" onclick="$('form#upload_remove').submit();" href="#" style="display:none"> <i class="fa fa-times-circle"></i> </a> upload.title</h3>
+                        </div>
+                        <div id="upload-id-1" class="panel-body small" style="display:none">
+                            <p>
+                                upload.body
+                            </p>
+                            <p>
+                                by <a href="#">upload.owner</a><span class="pull-right"><i class="fa fa-1 fa-calendar irm"></i>upload.created</span>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- .dijango for customer uploads -->
                 </div>
             </div>
         </div>
@@ -150,9 +162,24 @@
                             </div>
                         </div>
                     </div>
-                    <i class="fa fa-tag fa-fw irm"></i><strong>{% trans "Paper Title" %}</strong>
-                    <h2 style="padding-left:1em;font-family: Georgia, 'Times New Roman', serif;text-align:justify">{{object.paper_title}}</h2>
-                    <hr>
+                    <form action="#" method="post"  id="lock_form">
+                        <div id="lock_buttons">
+                            {% csrf_token %}
+                            {% if perm.can_lock %}
+                            <button type="button" data-url="{% url 'task_lock' object.pk %}" class="btn btn-primary pull-right" role="button">
+                                {% trans "Lock" %}<i class='fa fa-lock' style="margin-left:.5em"></i>
+                            </button>
+                            {% endif %}
+                            {% if perm.can_unlock %}
+                            <button type="button" data-url="{% url 'task_unlock' object.pk %}" class="btn btn-primary pull-right" role="button">
+                                {% trans "Unlock" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
+                            </button>
+                            {% endif %}
+                            <i class="fa fa-tag fa-fw irm"></i><strong>{% trans "Paper Title" %}</strong>
+                            <h2 style="padding-left:1em;font-family: Georgia, 'Times New Roman', serif;text-align:justify">{{object.paper_title}}</h2>
+                            <hr>
+                        </div>
+                    </form>
                     <i class="fa fa-file-text fa-fw irm"></i><strong>{% trans "Instructions" %}</strong>
                     <br>
                     <p style="white-space:pre-line;color:#555;padding-left:2em;padding-top:1em;text-align:justify;font-style:italic;line-height: 160%">
@@ -182,13 +209,45 @@
                     <i class="fa fa-building-o fa-fw irm"></i><strong>{% trans "Style" %}</strong>: <em>{{object.get_style}}</em>
                     <br>
                     <i class="fa fa-bars fa-fw irm"></i><strong>{% trans "Sources Number" %}</strong>: <em>{{object.source_number}}</em>
-                    <br>
-                    <i class="fa fa-paperclip fa-fw irm"></i><strong>{% trans "Attach" %}</strong>: <em>{{object.attach}}</em>
-                    <br>
                 </div>
             </div>
             <hr>
             <!-- buttons -->
+            {% if site == "admin" %}
+            <form action="{% url 'task_force_status' object.pk %}" method="post" id="admin_actions" class="pull-right">
+                {% csrf_token %}
+                <div class="btn-group dropup">
+                    <button id="admin_actions_button" type="button" style="min-width:190px" class="btn btn-default btn-lg" data-status="">
+                        Select status
+                    </button>
+                    <button type="button" class="btn btn-info btn-lg dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" id="admin_actions_list" style="min-width:190px">
+                        <!-- style="min-width:245px" -->
+                        <li>
+                            <a href="#" data-status="{{co.UNPROCESSED}}">{{co.UNPROCESSED|render_status}}<span class="ilm">{% trans "Unprocessed" %}</span></a>
+                        </li>
+                        <li>
+                            <a href="#" data-status="{{co.PROCESSING}}">{{co.PROCESSING|render_status}}<span class="ilm">{% trans "Processing" %}</span></a>
+                        </li>
+                        <li>
+                            <a href="#" data-status="{{co.COMPLETED}}">{{co.COMPLETED|render_status}}<span class="ilm">{% trans "Completed" %}</span></a>
+                        </li>
+                        <li>
+                            <a href="#" data-status="{{co.REJECTED}}">{{co.REJECTED|render_status}}<span class="ilm">{% trans "Rejected" %}</span></a>
+                        </li>
+                        <li>
+                            <a href="#" data-status="{{co.SUSPICIOUS}}">{{co.SUSPICIOUS|render_status}}<span class="ilm">{% trans "Suspicious" %}</span></a>
+                        </li>
+                        <li>
+                            <a href="#" data-status="{{co.SENT}}">{{co.SENT|render_status}}<span class="ilm">{% trans "Sent" %}</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+            {% endif %}
             <form action="#" method="post"  id="admin_flat_form">
                 {% csrf_token %}
                 <div class="btn-group" id="admin_flat_buttons">
@@ -208,17 +267,10 @@
                     </button>
                     {% endif %}
                     {% if perm.can_send %}
-                    <a data-status="{{co.SENT}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg send" role="button"> {% trans "Send" %}&hellip; <i class='fa fa-upload' style="margin-left:.5em"></i> </a>
-                    {% endif %}
-                    {% if perm.can_lock %}
-                    <button type="button" data-status="1000" data-url="{% url 'task_lock' object.pk %}" class="btn btn-primary btn-lg" role="button">
-                        {% trans "Lock" %}<i class='fa fa-lock' style="margin-left:.5em"></i>
+                    <button type="button" data-status="{{co.SENT}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg" role="button">
+                        {% trans "Send" %}<i class='fa fa-share-square-o' style="margin-left:.5em"></i>
                     </button>
-                    {% endif %}
-                    {% if perm.can_unlock %}
-                    <button type="button" data-status="1000"  data-url="{% url 'task_unlock' object.pk %}" class="btn btn-primary btn-lg" role="button">
-                        {% trans "Unlock" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
-                    </button>
+                    <!-- <a data-status="{{co.SENT}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg send" role="button"> {% trans "Send" %}&hellip; <i class='fa fa-upload' style="margin-left:.5em"></i> </a> -->
                     {% endif %}
                     {% if perm.can_reject %}
                     <button type="button" data-status="{{co.REJECTED}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-danger btn-lg" role="button">
@@ -278,41 +330,5 @@
         </div>
         {% endif %}
     </div>
-    {% if site == "writer" %}
-    <!-- Writer send file modal popup-->
-    <div class="modal fade" id="writer-send" tabindex="-1" role="dialog" aria-labelledby="writer-send-label" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        <i class="fa fa-times-circle"></i>
-                    </button>
-                    <h4 class="modal-title" id="writer-send-label">{% trans "Send a file" %}</h4>
-                </div>
-                <form action="#" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="modal-body">
-                        <div class="form-group{% if form.attach.errors %} has-error{% endif %}">
-                            <div class="file-input form-control">
-                                <div class="input-group margin-bottom-sm">
-                                    <span class="input-group-addon"><i class="fa fa-paperclip fa-fw"></i></span>
-                                    <input id="writer-attach" class="upload-file" type="file" title="Browse" name="attach" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">
-                            {% trans "Close" %}<i class="fa fa-times-circle ilm"></i>
-                        </button>
-                        <button type="submit" class="btn btn-primary">
-                            {% trans "Send" %}<i class="fa fa-upload ilm"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    {% endif %}
 </section>
 {% endblock %}

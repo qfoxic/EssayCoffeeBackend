@@ -18,35 +18,75 @@ $( document ).ready( function( ) {
             }
         } );
     } );
+
     $( '.upload-file' ).bootstrapFileInput( );
 
     $( '.momdl' ).each( function( ) {
         var ts = $( this ).html( );
-        // console.log( moment( ts, 'X' ).fromNow( ) );
         $( this ).html( moment( ts, 'X' ).fromNow( ) );
     } );
+
+    $( '.uploads-add' ).on( 'click', function( ) {
+        var rbd = $( '#uploads-form' );
+        if( rbd.is( ':visible' ) ) {
+            $( this ).find( 'i' ).removeClass( 'fa-times-circle' ).addClass( 'fa-plus-circle' );
+        } else {
+            $( this ).find( 'i' ).removeClass( 'fa-plus-circle' ).addClass( 'fa-times-circle' );
+        }
+        rbd.toggle( 450 );
+    } );
+    
+    $( '.uploads-ctrl' ).on( 'click', function( ) {
+        var bid = $( this ).data( 'body-id' );
+        var rbd = $( '#upload-id-' + bid );
+        if( rbd.is( ':visible' ) ) {
+            // rbd.hide( 'slow' );
+            $( this ).find( 'i' ).removeClass( 'fa-rotate-180' );
+            $( '#upload-del-' + bid ).fadeOut( 'slow' );
+        } else {
+            // rbd.show( 'slow' );
+            $( this ).find( 'i' ).addClass( 'fa-rotate-180' );
+            $( '#upload-del-' + bid ).fadeIn( 'slow' );
+        }
+        rbd.toggle( 300 );
+    } );
+
+    // attr view
+    $( '.attr-ctrl' ).on( 'click', function( ) {
+        var bid = $( '.attr-body' );
+        if( bid.is( ':visible' ) ) {
+            $( this ).find( 'i' ).addClass( 'fa-rotate-180' );
+        } else {
+            $( this ).find( 'i' ).removeClass( 'fa-rotate-180' );
+        }
+        bid.toggle( 300 );
+    } );
+    // admin reports
     $( '.adm-report-ctrl' ).on( 'click', function( ) {
         var bid = $( this ).data( 'body-id' );
         var rbd = $( '#body-id-' + bid );
         if( rbd.is( ':visible' ) ) {
-            rbd.hide( 'slow' );
+            // rbd.hide( 'slow' );
             $( this ).find( 'i' ).removeClass( 'fa-rotate-180' );
             $( '#rep-del-' + bid ).fadeOut( 'slow' );
         } else {
-            rbd.show( 'slow' );
+            // rbd.show( 'slow' );
             $( this ).find( 'i' ).addClass( 'fa-rotate-180' );
             $( '#rep-del-' + bid ).fadeIn( 'slow' );
         }
+        rbd.toggle( 300 );
     } );
+
     $( '.adm-report-add' ).on( 'click', function( ) {
         var rbd = $( '#report-form' );
         if( rbd.is( ':visible' ) ) {
-            rbd.hide( 'slow' );
+            // rbd.hide( 'slow' );
             $( this ).find( 'i' ).removeClass( 'fa-times-circle' ).addClass( 'fa-plus-circle' );
         } else {
-            rbd.show( 'slow' );
+            // rbd.show( 'slow' );
             $( this ).find( 'i' ).removeClass( 'fa-plus-circle' ).addClass( 'fa-times-circle' );
         }
+        rbd.toggle( 400 );
     } );
 
     // admin actions
@@ -64,6 +104,13 @@ $( document ).ready( function( ) {
         }
     } );
 
+    $( '#lock_buttons > button' ).on( 'click', function( ev ) {
+        ev.preventDefault( );
+        if( $( this ).data( 'url' ) ) {
+            $( '#lock_form' ).attr( 'action', $( this ).data( 'url' ) ).submit( );
+        }
+    } );
+
     if( $( '#admin_flat_buttons' ).length ) {
         $( '#admin_flat_buttons > button' ).on( 'click', function( ev ) {
             ev.preventDefault( );
@@ -76,7 +123,7 @@ $( document ).ready( function( ) {
             ev.preventDefault( );
             if( $( this ).data( 'status' ) ) {
                 //     $( '#admin_flat_form' ).append( '<input type="hidden" name="status" value="' + $( this ).data( 'status' ) + '">' ).attr('action', $( this ).data( 'url' )).submit( );
-               // console.log( 'dialog show' );
+                // console.log( 'dialog show' );
                 $( '#writer-send' ).modal( 'show' );
             }
         } );
