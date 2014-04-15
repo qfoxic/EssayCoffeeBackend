@@ -1,0 +1,13 @@
+<form id="upload_remove_{{u.pk}}" action="{% url "upload_remove" u.pk %}" method="post">
+  {% csrf_token %}
+</form>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title"><a class="pull-right uploads-ctrl" data-body-id="{{u.pk}}" href="#"><i class="fa fa-caret-square-o-down"></i></a><a class="pull-right uploads-del" id="upload-del-{{u.pk}}" onclick="$('form#upload_remove_{{u.pk}}').submit();" href="#" style="display:none"> <i class="fa fa-times-circle"></i> </a> {{u.attach.name}}</h3>
+  </div>
+  <div id="upload-id-{{u.pk}}" class="panel-body small" style="display:none">
+    <p>Owner: <a href="{% url "user_edit" u.fowner.pk %}">{{u.fowner}}</a></p>
+    <p><span><i class="fa fa-1 fa-calendar irm"> Created:</i>{{u.created}}</span></p>
+    <p><span><i class="fa fa-1 fa-calendar irm"> Updated:</i>{{u.updated}}</span></p>
+  </div>
+</div>

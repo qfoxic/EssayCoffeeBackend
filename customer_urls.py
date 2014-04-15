@@ -12,17 +12,13 @@ from userprofile.views import CreateProfileView, UpdateProfileView
 
 import constants as co
 
-task_rm = login_required(
-    permission_required('general.delete_task', raise_exception=True)(RemoveTaskView.as_view()),
-    login_url=reverse_lazy('login'))
+task_rm = login_required(RemoveTaskView.as_view(), login_url=reverse_lazy('login'))
 
 comment_new = login_required(
-    permission_required('comments.add_comment', raise_exception=True)
-      (CreateCommentView.as_view(module_name='customer')),
+    CreateCommentView.as_view(module_name='customer'),
     login_url=reverse_lazy('login'))
 comment_rm = login_required(
-    permission_required('comments.delete_comment', raise_exception=True)
-      (RemoveCommentView.as_view(module_name='customer')),
+    RemoveCommentView.as_view(module_name='customer'),
     login_url=reverse_lazy('login'))
 
 
@@ -38,16 +34,13 @@ task_list = lambda request: login_required(
 task_details = login_required(DetailTaskView.as_view(module_name='customer'),
                               login_url=reverse_lazy('login'))
 task_new = login_required(
-  permission_required('general.add_task', raise_exception=True)
-    (CreateTaskView.as_view(module_name='customer')),
+  CreateTaskView.as_view(module_name='customer'),
   login_url=reverse_lazy('login'))
 task_status = login_required(
-  permission_required('general.change_task', raise_exception=True)
-    (SwitchStatusView.as_view(module_name='customer')),
+  SwitchStatusView.as_view(module_name='customer'),
   login_url=reverse_lazy('login'))
 task_update = login_required(
-  permission_required('general.change_task', raise_exception=True)
-    (UpdateTaskView.as_view(module_name='customer')),
+  UpdateTaskView.as_view(module_name='customer'),
   login_url=reverse_lazy('login'))
 
 urlpatterns = patterns('',

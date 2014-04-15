@@ -39,8 +39,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'customer',
     'comments',
+    'reports',
     'general',
     'userprofile',
+    'ftpstorage',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -54,6 +56,12 @@ MIDDLEWARE_CLASSES = (
 
 AUTHENTICATION_BACKENDS = (
     'userprofile.auth.UserProfileBackend',
+)
+
+FTP_DATA = ('127.0.0.1', 'ftp', 'q1w2e3r4t5y6')
+
+DEFAULT_FILE_STORAGE = (
+    'ftpstorage.storage.FTPStorage'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

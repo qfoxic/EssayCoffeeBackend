@@ -67,7 +67,6 @@ class CreateCommentView(BaseView, CreateView):
 class RemoveCommentView(BaseView, DeleteView):
   template_name = 'tasks/delete.html'
   queryset = Comment.objects.all()
-  owner_required = True
 
   def get_success_url(self):
     task_id = self.object.ctask.pk

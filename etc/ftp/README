@@ -1,0 +1,6 @@
+useradd ftp
+mkdir /pub/
+chown -R ftp:ftp /pub/
+mkdir /pub/uploads
+chown -R ftp:ftp /pub/uploads
+

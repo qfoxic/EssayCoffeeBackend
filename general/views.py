@@ -6,11 +6,13 @@ from django.contrib.auth.views import login, logout, password_reset
 from django.contrib.auth.views import password_reset_done, password_reset_confirm, password_reset_complete
 from django.core.urlresolvers import reverse_lazy
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 
 from general.models import Task
 from userprofile.models import UserProfile
 from comments.models import Comment
 from reports.models import Report
+from ftpstorage.models import Upload
 from general.forms import TaskForm, SwitchStatusForm, LockTaskForm, UnlockTaskForm
 
 from django.views.generic.edit import UpdateView
@@ -126,7 +128,8 @@ class BaseView(View):
       'can_lock': co.CheckPermissions(user, obj, co.CAN_LOCK) and not obj.is_locked(user),
       'can_unlock': co.CheckPermissions(user, obj, co.CAN_UNLOCK) and obj.is_locked(user, by_user=True),
       'can_delete': co.CheckPermissions(user, obj, co.CAN_DELETE),
-      'can_complete': co.CheckPermissions(user, obj, co.CAN_COMPLETE)
+      'can_complete': co.CheckPermissions(user, obj, co.CAN_COMPLETE),
+      'can_upload': co.CheckPermissions(user, obj, co.CAN_UPLOAD)
     }
     context['stats'] = get_stats(self.request)
     context['action_label'] = self.action_label
@@ -275,6 +278,17 @@ class DetailTaskView(BaseView, DetailView):
     task_id = self.kwargs.get('pk')
     context['comments'] = Comment.objects.filter(ctask_id__exact=task_id)
     context['reports'] = Report.objects.filter(rtask_id__exact=task_id)
+    group = self.request.user.get_group()
+    task_q = Q(ftask_id__exact=task_id)
+    or_q = Q(fowner_id__exact=self.request.user.id)|Q(access_level__in=(co.PUBLIC_ACCESS,))
+    context['customer_uploads'] = Upload.objects.filter(fowner__groups__name=co.CUSTOMER_GROUP).filter(task_q, or_q)
+    if group in [co.ADMIN_GROUP, co.EDITOR_GROUP]:
+      context['admin_uploads'] = Upload.objects.filter(fowner__groups__name=co.ADMIN_GROUP).filter(task_q, or_q)
+      context['editor_uploads'] = Upload.objects.filter(fowner__groups__name=co.EDITOR_GROUP).filter(task_q, or_q)
+      context['writer_uploads'] = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q)
+    elif group == co.WRITER_GROUP:
+      context['editor_uploads'] = Upload.objects.filter(fowner__groups__name=co.EDITOR_GROUP).filter(task_q, or_q)
+      context['writer_uploads'] = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q)
     return context
 
   def user_id(self):

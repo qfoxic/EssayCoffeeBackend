@@ -24,7 +24,7 @@ class TaskForm(BaseForm):
     fields = ('site',
               'paper_title', 'discipline', 'assigment', 'level', 'urgency',
               'spacing', 'page_number', 'style', 'source_number',
-              'instructions', 'attach', 'discount', 'accept_terms',
+              'instructions', 'discount', 'accept_terms',
               'owner', 'assignee',
               'priority',
               'access_level',

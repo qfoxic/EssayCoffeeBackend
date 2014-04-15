@@ -25,10 +25,6 @@ def ValidateMinSize(size):
   return Validate
 
 
-def get_attach_path(instance, filename):
-  return os.path.join(instance.owner.username, 'attach', filename)
-
-
 class Task(models.Model):
   paper_title = models.CharField(max_length=co.TITLE_MAX_LEN, validators=[ValidateMinSize(4)])
   discipline = models.CharField(choices=co.DISCIPLINES, max_length=co.TITLE_MAX_LEN,
@@ -47,7 +43,6 @@ class Task(models.Model):
   mark = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
   instructions = models.TextField(max_length=co.INSTRUCTION_MAX_LEN,
                                   validators=[ValidateMinSize(100)])
-  attach = models.FileField(upload_to=get_attach_path, blank=True, null=True)
   discount = models.CharField(max_length=co.TITLE_MAX_LEN)
   accept_terms = models.BooleanField(validators=[ValidateTerms])
   payment_status = models.SmallIntegerField(choices=co.PAYMENT_STATUS, default=co.UNPAID)
@@ -186,7 +181,7 @@ class Task(models.Model):
     flds = set(self._meta.get_all_field_names())
     if self.pk or self.id:
       # Don't update fields below.
-      flds = flds.difference(['owner', 'site', 'id', 'ctask', 'rtask'])
+      flds = flds.difference(['owner', 'site', 'id', 'ctask', 'rtask', 'ftask'])
       kwargs.update({'update_fields': flds})
       return super(Task, self).save(*args, **kwargs)
     return super(Task, self).save(*args, **kwargs)

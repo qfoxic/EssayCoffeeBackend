@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import permission_required
 from django.core.urlresolvers import reverse_lazy
 
 from general.views import DetailTaskView,SwitchStatusView,LockTaskView
@@ -51,12 +50,10 @@ task_lock = login_required(LockTaskView.as_view(module_name='writer'),
                            login_url=reverse_lazy('login'))
 
 comment_new = login_required(
-    permission_required('comments.add_comment', raise_exception=True)
-      (CreateCommentView.as_view(module_name='writer')),
+    CreateCommentView.as_view(module_name='writer'),
     login_url=reverse_lazy('login'))
 comment_rm = login_required(
-    permission_required('comments.delete_comment', raise_exception=True)
-      (RemoveCommentView.as_view(module_name='writer')),
+    RemoveCommentView.as_view(module_name='writer'),
     login_url=reverse_lazy('login'))
 
 task_status = login_required(

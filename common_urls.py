@@ -9,10 +9,13 @@ admin.autodiscover()
 from general.views import LoginView, LogoutView, ResetPswdView, StaticHtmlView
 from general.views import ResetPswdDoneView, ResetPswdConfirmView, ResetPswdCompleteView
 
+from ftpstorage.views import UploadFileView,RemoveUploadView 
 from userprofile.views import RemoveProfileView
 
 
 user_remove = login_required(RemoveProfileView.as_view(), login_url=reverse_lazy('login'))
+upload_file = login_required(UploadFileView.as_view(module_name='customer'), login_url=reverse_lazy('login'))
+upload_rm = login_required(RemoveUploadView.as_view(module_name='customer'), login_url=reverse_lazy('login'))
 
 urlpatterns = patterns('',
     url(r'^login/$', LoginView.as_view(), name='login'),
@@ -24,6 +27,8 @@ urlpatterns = patterns('',
     url(r'^html/(?P<path>.*)$', StaticHtmlView.as_view(), name='html'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'profile/(?P<pk>\d+)/remove$', user_remove, name='user_remove'),
+    url(r'^upload/(?P<task_id>\d+)/new$', upload_file, name='upload_file'),
+    url(r'^upload/(?P<pk>\d+)/remove$', upload_rm, name='upload_remove'),
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
 

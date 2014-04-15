@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import permission_required
 from django.core.urlresolvers import reverse_lazy
 
 from general.views import DetailTaskView,SwitchStatusView,LockTaskView,UnlockTaskView
@@ -26,21 +25,17 @@ user_edit = login_required(UpdateProfileView.as_view(module_name='editor',
                            login_url=reverse_lazy('login'))
 
 comment_new = login_required(
-    permission_required('comments.add_comment', raise_exception=True)
-      (CreateCommentView.as_view(module_name='editor')),
+    CreateCommentView.as_view(module_name='editor'),
     login_url=reverse_lazy('login'))
 comment_rm = login_required(
-    permission_required('comments.delete_comment', raise_exception=True)
-      (RemoveCommentView.as_view(module_name='editor')),
+    RemoveCommentView.as_view(module_name='editor'),
     login_url=reverse_lazy('login'))
 
 report_new = login_required(
-    permission_required('reports.add_report', raise_exception=True)
-      (CreateReportView.as_view(module_name='editor')),
+    CreateReportView.as_view(module_name='editor'),
     login_url=reverse_lazy('login'))
 report_rm = login_required(
-    permission_required('comments.delete_comment', raise_exception=True)
-      (RemoveReportView.as_view(module_name='editor')),
+    RemoveReportView.as_view(module_name='editor'),
     login_url=reverse_lazy('login'))
 
 tasks_active = login_required(TaskIndexView.as_view(module_name='editor',

@@ -40,21 +40,17 @@ user_edit = login_required(UpdateProfileView.as_view(module_name='administer',
                            login_url=reverse_lazy('login'))
 
 comment_new = login_required(
-    permission_required('comments.add_comment', raise_exception=True)
-      (CreateCommentView.as_view(module_name='administer')),
+    CreateCommentView.as_view(module_name='administer'),
     login_url=reverse_lazy('login'))
 comment_rm = login_required(
-    permission_required('comments.delete_comment', raise_exception=True)
-      (RemoveCommentView.as_view(module_name='administer')),
+    RemoveCommentView.as_view(module_name='administer'),
     login_url=reverse_lazy('login'))
 
 report_new = login_required(
-    permission_required('reports.add_report', raise_exception=True)
-      (CreateReportView.as_view(module_name='administer')),
+    CreateReportView.as_view(module_name='administer'),
     login_url=reverse_lazy('login'))
 report_rm = login_required(
-    permission_required('comments.delete_comment', raise_exception=True)
-      (RemoveReportView.as_view(module_name='administer')),
+    RemoveReportView.as_view(module_name='administer'),
     login_url=reverse_lazy('login'))
 
 tasks_list = login_required(TaskIndexView.as_view(module_name='administer',
@@ -90,18 +86,15 @@ tasks_expired = login_required(TaskIndexView.as_view(module_name='administer',
 task_details = login_required(DetailTaskView.as_view(module_name='administer'),
                               login_url=reverse_lazy('login'))
 task_update = login_required(
-  permission_required('general.change_task', raise_exception=True)
-    (UpdateTaskView.as_view(module_name='administer', owner_required=False)),
+  UpdateTaskView.as_view(module_name='administer', owner_required=False),
   login_url=reverse_lazy('login'))
 
 task_status = login_required(
-    permission_required('general.change_task', raise_exception=True)
-      (SwitchStatusView.as_view(module_name='administer')),
+    SwitchStatusView.as_view(module_name='administer'),
     login_url=reverse_lazy('login'))
 
 task_force_status = login_required(
-    permission_required('general.change_task', raise_exception=True)
-      (AdminForceSwitchStatusView.as_view(module_name='administer')),
+    AdminForceSwitchStatusView.as_view(module_name='administer'),
     login_url=reverse_lazy('login'))
 
 task_lock = login_required(LockTaskView.as_view(module_name='administer'),

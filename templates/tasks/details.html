@@ -87,17 +87,20 @@
                 </div>
             </div>
             <div id="uploads">
+                {% if perm.can_upload %}
                 <div class="well well-sm">
                     <a class="pull-right uploads-add" href="#"><i class="fa fa-plus-circle"></i></a>
                     <strong>{% trans "Upload a file" %}&hellip;</strong><span class="ilm badge">{{stats.uploads}}</span>
                     <div id="uploads-form" style="display:none; margin-top:-10px">
-                        <form action="#" method="post">
+                        <form action="{% url "upload_file" object.pk %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-group{% if form.attach.errors %} has-error{% endif %}">
                                 <div class="file-input form-control">
                                     <div class="input-group margin-bottom-sm">
                                         <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
                                         <input id="id_attach" class="upload-file" type="file" title="Browse" name="attach">
+                                        {# this field must be shown as checkbox : Public or Private #}
+                                        <input type="hidden" name="access_level" value="{{co.PUBLIC_ACCESS}}">
                                     </div>
                                 </div>
                             </div>
@@ -109,26 +112,32 @@
                         </form>
                     </div>
                 </div>
+                {% endif  %}
                 <div id="uploads-holder">
-                    <form id="upload_remove" action="#" method="post">
-                        {% csrf_token %}
-                    </form>
-                    <h5>Customer uploads</h5>
-                    <!-- dijango for customer uploads -->
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><a class="pull-right uploads-ctrl" data-body-id="1" href="#"><i class="fa fa-caret-square-o-down"></i></a><a class="pull-right uploads-del" id="upload-del-1" onclick="$('form#upload_remove').submit();" href="#" style="display:none"> <i class="fa fa-times-circle"></i> </a> upload.title</h3>
-                        </div>
-                        <div id="upload-id-1" class="panel-body small" style="display:none">
-                            <p>
-                                upload.body
-                            </p>
-                            <p>
-                                by <a href="#">upload.owner</a><span class="pull-right"><i class="fa fa-1 fa-calendar irm"></i>upload.created</span>
-                            </p>
-                        </div>
-                    </div>
-                    <!-- .dijango for customer uploads -->
+                    {% if customer_uploads %}
+                      <h5>Customer uploads</h5>
+                      {% for u in customer_uploads  %}
+                        {% include "tasks/upload_details.html" %}
+                      {% endfor %}
+                    {% endif %}
+                    {% if admin_uploads %}
+                      <h5>Admin uploads</h5>
+                      {% for u in admin_uploads  %}
+                        {% include "tasks/upload_details.html" %}
+                      {% endfor %}
+                    {% endif %}
+                    {% if editor_uploads %}
+                      <h5>Editor uploads</h5>
+                      {% for u in editor_uploads  %}
+                        {% include "tasks/upload_details.html" %}
+                      {% endfor %}
+                    {% endif %}
+                    {% if writer_uploads %}
+                      <h5>Writer uploads</h5>
+                      {% for u in writer_uploads  %}
+                        {% include "tasks/upload_details.html" %}
+                      {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         </div>
