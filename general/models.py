@@ -181,7 +181,7 @@ class Task(models.Model):
     flds = set(self._meta.get_all_field_names())
     if self.pk or self.id:
       # Don't update fields below.
-      flds = flds.difference(['owner', 'site', 'id', 'ctask', 'rtask', 'ftask'])
+      flds = flds.difference(['owner', 'site', 'id', 'ctask', 'rtask', 'ftask', 'howner'])
       kwargs.update({'update_fields': flds})
       return super(Task, self).save(*args, **kwargs)
     return super(Task, self).save(*args, **kwargs)

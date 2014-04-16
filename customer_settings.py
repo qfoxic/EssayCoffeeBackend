@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'customer',
     'general',
     'reports',
+    'history',
     'comments',
     'userprofile',
 )

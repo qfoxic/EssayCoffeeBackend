@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'writer',
     'comments',
     'general',
+    'history',
     'userprofile',
 )
 

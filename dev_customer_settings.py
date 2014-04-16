@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'comments',
     'reports',
     'general',
+    'history',
     'userprofile',
     'ftpstorage',
 )
