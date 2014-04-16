@@ -114,6 +114,12 @@
                 </div>
                 {% endif  %}
                 <div id="uploads-holder">
+                    {% if my_uploads %}
+                      <h5>My uploads</h5>
+                      {% for u in my_uploads  %}
+                        {% include "tasks/upload_details.html" %}
+                      {% endfor %}
+                    {% endif %}
                     {% if customer_uploads %}
                       <h5>Customer uploads</h5>
                       {% for u in customer_uploads  %}

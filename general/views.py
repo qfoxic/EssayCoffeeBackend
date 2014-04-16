@@ -281,14 +281,19 @@ class DetailTaskView(BaseView, DetailView):
     group = self.request.user.get_group()
     task_q = Q(ftask_id__exact=task_id)
     or_q = Q(fowner_id__exact=self.request.user.id)|Q(access_level__in=(co.PUBLIC_ACCESS,))
-    context['customer_uploads'] = Upload.objects.filter(fowner__groups__name=co.CUSTOMER_GROUP).filter(task_q, or_q)
+    context['my_uploads'] = Upload.objects.filter(task_q, Q(fowner_id__exact=self.request.user.id))
     if group in [co.ADMIN_GROUP, co.EDITOR_GROUP]:
+      context['customer_uploads'] = Upload.objects.filter(fowner__groups__name=co.CUSTOMER_GROUP).filter(task_q, or_q)
       context['admin_uploads'] = Upload.objects.filter(fowner__groups__name=co.ADMIN_GROUP).filter(task_q, or_q)
       context['editor_uploads'] = Upload.objects.filter(fowner__groups__name=co.EDITOR_GROUP).filter(task_q, or_q)
       context['writer_uploads'] = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q)
     elif group == co.WRITER_GROUP:
+      context['customer_uploads'] = Upload.objects.filter(fowner__groups__name=co.CUSTOMER_GROUP).filter(task_q, or_q)
       context['editor_uploads'] = Upload.objects.filter(fowner__groups__name=co.EDITOR_GROUP).filter(task_q, or_q)
       context['writer_uploads'] = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q)
+    elif group == co.CUSTOMER_GROUP:
+      context['writer_uploads'] = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q)
+       
     return context
 
   def user_id(self):
