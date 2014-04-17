@@ -10,7 +10,6 @@ from django.db.models import Q
 
 from general.models import Task
 from userprofile.models import UserProfile
-from comments.models import Comment
 from reports.models import Report
 from ftpstorage.models import Upload
 from general.forms import TaskForm, SwitchStatusForm, LockTaskForm, UnlockTaskForm
@@ -113,9 +112,7 @@ class BaseView(View):
     except:
       obj = None
     context['perm'] = {
-      'can_comment': co.CheckPermissions(user, obj, co.CAN_COMMENT),
       'can_edit': co.CheckPermissions(user, obj, co.CAN_EDIT),
-      'can_see_comments': co.CheckPermissions(user, obj, co.CAN_SEE_COMMENTS),
       'can_submit': co.CheckPermissions(user, obj, co.CAN_SUBMIT),
       # approve, suspect, reject
       'can_approve': co.CheckPermissions(user, obj, co.CAN_APPROVE),
@@ -129,7 +126,8 @@ class BaseView(View):
       'can_unlock': co.CheckPermissions(user, obj, co.CAN_UNLOCK) and obj.is_locked(user, by_user=True),
       'can_delete': co.CheckPermissions(user, obj, co.CAN_DELETE),
       'can_complete': co.CheckPermissions(user, obj, co.CAN_COMPLETE),
-      'can_upload': co.CheckPermissions(user, obj, co.CAN_UPLOAD)
+      'can_upload': co.CheckPermissions(user, obj, co.CAN_UPLOAD),
+      'can_message': co.CheckPermissions(user, obj, co.CAN_MESSAGE)
     }
     context['stats'] = get_stats(self.request)
     context['action_label'] = self.action_label
@@ -276,7 +274,6 @@ class DetailTaskView(BaseView, DetailView):
   def get_context_data(self, **kwargs):
     context = super(DetailTaskView, self).get_context_data(**kwargs)
     task_id = self.kwargs.get('pk')
-    context['comments'] = Comment.objects.filter(ctask_id__exact=task_id)
     context['reports'] = Report.objects.filter(rtask_id__exact=task_id)
     group = self.request.user.get_group()
     task_q = Q(ftask_id__exact=task_id)

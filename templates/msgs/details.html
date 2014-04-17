@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% load i18n render_status %}
+{% block pagetitle %}{% trans "Message Details" %}{% endblock %}
+{% block info_block %}
+<section class="info">
+    <h2><i class="fa fa-list-alt irm"></i> {% trans "Message Details" %}
+</section>
+{% endblock %}
+{% block content %}
+<section class="container-fluid task-details" style="margin: 0 auto">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            {{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body attr-body" style="line-height: 160%">
+                    <i class="fa fa-info-circle fa-fw irm"></i><strong>{% trans "Body" %}</strong>: <em>{{object.body}}</em>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

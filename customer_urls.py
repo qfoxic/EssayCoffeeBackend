@@ -6,7 +6,9 @@ from django.core.urlresolvers import reverse_lazy
 from general.views import RemoveTaskView,SwitchStatusView
 from general.views import CreateTaskView,UpdateTaskView,DetailTaskView,TaskIndexView
 from general.models import Task
-from comments.views import CreateCommentView,RemoveCommentView 
+from msgs.views import CreateMsgView, RemoveMsgView, ListMsgsView,DetailMsgView
+from ftpstorage.views import UploadFileView,RemoveUploadView 
+
 
 from userprofile.views import CreateProfileView, UpdateProfileView
 
@@ -14,13 +16,12 @@ import constants as co
 
 task_rm = login_required(RemoveTaskView.as_view(), login_url=reverse_lazy('login'))
 
-comment_new = login_required(
-    CreateCommentView.as_view(module_name='customer'),
-    login_url=reverse_lazy('login'))
-comment_rm = login_required(
-    RemoveCommentView.as_view(module_name='customer'),
-    login_url=reverse_lazy('login'))
-
+msg_add = login_required(CreateMsgView.as_view(module_name='customer'), login_url=reverse_lazy('login'))
+msg_rm = login_required(RemoveMsgView.as_view(module_name='customer'), login_url=reverse_lazy('login'))
+msg_list = login_required(ListMsgsView.as_view(module_name='customer'), login_url=reverse_lazy('login'))
+msg_detail = login_required(DetailMsgView.as_view(module_name='customer'), login_url=reverse_lazy('login'))
+upload_file = login_required(UploadFileView.as_view(module_name='customer'), login_url=reverse_lazy('login'))
+upload_rm = login_required(RemoveUploadView.as_view(module_name='customer'), login_url=reverse_lazy('login'))
 
 user_new = CreateProfileView.as_view(module_name='customer',
                                      group_name=co.CUSTOMER_GROUP)
@@ -52,8 +53,13 @@ urlpatterns = patterns('',
     url(r'^task/(?P<pk>\d+)/edit$', task_update, name='task_edit'),
     url(r'^task/(?P<pk>\d+)/status$', task_status, name='task_status'),
 
-    url(r'^comment/(?P<task_id>\d+)/new$', comment_new, name='comment_new'),
-    url(r'^comment/(?P<pk>\d+)/remove$', comment_rm, name='comment_remove'),
+    url(r'^msg/(?P<task_id>\d+)/new$', msg_add, name='msg_add'),
+    url(r'^msg/(?P<pk>\d+)/remove$', msg_rm, name='msg_remove'),
+    url(r'^msgs/$', msg_list, name='msgs_list'),
+    url(r'^msg/(?P<pk>\d+)/$', msg_detail, name='msg_detail'),
+
+    url(r'^upload/(?P<task_id>\d+)/new$', upload_file, name='upload_file'),
+    url(r'^upload/(?P<pk>\d+)/remove$', upload_rm, name='upload_remove'),
 
     url(r'profile/new', user_new, name='user_new'),
     url(r'profile/(?P<pk>\d+)/$', user_edit, name='user_details'),

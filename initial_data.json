@@ -297,44 +297,146 @@
   }
 },
 {
+  "pk": 34, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_report", 
+    "name": "Can add report", 
+    "content_type": 8
+  }
+},
+{
+  "pk": 35, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_report", 
+    "name": "Can change report", 
+    "content_type": 8
+  }
+},
+{
+  "pk": 36, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_report", 
+    "name": "Can delete report", 
+    "content_type": 8
+  }
+},
+{
+  "pk": 37, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_task", 
+    "name": "Can add task", 
+    "content_type": 9
+  }
+},
+{
+  "pk": 38, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_task", 
+    "name": "Can change task", 
+    "content_type": 9
+  }
+},
+{
+  "pk": 39, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_task", 
+    "name": "Can delete task", 
+    "content_type": 9
+  }
+},
+{
+  "pk": 40, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_history", 
+    "name": "Can add history", 
+    "content_type": 12
+  }
+},
+{
+  "pk": 41, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_history", 
+    "name": "Can change history", 
+    "content_type": 12
+  }
+},
+{
+  "pk": 42, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_history", 
+    "name": "Can delete history", 
+    "content_type": 12
+  }
+},
+{
+  "pk": 43, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_userprofile", 
+    "name": "Can add user profile", 
+    "content_type": 10
+  }
+},
+{
+  "pk": 44, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_userprofile", 
+    "name": "Can change user profile", 
+    "content_type": 10
+  }
+},
+{
+  "pk": 45, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_userprofile", 
+    "name": "Can delete user profile", 
+    "content_type": 10
+  }
+},
+{
+  "pk": 46, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_upload", 
+    "name": "Can add upload", 
+    "content_type": 11
+  }
+},
+{
+  "pk": 47, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_upload", 
+    "name": "Can change upload", 
+    "content_type": 11
+  }
+},
+{
+  "pk": 48, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_upload", 
+    "name": "Can delete upload", 
+    "content_type": 11
+  }
+},
+{
   "pk": 1, 
   "model": "auth.group", 
   "fields": {
     "name": "admin", 
     "permissions": [
-      1, 
-      2, 
-      3, 
-      7, 
-      8, 
-      9, 
-      4, 
-      5, 
-      6, 
-      10, 
-      11, 
-      12, 
-      19, 
-      20, 
-      21, 
-      13, 
-      14, 
-      15, 
-      31, 
-      32, 
-      33, 
-      25, 
-      26, 
-      27, 
-      22, 
-      23, 
-      24, 
-      16, 
-      17, 
-      18, 
-      28, 
-      29, 
-      30
     ]
   }
 },
@@ -344,39 +446,6 @@
   "fields": {
     "name": "writer", 
     "permissions": [
-      1, 
-      2, 
-      3, 
-      7, 
-      8, 
-      9, 
-      4, 
-      5, 
-      6, 
-      10, 
-      11, 
-      12, 
-      19, 
-      20, 
-      21, 
-      13, 
-      14, 
-      15, 
-      31, 
-      32, 
-      33, 
-      25, 
-      26, 
-      27, 
-      22, 
-      23, 
-      24, 
-      16, 
-      17, 
-      18, 
-      28, 
-      29, 
-      30
     ]
   }
 },
@@ -386,39 +455,6 @@
   "fields": {
     "name": "customer", 
     "permissions": [
-      1, 
-      2, 
-      3, 
-      7, 
-      8, 
-      9, 
-      4, 
-      5, 
-      6, 
-      10, 
-      11, 
-      12, 
-      19, 
-      20, 
-      21, 
-      13, 
-      14, 
-      15, 
-      31, 
-      32, 
-      33, 
-      25, 
-      26, 
-      27, 
-      22, 
-      23, 
-      24, 
-      16, 
-      17, 
-      18, 
-      28, 
-      29, 
-      30
     ]
   }
 },
@@ -428,39 +464,6 @@
   "fields": {
     "name": "editor", 
     "permissions": [
-      1, 
-      2, 
-      3, 
-      7, 
-      8, 
-      9, 
-      4, 
-      5, 
-      6, 
-      10, 
-      11, 
-      12, 
-      19, 
-      20, 
-      21, 
-      13, 
-      14, 
-      15, 
-      31, 
-      32, 
-      33, 
-      25, 
-      26, 
-      27, 
-      22, 
-      23, 
-      24, 
-      16, 
-      17, 
-      18, 
-      28, 
-      29, 
-      30
     ]
   }
 },
@@ -492,7 +495,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-04-15T12:31:15Z", 
+    "last_login": "2014-04-17T14:31:06Z", 
     "groups": [
       1
     ], 
@@ -512,7 +515,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-04-15T14:36:58Z", 
+    "last_login": "2014-04-17T14:16:02Z", 
     "groups": [
       3
     ], 
@@ -532,7 +535,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-04-15T12:32:03Z", 
+    "last_login": "2014-04-17T13:06:53Z", 
     "groups": [
       4
     ], 
@@ -552,7 +555,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-04-15T12:32:28Z", 
+    "last_login": "2014-04-17T13:52:50Z", 
     "groups": [
       2
     ], 
@@ -563,12 +566,32 @@
   }
 },
 {
+  "pk": 6, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "admin1", 
+    "first_name": "Admin1", 
+    "last_name": "Admin1", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": false, 
+    "last_login": "2014-04-15T15:11:33Z", 
+    "groups": [
+      1
+    ], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$12000$BVaZsFFBmEu4$2gJAvBhK9/81zvyfy5M9n8F6fplaRvthorKs7qlIKqU=", 
+    "email": "wwww@qq.qq", 
+    "date_joined": "2014-04-15T15:11:26Z"
+  }
+},
+{
   "pk": 1, 
   "model": "general.task", 
   "fields": {
     "payment_status": 1, 
     "site": "85.17.249.125:8089", 
-    "assignee": null, 
+    "assignee": 5, 
     "manager": null, 
     "source_number": 2, 
     "owner": 3, 
@@ -577,13 +600,13 @@
     "assigment": "es", 
     "mark": null, 
     "priority": false, 
-    "access_level": "1", 
+    "access_level": "0", 
     "page_number": 2, 
     "editor": null, 
     "ttype": 1, 
     "revision": false, 
-    "status": 7, 
-    "updated": "2014-04-15T14:46:16Z", 
+    "status": 1, 
+    "updated": "2014-04-17T13:49:05Z", 
     "completed": null, 
     "spacing": 1, 
     "discount": "1233", 
@@ -662,6 +685,254 @@
   }
 },
 {
+  "pk": 4, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "85.17.249.125:8089", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 22, 
+    "owner": 2, 
+    "discipline": "hs", 
+    "style": 1, 
+    "assigment": "es", 
+    "mark": null, 
+    "priority": false, 
+    "access_level": "1", 
+    "page_number": 2, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 1, 
+    "updated": "2014-04-15T15:10:34Z", 
+    "completed": null, 
+    "spacing": 1, 
+    "discount": "111", 
+    "accept_terms": true, 
+    "instructions": "Michael Jackson's mother has been ordered by a US court to pay AEG Live $800,000 (\u00a3480,000) for costs defending the failed negligence case she brought against the concert promoter.\r\n\r\nThe company was cleared of liability over the 2009 death of the pop star in a five-month trial last October.\r\n\r\nAEG Live had sought $1.2m (\u00a3720,000) to cover costs, but Katherine Jackson's lawyers claimed it was not justified.\r\n\r\nBoth parties agreed not to challenge the court's decision, but may appeal.\r\n\r\nThe exact amount to be paid is expected to be finalised after AEG Live submits an amended list of its costs for items such as court filing fees and travel.", 
+    "level": "hs", 
+    "created": "2014-04-15T14:53:10Z", 
+    "urgency": 21600, 
+    "paper_title": "Paepr2"
+  }
+},
+{
+  "pk": 5, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "85.17.249.125:8089", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 22, 
+    "owner": 3, 
+    "discipline": "lt", 
+    "style": 2, 
+    "assigment": "re", 
+    "mark": null, 
+    "priority": false, 
+    "access_level": "1", 
+    "page_number": 13, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 4, 
+    "updated": "2014-04-16T14:34:35Z", 
+    "completed": null, 
+    "spacing": 2, 
+    "discount": "123", 
+    "accept_terms": true, 
+    "instructions": "The company was cleared of liability over the 2009 death of the pop star in a five-month trial last October.\r\n\r\nAEG Live had sought $1.2m (\u00a3720,000) to cover costs, but Katherine Jackson's lawyers claimed it was not justified.\r\n\r\nBoth parties agreed not to challenge the court's decision, but may appeal.\r\n\r\nThe exact amount to be paid is expected to be finalised after AEG Live submits an amended list of its costs for items such as court filing fees and travel.", 
+    "level": "co", 
+    "created": "2014-04-16T13:26:29Z", 
+    "urgency": 86400, 
+    "paper_title": "qqqqqqqq"
+  }
+},
+{
+  "pk": 1, 
+  "model": "msgs.message", 
+  "fields": {
+    "body": "qqqq", 
+    "updated": "2014-04-17T14:31:19Z", 
+    "created": "2014-04-17T12:33:32Z", 
+    "title": "title111", 
+    "readby": ":3:2:", 
+    "visibility": 1, 
+    "mowner": 3, 
+    "mtask": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "msgs.message", 
+  "fields": {
+    "body": "qqqq", 
+    "updated": "2014-04-17T12:34:51Z", 
+    "created": "2014-04-17T12:34:51Z", 
+    "title": "title111", 
+    "readby": "3", 
+    "visibility": 1, 
+    "mowner": 3, 
+    "mtask": 1
+  }
+},
+{
+  "pk": 3, 
+  "model": "msgs.message", 
+  "fields": {
+    "body": "qqqq", 
+    "updated": "2014-04-17T12:37:05Z", 
+    "created": "2014-04-17T12:37:05Z", 
+    "title": "3333", 
+    "readby": "3", 
+    "visibility": 1, 
+    "mowner": 3, 
+    "mtask": 1
+  }
+},
+{
+  "pk": 4, 
+  "model": "msgs.message", 
+  "fields": {
+    "body": "aaaaaa", 
+    "updated": "2014-04-17T14:29:24Z", 
+    "created": "2014-04-17T13:00:47Z", 
+    "title": "title", 
+    "readby": ":3:", 
+    "visibility": 0, 
+    "mowner": 3, 
+    "mtask": 1
+  }
+},
+{
+  "pk": 5, 
+  "model": "msgs.message", 
+  "fields": {
+    "body": "qqqq", 
+    "updated": "2014-04-17T14:30:29Z", 
+    "created": "2014-04-17T13:06:08Z", 
+    "title": "title111", 
+    "readby": ":3:2:", 
+    "visibility": 2, 
+    "mowner": 2, 
+    "mtask": 1
+  }
+},
+{
+  "pk": 6, 
+  "model": "msgs.message", 
+  "fields": {
+    "body": "qqqq", 
+    "updated": "2014-04-17T13:06:27Z", 
+    "created": "2014-04-17T13:06:27Z", 
+    "title": "wwwww", 
+    "readby": "2", 
+    "visibility": 1, 
+    "mowner": 2, 
+    "mtask": 4
+  }
+},
+{
+  "pk": 7, 
+  "model": "msgs.message", 
+  "fields": {
+    "body": "qqqq", 
+    "updated": "2014-04-17T13:07:05Z", 
+    "created": "2014-04-17T13:07:05Z", 
+    "title": "title111", 
+    "readby": "4", 
+    "visibility": 1, 
+    "mowner": 4, 
+    "mtask": 4
+  }
+},
+{
+  "pk": 8, 
+  "model": "msgs.message", 
+  "fields": {
+    "body": "qqqq", 
+    "updated": "2014-04-17T13:07:12Z", 
+    "created": "2014-04-17T13:07:12Z", 
+    "title": "title111", 
+    "readby": "4", 
+    "visibility": 2, 
+    "mowner": 4, 
+    "mtask": 4
+  }
+},
+{
+  "pk": 9, 
+  "model": "msgs.message", 
+  "fields": {
+    "body": "qqqq", 
+    "updated": "2014-04-17T14:25:23Z", 
+    "created": "2014-04-17T13:34:46Z", 
+    "title": "title111", 
+    "readby": ":3:", 
+    "visibility": 0, 
+    "mowner": 3, 
+    "mtask": 3
+  }
+},
+{
+  "pk": 10, 
+  "model": "msgs.message", 
+  "fields": {
+    "body": "qqqq", 
+    "updated": "2014-04-17T13:38:17Z", 
+    "created": "2014-04-17T13:38:17Z", 
+    "title": "title111", 
+    "readby": "2", 
+    "visibility": 1, 
+    "mowner": 2, 
+    "mtask": 3
+  }
+},
+{
+  "pk": 11, 
+  "model": "msgs.message", 
+  "fields": {
+    "body": "qqqq", 
+    "updated": "2014-04-17T14:25:18Z", 
+    "created": "2014-04-17T13:51:23Z", 
+    "title": "3333", 
+    "readby": ":3:5:", 
+    "visibility": 2, 
+    "mowner": 5, 
+    "mtask": 1
+  }
+},
+{
+  "pk": 12, 
+  "model": "msgs.message", 
+  "fields": {
+    "body": "qqqq", 
+    "updated": "2014-04-17T13:51:36Z", 
+    "created": "2014-04-17T13:51:36Z", 
+    "title": "comment1", 
+    "readby": "5", 
+    "visibility": 0, 
+    "mowner": 5, 
+    "mtask": 1
+  }
+},
+{
+  "pk": 13, 
+  "model": "msgs.message", 
+  "fields": {
+    "body": "qqqqqqqqqqq", 
+    "updated": "2014-04-17T14:15:48Z", 
+    "created": "2014-04-17T13:52:32Z", 
+    "title": "title111qqqqqqq", 
+    "readby": ":2:5:", 
+    "visibility": 1, 
+    "mowner": 2, 
+    "mtask": 1
+  }
+},
+{
   "pk": 1, 
   "model": "userprofile.userprofile", 
   "fields": {
@@ -724,6 +995,20 @@
     "phone": "1111", 
     "groups": [
       2
+    ], 
+    "country": "AF", 
+    "user_permissions": []
+  }
+},
+{
+  "pk": 6, 
+  "model": "userprofile.userprofile", 
+  "fields": {
+    "updated": "2014-04-15T15:11:26Z", 
+    "gender": 0, 
+    "phone": "123", 
+    "groups": [
+      1
     ], 
     "country": "AF", 
     "user_permissions": []

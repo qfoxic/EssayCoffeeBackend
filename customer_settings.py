@@ -45,7 +45,7 @@ INSTALLED_APPS = (
     'general',
     'reports',
     'history',
-    'comments',
+    'msgs',
     'userprofile',
 )
 

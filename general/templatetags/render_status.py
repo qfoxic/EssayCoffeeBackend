@@ -5,6 +5,11 @@ import constants
  
 register = template.Library()
  
+@register.filter(name='is_msg_new')
+def is_msg_new(msg, user):
+  readby = msg.readby
+  return str(user.id) not in readby.strip(':').split(':')
+
 @register.filter(name='render_status')
 def render_status(value):
 

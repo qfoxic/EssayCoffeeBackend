@@ -6,12 +6,13 @@ from general.views import DetailTaskView,SwitchStatusView,LockTaskView,UnlockTas
 from general.views import TaskIndexView, UpdateTaskView
 from general.models import Task
 
-from comments.views import CreateCommentView,RemoveCommentView 
 from reports.views import CreateReportView,RemoveReportView 
 
 from userprofile.views import CreateProfileView, UpdateProfileView, ListProfileView
 from userprofile.models import UserProfile
 
+from msgs.views import CreateMsgView, RemoveMsgView, ListMsgsView,DetailMsgView
+from ftpstorage.views import UploadFileView,RemoveUploadView 
 import constants as co
 
 writers = login_required(ListProfileView.as_view(module_name='editor',
@@ -24,12 +25,12 @@ user_edit = login_required(UpdateProfileView.as_view(module_name='editor',
                                                      allowed_groups=[co.WRITER_GROUP]),
                            login_url=reverse_lazy('login'))
 
-comment_new = login_required(
-    CreateCommentView.as_view(module_name='editor'),
-    login_url=reverse_lazy('login'))
-comment_rm = login_required(
-    RemoveCommentView.as_view(module_name='editor'),
-    login_url=reverse_lazy('login'))
+msg_add = login_required(CreateMsgView.as_view(module_name='editor'), login_url=reverse_lazy('login'))
+msg_rm = login_required(RemoveMsgView.as_view(module_name='editor'), login_url=reverse_lazy('login'))
+msg_list = login_required(ListMsgsView.as_view(module_name='editor'), login_url=reverse_lazy('login'))
+msg_detail = login_required(DetailMsgView.as_view(module_name='editor'), login_url=reverse_lazy('login'))
+upload_file = login_required(UploadFileView.as_view(module_name='editor'), login_url=reverse_lazy('login'))
+upload_rm = login_required(RemoveUploadView.as_view(module_name='editor'), login_url=reverse_lazy('login'))
 
 report_new = login_required(
     CreateReportView.as_view(module_name='editor'),
@@ -91,8 +92,13 @@ urlpatterns = patterns('',
     url(r'^task/(?P<pk>\d+)/lock$', task_lock, name='task_lock'),
     url(r'^task/(?P<pk>\d+)/unlock$', task_unlock, name='task_unlock'),
 
-    url(r'^comment/(?P<task_id>\d+)/new$', comment_new, name='comment_new'),
-    url(r'^comment/(?P<pk>\d+)/remove$', comment_rm, name='comment_remove'),
+    url(r'^msg/(?P<task_id>\d+)/new$', msg_add, name='msg_add'),
+    url(r'^msg/(?P<pk>\d+)/remove$', msg_rm, name='msg_remove'),
+    url(r'^msgs/$', msg_list, name='msgs_list'),
+    url(r'^msg/(?P<pk>\d+)/$', msg_detail, name='msg_detail'),
+
+    url(r'^upload/(?P<task_id>\d+)/new$', upload_file, name='upload_file'),
+    url(r'^upload/(?P<pk>\d+)/remove$', upload_rm, name='upload_remove'),
 
     url(r'^report/(?P<task_id>\d+)/new$', report_new, name='report_new'),
     url(r'^report/(?P<pk>\d+)/remove$', report_rm, name='report_remove'),

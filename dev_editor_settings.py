@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'editor',
     'general',
-    'comments',
+    'msgs',
     'userprofile',
 )
 

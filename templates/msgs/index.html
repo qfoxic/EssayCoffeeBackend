@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% load i18n render_status %}
+{% block pagetitle %}Messages{% endblock %}
+{% block info_block %}
+<section class="info">
+    <h2><i class="fa fa-tasks irm"></i> {% trans "Messages List" %} <small style="color:#333;margin-left:0.5em">{{action_label}} <sup><span class="badge" style="font-size:.6em;text-shadow:none;margin-left:.5em;background-color:#08F">{{msgs|length}}</span></sup></small></h2>
+</section>
+{% endblock %}
+{% block content %}
+{% if msgs %}
+<div class="row">
+    {{ PATH_IFNO }}
+    <div class="col-md-12">
+        <table class="tablesorter table table-hover table-condensed">
+	<thead>
+	    <tr>
+		<th class="sorter-digit">{% trans 'Title' %}</th>
+		<th>{% trans 'Created' %}</th>
+		<th class="sorter-text">{% trans 'Task' %}</th>
+		<th class="sorter-text">{% trans 'Creator' %}</th>
+		<th class="sorter-text">{% trans 'Sent To' %}</th>
+		<th>{% trans 'Is New' %}</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    {% for m in msgs %}
+	    <tr>
+		<td><a href="{% url 'msg_detail' m.id %}">{{m.title}}</a></td>
+		<td>{{m.created}}</td>
+		<td><a href="{% url 'task_view' m.mtask.id %}">{{m.mtask.paper_title}}</a></td>
+		<td><a href="{% url 'user_edit' m.mowner.id %}">{{m.mowner.username}}</a></td>
+		<td>{{m.get_visibility}}</td>
+		<td>{{m|is_msg_new:request.user}}</td>
+	    </tr>
+	    {% endfor %}
+	</tbody>
+	<tfoot>
+	    <tr></tr>
+	</tfoot>
+        </table>
+    </div>
+</div>
+{% endif  %}
+{% endblock %}

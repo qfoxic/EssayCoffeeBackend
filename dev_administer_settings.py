@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'administer',
     'general',
-    'comments',
+    'msgs',
     'reports',
     'userprofile',
 )

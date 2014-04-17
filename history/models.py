@@ -34,7 +34,7 @@ def save_handler(sender, **kwargs):
     new_values = []
     fields = []
     for field in new_inst._meta.get_all_field_names():
-      if field in ['ctask','ftask','rtask']:
+      if field in ['mtask','ftask','rtask', 'owner', 'site']:
         continue
       new_value = getattr(new_inst, field)
       old_value = getattr(old_inst, field)
@@ -51,9 +51,6 @@ def save_handler(sender, **kwargs):
                       new_values=','.join(new_values))
     history.save()
       
-  else:
-    pass
-    
 
 class History(models.Model):
   howner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True,

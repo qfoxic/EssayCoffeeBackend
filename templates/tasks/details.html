@@ -87,6 +87,45 @@
                 </div>
             </div>
             <div id="uploads">
+                {% if perm.can_message %}
+                <div class="well well-sm">
+                    <a class="pull-right uploads-add" href="#"><i class="fa fa-plus-circle"></i></a>
+                    <strong>{% trans "Write a message" %}</strong><span class="ilm badge"></span>
+                    <div id="uploads-form" style="display:none; margin-top:-10px">
+                        <form action="{% url "msg_add" object.pk %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="file-input form-control">
+                                    <div class="input-group margin-bottom-sm">
+                                        <input class="upload-file" type="text" title="Title" name="title">
+                                        <input class="upload-file" type="text" title="Body" name="body">
+                                        <select name="visibility">
+                                          {% if site == 'customer' %}
+                                            <option value={{co.MSGS_ADM}}>Send to Admin&Editor</option>
+                                            <option value={{co.MSGS_WRITER}}>Send to Writer</option>
+                                          {% elif site == 'writer' %}
+                                            <option value={{co.MSGS_ADM}}>Send to Admin&Editor</option>
+                                            <option value={{co.MSGS_CUSTOMER}}>Send to Customer</option>
+                                          {% else %}
+                                            <option value={{co.MSGS_WRITER}}>Send to Writer</option>
+                                            <option value={{co.MSGS_CUSTOMER}}>Send to Customer</option>
+                                          {% endif %}
+                                        </select>
+                                        <input type="submit" value="Submit">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--
+                            <div style="text-align:right">
+                                <button type="submit" class="btn btn-primary">
+                                    Send<i class="fa fa-upload ilm"></i>
+                                </button>
+                            </div>
+                            -->
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
                 {% if perm.can_upload %}
                 <div class="well well-sm">
                     <a class="pull-right uploads-add" href="#"><i class="fa fa-plus-circle"></i></a>
