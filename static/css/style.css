@@ -190,11 +190,15 @@ a.adm-report-del, a.uploads-del {
 	color: #800;
 	margin-right: 8px;
 }
-a.adm-report-add, a.uploads-add {
+a.adm-report-add, a.uploads-add, a.messages-add {
 	font-size: 24px;
 	line-height: 24px;
 	margin: -2px 3px 0 0;
 	padding: 0;
+}
+.flat-btn {
+	background-image: none !important;
+	box-shadow: none !important;
 }
 a.attr-ctrl {
 	font-size: 18px;

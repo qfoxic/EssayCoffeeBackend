@@ -10,6 +10,8 @@ $( document ).ready( function( ) {
     // down: "fa fa-arrow-down"
     // }
     // } );
+    $('.vtoggler[checked="checked"]').parent().addClass("active");
+    
     $( '.btn-cancel' ).on( 'click', function( ) {
         var message = "Are you sure to leave this page? All unsaved data will be lost&hellip;";
         bootbox.confirm( message, function( result ) {
@@ -24,6 +26,16 @@ $( document ).ready( function( ) {
     $( '.momdl' ).each( function( ) {
         var ts = $( this ).html( );
         $( this ).html( moment( ts, 'X' ).fromNow( ) );
+    } );
+
+    $( '.messages-add' ).on( 'click', function( ) {
+        var rbd = $( '#messages-form' );
+        if( rbd.is( ':visible' ) ) {
+            $( this ).find( 'i' ).removeClass( 'fa-times-circle' ).addClass( 'fa-plus-circle' );
+        } else {
+            $( this ).find( 'i' ).removeClass( 'fa-plus-circle' ).addClass( 'fa-times-circle' );
+        }
+        rbd.toggle( 450 );
     } );
 
     $( '.uploads-add' ).on( 'click', function( ) {

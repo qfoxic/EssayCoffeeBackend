@@ -22,7 +22,7 @@
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="pull-right attr-ctrl" href="#"><i class="fa fa-toggle-up"></i></a>
+                    <a class="pull-right attr-ctrl" href="javascript:void()"><i class="fa fa-toggle-up"></i></a>
                     Attributes
                 </div>
                 <div class="panel-body attr-body" style="line-height: 160%">
@@ -92,36 +92,25 @@
                     <a class="pull-right messages-add" href="javascript:void()"><i class="fa fa-plus-circle"></i></a>
                     <strong>{% trans "Write a message" %}</strong><span class="ilm badge"></span>
                     <div id="messages-form" style="display:none; margin-top:-10px">
-                        <form action="{% url "msg_add" object.pk %}" method="post" enctype="multipart/form-data">
+                        <form action="{% url "msg_add" object.pk %}" method="post">
                             {% csrf_token %}
                             <div class="form-group">
-                                <div class="file-input form-control">
-                                    <div class="input-group margin-bottom-sm">
-                                        <input class="upload-file" type="text" title="Title" name="title">
-                                        <input class="upload-file" type="text" title="Body" name="body">
-                                        <select name="visibility">
-                                          {% if site == 'customer' %}
-                                            <option value={{co.MSGS_ADM}}>Send to Admin&Editor</option>
-                                            <option value={{co.MSGS_WRITER}}>Send to Writer</option>
-                                          {% elif site == 'writer' %}
-                                            <option value={{co.MSGS_ADM}}>Send to Admin&Editor</option>
-                                            <option value={{co.MSGS_CUSTOMER}}>Send to Customer</option>
-                                          {% else %}
-                                            <option value={{co.MSGS_WRITER}}>Send to Writer</option>
-                                            <option value={{co.MSGS_CUSTOMER}}>Send to Customer</option>
-                                          {% endif %}
-                                        </select>
-                                        <input type="submit" value="Submit">
-                                    </div>
-                                </div>
+                                <input class="form-control" type="text" title="Title" name="title" placeholder="Enter a title">
+                                <textarea class="form-control" placeholder="Enter a message text" name="body"></textarea>
+                                <select name="visibility">
+                                    {% if site == 'customer' %}
+                                    <option value={{co.MSGS_ADM}}>Send to Admin&amp;Editor</option>
+                                    <option value={{co.MSGS_WRITER}}>Send to Writer</option>
+                                    {% elif site == 'writer' %}
+                                    <option value={{co.MSGS_ADM}}>Send to Admin&amp;Editor</option>
+                                    <option value={{co.MSGS_CUSTOMER}}>Send to Customer</option>
+                                    {% else %}
+                                    <option value={{co.MSGS_WRITER}}>Send to Writer</option>
+                                    <option value={{co.MSGS_CUSTOMER}}>Send to Customer</option>
+                                    {% endif %}
+                                </select>
+                                <input type="submit" value="Submit">
                             </div>
-                            <!--
-                            <div style="text-align:right">
-                                <button type="submit" class="btn btn-primary">
-                                    Send<i class="fa fa-upload ilm"></i>
-                                </button>
-                            </div>
-                            -->
                         </form>
                     </div>
                 </div>
@@ -143,45 +132,63 @@
                                     </div>
                                 </div>
                             </div>
-                            <div style="text-align:right">
-                                <button type="submit" class="btn btn-primary">
-                                    Upload<i class="fa fa-upload ilm"></i>
-                                </button>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="btn-group btn-group-xs" data-toggle="buttons">
+                                        <label class="btn btn-default flat-btn">
+                                            <input class="vtoggler" type="radio" name="visibility" id="option1" checked="checked">
+                                            Public </label>
+                                        <label class="btn btn-default flat-btn">
+                                            <input  class="vtoggler" type="radio" name="visibility" id="option2">
+                                            Private </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-primary">
+                                        Upload<i class="fa fa-upload ilm"></i>
+                                    </button>
+                                </div>
                             </div>
+
+                            <!-- <div style="text-align:right">
+                            <button type="submit" class="btn btn-primary">
+                            Upload<i class="fa fa-upload ilm"></i>
+                            </button>
+                            </div> -->
                         </form>
                     </div>
                 </div>
                 {% endif  %}
                 <div id="uploads-holder">
                     {% if my_uploads %}
-                      <h5>My uploads</h5>
-                      {% for u in my_uploads  %}
-                        {% include "tasks/upload_details.html" %}
-                      {% endfor %}
+                    <h5>My uploads</h5>
+                    {% for u in my_uploads  %}
+                    {% include "tasks/upload_details.html" %}
+                    {% endfor %}
                     {% endif %}
                     {% if customer_uploads %}
-                      <h5>Customer uploads</h5>
-                      {% for u in customer_uploads  %}
-                        {% include "tasks/upload_details.html" %}
-                      {% endfor %}
+                    <h5>Customer uploads</h5>
+                    {% for u in customer_uploads  %}
+                    {% include "tasks/upload_details.html" %}
+                    {% endfor %}
                     {% endif %}
                     {% if admin_uploads %}
-                      <h5>Admin uploads</h5>
-                      {% for u in admin_uploads  %}
-                        {% include "tasks/upload_details.html" %}
-                      {% endfor %}
+                    <h5>Admin uploads</h5>
+                    {% for u in admin_uploads  %}
+                    {% include "tasks/upload_details.html" %}
+                    {% endfor %}
                     {% endif %}
                     {% if editor_uploads %}
-                      <h5>Editor uploads</h5>
-                      {% for u in editor_uploads  %}
-                        {% include "tasks/upload_details.html" %}
-                      {% endfor %}
+                    <h5>Editor uploads</h5>
+                    {% for u in editor_uploads  %}
+                    {% include "tasks/upload_details.html" %}
+                    {% endfor %}
                     {% endif %}
                     {% if writer_uploads %}
-                      <h5>Writer uploads</h5>
-                      {% for u in writer_uploads  %}
-                        {% include "tasks/upload_details.html" %}
-                      {% endfor %}
+                    <h5>Writer uploads</h5>
+                    {% for u in writer_uploads  %}
+                    {% include "tasks/upload_details.html" %}
+                    {% endfor %}
                     {% endif %}
                 </div>
             </div>
@@ -216,7 +223,7 @@
                             </div>
                         </div>
                     </div>
-                    <form action="#" method="post"  id="lock_form">
+                    <form action="javascript:void()" method="post"  id="lock_form">
                         <div id="lock_buttons">
                             {% csrf_token %}
                             {% if perm.can_lock %}
@@ -281,28 +288,28 @@
                     <ul class="dropdown-menu" role="menu" id="admin_actions_list" style="min-width:190px">
                         <!-- style="min-width:245px" -->
                         <li>
-                            <a href="#" data-status="{{co.UNPROCESSED}}">{{co.UNPROCESSED|render_status}}<span class="ilm">{% trans "Unprocessed" %}</span></a>
+                            <a href="javascript:void()" data-status="{{co.UNPROCESSED}}">{{co.UNPROCESSED|render_status}}<span class="ilm">{% trans "Unprocessed" %}</span></a>
                         </li>
                         <li>
-                            <a href="#" data-status="{{co.PROCESSING}}">{{co.PROCESSING|render_status}}<span class="ilm">{% trans "Processing" %}</span></a>
+                            <a href="javascript:void()" data-status="{{co.PROCESSING}}">{{co.PROCESSING|render_status}}<span class="ilm">{% trans "Processing" %}</span></a>
                         </li>
                         <li>
-                            <a href="#" data-status="{{co.COMPLETED}}">{{co.COMPLETED|render_status}}<span class="ilm">{% trans "Completed" %}</span></a>
+                            <a href="javascript:void()" data-status="{{co.COMPLETED}}">{{co.COMPLETED|render_status}}<span class="ilm">{% trans "Completed" %}</span></a>
                         </li>
                         <li>
-                            <a href="#" data-status="{{co.REJECTED}}">{{co.REJECTED|render_status}}<span class="ilm">{% trans "Rejected" %}</span></a>
+                            <a href="javascript:void()" data-status="{{co.REJECTED}}">{{co.REJECTED|render_status}}<span class="ilm">{% trans "Rejected" %}</span></a>
                         </li>
                         <li>
-                            <a href="#" data-status="{{co.SUSPICIOUS}}">{{co.SUSPICIOUS|render_status}}<span class="ilm">{% trans "Suspicious" %}</span></a>
+                            <a href="javascript:void()" data-status="{{co.SUSPICIOUS}}">{{co.SUSPICIOUS|render_status}}<span class="ilm">{% trans "Suspicious" %}</span></a>
                         </li>
                         <li>
-                            <a href="#" data-status="{{co.SENT}}">{{co.SENT|render_status}}<span class="ilm">{% trans "Sent" %}</span></a>
+                            <a href="javascript:void()" data-status="{{co.SENT}}">{{co.SENT|render_status}}<span class="ilm">{% trans "Sent" %}</span></a>
                         </li>
                     </ul>
                 </div>
             </form>
             {% endif %}
-            <form action="#" method="post"  id="admin_flat_form">
+            <form action="javascript:void()" method="post"  id="admin_flat_form">
                 {% csrf_token %}
                 <div class="btn-group" id="admin_flat_buttons">
                     {% if perm.can_delete %}
@@ -348,7 +355,7 @@
         {% if perm.can_report %}
         <div class="col-md-3 admin-reports">
             <div class="well well-sm">
-                <a class="pull-right adm-report-add" href="#"><i class="fa fa-plus-circle"></i></a>
+                <a class="pull-right adm-report-add" href="javascript:void()"><i class="fa fa-plus-circle"></i></a>
                 <strong>{% trans "Admin reports"%}</strong><span class="ilm badge">{{stats.adm_reports}}</span>
                 <div id="report-form" style="display:none">
                     <form action="{% url "report_new" object.pk %}" method="post">
@@ -370,7 +377,7 @@
                         {% csrf_token %}
                     </form>
                     <div class="panel-heading">
-                        <h3 class="panel-title"><a class="pull-right adm-report-ctrl" data-body-id="{{report.pk}}" href="#"><i class="fa fa-caret-square-o-down"></i></a><a class="pull-right adm-report-del" id="rep-del-{{report.pk}}" onclick="$('#report_remove').submit();" href="#" style="display:none"> <i class="fa fa-times-circle"></i> </a> {{report.title}}</h3>
+                        <h3 class="panel-title"><a class="pull-right adm-report-ctrl" data-body-id="{{report.pk}}" href="javascript:void()"><i class="fa fa-caret-square-o-down"></i></a><a class="pull-right adm-report-del" id="rep-del-{{report.pk}}" onclick="$('#report_remove').submit();" href="javascript:void()" style="display:none"> <i class="fa fa-times-circle"></i> </a> {{report.title}}</h3>
                     </div>
                     <div id="body-id-{{report.pk}}" class="panel-body small" style="display:none">
                         {{report.body}}

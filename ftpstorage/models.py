@@ -9,7 +9,8 @@ import constants as co
 
   
 def get_attach_path(instance, filename):
-  return os.path.join(instance.fowner.username, filename)
+  #return os.path.join(instance.fowner.username, filename)
+  return instance.fowner.username + '/' + filename
 
 
 class Upload(models.Model):
