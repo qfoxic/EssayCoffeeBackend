@@ -54,7 +54,6 @@
     <tr>
         <td>{{task.id}}</td>
         <td><a href="{% url 'task_view' task.id %}">{{task.paper_title}}</a></td>
-        <!-- <td>{{task.status|render_status}} - {{task.status}}</td> -->
         <td>{{task.get_assigment}}</td>
         <td>{{task.mark}}</td>
         <td>{{task.site}}</td>

@@ -260,3 +260,7 @@ thead > tr > th > div {
 	margin-bottom: 14px;
 	padding: 9px 14px;
 }
+
+.modal-dialog-center {
+    margin-top: 15%;
+}
