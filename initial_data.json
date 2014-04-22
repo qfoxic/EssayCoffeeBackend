@@ -1,443 +1,10 @@
 [
 {
   "pk": 1, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_logentry", 
-    "name": "Can add log entry", 
-    "content_type": 1
-  }
-},
-{
-  "pk": 2, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_logentry", 
-    "name": "Can change log entry", 
-    "content_type": 1
-  }
-},
-{
-  "pk": 3, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_logentry", 
-    "name": "Can delete log entry", 
-    "content_type": 1
-  }
-},
-{
-  "pk": 4, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_permission", 
-    "name": "Can add permission", 
-    "content_type": 2
-  }
-},
-{
-  "pk": 5, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_permission", 
-    "name": "Can change permission", 
-    "content_type": 2
-  }
-},
-{
-  "pk": 6, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_permission", 
-    "name": "Can delete permission", 
-    "content_type": 2
-  }
-},
-{
-  "pk": 7, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_group", 
-    "name": "Can add group", 
-    "content_type": 3
-  }
-},
-{
-  "pk": 8, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_group", 
-    "name": "Can change group", 
-    "content_type": 3
-  }
-},
-{
-  "pk": 9, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_group", 
-    "name": "Can delete group", 
-    "content_type": 3
-  }
-},
-{
-  "pk": 10, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_user", 
-    "name": "Can add user", 
-    "content_type": 4
-  }
-},
-{
-  "pk": 11, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_user", 
-    "name": "Can change user", 
-    "content_type": 4
-  }
-},
-{
-  "pk": 12, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_user", 
-    "name": "Can delete user", 
-    "content_type": 4
-  }
-},
-{
-  "pk": 13, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_contenttype", 
-    "name": "Can add content type", 
-    "content_type": 5
-  }
-},
-{
-  "pk": 14, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_contenttype", 
-    "name": "Can change content type", 
-    "content_type": 5
-  }
-},
-{
-  "pk": 15, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_contenttype", 
-    "name": "Can delete content type", 
-    "content_type": 5
-  }
-},
-{
-  "pk": 16, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_session", 
-    "name": "Can add session", 
-    "content_type": 6
-  }
-},
-{
-  "pk": 17, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_session", 
-    "name": "Can change session", 
-    "content_type": 6
-  }
-},
-{
-  "pk": 18, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_session", 
-    "name": "Can delete session", 
-    "content_type": 6
-  }
-},
-{
-  "pk": 19, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_comment", 
-    "name": "Can add comment", 
-    "content_type": 7
-  }
-},
-{
-  "pk": 20, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_comment", 
-    "name": "Can change comment", 
-    "content_type": 7
-  }
-},
-{
-  "pk": 21, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_comment", 
-    "name": "Can delete comment", 
-    "content_type": 7
-  }
-},
-{
-  "pk": 22, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_task", 
-    "name": "Can add task", 
-    "content_type": 8
-  }
-},
-{
-  "pk": 23, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_task", 
-    "name": "Can change task", 
-    "content_type": 8
-  }
-},
-{
-  "pk": 24, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_task", 
-    "name": "Can delete task", 
-    "content_type": 8
-  }
-},
-{
-  "pk": 25, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_userprofile", 
-    "name": "Can add user profile", 
-    "content_type": 9
-  }
-},
-{
-  "pk": 26, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_userprofile", 
-    "name": "Can change user profile", 
-    "content_type": 9
-  }
-},
-{
-  "pk": 27, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_userprofile", 
-    "name": "Can delete user profile", 
-    "content_type": 9
-  }
-},
-{
-  "pk": 28, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_upload", 
-    "name": "Can add upload", 
-    "content_type": 10
-  }
-},
-{
-  "pk": 29, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_upload", 
-    "name": "Can change upload", 
-    "content_type": 10
-  }
-},
-{
-  "pk": 30, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_upload", 
-    "name": "Can delete upload", 
-    "content_type": 10
-  }
-},
-{
-  "pk": 31, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_report", 
-    "name": "Can add report", 
-    "content_type": 11
-  }
-},
-{
-  "pk": 32, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_report", 
-    "name": "Can change report", 
-    "content_type": 11
-  }
-},
-{
-  "pk": 33, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_report", 
-    "name": "Can delete report", 
-    "content_type": 11
-  }
-},
-{
-  "pk": 34, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_report", 
-    "name": "Can add report", 
-    "content_type": 8
-  }
-},
-{
-  "pk": 35, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_report", 
-    "name": "Can change report", 
-    "content_type": 8
-  }
-},
-{
-  "pk": 36, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_report", 
-    "name": "Can delete report", 
-    "content_type": 8
-  }
-},
-{
-  "pk": 37, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_task", 
-    "name": "Can add task", 
-    "content_type": 9
-  }
-},
-{
-  "pk": 38, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_task", 
-    "name": "Can change task", 
-    "content_type": 9
-  }
-},
-{
-  "pk": 39, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_task", 
-    "name": "Can delete task", 
-    "content_type": 9
-  }
-},
-{
-  "pk": 40, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_history", 
-    "name": "Can add history", 
-    "content_type": 12
-  }
-},
-{
-  "pk": 41, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_history", 
-    "name": "Can change history", 
-    "content_type": 12
-  }
-},
-{
-  "pk": 42, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_history", 
-    "name": "Can delete history", 
-    "content_type": 12
-  }
-},
-{
-  "pk": 43, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_userprofile", 
-    "name": "Can add user profile", 
-    "content_type": 10
-  }
-},
-{
-  "pk": 44, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_userprofile", 
-    "name": "Can change user profile", 
-    "content_type": 10
-  }
-},
-{
-  "pk": 45, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_userprofile", 
-    "name": "Can delete user profile", 
-    "content_type": 10
-  }
-},
-{
-  "pk": 46, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "add_upload", 
-    "name": "Can add upload", 
-    "content_type": 11
-  }
-},
-{
-  "pk": 47, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "change_upload", 
-    "name": "Can change upload", 
-    "content_type": 11
-  }
-},
-{
-  "pk": 48, 
-  "model": "auth.permission", 
-  "fields": {
-    "codename": "delete_upload", 
-    "name": "Can delete upload", 
-    "content_type": 11
-  }
-},
-{
-  "pk": 1, 
   "model": "auth.group", 
   "fields": {
     "name": "admin", 
-    "permissions": [
-    ]
+    "permissions": []
   }
 },
 {
@@ -445,8 +12,7 @@
   "model": "auth.group", 
   "fields": {
     "name": "writer", 
-    "permissions": [
-    ]
+    "permissions": []
   }
 },
 {
@@ -454,8 +20,7 @@
   "model": "auth.group", 
   "fields": {
     "name": "customer", 
-    "permissions": [
-    ]
+    "permissions": []
   }
 },
 {
@@ -463,8 +28,7 @@
   "model": "auth.group", 
   "fields": {
     "name": "editor", 
-    "permissions": [
-    ]
+    "permissions": []
   }
 },
 {
@@ -477,7 +41,7 @@
     "is_active": true, 
     "is_superuser": true, 
     "is_staff": true, 
-    "last_login": "2014-04-15T14:33:53Z", 
+    "last_login": "2014-04-22T12:17:08Z", 
     "groups": [], 
     "user_permissions": [], 
     "password": "pbkdf2_sha256$12000$Vd9a38P5xyHa$pquwZlnbEx5/dir+UYvjiem1GzmAxBshCHCOfZstrdg=", 
@@ -495,7 +59,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-04-17T14:31:06Z", 
+    "last_login": "2014-04-22T11:53:10Z", 
     "groups": [
       1
     ], 
@@ -515,7 +79,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-04-17T14:16:02Z", 
+    "last_login": "2014-04-17T14:45:58Z", 
     "groups": [
       3
     ], 
@@ -535,7 +99,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-04-17T13:06:53Z", 
+    "last_login": "2014-04-15T12:32:03Z", 
     "groups": [
       4
     ], 
@@ -555,7 +119,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-04-17T13:52:50Z", 
+    "last_login": "2014-04-15T12:32:28Z", 
     "groups": [
       2
     ], 
@@ -591,7 +155,7 @@
   "fields": {
     "payment_status": 1, 
     "site": "85.17.249.125:8089", 
-    "assignee": 5, 
+    "assignee": null, 
     "manager": null, 
     "source_number": 2, 
     "owner": 3, 
@@ -600,13 +164,13 @@
     "assigment": "es", 
     "mark": null, 
     "priority": false, 
-    "access_level": "0", 
+    "access_level": "1", 
     "page_number": 2, 
     "editor": null, 
     "ttype": 1, 
     "revision": false, 
     "status": 1, 
-    "updated": "2014-04-17T13:49:05Z", 
+    "updated": "2014-04-22T11:53:16Z", 
     "completed": null, 
     "spacing": 1, 
     "discount": "1233", 
@@ -693,7 +257,7 @@
     "assignee": null, 
     "manager": null, 
     "source_number": 22, 
-    "owner": 2, 
+    "owner": 3, 
     "discipline": "hs", 
     "style": 1, 
     "assigment": "es", 
@@ -755,181 +319,13 @@
   "model": "msgs.message", 
   "fields": {
     "body": "qqqq", 
-    "updated": "2014-04-17T14:31:19Z", 
-    "created": "2014-04-17T12:33:32Z", 
-    "title": "title111", 
-    "readby": ":3:2:", 
-    "visibility": 1, 
-    "mowner": 3, 
-    "mtask": 1
-  }
-},
-{
-  "pk": 2, 
-  "model": "msgs.message", 
-  "fields": {
-    "body": "qqqq", 
-    "updated": "2014-04-17T12:34:51Z", 
-    "created": "2014-04-17T12:34:51Z", 
-    "title": "title111", 
-    "readby": "3", 
-    "visibility": 1, 
-    "mowner": 3, 
-    "mtask": 1
-  }
-},
-{
-  "pk": 3, 
-  "model": "msgs.message", 
-  "fields": {
-    "body": "qqqq", 
-    "updated": "2014-04-17T12:37:05Z", 
-    "created": "2014-04-17T12:37:05Z", 
-    "title": "3333", 
-    "readby": "3", 
-    "visibility": 1, 
-    "mowner": 3, 
-    "mtask": 1
-  }
-},
-{
-  "pk": 4, 
-  "model": "msgs.message", 
-  "fields": {
-    "body": "aaaaaa", 
-    "updated": "2014-04-17T14:29:24Z", 
-    "created": "2014-04-17T13:00:47Z", 
-    "title": "title", 
-    "readby": ":3:", 
-    "visibility": 0, 
-    "mowner": 3, 
-    "mtask": 1
-  }
-},
-{
-  "pk": 5, 
-  "model": "msgs.message", 
-  "fields": {
-    "body": "qqqq", 
-    "updated": "2014-04-17T14:30:29Z", 
-    "created": "2014-04-17T13:06:08Z", 
-    "title": "title111", 
-    "readby": ":3:2:", 
-    "visibility": 2, 
-    "mowner": 2, 
-    "mtask": 1
-  }
-},
-{
-  "pk": 6, 
-  "model": "msgs.message", 
-  "fields": {
-    "body": "qqqq", 
-    "updated": "2014-04-17T13:06:27Z", 
-    "created": "2014-04-17T13:06:27Z", 
-    "title": "wwwww", 
-    "readby": "2", 
-    "visibility": 1, 
-    "mowner": 2, 
-    "mtask": 4
-  }
-},
-{
-  "pk": 7, 
-  "model": "msgs.message", 
-  "fields": {
-    "body": "qqqq", 
-    "updated": "2014-04-17T13:07:05Z", 
-    "created": "2014-04-17T13:07:05Z", 
-    "title": "title111", 
-    "readby": "4", 
-    "visibility": 1, 
-    "mowner": 4, 
-    "mtask": 4
-  }
-},
-{
-  "pk": 8, 
-  "model": "msgs.message", 
-  "fields": {
-    "body": "qqqq", 
-    "updated": "2014-04-17T13:07:12Z", 
-    "created": "2014-04-17T13:07:12Z", 
-    "title": "title111", 
-    "readby": "4", 
-    "visibility": 2, 
-    "mowner": 4, 
-    "mtask": 4
-  }
-},
-{
-  "pk": 9, 
-  "model": "msgs.message", 
-  "fields": {
-    "body": "qqqq", 
-    "updated": "2014-04-17T14:25:23Z", 
-    "created": "2014-04-17T13:34:46Z", 
+    "updated": "2014-04-17T14:46:21Z", 
+    "created": "2014-04-17T14:46:12Z", 
     "title": "title111", 
     "readby": ":3:", 
     "visibility": 0, 
     "mowner": 3, 
-    "mtask": 3
-  }
-},
-{
-  "pk": 10, 
-  "model": "msgs.message", 
-  "fields": {
-    "body": "qqqq", 
-    "updated": "2014-04-17T13:38:17Z", 
-    "created": "2014-04-17T13:38:17Z", 
-    "title": "title111", 
-    "readby": "2", 
-    "visibility": 1, 
-    "mowner": 2, 
-    "mtask": 3
-  }
-},
-{
-  "pk": 11, 
-  "model": "msgs.message", 
-  "fields": {
-    "body": "qqqq", 
-    "updated": "2014-04-17T14:25:18Z", 
-    "created": "2014-04-17T13:51:23Z", 
-    "title": "3333", 
-    "readby": ":3:5:", 
-    "visibility": 2, 
-    "mowner": 5, 
-    "mtask": 1
-  }
-},
-{
-  "pk": 12, 
-  "model": "msgs.message", 
-  "fields": {
-    "body": "qqqq", 
-    "updated": "2014-04-17T13:51:36Z", 
-    "created": "2014-04-17T13:51:36Z", 
-    "title": "comment1", 
-    "readby": "5", 
-    "visibility": 0, 
-    "mowner": 5, 
-    "mtask": 1
-  }
-},
-{
-  "pk": 13, 
-  "model": "msgs.message", 
-  "fields": {
-    "body": "qqqqqqqqqqq", 
-    "updated": "2014-04-17T14:15:48Z", 
-    "created": "2014-04-17T13:52:32Z", 
-    "title": "title111qqqqqqq", 
-    "readby": ":2:5:", 
-    "visibility": 1, 
-    "mowner": 2, 
-    "mtask": 1
+    "mtask": 4
   }
 },
 {
