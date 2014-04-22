@@ -74,7 +74,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
 )
 
-FTP_DATA = ('85.17.249.125','2121', 'ftp', 'q1w2e3r4t5y6')
+FTP_DATA = ('85.17.249.125', '2121', 'ftp', 'q1w2e3r4t5y6')
 
 DEFAULT_FILE_STORAGE = (
     'ftpstorage.storage.FTPStorage'

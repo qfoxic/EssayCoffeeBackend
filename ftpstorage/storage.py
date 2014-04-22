@@ -24,11 +24,14 @@ class FTPStorage(Storage):
     def __init__(self, location=None, base_url=None):
 #      import pdb; pdb.set_trace()
       self.session = FTP()
-      host, port, user, passwd = settings.FTP_DATA 
+      try:
+        host, port, user, passwd = settings.FTP_DATA
+      except ValueError:
+        # Fallback to some unexistent data.
+        host, port, user, passwd = '127.0.0.1', 21, 'anonimous', '123' 
       self.session.connect(host, port)
       self.session.login(user, passwd)
       self.session.set_pasv(True)
-      
       
     def _save(self, name, content):
       try:
