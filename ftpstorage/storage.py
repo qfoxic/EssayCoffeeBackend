@@ -17,12 +17,19 @@ from django.core.files.utils import FileProxyMixin
 from django.utils.encoding import force_bytes, python_2_unicode_compatible
 from ftplib import FTP, error_perm, error_reply, error_temp
 from django.core.files.storage import Storage
+from django.db.models.fields import files
 
 
 class FTPStorage(Storage):
     def __init__(self, location=None, base_url=None):
-      self.session = FTP(*settings.FTP_DATA)
-
+#      import pdb; pdb.set_trace()
+      self.session = FTP()
+      host, port, user, passwd = settings.FTP_DATA 
+      self.session.connect(host, port)
+      self.session.login(user, passwd)
+      self.session.set_pasv(True)
+      
+      
     def _save(self, name, content):
       try:
         username, filename = name.split('/')

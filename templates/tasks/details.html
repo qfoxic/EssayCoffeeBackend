@@ -89,9 +89,9 @@
             <div id="uploads">
                 {% if perm.can_message %}
                 <div class="well well-sm">
-                    <a class="pull-right uploads-add" href="#"><i class="fa fa-plus-circle"></i></a>
+                    <a class="pull-right messages-add" href="javascript:void()"><i class="fa fa-plus-circle"></i></a>
                     <strong>{% trans "Write a message" %}</strong><span class="ilm badge"></span>
-                    <div id="uploads-form" style="display:none; margin-top:-10px">
+                    <div id="messages-form" style="display:none; margin-top:-10px">
                         <form action="{% url "msg_add" object.pk %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-group">
@@ -128,7 +128,7 @@
                 {% endif %}
                 {% if perm.can_upload %}
                 <div class="well well-sm">
-                    <a class="pull-right uploads-add" href="#"><i class="fa fa-plus-circle"></i></a>
+                    <a class="pull-right uploads-add" href="javascript:void()"><i class="fa fa-plus-circle"></i></a>
                     <strong>{% trans "Upload a file" %}&hellip;</strong><span class="ilm badge">{{stats.uploads}}</span>
                     <div id="uploads-form" style="display:none; margin-top:-10px">
                         <form action="{% url "upload_file" object.pk %}" method="post" enctype="multipart/form-data">
