@@ -146,38 +146,54 @@
                 {% endif  %}
                 <div id="uploads-holder">
                     {% if my_uploads %}
-                    <h5>My uploads</h5>
-                    <div class="panel-group" id="accordion">
+                    <h5>My uploads <span class="badge pull-right">{{my_uploads|length}}</span></h5>
+                    <div class="panel-group" id="accordion-my">
                         <div class="panel panel-default small">
                             {% for u in my_uploads  %}
-                            {% include "tasks/upload_item.html" %}
+                            {% include "tasks/upload_item.html" with accid="my" %}
                             {% endfor %}
                         </div>
                     </div>
                     {% endif %}
                     {% if customer_uploads %}
-                    <h5>Customer uploads</h5>
-                    {% for u in customer_uploads  %}
-                    {% include "tasks/upload_details.html" %}
-                    {% endfor %}
+                    <h5>Customer uploads <span class="badge pull-right">{{customer_uploads|length}}</span></h5>
+                    <div class="panel-group" id="accordion-customer">
+                        <div class="panel panel-default small">
+                            {% for u in customer_uploads  %}
+                            {% include "tasks/upload_item.html" with accid="customer" %}
+                            {% endfor %}
+                        </div>
+                    </div>
                     {% endif %}
                     {% if admin_uploads %}
-                    <h5>Admin uploads</h5>
-                    {% for u in admin_uploads  %}
-                    {% include "tasks/upload_details.html" %}
-                    {% endfor %}
+                    <h5>Admin uploads <span class="badge pull-right">{{admin_uploads|length}}</span></h5>
+                    <div class="panel-group" id="accordion-admin">
+                        <div class="panel panel-default small">
+                            {% for u in admin_uploads  %}
+                            {% include "tasks/upload_item.html" with accid="admin" %}
+                            {% endfor %}
+                        </div>
+                    </div>
                     {% endif %}
                     {% if editor_uploads %}
-                    <h5>Editor uploads</h5>
-                    {% for u in editor_uploads  %}
-                    {% include "tasks/upload_details.html" %}
-                    {% endfor %}
+                    <h5>Editor uploads <span class="badge pull-right">{{editor_uploads|length}}</span></h5>
+                    <div class="panel-group" id="accordion-editor">
+                        <div class="panel panel-default small">
+                            {% for u in editor_uploads  %}
+                            {% include "tasks/upload_item.html" with accid="editor" %}
+                            {% endfor %}
+                        </div>
+                    </div>
                     {% endif %}
                     {% if writer_uploads %}
-                    <h5>Writer uploads</h5>
-                    {% for u in writer_uploads  %}
-                    {% include "tasks/upload_details.html" %}
-                    {% endfor %}
+                    <h5>Writer uploads <span class="badge pull-right">{{writer_uploads|length}}</span></h5>
+                    <div class="panel-group" id="accordion-writer">
+                        <div class="panel panel-default small">
+                            {% for u in writer_uploads  %}
+                            {% include "tasks/upload_item.html" with accid="writer" %}
+                            {% endfor %}
+                        </div>
+                    </div>
                     {% endif %}
                 </div>
             </div>

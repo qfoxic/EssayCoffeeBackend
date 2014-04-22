@@ -1,7 +1,7 @@
 <div class="panel-heading">
-    <div class="panel-title"><a class="small" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{u.pk}}"> {{u.attach.name}} </a></div>
+    <div class="panel-title"><a class="small" data-toggle="collapse" data-parent="#accordion-{{accid}}" href="#collapse-{{accid}}-{{u.pk}}"> {{u.attach.name}} </a></div>
 </div>
-<div id="collapse-{{u.pk}}" class="panel-collapse collapse">
+<div id="collapse-{{accid}}-{{u.pk}}" class="panel-collapse collapse">
     <div class="panel-body">
         <p>
             Owner: <a href="{% url "user_edit" u.fowner.pk %}">{{u.fowner}}</a>
