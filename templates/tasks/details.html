@@ -9,6 +9,9 @@
 </section>
 {% endblock %}
 {% block content %}
+<div class="side-label rotate">
+    events
+</div>
 <section class="container-fluid task-details" style="margin: 0 auto">
     {% if messages %}
     <ul class="messages">
@@ -133,19 +136,19 @@
                         {% csrf_token %}
                     </form>
                     {% if my_uploads %}
-                        {% include "tasks/uploads_list.html" with uploads_list=my_uploads accid="my" list_title="My uploads" %}
+                    {% include "tasks/uploads_list.html" with uploads_list=my_uploads accid="my" list_title="My uploads" %}
                     {% endif %}
                     {% if customer_uploads %}
-                        {% include "tasks/uploads_list.html" with uploads_list=customer_uploads accid="customer" list_title="Customer uploads" %}
+                    {% include "tasks/uploads_list.html" with uploads_list=customer_uploads accid="customer" list_title="Customer uploads" %}
                     {% endif %}
                     {% if admin_uploads %}
-                        {% include "tasks/uploads_list.html" with uploads_list=admin_uploads accid="admin" list_title="Admin uploads" %}
+                    {% include "tasks/uploads_list.html" with uploads_list=admin_uploads accid="admin" list_title="Admin uploads" %}
                     {% endif %}
                     {% if editor_uploads %}
-                        {% include "tasks/uploads_list.html" with uploads_list=editor_uploads accid="editor" list_title="Editor uploads" %}
+                    {% include "tasks/uploads_list.html" with uploads_list=editor_uploads accid="editor" list_title="Editor uploads" %}
                     {% endif %}
                     {% if writer_uploads %}
-                        {% include "tasks/uploads_list.html" with uploads_list=writer_uploads accid="writer" list_title="Writer uploads" %}
+                    {% include "tasks/uploads_list.html" with uploads_list=writer_uploads accid="writer" list_title="Writer uploads" %}
                     {% endif %}
                 </div>
             </div>
@@ -374,7 +377,7 @@
                     <div class="form-group">
                         <div class="btn-group" data-toggle="buttons">
                             <button class="btn btn-primary" disabled>
-                                Send mesage to
+                                Send to
                             </button>
                             {% if site == 'customer' %}
                             <label class="btn btn-default">
@@ -399,20 +402,6 @@
                                 Customer </label>
                             {% endif %}
                         </div>
-                        <!--
-                        <select name="visibility">
-                        {% if site == 'customer' %}
-                        <option value={{co.MSGS_ADM}}>Send to Admin&amp;Editor</option>
-                        <option value={{co.MSGS_WRITER}}>Send to Writer</option>
-                        {% elif site == 'writer' %}
-                        <option value={{co.MSGS_ADM}}>Send to Admin&amp;Editor</option>
-                        <option value={{co.MSGS_CUSTOMER}}>Send to Customer</option>
-                        {% else %}
-                        <option value={{co.MSGS_WRITER}}>Send to Writer</option>
-                        <option value={{co.MSGS_CUSTOMER}}>Send to Customer</option>
-                        {% endif %}
-                        </select>
-                        -->
                     </div>
                 </div>
                 <div class="modal-footer" style="margin-top: -1em">

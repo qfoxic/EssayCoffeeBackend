@@ -1,11 +1,11 @@
-<h5>{{list_title}} <span class="badge pull-right">{{uploads_list|length}}</span></h5>
+<h5>{{list_title}} <span class="badge pull-right" style="margin-right:8px;background-color:#555">{{uploads_list|length}}</span></h5>
 <div class="panel-group" id="accordion-{{accid}}">
     <div class="panel panel-default small">
         {% for u in uploads_list  %}
         <div class="panel-heading">
             <div class="panel-title">
                 <a class="small" data-toggle="collapse" data-parent="#accordion-{{accid}}" href="#collapse-{{accid}}-{{u.pk}}"> {{u.attach.name}} </a>
-            <a href="javascript:void()" data-url="/upload/{{u.pk}}/visibility" class="pull-right set-public"><i class="fa fa-eye{% if u.access_level == "0" %}-slash{% endif %}"></i></a>
+            <a href="javascript:void()" data-url="/upload/{{u.pk}}/visibility" class="pull-right set-public"><i class="fa fa-eye{% if u.access_level == "0" %}-slash text-danger{% endif %}"></i></a>
             </div>
         </div>
         <div id="collapse-{{accid}}-{{u.pk}}" class="panel-collapse collapse">
@@ -33,7 +33,7 @@
                         &nbsp;
                     </dt>
                     <dd>
-                        <button data-url="{% url "upload_remove" u.pk %}" type="button" style="margin-top:10px" class="upload-delete btn btn-danger btn-xs pull-right">Delete <i class="fa fa-times"></i></button>
+                        <button data-file-name="{{u.attach.name}}" data-url="{% url "upload_remove" u.pk %}" type="button" style="margin-top:10px" class="upload-delete btn btn-danger btn-xs pull-right">Delete <i class="fa fa-times"></i></button>
                     </dd>
                 </dl>
             </div>

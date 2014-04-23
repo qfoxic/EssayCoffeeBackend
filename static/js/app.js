@@ -26,8 +26,9 @@ $( document ).ready( function( ) {
         ev.preventDefault( );
         var that = $( this );
         bootbox.dialog( {
-            message: "This file will be permanently deleted. Are you sure?",
+            message: "The &quot;" + that.data('file-name') + "&quot; file will be permanently deleted. Are you sure?",
             title: "Please confirm",
+            className: "bootbox-modal",
             buttons: {
                 cancel: {
                     label: "Cancel",
