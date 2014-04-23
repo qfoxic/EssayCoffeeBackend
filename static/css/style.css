@@ -262,5 +262,15 @@ thead > tr > th > div {
 }
 
 .modal-dialog-center {
-    margin-top: 15%;
+	margin-top: 10%;
+}
+.panel-title {
+	font-size: 1.3em;
+	line-height: 100%;
+}
+.dl-horizontal > dt {
+	width:60px;
+}
+.dl-horizontal > dd {
+	margin-left:70px;
 }

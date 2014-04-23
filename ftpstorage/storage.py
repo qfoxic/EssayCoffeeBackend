@@ -69,11 +69,7 @@ class FTPStorage(Storage):
         return directories, files
 
     def path(self, name):
-        try:
-            path = safe_join('/', name)
-        except ValueError:
-            raise SuspiciousFileOperation("Attempted access to '%s' denied." % name)
-        return os.path.normpath(path)
+        return '/'+ name
 
     def size(self, name):
         self.session.voidcmd('TYPE I') 

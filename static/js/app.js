@@ -10,8 +10,8 @@ $( document ).ready( function( ) {
     // down: "fa fa-arrow-down"
     // }
     // } );
-    $('.vtoggler[checked="checked"]').parent().addClass("active");
-    
+    $( '.vtoggler[checked="checked"]' ).parent( ).addClass( "active" );
+
     $( '.btn-cancel' ).on( 'click', function( ) {
         var message = "Are you sure to leave this page? All unsaved data will be lost&hellip;";
         bootbox.confirm( message, function( result ) {
@@ -22,7 +22,34 @@ $( document ).ready( function( ) {
     } );
 
     $( '.upload-file' ).bootstrapFileInput( );
-
+    $( '.upload-delete' ).on( 'click', function( ev ) {
+        ev.preventDefault( );
+        var that = $( this );
+        bootbox.dialog( {
+            message: "This file will be permanently deleted. Are you sure?",
+            title: "Please confirm",
+            buttons: {
+                cancel: {
+                    label: "Cancel",
+                    className: "btn-default",
+                    callback: function( ) {
+                    }
+                },
+                confirm: {
+                    label: "Delete",
+                    className: "btn-danger",
+                    callback: function( ) {
+                        $( '#uploads_manage' ).attr( 'action', that.data( 'url' ) ).submit( );
+                    }
+                },
+            }
+        } );
+    } );
+    $('a.set-public').on('click', function(ev){
+        ev.preventDefault( );
+        //alert($(this).data( 'url' ));
+        $( '#uploads_manage' ).attr( 'action', $(this).data( 'url' ) ).submit( );
+    });
     $( '.momdl' ).each( function( ) {
         var ts = $( this ).html( );
         $( this ).html( moment( ts, 'X' ).fromNow( ) );
@@ -47,7 +74,7 @@ $( document ).ready( function( ) {
         }
         rbd.toggle( 450 );
     } );
-    
+
     $( '.uploads-ctrl' ).on( 'click', function( ) {
         var bid = $( this ).data( 'body-id' );
         var rbd = $( '#upload-id-' + bid );

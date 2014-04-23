@@ -91,14 +91,6 @@
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#write-a-message" style="font-size: 1.1em;width:100%;margin: -10px auto 10px">
                     Write a message <i class="fa fa-envelope-o  fa-lg ilm"></i>
                 </button>
-                <!--
-                <div class="well well-sm">
-                <a class="pull-right messages-add" href="javascript:void()"><i class="fa fa-plus-circle"></i></a>
-                <strong>{% trans "Write a message" %}</strong><span class="ilm badge"></span>
-                <div id="messages-form" style="display:none; margin-top:-10px">
-                </div>
-                </div>
-                -->
                 {% endif %}
                 {% if perm.can_upload %}
                 <div class="well well-sm">
@@ -112,8 +104,6 @@
                                     <div class="input-group margin-bottom-sm">
                                         <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
                                         <input id="id_attach" class="upload-file" type="file" title="Browse" name="attach">
-                                        {# this field must be shown as checkbox : Public or Private #}
-                                        <input type="hidden" name="access_level" value="{{co.PUBLIC_ACCESS}}">
                                     </div>
                                 </div>
                             </div>
@@ -121,79 +111,41 @@
                                 <div class="col-md-7">
                                     <div class="btn-group btn-group-xs" data-toggle="buttons">
                                         <label class="btn btn-default flat-btn">
-                                            <input class="vtoggler" type="radio" name="visibility" id="option1" checked="checked">
+                                            <input class="vtoggler" type="radio" name="access_level" value="{{co.PUBLIC_ACCESS}}" checked="checked">
                                             Public </label>
                                         <label class="btn btn-default flat-btn">
-                                            <input  class="vtoggler" type="radio" name="visibility" id="option2">
+                                            <input class="vtoggler" type="radio" name="access_level" value="{{co.PRIVATE_ACCESS}}">
                                             Private </label>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <button type="submit" class="btn btn-primary">
+                                <div class="col-md-5">
+                                    <button type="submit" class="btn btn-primary pull-right">
                                         Upload<i class="fa fa-upload ilm"></i>
                                     </button>
                                 </div>
                             </div>
-
-                            <!-- <div style="text-align:right">
-                            <button type="submit" class="btn btn-primary">
-                            Upload<i class="fa fa-upload ilm"></i>
-                            </button>
-                            </div> -->
                         </form>
                     </div>
                 </div>
                 {% endif  %}
                 <div id="uploads-holder">
+                    <form id="uploads_manage" action="" method="post" style="display:none">
+                        {% csrf_token %}
+                    </form>
                     {% if my_uploads %}
-                    <h5>My uploads <span class="badge pull-right">{{my_uploads|length}}</span></h5>
-                    <div class="panel-group" id="accordion-my">
-                        <div class="panel panel-default small">
-                            {% for u in my_uploads  %}
-                            {% include "tasks/upload_item.html" with accid="my" %}
-                            {% endfor %}
-                        </div>
-                    </div>
+                        {% include "tasks/uploads_list.html" with uploads_list=my_uploads accid="my" list_title="My uploads" %}
                     {% endif %}
                     {% if customer_uploads %}
-                    <h5>Customer uploads <span class="badge pull-right">{{customer_uploads|length}}</span></h5>
-                    <div class="panel-group" id="accordion-customer">
-                        <div class="panel panel-default small">
-                            {% for u in customer_uploads  %}
-                            {% include "tasks/upload_item.html" with accid="customer" %}
-                            {% endfor %}
-                        </div>
-                    </div>
+                        {% include "tasks/uploads_list.html" with uploads_list=customer_uploads accid="customer" list_title="Customer uploads" %}
                     {% endif %}
                     {% if admin_uploads %}
-                    <h5>Admin uploads <span class="badge pull-right">{{admin_uploads|length}}</span></h5>
-                    <div class="panel-group" id="accordion-admin">
-                        <div class="panel panel-default small">
-                            {% for u in admin_uploads  %}
-                            {% include "tasks/upload_item.html" with accid="admin" %}
-                            {% endfor %}
-                        </div>
-                    </div>
+                        {% include "tasks/uploads_list.html" with uploads_list=admin_uploads accid="admin" list_title="Admin uploads" %}
                     {% endif %}
                     {% if editor_uploads %}
-                    <h5>Editor uploads <span class="badge pull-right">{{editor_uploads|length}}</span></h5>
-                    <div class="panel-group" id="accordion-editor">
-                        <div class="panel panel-default small">
-                            {% for u in editor_uploads  %}
-                            {% include "tasks/upload_item.html" with accid="editor" %}
-                            {% endfor %}
-                        </div>
-                    </div>
+                        {% include "tasks/uploads_list.html" with uploads_list=editor_uploads accid="editor" list_title="Editor uploads" %}
                     {% endif %}
                     {% if writer_uploads %}
-                    <h5>Writer uploads <span class="badge pull-right">{{writer_uploads|length}}</span></h5>
-                    <div class="panel-group" id="accordion-writer">
-                        <div class="panel panel-default small">
-                            {% for u in writer_uploads  %}
-                            {% include "tasks/upload_item.html" with accid="writer" %}
-                            {% endfor %}
-                        </div>
-                    </div>
+                        {% include "tasks/uploads_list.html" with uploads_list=writer_uploads accid="writer" list_title="Writer uploads" %}
                     {% endif %}
                 </div>
             </div>
@@ -426,24 +378,24 @@
                             </button>
                             {% if site == 'customer' %}
                             <label class="btn btn-default">
-                                <input type="checkbox" value="{{co.MSGS_ADM}}" name="visibility">
+                                <input type="radio" value="{{co.MSGS_ADM}}" name="visibility">
                                 Admin &amp; Editor </label>
                             <label class="btn btn-default">
-                                <input type="checkbox" value="{{co.MSGS_WRITER}}" name="visibility">
+                                <input type="radio" value="{{co.MSGS_WRITER}}" name="visibility">
                                 Writer </label>
                             {% elif site == 'writer' %}
                             <label class="btn btn-default">
-                                <input type="checkbox" value="{{co.MSGS_ADM}}" name="visibility">
+                                <input type="radio" value="{{co.MSGS_ADM}}" name="visibility">
                                 Admin &amp; Editor </label>
                             <label class="btn btn-default">
-                                <input type="checkbox" value="{{co.MSGS_CUSTOMER}}" name="visibility">
+                                <input type="radio" value="{{co.MSGS_CUSTOMER}}" name="visibility">
                                 Customer </label>
                             {% else %}
                             <label class="btn btn-default">
-                                <input type="checkbox" value="{{co.MSGS_WRITER}}" name="visibility">
+                                <input type="radio" value="{{co.MSGS_WRITER}}" name="visibility">
                                 Writer </label>
                             <label class="btn btn-default">
-                                <input type="checkbox" value="{{co.MSGS_CUSTOMER}}" name="visibility">
+                                <input type="radio" value="{{co.MSGS_CUSTOMER}}" name="visibility">
                                 Customer </label>
                             {% endif %}
                         </div>
