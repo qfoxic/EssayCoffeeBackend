@@ -10,6 +10,46 @@ $( document ).ready( function( ) {
     // down: "fa fa-arrow-down"
     // }
     // } );
+    if( $( "#eventsRight" ).length ) {
+        $( "#eventsRight" ).buildMbExtruder( {
+            positionFixed: true,
+            width: 350,
+            sensibility: 800,
+            position: "right", // left, right, bottom
+            extruderOpacity: 1,
+            flapDim: 100,
+            textOrientation: "bt", // or "tb" (top-bottom or bottom-top)
+            onExtOpen: function( ) {
+            },
+            onExtContentLoad: function( ) {
+            },
+            onExtClose: function( ) {
+            },
+            hidePanelsOnClose: true,
+            autoCloseTime: 0, // 0=never
+            slideTimer: 300
+        } );
+    }
+    if( $( "#reportsRight" ).length ) {
+        $( "#reportsRight" ).buildMbExtruder( {
+            positionFixed: true,
+            width: 400,
+            sensibility: 800,
+            position: "right", // left, right, bottom
+            extruderOpacity: 1,
+            flapDim: 100,
+            textOrientation: "bt", // or "tb" (top-bottom or bottom-top)
+            onExtOpen: function( ) {
+            },
+            onExtContentLoad: function( ) {
+            },
+            onExtClose: function( ) {
+            },
+            hidePanelsOnClose: true,
+            autoCloseTime: 0, // 0=never
+            slideTimer: 300
+        } );
+    }
     $( '.vtoggler[checked="checked"]' ).parent( ).addClass( "active" );
 
     $( '.btn-cancel' ).on( 'click', function( ) {
@@ -26,7 +66,7 @@ $( document ).ready( function( ) {
         ev.preventDefault( );
         var that = $( this );
         bootbox.dialog( {
-            message: "The &quot;" + that.data('file-name') + "&quot; file will be permanently deleted. Are you sure?",
+            message: "The &quot;" + that.data( 'file-name' ) + "&quot; file will be permanently deleted. Are you sure?",
             title: "Please confirm",
             className: "bootbox-modal",
             buttons: {
@@ -46,11 +86,11 @@ $( document ).ready( function( ) {
             }
         } );
     } );
-    $('a.set-public').on('click', function(ev){
+    $( 'a.set-public' ).on( 'click', function( ev ) {
         ev.preventDefault( );
         //alert($(this).data( 'url' ));
-        $( '#uploads_manage' ).attr( 'action', $(this).data( 'url' ) ).submit( );
-    });
+        $( '#uploads_manage' ).attr( 'action', $( this ).data( 'url' ) ).submit( );
+    } );
     $( '.momdl' ).each( function( ) {
         var ts = $( this ).html( );
         $( this ).html( moment( ts, 'X' ).fromNow( ) );
@@ -102,7 +142,9 @@ $( document ).ready( function( ) {
         bid.toggle( 300 );
     } );
     // admin reports
-    $( '.adm-report-ctrl' ).on( 'click', function( ) {
+    $( '.adm-report-ctrl' ).on( 'click', function( ev ) {
+        ev.preventDefault( );
+        console.log( 'click' );
         var bid = $( this ).data( 'body-id' );
         var rbd = $( '#body-id-' + bid );
         if( rbd.is( ':visible' ) ) {
@@ -117,7 +159,8 @@ $( document ).ready( function( ) {
         rbd.toggle( 300 );
     } );
 
-    $( '.adm-report-add' ).on( 'click', function( ) {
+    $( '.adm-report-add' ).on( 'click', function( ev ) {
+        ev.preventDefault( );
         var rbd = $( '#report-form' );
         if( rbd.is( ':visible' ) ) {
             // rbd.hide( 'slow' );

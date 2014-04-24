@@ -22,7 +22,7 @@
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="pull-right attr-ctrl" href="javascript:void(0)"><i class="fa fa-toggle-up"></i></a>
+                    <a class="pull-right attr-ctrl" href="javascript:void()"><i class="fa fa-toggle-up"></i></a>
                     Attributes
                 </div>
                 <div class="panel-body attr-body" style="line-height: 160%">
@@ -94,7 +94,7 @@
                 {% endif %}
                 {% if perm.can_upload %}
                 <div class="well well-sm">
-                    <a class="pull-right uploads-add" href="javascript:void(0)"><i class="fa fa-plus-circle"></i></a>
+                    <a class="pull-right uploads-add" href="javascript:void()"><i class="fa fa-plus-circle"></i></a>
                     <strong>{% trans "Upload a file" %}&hellip;</strong><span class="ilm badge">{{stats.uploads}}</span>
                     <div id="uploads-form" style="display:none; margin-top:-10px">
                         <form action="{% url "upload_file" object.pk %}" method="post" enctype="multipart/form-data">
@@ -150,7 +150,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-{% if perm.can_approve or perm.can_reject or perm.can_suspect %}6{% else %}9{% endif %}">
             <!-- <div class="task-details-inner"> -->
             <div class="row">
                 <div class="col-md-12">
@@ -180,7 +180,7 @@
                             </div>
                         </div>
                     </div>
-                    <form action="javascript:void(0)" method="post"  id="lock_form">
+                    <form action="javascript:void()" method="post"  id="lock_form">
                         <div id="lock_buttons">
                             {% csrf_token %}
                             {% if perm.can_lock %}
@@ -245,28 +245,28 @@
                     <ul class="dropdown-menu" role="menu" id="admin_actions_list" style="min-width:190px">
                         <!-- style="min-width:245px" -->
                         <li>
-                            <a href="javascript:void(0)" data-status="{{co.UNPROCESSED}}">{{co.UNPROCESSED|render_status}}<span class="ilm">{% trans "Unprocessed" %}</span></a>
+                            <a href="javascript:void()" data-status="{{co.UNPROCESSED}}">{{co.UNPROCESSED|render_status}}<span class="ilm">{% trans "Unprocessed" %}</span></a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" data-status="{{co.PROCESSING}}">{{co.PROCESSING|render_status}}<span class="ilm">{% trans "Processing" %}</span></a>
+                            <a href="javascript:void()" data-status="{{co.PROCESSING}}">{{co.PROCESSING|render_status}}<span class="ilm">{% trans "Processing" %}</span></a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" data-status="{{co.COMPLETED}}">{{co.COMPLETED|render_status}}<span class="ilm">{% trans "Completed" %}</span></a>
+                            <a href="javascript:void()" data-status="{{co.COMPLETED}}">{{co.COMPLETED|render_status}}<span class="ilm">{% trans "Completed" %}</span></a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" data-status="{{co.REJECTED}}">{{co.REJECTED|render_status}}<span class="ilm">{% trans "Rejected" %}</span></a>
+                            <a href="javascript:void()" data-status="{{co.REJECTED}}">{{co.REJECTED|render_status}}<span class="ilm">{% trans "Rejected" %}</span></a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" data-status="{{co.SUSPICIOUS}}">{{co.SUSPICIOUS|render_status}}<span class="ilm">{% trans "Suspicious" %}</span></a>
+                            <a href="javascript:void()" data-status="{{co.SUSPICIOUS}}">{{co.SUSPICIOUS|render_status}}<span class="ilm">{% trans "Suspicious" %}</span></a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" data-status="{{co.SENT}}">{{co.SENT|render_status}}<span class="ilm">{% trans "Sent" %}</span></a>
+                            <a href="javascript:void()" data-status="{{co.SENT}}">{{co.SENT|render_status}}<span class="ilm">{% trans "Sent" %}</span></a>
                         </li>
                     </ul>
                 </div>
             </form>
             {% endif %}
-            <form action="javascript:void(0)" method="post"  id="admin_flat_form">
+            <form action="javascript:void()" method="post"  id="admin_flat_form">
                 {% csrf_token %}
                 <div class="btn-group" id="admin_flat_buttons">
                     {% if perm.can_delete %}
@@ -309,6 +309,44 @@
             </form>
             <!-- .buttons -->
         </div>
+        {% if perm.can_report %}
+        <div class="col-md-3 admin-reports">
+            <div class="well well-sm">
+                <a class="pull-right adm-report-add" href="javascript:void()"><i class="fa fa-plus-circle"></i></a>
+                <strong>{% trans "Admin reports"%}</strong><span class="ilm badge">{{stats.adm_reports}}</span>
+                <div id="report-form" style="display:none">
+                    <form action="{% url "report_new" object.pk %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="title" class="form-control" required placeholder="Report title">
+                        <textarea row="4" name="body" class="form-control" required placeholder="Report text"></textarea>
+                        <div style="text-align:right">
+                            <button type="submit" class="btn btn-primary">
+                                Post<i class="fa fa-check-square-o ilm"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="adm-report-holder">
+                {% for report in reports %}
+                <div class="panel panel-warning">
+                    <form id="report_remove" action="{% url "report_remove" report.pk %}" method="post">
+                        {% csrf_token %}
+                    </form>
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><a class="pull-right adm-report-ctrl" data-body-id="{{report.pk}}" href="javascript:void()"><i class="fa fa-caret-square-o-down"></i></a><a class="pull-right adm-report-del" id="rep-del-{{report.pk}}" onclick="$('#report_remove').submit();" href="javascript:void()" style="display:none"> <i class="fa fa-times-circle"></i> </a> {{report.title}}</h3>
+                    </div>
+                    <div id="body-id-{{report.pk}}" class="panel-body small" style="display:none">
+                        {{report.body}}
+                    </div>
+                    <div class="panel-footer small">
+                        by <a href="{% url "user_details" report.rowner.pk %}">{{report.rowner}}</a><span class="pull-right"><i class="fa fa-1 fa-calendar irm"></i>{{report.created}}</span>
+                    </div>
+                </div>
+                {% endfor  %}
+            </div>
+        </div>
+        {% endif %}
     </div>
 </section>
 <!-- messages modal dialog -->
@@ -375,58 +413,13 @@
         </div><!-- /.modal-dialog -->
     </form>
 </div><!-- /.modal -->
-<div id="eventsRight" class="{title:'events'}">
-    events list
-</div>
-{% if reports or perm.can_report%}
-<div id="reportsRight" class="{title:'reports &middot; {{reports|length}}'}">
-    <div class="admin-reports">
-        {% if perm.can_report %}
-        <div class="well well-sm">
-            <a class="pull-right adm-report-add" href="javascript:void(0)"><i class="fa fa-plus-circle"></i></a>
-            <strong>{% trans "Admin reports"%}</strong><span class="ilm badge">{{reports|length}}</span>
-            <div id="report-form" style="display:none">
-                <form action="{% url "report_new" object.pk %}" method="post">
-                    {% csrf_token %}
-                    <input type="text" name="title" class="form-control" required placeholder="Report title">
-                    <textarea row="4" name="body" class="form-control" required placeholder="Report text"></textarea>
-                    <div style="text-align:right">
-                        <button type="submit" class="btn btn-primary">
-                            Post<i class="fa fa-check-square-o ilm"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        {% endif %}
-        <div id="adm-report-holder">
-            {% for report in reports %}
-            <div class="panel panel-info">
-                <form id="report_remove" action="{% url "report_remove" report.pk %}" method="post">
-                    {% csrf_token %}
-                </form>
-                <div class="panel-heading">
-                    <h3 class="panel-title"><a class="pull-right adm-report-ctrl" data-body-id="{{report.pk}}" href="javascript:void(0)"><i class="fa fa-caret-square-o-down"></i></a><a class="pull-right adm-report-del" id="rep-del-{{report.pk}}" onclick="$('#report_remove').submit();" href="javascript:void(0)" style="display:none"> <i class="fa fa-times-circle"></i> </a> {{report.title}}</h3>
-                </div>
-                <div id="body-id-{{report.pk}}" class="panel-body small" style="display:none">
-                    {{report.body}}
-                </div>
-                <div class="panel-footer small">
-                    by <a href="{% url "user_details" report.rowner.pk %}">{{report.rowner}}</a><span class="pull-right"><i class="fa fa-1 fa-calendar irm"></i>{{report.created}}</span>
-                </div>
-            </div>
-            {% endfor  %}
-        </div>
-    </div>
-</div>
-{% endif %}
+<div id="eventsRight" class="{title:'events'}"> events list</div>
+<div id="reportsRight" class="{title:'reports'}"> Admin reports</div>
 {% endblock %}
-{% block styles %}
-<link rel="stylesheet" href="{{ STATIC_URL }}css/mbExtruder.css" type="text/css">
-{% endblock %}
+{% block styles %}<link rel="stylesheet" href="{{ STATIC_URL }}css/mbExtruder.css" type="text/css">{% endblock %}
 {% block scripts %}
-<script src="{{ STATIC_URL }}js/lib/jquery.hoverIntent.min.js" type="text/javascript"></script>
-<script src="{{ STATIC_URL }}js/lib/jquery.mb.flipText.js" type="text/javascript"></script>
-<script src="{{ STATIC_URL }}js/lib/mbExtruder.js" type="text/javascript"></script>
-<script src="{{ STATIC_URL }}js/panels.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}js/lib/jquery.hoverIntent.min.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}js/lib/jquery.mb.flipText.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}js/lib/mbExtruder.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}js/panels.js" type="text/javascript"></script>
 {% endblock %}
