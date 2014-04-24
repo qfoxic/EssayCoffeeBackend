@@ -375,11 +375,30 @@
         </div><!-- /.modal-dialog -->
     </form>
 </div><!-- /.modal -->
-<div id="eventsRight" class="{title:'events'}">
-    events list
+<div id="eventsRight" class="{title:'&middot; events &middot; {{events|length}}  '}">
+    <table class="table table-hover table-condensed" style="background-color:#fff;">
+        <thead>
+            <tr>
+                <th>Header 1</th>
+                <th>Header 2</th>
+                <th>Header 3</th>
+                <th>Header 4</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in "123456789012345678901234567890" %}
+            <tr>
+                <td>id: {{forloop.counter}}</td>
+                <td>cell 2 text</td>
+                <td>cell 3 text</td>
+                <td>cell 4 text</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% if reports or perm.can_report%}
-<div id="reportsRight" class="{title:'reports &middot; {{reports|length}}'}">
+<div id="reportsRight" class="{title:' reports &middot; {{reports|length}}  '}">
     <div class="admin-reports">
         {% if perm.can_report %}
         <div class="well well-sm">

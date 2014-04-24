@@ -60,6 +60,9 @@
 	/*background: url("../elements/extruder_blank.png")*/
 }
 .extruder.right .extruder-content {
+    -moz-box-shadow: -2px 0 5px #555;
+    -webkit-box-shadow: -2px 0 5px #555;
+    box-shadow: -2px 0 5px #555;
 	/*border-left: 2px solid #104068;*/
 }
 .extruder.right.open .extruder-content {
@@ -79,7 +82,8 @@
 	font-weight: normal !important;
 	color: white;
 	top: 0;
-	padding: 8px 0 8px 8px;
+	cursor: pointer;
+	padding: 8px 0px 8px 8px;
 	background-color: #3374AD;
 	width: auto;
 	position: absolute;
@@ -99,6 +103,7 @@
 }
 .extruder.right .flap .flapLabel {
 	/*background: #000*/
+	width: auto;
 }
 .extruder .voice {
 	font: 18px/24px Arial, Helvetica, sans-serif;
