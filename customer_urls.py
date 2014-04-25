@@ -7,7 +7,7 @@ from general.views import RemoveTaskView,SwitchStatusView
 from general.views import CreateTaskView,UpdateTaskView,DetailTaskView,TaskIndexView
 from general.models import Task
 from msgs.views import CreateMsgView, RemoveMsgView, ListMsgsView,DetailMsgView
-from ftpstorage.views import UploadFileView,RemoveUploadView 
+from ftpstorage.views import UploadFileView,RemoveUploadView,UpdateUploadView 
 
 
 from userprofile.views import CreateProfileView, UpdateProfileView
@@ -22,6 +22,7 @@ msg_list = login_required(ListMsgsView.as_view(module_name='customer'), login_ur
 msg_detail = login_required(DetailMsgView.as_view(module_name='customer'), login_url=reverse_lazy('login'))
 upload_file = login_required(UploadFileView.as_view(module_name='customer'), login_url=reverse_lazy('login'))
 upload_rm = login_required(RemoveUploadView.as_view(module_name='customer'), login_url=reverse_lazy('login'))
+upload_visibility = login_required(UpdateUploadView.as_view(module_name='customer'), login_url=reverse_lazy('login'))
 
 user_new = CreateProfileView.as_view(module_name='customer',
                                      group_name=co.CUSTOMER_GROUP)
@@ -60,6 +61,7 @@ urlpatterns = patterns('',
 
     url(r'^upload/(?P<task_id>\d+)/new$', upload_file, name='upload_file'),
     url(r'^upload/(?P<pk>\d+)/remove$', upload_rm, name='upload_remove'),
+    url(r'^upload/(?P<pk>\d+)/visibility$', upload_visibility, name='upload_visibility'),
 
     url(r'profile/new', user_new, name='user_new'),
     url(r'profile/(?P<pk>\d+)/$', user_edit, name='user_details'),

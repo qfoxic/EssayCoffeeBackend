@@ -5,7 +5,7 @@
         <div class="panel-heading">
             <div class="panel-title">
                 <a class="small" data-toggle="collapse" data-parent="#accordion-{{accid}}" href="#collapse-{{accid}}-{{u.pk}}"> {{u.attach.name}} </a>
-            <a href="javascript:void()" data-url="/upload/{{u.pk}}/visibility" class="pull-right set-public"><i class="fa fa-eye{% if u.access_level == "0" %}-slash text-danger{% endif %}"></i></a>
+            <a href="javascript:void()" data-url="{% url "upload_visibility" u.pk %}" class="pull-right set-public"><i class="fa fa-eye{% if u.access_level == "0" %}-slash text-danger{% endif %}"></i></a>
             </div>
         </div>
         <div id="collapse-{{accid}}-{{u.pk}}" class="panel-collapse collapse">

@@ -2,7 +2,7 @@ import os
 import time
 from django.db import models
 from django.contrib.auth.models import User
-from general.models import Task
+from general.models import Task, BaseModel
 from django.core.exceptions import ValidationError
 
 import constants as co
@@ -13,7 +13,7 @@ def get_attach_path(instance, filename):
   return instance.fowner.username + '/' + filename
 
 
-class Upload(models.Model):
+class Upload(BaseModel):
   created = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(auto_now=True)
   attach = models.FileField(upload_to=get_attach_path, blank=True, null=True)
@@ -23,7 +23,7 @@ class Upload(models.Model):
                             related_name='ftask')
   access_level = models.CharField(choices=co.ACCESS_LEVELS,
                                   default=co.PRIVATE_ACCESS,
-                                  max_length=1)
+                                  max_length=1, blank=True)
 
   class Meta:
     db_table = 'uploads'

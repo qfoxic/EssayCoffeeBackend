@@ -18,7 +18,12 @@ PROJECT_DIR = os.path.join(BASE_DIR, 'transport')
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_w$x6+-q7hk1)5h6)w^pf(8&n3+dmi^hbc4_6_o+-)wfe&8!+*'
+SECRET_KEY = '_w$x6+-q7hk1)5r6)w^pf(6&n9_dmi^hbc4_6_0+-)wfe&9!+*'
+
+CSRF_COOKIE_NAME = 'csrfa'
+SESSION_COOKIE_NAME = 'sessa'
+#CSRF_COOKIE_DOMAIN = '.admins.yourseller.net'
+#SESSION_COOKIE_DOMAIN = '.admins.yourseller.net'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,8 +44,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'administer',
     'general',
+    'history',
     'msgs',
     'reports',
+    'ftpstorage',
     'userprofile',
 )
 
@@ -68,6 +75,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
 )
 
+FTP_DATA = ('85.17.249.125', '2121', 'ftp', 'q1w2e3r4t5y6')
+
+DEFAULT_FILE_STORAGE = (
+    'ftpstorage.storage.FTPStorage'
+)
 
 ROOT_URLCONF = 'administer_urls'
 

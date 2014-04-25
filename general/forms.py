@@ -1,5 +1,6 @@
-from django.forms import ModelForm, ValidationError
+from django.forms import ModelForm, ValidationError, FileField
 from general.models import Task
+from ftpstorage.models import Upload
 from userprofile.models import UserProfile
 
 import constants as co
@@ -20,13 +21,14 @@ class BaseForm(ModelForm):
 
 
 class TaskForm(BaseForm):
+  attach = FileField(required=False)
   class Meta(BaseForm.Meta):
     fields = ('site',
               'paper_title', 'discipline', 'assigment', 'level', 'urgency',
               'spacing', 'page_number', 'style', 'source_number',
               'instructions', 'discount', 'accept_terms',
               'owner', 'assignee',
-              'priority',
+              'priority', 'attach',
               'access_level',
               'revision', 'mark'
               )
@@ -57,7 +59,12 @@ class TaskForm(BaseForm):
     # TODO: this is a bug!!!!
     #    send_mail(co.ORDER_MAIL_SUBJECT, mail, co.ADMIN_EMAIL,
     #              [self.request.user.email])
-    return super(TaskForm, self).save(*args, **kwargs)
+    res = super(TaskForm, self).save(*args, **kwargs)
+    upload = Upload(attach=self.cleaned_data['attach'],
+                    ftask=self.instance, fowner=self.request.user,
+                    access_level=co.PRIVATE_ACCESS)
+    upload.save()
+    return res
 
 
 class LockTaskForm(BaseForm):

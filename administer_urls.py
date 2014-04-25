@@ -14,7 +14,7 @@ from administer.views import AdminForceSwitchStatusView
 from userprofile.views import CreateProfileView, UpdateProfileView, ListProfileView
 from userprofile.models import UserProfile
 from msgs.views import CreateMsgView, RemoveMsgView, ListMsgsView,DetailMsgView
-from ftpstorage.views import UploadFileView,RemoveUploadView 
+from ftpstorage.views import UploadFileView,RemoveUploadView,UpdateUploadView 
 
 import constants as co
 
@@ -47,6 +47,7 @@ msg_list = login_required(ListMsgsView.as_view(module_name='administer'), login_
 msg_detail = login_required(DetailMsgView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
 upload_file = login_required(UploadFileView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
 upload_rm = login_required(RemoveUploadView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
+upload_visibility = login_required(UpdateUploadView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
 report_new = login_required(
     CreateReportView.as_view(module_name='administer'),
     login_url=reverse_lazy('login'))
@@ -128,6 +129,7 @@ urlpatterns = patterns('',
 
     url(r'^upload/(?P<task_id>\d+)/new$', upload_file, name='upload_file'),
     url(r'^upload/(?P<pk>\d+)/remove$', upload_rm, name='upload_remove'),
+    url(r'^upload/(?P<pk>\d+)/visibility$', upload_visibility, name='upload_visibility'),
 
     url(r'^report/(?P<task_id>\d+)/new$', report_new, name='report_new'),
     url(r'^report/(?P<pk>\d+)/remove$', report_rm, name='report_remove'),

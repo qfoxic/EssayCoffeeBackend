@@ -3,6 +3,7 @@ import time
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from history.models import new_event, change_event, delete_event
 
 import constants as co
 
@@ -25,7 +26,30 @@ def ValidateMinSize(size):
   return Validate
 
 
-class Task(models.Model):
+# Main purpose of that class is to create events on each action.
+class BaseModel(models.Model):
+  class Meta:
+    abstract = True
+  
+  def save(self, *args, **kwargs):
+    # instance is new.
+    if not self.id:
+      # Save an item before event.
+      super(BaseModel, self).save(*args, **kwargs)
+      if hasattr(self.__class__, 'cur_rqst'):
+        new_event(self.__class__.cur_rqst.user, self)
+    else:
+      if hasattr(self.__class__, 'cur_rqst'):
+        change_event(self.__class__.cur_rqst.user, self)
+      super(BaseModel, self).save(*args, **kwargs)
+  
+  def delete(self, *args, **kwargs):
+    if hasattr(self.__class__, 'cur_rqst'):
+      delete_event(self.__class__.cur_rqst.user, self)
+    super(BaseModel, self).delete(*args, **kwargs)
+
+
+class Task(BaseModel):
   paper_title = models.CharField(max_length=co.TITLE_MAX_LEN, validators=[ValidateMinSize(4)])
   discipline = models.CharField(choices=co.DISCIPLINES, max_length=co.TITLE_MAX_LEN,
                                 default=co.DISCIPLINES[0], validators=[ValidateEmptySelect])

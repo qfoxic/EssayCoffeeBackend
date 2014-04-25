@@ -105,9 +105,10 @@ class CreateMsgView(BaseView, CreateView):
 class RemoveMsgView(BaseView, DeleteView):
   template_name = 'tasks/delete.html'
   queryset = Message.objects.all()
+  owner_required = True
 
   def get_success_url(self):
-    task_id = self.object.ctask.pk
+    task_id = self.object.mtask.pk
     return reverse('task_view', kwargs={'pk': task_id})
 
   def user_id(self):

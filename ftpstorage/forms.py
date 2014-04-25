@@ -31,3 +31,19 @@ class UploadForm(BaseForm):
         self.cleaned_data['ftask'], co.CAN_UPLOAD):
       raise ValidationError('You can not upload file.') 
 
+
+class UploadVisibilityForm(BaseForm):
+  class Meta(BaseForm.Meta):
+    model = Upload
+    fields = ('access_level',)
+
+  def clean_access_level(self):
+    lvl = self.instance.access_level 
+    if lvl == co.PRIVATE_ACCESS:
+      return co.PUBLIC_ACCESS
+    else:
+      return co.PRIVATE_ACCESS
+
+  def check_permissions(self, cleaned_data):
+    """Raises an exception if there are no permissions to save a form."""
+    pass

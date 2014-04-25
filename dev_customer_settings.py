@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-# BASE_DIR = '/var/www'
+#BASE_DIR = '/var/www'
 PROJECT_DIR = os.path.join(BASE_DIR, 'transport')
 
 # Quick-start development settings - unsuitable for production
@@ -20,6 +20,10 @@ PROJECT_DIR = os.path.join(BASE_DIR, 'transport')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '_w$x6+-q7hk1)5h6)w^pf(8&n3+dmi^hbc4_6_o+-)wfe&8!+*'
 
+CSRF_COOKIE_NAME = 'csrfc'
+SESSION_COOKIE_NAME = 'sessc'
+#CSRF_COOKIE_DOMAIN = '.customers.yourseller.net'
+#SESSION_COOKIE_DOMAIN = '.customers.yourseller.net'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -38,12 +42,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'customer',
-    'reports',
-    'msgs',
     'general',
+    'reports',
     'history',
-    'userprofile',
+    'msgs',
     'ftpstorage',
+    'userprofile',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -59,12 +63,11 @@ AUTHENTICATION_BACKENDS = (
     'userprofile.auth.UserProfileBackend',
 )
 
-FTP_DATA = ('127.0.0.1', 'ftp', 'q1w2e3r4t5y6')
+FTP_DATA = ('127.0.0.1', 2121, 'ftp', 'q1w2e3r4t5y6')
 
 DEFAULT_FILE_STORAGE = (
     'ftpstorage.storage.FTPStorage'
 )
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
@@ -87,14 +90,12 @@ WSGI_APPLICATION = 'customer_wsgi.application'
 
 DATABASES = {
     'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(PROJECT_DIR, 'db.sq3'),
-         'ENGINE':'django.db.backends.mysql',
-         'NAME': 'transport_vpaslav',
-         'USER': 'transport',
-         'PASSWORD': 'Secret677',
-         'HOST': '127.0.0.1',
-         'PORT': '3306',
+        'ENGINE':'django.db.backends.mysql',
+        'NAME': 'transport_vpaslav',
+        'USER': 'transport',
+        'PASSWORD': 'Secret677',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
@@ -114,6 +115,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (

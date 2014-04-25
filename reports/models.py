@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
-from general.models import Task
+from general.models import Task, BaseModel
 
 
 import constants as co
 
-class Report(models.Model):
+class Report(BaseModel):
   title = models.CharField(max_length=co.TITLE_MAX_LEN)
   body = models.TextField()
   created = models.DateTimeField(auto_now_add=True)

@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'reports',
     'history',
     'msgs',
+    'ftpstorage',
     'userprofile',
 )
 
@@ -62,7 +63,7 @@ AUTHENTICATION_BACKENDS = (
     'userprofile.auth.UserProfileBackend',
 )
 
-FTP_DATA = ('127.0.0.1', 'ftp', 'q1w2e3r4t5y6')
+FTP_DATA = ('127.0.0.1', 2121, 'ftp', 'q1w2e3r4t5y6')
 
 DEFAULT_FILE_STORAGE = (
     'ftpstorage.storage.FTPStorage'

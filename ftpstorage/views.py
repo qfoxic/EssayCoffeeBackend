@@ -1,5 +1,5 @@
 from general.views import BaseView 
-from ftpstorage.forms import UploadForm 
+from ftpstorage.forms import UploadForm, UploadVisibilityForm 
 from ftpstorage.models import Upload 
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import CreateView
@@ -23,6 +23,20 @@ class UploadFileView(BaseView, CreateView):
   
   def get_success_url(self):
     return reverse('task_view', kwargs={'pk': self.kwargs.get('task_id')})
+
+  def form_invalid(self, form):
+    # If form is invalid redirect to task details with an error.
+    messages.add_message(self.request, messages.ERROR, str(form.errors))
+    return HttpResponseRedirect(self.get_success_url())
+
+
+class UpdateUploadView(BaseView, UpdateView):
+  form_class = UploadVisibilityForm 
+  queryset = Upload.objects.all() 
+  template_name = 'tasks/details.html'
+
+  def get_success_url(self):
+    return reverse('task_view', kwargs={'pk': self.object.ftask.id})
 
   def form_invalid(self, form):
     # If form is invalid redirect to task details with an error.

@@ -11,6 +11,7 @@ from django.db.models import Q
 from general.models import Task
 from userprofile.models import UserProfile
 from reports.models import Report
+from history.models import list_task_events
 from ftpstorage.models import Upload
 from general.forms import TaskForm, SwitchStatusForm, LockTaskForm, UnlockTaskForm
 
@@ -85,7 +86,11 @@ class BaseView(View):
   def _check_permissions(self):
     # Do nothing by default should be overloaded for different groups.
     pass
-
+  
+  def _add_request_to_obj(self, request, instance):
+    """Add request attribute to an object's model."""
+    instance.__class__.cur_rqst = request
+  
   def _owner_required(self, user, owner_id):
     """Checks whether user is owner of an entity."""
     user_group = UserProfile.objects.get(
@@ -95,12 +100,22 @@ class BaseView(View):
       return
     if not user.is_superuser and not owner_id == user.pk:
       raise PermissionDenied
-
+  
+  def form_valid(self, form):
+    """Main purpose of that function is to create an event."""
+    self._add_request_to_obj(self.request, form.instance)
+    return super(BaseView, self).form_valid(form)
+  
   def dispatch(self, request, *args, **kwargs):
     if self.owner_required:
       self._owner_required(request.user, self.user_id())
     self._check_permissions()
+    try:
+      self._add_request_to_obj(request, self.get_object())
+    except AttributeError:
+      pass
     return super(BaseView, self).dispatch(request, *args, **kwargs)
+    
 
   def render_to_response(self, context, **response_kwargs):
     context.update(self.settings)
@@ -275,21 +290,24 @@ class DetailTaskView(BaseView, DetailView):
     context = super(DetailTaskView, self).get_context_data(**kwargs)
     task_id = self.kwargs.get('pk')
     context['reports'] = Report.objects.filter(rtask_id__exact=task_id)
+    context['events'] = list_task_events(task_id)
     group = self.request.user.get_group()
     task_q = Q(ftask_id__exact=task_id)
-    or_q = Q(fowner_id__exact=self.request.user.id)|Q(access_level__in=(co.PUBLIC_ACCESS,))
+    #or_q = Q(fowner_id__exact=self.request.user.id)|Q(access_level__in=(co.PUBLIC_ACCESS,))
+    or_q = Q(access_level__in=(co.PUBLIC_ACCESS,))
+    not_owner_q = ~Q(fowner_id__exact=self.request.user.id)
     context['my_uploads'] = Upload.objects.filter(task_q, Q(fowner_id__exact=self.request.user.id))
     if group in [co.ADMIN_GROUP, co.EDITOR_GROUP]:
-      context['customer_uploads'] = Upload.objects.filter(fowner__groups__name=co.CUSTOMER_GROUP).filter(task_q, or_q)
-      context['admin_uploads'] = Upload.objects.filter(fowner__groups__name=co.ADMIN_GROUP).filter(task_q, or_q)
-      context['editor_uploads'] = Upload.objects.filter(fowner__groups__name=co.EDITOR_GROUP).filter(task_q, or_q)
-      context['writer_uploads'] = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q)
+      context['customer_uploads'] = Upload.objects.filter(fowner__groups__name=co.CUSTOMER_GROUP).filter(task_q, or_q, not_owner_q)
+      context['admin_uploads'] = Upload.objects.filter(fowner__groups__name=co.ADMIN_GROUP).filter(task_q, or_q, not_owner_q)
+      context['editor_uploads'] = Upload.objects.filter(fowner__groups__name=co.EDITOR_GROUP).filter(task_q, or_q, not_owner_q)
+      context['writer_uploads'] = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q, not_owner_q)
     elif group == co.WRITER_GROUP:
-      context['customer_uploads'] = Upload.objects.filter(fowner__groups__name=co.CUSTOMER_GROUP).filter(task_q, or_q)
-      context['editor_uploads'] = Upload.objects.filter(fowner__groups__name=co.EDITOR_GROUP).filter(task_q, or_q)
-      context['writer_uploads'] = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q)
+      context['customer_uploads'] = Upload.objects.filter(fowner__groups__name=co.CUSTOMER_GROUP).filter(task_q, or_q, not_owner_q)
+      context['editor_uploads'] = Upload.objects.filter(fowner__groups__name=co.EDITOR_GROUP).filter(task_q, or_q, not_owner_q)
+      context['writer_uploads'] = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q, not_owner_q)
     elif group == co.CUSTOMER_GROUP:
-      context['writer_uploads'] = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q)
+      context['writer_uploads'] = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q, not_owner_q)
        
     return context
 
