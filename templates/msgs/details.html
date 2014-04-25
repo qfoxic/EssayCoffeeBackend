@@ -3,16 +3,30 @@
 {% block pagetitle %}{% trans "Message Details" %}{% endblock %}
 {% block info_block %}
 <section class="info">
-    <h2><i class="fa fa-list-alt irm"></i> {% trans "Message Details" %}</h2>
+    <h2><i class="fa fa-envelope-o irm"></i> {{object.title}} </h2>
 </section>
 {% endblock %}
 {% block content %}
 <section class="container-fluid task-details" style="margin: 0 auto">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-body attr-body" style="line-height: 160%">
-                    <i class="fa fa-info-circle fa-fw irm"></i><strong>{% trans "Body" %}</strong>: <em>{{object.body}}</em>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-md-offset-1">
+                            <i class="fa fa-male irm"></i>From: {{object.mowner.username}}
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fa fa-calendar irm"></i>Created: {{object.created}}
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fa fa-tasks irm"></i>Task ID: <a href="{% url "task_view" object.mtask_id %}">{{object.mtask_id}}</a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="mesg-body">
+                        {{object.body}}
+                    </div>
                     <br>
                 </div>
             </div>

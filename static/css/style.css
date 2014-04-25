@@ -289,3 +289,11 @@ thead > tr > th > div {
 .dl-horizontal > dd {
     margin-left: 70px;
 }
+.mesg-body {
+    margin-top:-1em;
+    white-space:pre-line;
+    font-size: 1.2em;
+    font-style: italic;
+    padding: 0 1em;
+    line-height: 160%;
+}

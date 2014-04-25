@@ -332,21 +332,21 @@
                             </button>
                             {% if site == 'customer' %}
                             <label class="btn btn-default">
-                                <input type="radio" value="{{co.MSGS_ADM}}" name="visibility">
+                                <input type="radio" value="{{co.MSGS_ADM}}" name="visibility" class="vtoggler" checked="checked">
                                 Admin &amp; Editor </label>
                             <label class="btn btn-default">
                                 <input type="radio" value="{{co.MSGS_WRITER}}" name="visibility">
                                 Writer </label>
                             {% elif site == 'writer' %}
                             <label class="btn btn-default">
-                                <input type="radio" value="{{co.MSGS_ADM}}" name="visibility">
+                                <input type="radio" value="{{co.MSGS_ADM}}" name="visibility" class="vtoggler" checked="checked">
                                 Admin &amp; Editor </label>
                             <label class="btn btn-default">
                                 <input type="radio" value="{{co.MSGS_CUSTOMER}}" name="visibility">
                                 Customer </label>
                             {% else %}
                             <label class="btn btn-default">
-                                <input type="radio" value="{{co.MSGS_WRITER}}" name="visibility">
+                                <input type="radio" value="{{co.MSGS_WRITER}}" name="visibility" class="vtoggler" checked="checked">
                                 Writer </label>
                             <label class="btn btn-default">
                                 <input type="radio" value="{{co.MSGS_CUSTOMER}}" name="visibility">
@@ -367,15 +367,15 @@
         </div><!-- /.modal-dialog -->
     </form>
 </div><!-- /.modal -->
-<div id="eventsRight" class="{title:'history'}">
+<div id="eventsRight" class="{title:' history '}">
     <table class="table table-hover table-condensed small" style="background-color:#fff;">
         <thead>
             <tr>
-                <th>Owner ID</th>
+                <th>Owner</th>
                 <th>Type</th>
                 <th>Action</th>
                 <th>Created</th>
-                <th>Values Old/New</th>
+                <th>Values old/new</th>
             </tr>
         </thead>
         <tbody>
@@ -387,10 +387,10 @@
                 <td>{{h.created}}</td>
                 <td>
                 <div>
-                    OLD: {{h.old_values}}
+                    <span style="font-variant:small-caps">old</span>: {{h.old_values}}
                 </div>
                 <div>
-                    NEW: {{h.new_values}}
+                    <span style="font-variant:small-caps">new</span>: {{h.new_values}}
                 </div></td>
             </tr>
             {% endfor %}
@@ -398,7 +398,7 @@
     </table>
 </div>
 {% if reports or perm.can_report%}
-<div id="reportsRight" class="{title:' reports &middot; {{reports|length}}  '}">
+<div id="reportsRight" class="{title:' reports &middot; {{reports|length}} '}">
     <div class="admin-reports">
         {% if perm.can_report %}
         <div class="well well-sm">
