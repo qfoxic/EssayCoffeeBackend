@@ -13,7 +13,7 @@ $( document ).ready( function( ) {
     if( $( "#eventsRight" ).length ) {
         $( "#eventsRight" ).buildMbExtruder( {
             positionFixed: true,
-            width: 450,
+            width: 650,
             sensibility: 800,
             position: "right", // left, right, bottom
             extruderOpacity: 1,

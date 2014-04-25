@@ -1,4 +1,4 @@
-import os
+import os, re
 import time
 from django.db import models
 from django.contrib.auth.models import User
@@ -25,7 +25,13 @@ def ValidateMinSize(size):
       raise ValidationError('Size should be at least %s' % size)
   return Validate
 
-
+def get_pid(path):
+  mo = re.match(r'^/\w+/(\d+)/.*', path)
+  if mo.groups(): 
+    return mo.group(1)
+  else:
+    return None 
+    
 # Main purpose of that class is to create events on each action.
 class BaseModel(models.Model):
   class Meta:
@@ -37,15 +43,16 @@ class BaseModel(models.Model):
       # Save an item before event.
       super(BaseModel, self).save(*args, **kwargs)
       if hasattr(self.__class__, 'cur_rqst'):
-        new_event(self.__class__.cur_rqst.user, self)
+        #import pdb; pdb.set_trace()
+        new_event(self.__class__.cur_rqst.user, self, get_pid(self.__class__.cur_rqst.path))
     else:
       if hasattr(self.__class__, 'cur_rqst'):
-        change_event(self.__class__.cur_rqst.user, self)
+        change_event(self.__class__.cur_rqst.user, self, get_pid(self.__class__.cur_rqst.path))
       super(BaseModel, self).save(*args, **kwargs)
   
   def delete(self, *args, **kwargs):
     if hasattr(self.__class__, 'cur_rqst'):
-      delete_event(self.__class__.cur_rqst.user, self)
+      delete_event(self.__class__.cur_rqst.user, self, get_pid(self.__class__.cur_rqst.path))
     super(BaseModel, self).delete(*args, **kwargs)
 
 

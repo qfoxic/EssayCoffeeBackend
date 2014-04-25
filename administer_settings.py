@@ -47,7 +47,7 @@ INSTALLED_APPS = (
     'history',
     'msgs',
     'reports',
-    'uploads',
+    'ftpstorage',
     'userprofile',
 )
 

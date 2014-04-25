@@ -10,14 +10,6 @@
 {% endblock %}
 {% block content %}
 <section class="container-fluid task-details" style="margin: 0 auto">
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-            {{ message }}</li>
-            {% endfor %}
-    </ul>
-    {% endif %}
     <div class="row">
         <div class="col-md-3">
             <div class="panel panel-default">
@@ -375,23 +367,31 @@
         </div><!-- /.modal-dialog -->
     </form>
 </div><!-- /.modal -->
-<div id="eventsRight" class="{title:'&middot; events &middot; {{events|length}}  '}">
-    <table class="table table-hover table-condensed" style="background-color:#fff;">
+<div id="eventsRight" class="{title:'history'}">
+    <table class="table table-hover table-condensed small" style="background-color:#fff;">
         <thead>
             <tr>
-                <th>Header 1</th>
-                <th>Header 2</th>
-                <th>Header 3</th>
-                <th>Header 4</th>
+                <th>Owner ID</th>
+                <th>Type</th>
+                <th>Action</th>
+                <th>Created</th>
+                <th>Values Old/New</th>
             </tr>
         </thead>
         <tbody>
-            {% for i in "123456789012345678901234567890" %}
+            {% for h in history %}
             <tr>
-                <td>id: {{forloop.counter}}</td>
-                <td>cell 2 text</td>
-                <td>cell 3 text</td>
-                <td>cell 4 text</td>
+                <td><a href="{% url "user_edit" h.howner_id %}">{{h.howner.username}}</a></td>
+                <td>{% if h.object_type == "Message" %}<a href="{% url "msg_detail" h.object_id %}">{{h.object_type}}</a>{% else %}{{h.object_type}} [id:{{h.object_id}}]{% endif %}</td>
+                <td>{{h.action_type}}</td>
+                <td>{{h.created}}</td>
+                <td>
+                <div>
+                    OLD: {{h.old_values}}
+                </div>
+                <div>
+                    NEW: {{h.new_values}}
+                </div></td>
             </tr>
             {% endfor %}
         </tbody>

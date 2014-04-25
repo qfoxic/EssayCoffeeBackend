@@ -11,7 +11,7 @@ ELIMINATION_FIELDS = ['mtask','ftask','rtask', 'logentry', 'manager',
     'ctask', 'owner', 'site', 'user_permissions', 'rowner', 'mowner', ]
 
 
-def _add_event(user, action, obj, fields, old_values, new_values):
+def _add_event(user, action, obj, fields, old_values, new_values, pid = None):
   """user - current user.
      obj - model instance.
      fields - list of changed fields.
@@ -23,6 +23,7 @@ def _add_event(user, action, obj, fields, old_values, new_values):
     
   history = History(object_id=obj.id,
                     howner=user,
+                    parent_id=pid,
                     object_type=obj.__class__.__name__,
                     action_type=action,
                     fields=','.join(fields),
@@ -52,17 +53,17 @@ def _obj_diff(old_inst, new_inst):
   return fields, old_values, new_values
 
 
-def new_event(user, inst):
+def new_event(user, inst, pid = None):
   """inst - old instance."""
   # Don't create an event if instance isn't new.
   if not inst.id:
     return
   # No need to display difference between objects if it is new.
   fields, old_values, new_values = _obj_diff(inst, inst)
-  return _add_event(user, NEW_EVENT, inst, fields, old_values, new_values)
+  return _add_event(user, NEW_EVENT, inst, fields, old_values, new_values, pid)
 
 
-def change_event(user, inst):
+def change_event(user, inst, pid = None):
   """Have to be called before an inst is going to be saved.
      user - current user.
      inst - model instance before saving.
@@ -72,41 +73,28 @@ def change_event(user, inst):
     return
   old_inst = inst.__class__.objects.get(id=inst.id)
   fields, old_values, new_values = _obj_diff(old_inst, inst)
-  return _add_event(user, CHANGE_EVENT, inst, fields, old_values, new_values)
+  return _add_event(user, CHANGE_EVENT, inst, fields, old_values, new_values, pid)
 
 
-def delete_event(user, inst):
+def delete_event(user, inst, pid = None):
   # Don't create an event if instance is new.
   if not inst.id:
     return
   # No need to display difference between objects if it is new.
   fields, old_values, new_values = _obj_diff(inst, inst)
-  return _add_event(user, DELETE_EVENT, inst, fields, old_values, new_values)
+  return _add_event(user, DELETE_EVENT, inst, fields, old_values, new_values, pid)
 
 
-EVENT_TABLE_MAP = {'Upload': {'task_id': 'uploads.ftask_id', 'table': 'uploads', 'event_type': 'Upload'},
-                   'Message': {'task_id': 'msgs.mtask_id', 'table': 'msgs', 'event_type': 'Message'},
-                   'Task': {'task_id': 'tasks.id', 'table': 'tasks', 'event_type': 'Task'},
-                   'Report': {'task_id': 'reports.rtask_id', 'table': 'reports', 'event_type': 'Report'}}
-
-
-def list_task_events(task_id, events=['Upload', 'Message', 'Task', 'Report']):
-  sql = ('select history.id,%(task_id)s,howner_id,object_id,object_type,action_type,fields,history.created,old_values,new_values'
-         ' from history left join (%(table)s) on (object_id=%(table)s.id)'
-         ' where object_type="%(event_type)s" and %(task_id)s=%(tid)s')
-  request = []
-  for event in events:
-    sql_dict = EVENT_TABLE_MAP.get(event)
-    if not sql_dict:
-      continue
-    sql_dict['tid'] = task_id
-    request.append(sql % sql_dict)
-  return History.objects.raw(' UNION '.join(request))
+def list_task_events(task_id):
+  sql = ('SELECT id,howner_id,object_id,object_type,action_type,history.created,old_values,new_values'
+         ' FROM history WHERE object_type IN ("Upload", "Message", "Task", "Report") AND parent_id=%(pid)s')
+  return History.objects.raw(sql%{'pid':task_id})
 
 
 class History(models.Model):
   howner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True,
                              related_name='howner')
+  parent_id = models.IntegerField( null=True, blank=True )
   object_id = models.IntegerField()
   object_type = models.CharField(max_length=12)
   action_type = models.CharField(max_length=6,

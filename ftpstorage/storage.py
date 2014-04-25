@@ -22,7 +22,6 @@ from django.db.models.fields import files
 
 class FTPStorage(Storage):
     def __init__(self, location=None, base_url=None):
-#      import pdb; pdb.set_trace()
       self.session = FTP()
       try:
         host, port, user, passwd = settings.FTP_DATA
