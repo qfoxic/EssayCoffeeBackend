@@ -27,7 +27,7 @@ def ValidateMinSize(size):
 
 def get_pid(path):
   mo = re.match(r'^/\w+/(\d+)/.*', path)
-  if mo.groups(): 
+  if mo and mo.groups(): 
     return mo.group(1)
   else:
     return None 
