@@ -102,7 +102,7 @@
 	box-shadow: -2px 0 5px #aaa;
 }
 .extruder.right .flap .flapLabel {
-	/*background: #000*/
+	background:  #3374AD;
 	width: auto;
 }
 .extruder .voice {
