@@ -385,13 +385,15 @@
                 <td>{% if h.object_type == "Message" %}<a href="{% url "msg_detail" h.object_id %}">{{h.object_type}}</a>{% else %}{{h.object_type}} [id:{{h.object_id}}]{% endif %}</td>
                 <td>{{h.action_type}}</td>
                 <td>{{h.created}}</td>
-                <td>
+                <td> {% if not h.old_values and not h.new_values %}
+                &nbsp;
+                {% else %}
                 <div>
                     <span style="font-variant:small-caps">old</span>: {{h.old_values}}
                 </div>
                 <div>
                     <span style="font-variant:small-caps">new</span>: {{h.new_values}}
-                </div></td>
+                </div> {% endif %} </td>
             </tr>
             {% endfor %}
         </tbody>
