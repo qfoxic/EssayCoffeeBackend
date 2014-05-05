@@ -84,6 +84,62 @@
                     Write a message <i class="fa fa-envelope-o  fa-lg ilm"></i>
                 </button>
                 {% endif %}
+                {% if perm.can_upload %}
+                <div class="well well-sm">
+                    <a class="pull-right uploads-add" href="javascript:void(0)"><i class="fa fa-plus-circle"></i></a>
+                    <strong>{% trans "Upload a file" %}&hellip;</strong><span class="ilm badge">{{stats.uploads}}</span>
+                    <div id="uploads-form" style="display:none; margin-top:-10px">
+                        <form action="{% url "upload_file" object.pk %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group{% if form.attach.errors %} has-error{% endif %}">
+                                <div class="file-input form-control">
+                                    <div class="input-group margin-bottom-sm">
+                                        <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
+                                        <input id="id_attach" class="upload-file" type="file" title="Browse" name="attach">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="btn-group btn-group-xs" data-toggle="buttons">
+                                        <label class="btn btn-default flat-btn">
+                                            <input class="vtoggler" type="radio" name="access_level" value="{{co.PUBLIC_ACCESS}}" checked="checked">
+                                            Public </label>
+                                        <label class="btn btn-default flat-btn">
+                                            <input class="vtoggler" type="radio" name="access_level" value="{{co.PRIVATE_ACCESS}}">
+                                            Private </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <button type="submit" class="btn btn-primary pull-right">
+                                        Upload<i class="fa fa-upload ilm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {% endif  %}
+                <div id="uploads-holder">
+                    <form id="uploads_manage" action="" method="post" style="display:none">
+                        {% csrf_token %}
+                    </form>
+                    {% if my_uploads %}
+                    {% include "tasks/uploads_list.html" with uploads_list=my_uploads accid="my" list_title="My uploads" %}
+                    {% endif %}
+                    {% if customer_uploads %}
+                    {% include "tasks/uploads_list.html" with uploads_list=customer_uploads accid="customer" list_title="Customer uploads" %}
+                    {% endif %}
+                    {% if admin_uploads %}
+                    {% include "tasks/uploads_list.html" with uploads_list=admin_uploads accid="admin" list_title="Admin uploads" %}
+                    {% endif %}
+                    {% if editor_uploads %}
+                    {% include "tasks/uploads_list.html" with uploads_list=editor_uploads accid="editor" list_title="Editor uploads" %}
+                    {% endif %}
+                    {% if writer_uploads %}
+                    {% include "tasks/uploads_list.html" with uploads_list=writer_uploads accid="writer" list_title="Writer uploads" %}
+                    {% endif %}
+                </div>
             </div>
         </div>
         <div class="col-md-9">
@@ -343,82 +399,6 @@
         </tbody>
     </table>
 </div>
-<div id="uploadsRight" class="{title:'uploads'}">
-    {% if perm.can_upload %}
-    <div class="well well-sm">
-        <a class="pull-right uploads-add" href="javascript:void(0)"><i class="fa fa-plus-circle"></i></a>
-        <strong>{% trans "Upload a file" %}&hellip;</strong><span class="ilm badge">{{stats.uploads}}</span>
-        <div id="uploads-form" style="display:none; margin-top:-10px">
-            <form action="{% url "upload_file" object.pk %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group{% if form.attach.errors %} has-error{% endif %}">
-                    <div class="file-input form-control">
-                        <div class="input-group margin-bottom-sm">
-                            <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
-                            <input id="id_attach" class="upload-file" type="file" title="Browse" name="attach">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="btn-group btn-group-xs" data-toggle="buttons">
-                            <label class="btn btn-default flat-btn">
-                                <input class="vtoggler" type="radio" name="access_level" value="{{co.PUBLIC_ACCESS}}" checked="checked">
-                                Public </label>
-                            <label class="btn btn-default flat-btn">
-                                <input class="vtoggler" type="radio" name="access_level" value="{{co.PRIVATE_ACCESS}}">
-                                Private </label>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <button type="submit" class="btn btn-primary pull-right">
-                            Upload<i class="fa fa-upload ilm"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    {% endif  %}
-    <div id="uploads-holder">
-        <form id="uploads_manage" action="" method="post" style="display:none">
-            {% csrf_token %}
-        </form>
-        {% include "tasks/uploads_list.html" with uploads_list=my_uploads accid="my" list_title="My uploads" %}
-    </div>
-    <!--
-    <table class="table table-hover table-condensed small" style="background-color:#fff;">
-    <thead>
-    <tr>
-    <th>Owner</th>
-    <th>Type</th>
-    <th>Action</th>
-    <th>Created</th>
-    <th>Values old/new</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for h in history %}
-    <tr>
-    <td><a href="{% url "user_edit" h.howner_id %}">{{h.howner.username}}</a></td>
-    <td>{% if h.object_type == "Message" %}<a href="{% url "msg_detail" h.object_id %}">{{h.object_type}}</a>{% else %}{{h.object_type}} [id:{{h.object_id}}]{% endif %}</td>
-    <td>{{h.action_type}}</td>
-    <td>{{h.created}}</td>
-    <td> {% if not h.old_values and not h.new_values %}
-    &nbsp;
-    {% else %}
-    <div>
-    <span style="font-variant:small-caps">old</span>: {{h.old_values}}
-    </div>
-    <div>
-    <span style="font-variant:small-caps">new</span>: {{h.new_values}}
-    </div> {% endif %} </td>
-    </tr>
-    {% endfor %}
-    </tbody>
-    </table>
-    -->
-</div>
 {% if reports or perm.can_report%}
 <div id="reportsRight" class="{title:' reports &middot; {{reports|length}} '}">
     <div class="admin-reports">
@@ -462,9 +442,7 @@
 </div>
 {% endif %}
 {% endblock %}
-{% block styles %}
-<link rel="stylesheet" href="{{ STATIC_URL }}css/mbExtruder.css" type="text/css">
-{% endblock %}
+{% block styles %}<link rel="stylesheet" href="{{ STATIC_URL }}css/mbExtruder.css" type="text/css">{% endblock %}
 {% block scripts %}
 <script src="{{ STATIC_URL }}js/lib/jquery.hoverIntent.min.js" type="text/javascript"></script>
 <script src="{{ STATIC_URL }}js/lib/jquery.mb.flipText.js" type="text/javascript"></script>

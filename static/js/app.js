@@ -30,6 +30,26 @@ $( document ).ready( function( ) {
             slideTimer: 300
         } );
     }
+    if( $( "#uploadsRight" ).length ) {
+        $( "#uploadsRight" ).buildMbExtruder( {
+            positionFixed: true,
+            width: 550,
+            sensibility: 800,
+            position: "right",
+            extruderOpacity: 1,
+            flapDim: 100,
+            textOrientation: "bt",
+            onExtOpen: function( ) {
+            },
+            onExtContentLoad: function( ) {
+            },
+            onExtClose: function( ) {
+            },
+            hidePanelsOnClose: true,
+            autoCloseTime: 0, // 0=never
+            slideTimer: 300,
+        } );
+    }
     if( $( "#reportsRight" ).length ) {
         $( "#reportsRight" ).buildMbExtruder( {
             positionFixed: true,
@@ -62,7 +82,8 @@ $( document ).ready( function( ) {
     } );
 
     $( '.upload-file' ).bootstrapFileInput( );
-    $( '.upload-delete' ).on( 'click', function( ev ) {
+    $( 'a.upload-delete' ).on( 'click', function( ev ) {
+        $( "#uploadsRight" ).closeMbExtruder();
         ev.preventDefault( );
         var that = $( this );
         bootbox.dialog( {
@@ -74,6 +95,7 @@ $( document ).ready( function( ) {
                     label: "Cancel",
                     className: "btn-default",
                     callback: function( ) {
+                    $( "#uploadsRight" ).openMbExtruder(true);
                     }
                 },
                 confirm: {

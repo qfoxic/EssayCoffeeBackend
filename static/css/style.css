@@ -200,7 +200,7 @@ a.adm-report-add, a.uploads-add, a.messages-add {
     box-shadow: none !important;
 }
 a.set-public {
-    margin-right:3px;
+    margin-right: 3px;
 }
 a.attr-ctrl {
     font-size: 18px;
@@ -271,7 +271,7 @@ thead > tr > th > div {
     color: #F0F9FF;
     padding: 0 10px;
     border-radius: 7px 7px 0 0;
-    margin:0 -26px 0 0;
+    margin: 0 -26px 0 0;
     letter-spacing: 2px;
 }
 .modal-dialog-center, .bootbox-modal {
@@ -288,10 +288,19 @@ thead > tr > th > div {
     margin-left: 70px;
 }
 .mesg-body {
-    margin-top:-1em;
-    white-space:pre-line;
+    margin-top: -1em;
+    white-space: pre-line;
     font-size: 1.2em;
     font-style: italic;
     padding: 0 1em;
     line-height: 160%;
+}
+caption.my {
+    background: #888;
+    padding: .5em 0;
+    font-weight: bold;
+    color: #fff;
+    font-size: 1.3em;
+    border-radius: 10px 10px 0 0;
+    text-shadow: 1px 1px 0 #000;
 }

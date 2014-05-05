@@ -1,43 +1,23 @@
-<h5>{{list_title}} <span class="badge pull-right" style="margin-right:8px;background-color:#555">{{uploads_list|length}}</span></h5>
-<div class="panel-group" id="accordion-{{accid}}">
-    <div class="panel panel-default small">
+<table class="table table-hover table-condensed small" style="background-color:#fff;">
+    <caption class="my">Uploads <span class="badge pull-right" style="margin-right:8px;background-color:#555">{{uploads_list|length}}</span></caption>
+    <thead>
+        <tr>
+            <th>File</th>
+            <th>Owner</th>
+            <th>Created/Updated</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>    
+    <tbody>
         {% for u in uploads_list  %}
-        <div class="panel-heading">
-            <div class="panel-title">
-                <a class="small" data-toggle="collapse" data-parent="#accordion-{{accid}}" href="#collapse-{{accid}}-{{u.pk}}"> {{u.attach.name}} </a>
-            <a href="javascript:void()" data-url="{% url "upload_visibility" u.pk %}" class="pull-right set-public"><i class="fa fa-eye{% if u.access_level == co.PRIVATE_ACCESS %}-slash text-danger{% endif %}"></i></a>
-            </div>
-        </div>
-        <div id="collapse-{{accid}}-{{u.pk}}" class="panel-collapse collapse">
-            <div class="panel-body" style="padding:10px">
-                <dl class="dl-horizontal" style="margin:0">
-                    <dt>
-                        Owner
-                    </dt>
-                    <dd>
-                        <a href="{% url "user_edit" u.fowner.pk %}">{{u.fowner}}</a>
-                    </dd>
-                    <dt>
-                        Created
-                    </dt>
-                    <dd>
-                        <i class="fa fa-1 fa-calendar irm"></i>{{u.created}}
-                    </dd>
-                    <dt>
-                        Updated
-                    </dt>
-                    <dd>
-                        <i class="fa fa-1 fa-calendar irm"></i>{{u.updated}}
-                    </dd>
-                    <dt>
-                        &nbsp;
-                    </dt>
-                    <dd>
-                        <button data-file-name="{{u.attach.name}}" data-url="{% url "upload_remove" u.pk %}" type="button" style="margin-top:10px" class="upload-delete btn btn-danger btn-xs pull-right">Delete <i class="fa fa-times"></i></button>
-                    </dd>
-                </dl>
-            </div>
-        </div>
+        <tr>
+            <td>{{u.attach.name}}</td>
+            <td><a href="{% url "user_edit" u.fowner.pk %}">{{u.fowner}}</a></td>
+            <td><div>{{u.created}}</div><div>{{u.updated}}</div></td>
+            <td><a href="javascript:void()" data-url="{% url "upload_visibility" u.pk %}" class="set-public" style="font-size:1.5em"><i class="fa fa-eye{% if u.access_level == co.PRIVATE_ACCESS %}-slash text-danger{% endif %}"></i></a></td>
+            <td><a href="javascript:void()" data-file-name="{{u.attach.name}}" data-url="{% url "upload_remove" u.pk %}" class="upload-delete"  style="font-size:1.5em;color:#a00"><i class="fa fa-times-circle"></i></a></td>
+        </tr>
         {% endfor %}
-    </div>
-</div>
+    </tbody>
+</table>
