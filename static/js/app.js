@@ -70,6 +70,26 @@ $( document ).ready( function( ) {
             slideTimer: 300
         } );
     }
+    if( $( "#messagesRight" ).length ) {
+        $( "#messagesRight" ).buildMbExtruder( {
+            positionFixed: true,
+            width: 600,
+            sensibility: 800,
+            position: "right", // left, right, bottom
+            extruderOpacity: 1,
+            flapDim: 100,
+            textOrientation: "bt", // or "tb" (top-bottom or bottom-top)
+            onExtOpen: function( ) {
+            },
+            onExtContentLoad: function( ) {
+            },
+            onExtClose: function( ) {
+            },
+            hidePanelsOnClose: true,
+            autoCloseTime: 0, // 0=never
+            slideTimer: 300
+        } );
+    }
     $( '.vtoggler[checked="checked"]' ).parent( ).addClass( "active" );
 
     $( '.btn-cancel' ).on( 'click', function( ) {

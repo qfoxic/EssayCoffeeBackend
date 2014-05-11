@@ -343,6 +343,38 @@
         </tbody>
     </table>
 </div>
+<div id="messagesRight" class="{title:'messages &middot; {{msgs|length}} '}">
+    <table class="table table-hover table-condensed small" style="background-color:#fff;">
+        <thead>
+            <tr>
+                <th>Owner</th>
+                <th>Type</th>
+                <th>Action</th>
+                <th>Created</th>
+                <th>Values old/new</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for h in history %}
+            <tr>
+                <td><a href="{% url "user_edit" h.howner_id %}">{{h.howner.username}}</a></td>
+                <td>{% if h.object_type == "Message" %}<a href="{% url "msg_detail" h.object_id %}">{{h.object_type}}</a>{% else %}{{h.object_type}} [id:{{h.object_id}}]{% endif %}</td>
+                <td>{{h.action_type}}</td>
+                <td>{{h.created}}</td>
+                <td> {% if not h.old_values and not h.new_values %}
+                &nbsp;
+                {% else %}
+                <div>
+                    <span style="font-variant:small-caps">old</span>: {{h.old_values}}
+                </div>
+                <div>
+                    <span style="font-variant:small-caps">new</span>: {{h.new_values}}
+                </div> {% endif %} </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 <div id="uploadsRight" class="{title:'uploads'}">
     {% if perm.can_upload %}
     <div class="well well-sm">
