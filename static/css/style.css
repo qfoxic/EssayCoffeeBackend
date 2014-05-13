@@ -304,3 +304,6 @@ caption.my {
     border-radius: 10px 10px 0 0;
     text-shadow: 1px 1px 0 #000;
 }
+.tablesorter > thead > tr > th {
+    padding-top: 0 !important;
+}

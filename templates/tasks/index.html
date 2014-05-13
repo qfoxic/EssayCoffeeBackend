@@ -11,7 +11,7 @@
 <div class="row">
     {{ PATH_IFNO }}
     <div class="col-md-12">
-        <table class="tablesorter table table-hover table-condensed">
+        <table class="tablesorter tablesorter-default table table-hover table-condensed">
             {% with "tasks/"|add:site|add:"-tasks.html" as template %}
             {% include template %}
             {% endwith %}
@@ -20,3 +20,7 @@
 </div>
 {% endif  %}
 {% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/theme.default.css" type="text/css">
+{% endblock %}
+

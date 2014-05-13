@@ -278,6 +278,7 @@ $( document ).ready( function( ) {
         } );
 
         $( '.tablesorter' ).tablesorter( {
+            // theme: 'default',
             theme: 'default',
             dateFormat: "MMDDYYYY"/*March 27, 2014, 5:37 p.m.*/,
         } );
