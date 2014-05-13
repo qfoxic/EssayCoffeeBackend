@@ -347,35 +347,30 @@
     <table class="table table-hover table-condensed small" style="background-color:#fff;">
         <thead>
             <tr>
-                <th>Owner</th>
-                <th>Type</th>
-                <th>Action</th>
-                <th>Created</th>
-                <th>Values old/new</th>
+                <th width="16">&nbsp;</th>
+                <th class="sorter-digit">{% trans 'Title' %}</th>
+                <th>{% trans 'Created' %}</th>
+                <th class="sorter-text">{% trans 'Creator' %}</th>
+                <th class="sorter-text">{% trans 'Sent To' %}</th>
             </tr>
         </thead>
         <tbody>
-            {% for h in history %}
+            {% for m in msgs %}
             <tr>
-                <td><a href="{% url "user_edit" h.howner_id %}">{{h.howner.username}}</a></td>
-                <td>{% if h.object_type == "Message" %}<a href="{% url "msg_detail" h.object_id %}">{{h.object_type}}</a>{% else %}{{h.object_type}} [id:{{h.object_id}}]{% endif %}</td>
-                <td>{{h.action_type}}</td>
-                <td>{{h.created}}</td>
-                <td> {% if not h.old_values and not h.new_values %}
-                &nbsp;
-                {% else %}
-                <div>
-                    <span style="font-variant:small-caps">old</span>: {{h.old_values}}
-                </div>
-                <div>
-                    <span style="font-variant:small-caps">new</span>: {{h.new_values}}
-                </div> {% endif %} </td>
+                <td><i class="has_tooltip fa fa-envelope{% if not m|is_msg_new:request.user %}-o{% endif %}" title="{% if m|is_msg_new:request.user %}New message{% else %}Old message{% endif %}"></i></td>
+                <td><a href="{% url 'msg_detail' m.id %}">{{m.title}}</a></td>
+                <td>{{m.created}}</td>
+                <td><a href="{% url 'user_edit' m.mowner.id %}">{{m.mowner.username}}</a></td>
+                <td>{{m.get_visibility}}</td>
             </tr>
             {% endfor %}
         </tbody>
+        <tfoot>
+            <tr></tr>
+        </tfoot>
     </table>
 </div>
-<div id="uploadsRight" class="{title:'uploads'}">
+<div id="uploadsRight" class="{title:'uploads &middot; {{my_uploads|length}}'}">
     {% if perm.can_upload %}
     <div class="well well-sm">
         <a class="pull-right uploads-add" href="javascript:void(0)"><i class="fa fa-plus-circle"></i></a>
