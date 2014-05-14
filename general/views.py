@@ -12,6 +12,7 @@ from general.models import Task
 from userprofile.models import UserProfile
 from reports.models import Report
 from history.models import list_task_events
+from msgs.models import Message
 from ftpstorage.models import Upload
 from general.forms import TaskForm, SwitchStatusForm, LockTaskForm, UnlockTaskForm
 
@@ -61,6 +62,17 @@ def get_stats(request):
     }
   else:
     return {}
+
+
+def get_msgs_for_task(request, task_id):
+  """Returns messages for a task."""
+  if request.user.get_group() == co.CUSTOMER_GROUP:
+    return Message.objects.filter(Q(mtask_id__exact=task_id),
+        Q(visibility__in=[co.MSGS_CUSTOMER])|Q(mowner_id__exact=request.user.id))
+  elif request.user.get_group() == co.WRITER_GROUP:
+    return Message.objects.filter(Q(mtask_id__exact=task_id),
+        Q(visibility__in=[co.MSGS_WRITER])|Q(mowner_id__exact=request.user.id))
+  return Message.objects.filter(mtask_id__exact=task_id)
 
 
 class BaseView(View):
@@ -291,6 +303,7 @@ class DetailTaskView(BaseView, DetailView):
     task_id = self.kwargs.get('pk')
     context['reports'] = Report.objects.filter(rtask_id__exact=task_id)
     context['history'] = list_task_events(task_id)
+    context['msgs'] = get_msgs_for_task(self.request, task_id)
     group = self.request.user.get_group()
     task_q = Q(ftask_id__exact=task_id)
     #or_q = Q(fowner_id__exact=self.request.user.id)|Q(access_level__in=(co.PUBLIC_ACCESS,))

@@ -48,7 +48,7 @@ class MsgsForm(ModelForm):
     cleaned_data = super(MsgsForm, self).clean()
     self.check_permissions(cleaned_data)
     return cleaned_data
-     
+
 
 class ListMsgsView(BaseView, ListView):
   template_name = 'msgs/index.html'
