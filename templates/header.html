@@ -85,9 +85,9 @@
                         <a href="{% url 'admins'  %}"><i class='fa fa-users fa-lg' style="margin-right:.5em"></i>{% trans "Admins" %}</a>
                     </li>
                     {% endif %}
-                    <li class="{% active request 'messages' %}">
-                        <a href="{% url "msgs_list" %}"><i class='fa fa-envelope fa-lg' style="margin-right:.5em"></i>{% trans "Messages" %}</a>
-                    </li>
+                    <!-- <li class="{% active request 'messages' %}">
+                    <a href="{% url "msgs_list" %}"><i class='fa fa-envelope fa-lg' style="margin-right:.5em"></i>{% trans "Messages" %}</a>
+                    </li> -->
                     {% endif %}
                     {% elif site == 'writer' %}
                     {% if user.username %}

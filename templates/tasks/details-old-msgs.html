@@ -78,13 +78,13 @@
                     {% endif %}
                 </div>
             </div>
-            <!-- <div id="uploads">
-            {% if perm.can_message %}
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#write-a-message" style="font-size: 1.1em;width:100%;margin: -10px auto 10px">
-            Write a message <i class="fa fa-envelope-o  fa-lg ilm"></i>
-            </button>
-            {% endif %}
-            </div> -->
+            <div id="uploads">
+                {% if perm.can_message %}
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#write-a-message" style="font-size: 1.1em;width:100%;margin: -10px auto 10px">
+                    Write a message <i class="fa fa-envelope-o  fa-lg ilm"></i>
+                </button>
+                {% endif %}
+            </div>
         </div>
         <div class="col-md-9">
             <!-- <div class="task-details-inner"> -->
@@ -344,58 +344,6 @@
     </table>
 </div>
 <div id="messagesRight" class="{title:'messages &middot; {{msgs|length}} '}">
-    {% if perm.can_message %}
-    <div class="well well-sm">
-        <a class="pull-right messages-add" href="javascript:void(0)"><i class="fa fa-plus-circle"></i></a>
-        <i class="fa fa-envelope-o fa-lg irm"></i><strong style="font-size:1.2em">{% trans "Write a message" %}</strong>
-        <div id="messages-form" style="display:none;margin-top:1em">
-            <form action="{% url "msg_add" object.pk %}" method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-tag"></i></span>
-                        <input class="form-control" type="text" title="Title" name="title" required placeholder="Enter a title">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" rows="8" required placeholder="Enter a message text" name="body"></textarea>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary pull-right">
-                        Send <i class="fa fa-share ilm"></i>
-                    </button>
-                    <div class="btn-group" data-toggle="buttons">
-                        <button class="btn btn-primary" disabled>
-                            Send to
-                        </button>
-                        {% if site == 'customer' %}
-                        <label class="btn btn-default">
-                            <input type="radio" value="{{co.MSGS_ADM}}" name="visibility" class="vtoggler" checked="checked">
-                            Admin &amp; Editor </label>
-                        <label class="btn btn-default">
-                            <input type="radio" value="{{co.MSGS_WRITER}}" name="visibility">
-                            Writer </label>
-                        {% elif site == 'writer' %}
-                        <label class="btn btn-default">
-                            <input type="radio" value="{{co.MSGS_ADM}}" name="visibility" class="vtoggler" checked="checked">
-                            Admin &amp; Editor </label>
-                        <label class="btn btn-default">
-                            <input type="radio" value="{{co.MSGS_CUSTOMER}}" name="visibility">
-                            Customer </label>
-                        {% else %}
-                        <label class="btn btn-default">
-                            <input type="radio" value="{{co.MSGS_WRITER}}" name="visibility" class="vtoggler" checked="checked">
-                            Writer </label>
-                        <label class="btn btn-default">
-                            <input type="radio" value="{{co.MSGS_CUSTOMER}}" name="visibility">
-                            Customer </label>
-                        {% endif %}
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    {% endif %}
     <table class="table table-hover table-condensed small" style="background-color:#fff;">
         <thead>
             <tr>
@@ -409,7 +357,7 @@
         <tbody>
             {% for m in msgs %}
             <tr>
-                <td><i class="fa fa-envelope{% if not m|is_msg_new:request.user %}-o{% endif %}" title="{% if m|is_msg_new:request.user %}New message{% else %}Old message{% endif %}"></i></td>
+                <td><i class="has_tooltip fa fa-envelope{% if not m|is_msg_new:request.user %}-o{% endif %}" title="{% if m|is_msg_new:request.user %}New message{% else %}Old message{% endif %}"></i></td>
                 <td><a href="{% url 'msg_detail' m.id %}">{{m.title}}</a></td>
                 <td>{{m.created}}</td>
                 <td><a href="{% url 'user_edit' m.mowner.id %}">{{m.mowner.username}}</a></td>
@@ -465,6 +413,38 @@
         </form>
         {% include "tasks/uploads_list.html" with uploads_list=my_uploads accid="my" list_title="My uploads" %}
     </div>
+    <!--
+    <table class="table table-hover table-condensed small" style="background-color:#fff;">
+    <thead>
+    <tr>
+    <th>Owner</th>
+    <th>Type</th>
+    <th>Action</th>
+    <th>Created</th>
+    <th>Values old/new</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for h in history %}
+    <tr>
+    <td><a href="{% url "user_edit" h.howner_id %}">{{h.howner.username}}</a></td>
+    <td>{% if h.object_type == "Message" %}<a href="{% url "msg_detail" h.object_id %}">{{h.object_type}}</a>{% else %}{{h.object_type}} [id:{{h.object_id}}]{% endif %}</td>
+    <td>{{h.action_type}}</td>
+    <td>{{h.created}}</td>
+    <td> {% if not h.old_values and not h.new_values %}
+    &nbsp;
+    {% else %}
+    <div>
+    <span style="font-variant:small-caps">old</span>: {{h.old_values}}
+    </div>
+    <div>
+    <span style="font-variant:small-caps">new</span>: {{h.new_values}}
+    </div> {% endif %} </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    -->
 </div>
 {% if reports or perm.can_report%}
 <div id="reportsRight" class="{title:' reports &middot; {{reports|length}} '}">
