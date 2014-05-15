@@ -87,6 +87,7 @@
                     </div>
                     <div class="row">
                         <div class="{% if site == 'customer' or site == 'writer' %}col-md-10 col-md-offset-1{% else %}col-md-12{% endif %}">
+                            {% if not object.pk %}
                             <div class="form-group{% if form.attach.errors %} has-error{% endif %}">
                                 <div class="file-input form-control">
                                     <div class="input-group margin-bottom-sm">
@@ -100,6 +101,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {% endif  %}
                             <div class="form-group{% if form.paper_title.errors %} has-error{% endif %}">
                                 <label>{% trans "Paper Title" %}</label>
                                 <div class="input-group margin-bottom-sm">

@@ -311,6 +311,7 @@
         </div><!-- /.modal-dialog -->
     </form>
 </div><!-- /.modal -->
+{% if site == 'editor' or site == 'admin' %}
 <div id="eventsRight" class="{title:' history '}">
     <table class="table table-hover table-condensed small" style="background-color:#fff;">
         <thead>
@@ -343,6 +344,7 @@
         </tbody>
     </table>
 </div>
+{% endif %}
 <div id="messagesRight" class="{title:'messages &middot; {{msgs|length}} '}">
     {% if perm.can_message %}
     <div class="well well-sm">

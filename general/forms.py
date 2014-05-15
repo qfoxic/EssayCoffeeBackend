@@ -59,11 +59,16 @@ class TaskForm(BaseForm):
     # TODO: this is a bug!!!!
     #    send_mail(co.ORDER_MAIL_SUBJECT, mail, co.ADMIN_EMAIL,
     #              [self.request.user.email])
+    is_new = True
+    if self.instance.pk:
+      is_new = False
+
     res = super(TaskForm, self).save(*args, **kwargs)
-    upload = Upload(attach=self.cleaned_data['attach'],
-                    ftask=self.instance, fowner=self.request.user,
-                    access_level=co.PRIVATE_ACCESS)
-    upload.save()
+    if is_new:    
+      upload = Upload(attach=self.cleaned_data['attach'],
+                      ftask=self.instance, fowner=self.request.user,
+                      access_level=co.PRIVATE_ACCESS)
+      upload.save()
     return res
 
 

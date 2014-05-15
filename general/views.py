@@ -301,10 +301,11 @@ class DetailTaskView(BaseView, DetailView):
   def get_context_data(self, **kwargs):
     context = super(DetailTaskView, self).get_context_data(**kwargs)
     task_id = self.kwargs.get('pk')
-    context['reports'] = Report.objects.filter(rtask_id__exact=task_id)
-    context['history'] = list_task_events(task_id)
-    context['msgs'] = get_msgs_for_task(self.request, task_id)
     group = self.request.user.get_group()
+    context['reports'] = Report.objects.filter(rtask_id__exact=task_id)
+    if group in [co.ADMIN_GROUP, co.EDITOR_GROUP]: 
+      context['history'] = list_task_events(task_id)
+    context['msgs'] = get_msgs_for_task(self.request, task_id)
     task_q = Q(ftask_id__exact=task_id)
     #or_q = Q(fowner_id__exact=self.request.user.id)|Q(access_level__in=(co.PUBLIC_ACCESS,))
     or_q = Q(access_level__in=(co.PUBLIC_ACCESS,))
