@@ -307,3 +307,15 @@ caption.my {
 .tablesorter > thead > tr > th {
     padding-top: 0 !important;
 }
+.extruder .extruder-content{
+    background: #BBB !important;
+}
+.extruder.right .flap, .extruder.right .flapLabel {
+    background: #777 !important;
+}
+
+.extruder.right .flap {
+    border: 1px solid #999;
+    border-right:none;
+    margin-right: 3px;
+}
