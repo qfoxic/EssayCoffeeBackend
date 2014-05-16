@@ -314,6 +314,9 @@
 {% if site == 'editor' or site == 'admin' %}
 <div id="eventsRight" class="{title:' history '}">
     <table class="table table-hover table-condensed small" style="background-color:#fff;">
+        <caption class="my">
+            History
+        </caption>
         <thead>
             <tr>
                 <th>Owner</th>
@@ -399,7 +402,9 @@
     </div>
     {% endif %}
     <table class="table table-hover table-condensed small" style="background-color:#fff;">
-        <caption class="my">Messages <span class="badge pull-right" style="margin-right:8px;background-color:#555">{{msgs|length}}</span></caption>
+        <caption class="my">
+            Messages <span class="badge pull-right" style="margin-right:8px;background-color:#555">{{msgs|length}}</span>
+        </caption>
         <thead>
             <tr>
                 <th width="16">&nbsp;</th>
