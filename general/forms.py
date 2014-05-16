@@ -142,6 +142,15 @@ class SwitchStatusForm(BaseForm):
       next_status = None
     self.check_status_allowed(next_status)
     return next_status
+  
+  def save(self, *args, **kwargs):
+    # When go by path UNPROCESSED->PROCESSING.
+    # make task publicly visible.
+    # Status that we are going to switch to.
+    status = self.cleaned_data['status']
+    if status == co.PROCESSING:
+      self.instance.access_level = co.PUBLIC_ACCESS
+    return super(SwitchStatusForm, self).save(*args, **kwargs)
 
 
 class ForceSwitchStatusForm(BaseForm):
