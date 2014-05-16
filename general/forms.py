@@ -119,21 +119,24 @@ class SwitchStatusForm(BaseForm):
   def check_permissions(self, cleaned_data):
     """Raise an exception if user can't perform a status change."""
     user = self.request.user
-    s = int(self.request.POST.get('status'))
+    status = int(self.request.POST.get('status'))
     group = user.get_group()
     if (group == co.CUSTOMER_GROUP
         and not co.CheckPermissions(user, self.instance, co.CAN_SUBMIT)):
       raise ValidationError('Operation can not be performed.')
     elif group == co.ADMIN_GROUP:
-      if s == co.PROCESSING and not co.CheckPermissions(user, self.instance, co.CAN_APPROVE):
+      if status == co.PROCESSING and not co.CheckPermissions(user, self.instance, co.CAN_APPROVE):
         raise ValidationError('Operation can not be performed.')
-      elif s == co.REJECTED and not co.CheckPermissions(user, self.instance, co.CAN_REJECT):
+      elif status == co.REJECTED and not co.CheckPermissions(user, self.instance, co.CAN_REJECT):
         raise ValidationError('Operation can not be performed.')
-      elif s == co.SUSPICIOUS and not co.CheckPermissions(user, self.instance, co.CAN_SUSPECT):
+      elif status == co.SUSPICIOUS and not co.CheckPermissions(user, self.instance, co.CAN_SUSPECT):
         raise ValidationError('Operation can not be performed.')
     elif group == co.WRITER_GROUP:
-      if s == co.SENT and not co.CheckPermissions(user, self.instance, co.CAN_SEND):
+      if status == co.SENT and not co.CheckPermissions(user, self.instance, co.CAN_SEND):
         raise ValidationError('Operation can not be performed.')
+      if status == co.SENT and not self.instance.is_locked(user, by_user=True):
+        raise ValidationError('Please lock a task before make it SENT.')
+        
 
   def clean_status(self):
     try:

@@ -220,7 +220,7 @@
                         {% trans "Complete Task" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
                     </button>
                     {% endif %}
-                    {% if perm.can_send %}
+                    {% if perm.can_send and object|locked_by_user:request.user %}
                     <button type="button" data-status="{{co.SENT}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg" role="button">
                         {% trans "Send" %}<i class='fa fa-share-square-o' style="margin-left:.5em"></i>
                     </button>

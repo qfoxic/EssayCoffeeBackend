@@ -10,6 +10,10 @@ def is_msg_new(msg, user):
   readby = msg.readby
   return str(user.id) not in readby.strip(':').split(':')
 
+@register.filter(name='locked_by_user')
+def locked_by_user(task, user):
+  return task.is_locked(user, by_user=True)
+
 @register.filter(name='render_status')
 def render_status(value):
 
