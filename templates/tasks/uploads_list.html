@@ -1,5 +1,7 @@
 <table class="table table-hover table-condensed small" style="background-color:#fff;">
-    <caption class="my">Uploads <span class="badge pull-right" style="margin-right:8px;background-color:#555">{{uploads_list|length}}</span></caption>
+    <caption class="my">
+        Uploads <span class="badge pull-right" style="margin-right:8px;background-color:#555">{{uploads_list|length}}</span>
+    </caption>
     <thead>
         <tr>
             <th>File</th>
@@ -8,16 +10,25 @@
             <th>&nbsp;</th>
             <th>&nbsp;</th>
         </tr>
-    </thead>    
+    </thead>
     <tbody>
         {% for u in uploads_list  %}
         <tr>
             <td>{{u.attach.name}}</td>
             <td><a href="{% url "user_edit" u.fowner.pk %}">{{u.fowner}}</a></td>
-            <td><div>{{u.created}}</div><div>{{u.updated}}</div></td>
+            <td>
+            <div>
+                {{u.created}}
+            </div>
+            <div>
+                {{u.updated}}
+            </div></td>
             <td><a href="javascript:void()" data-url="{% url "upload_visibility" u.pk %}" class="set-public" style="font-size:1.5em"><i class="fa fa-eye{% if u.access_level == co.PRIVATE_ACCESS %}-slash text-danger{% endif %}"></i></a></td>
             <td><a href="javascript:void()" data-file-name="{{u.attach.name}}" data-url="{% url "upload_remove" u.pk %}" class="upload-delete"  style="font-size:1.5em;color:#a00"><i class="fa fa-times-circle"></i></a></td>
         </tr>
         {% endfor %}
     </tbody>
+    <tfoot class="my">
+        <tr></tr>
+    </tfoot>
 </table>
