@@ -90,7 +90,7 @@ tasks_sent = login_required(TaskIndexView.as_view(module_name='administer',
                             login_url=reverse_lazy('login'))
 tasks_expired = login_required(TaskIndexView.as_view(module_name='administer',
                                                      queryset=Task.get_expired_tasks(0),
-                                                     action_label='expired'),
+                                                     action_label='late'),
                                login_url=reverse_lazy('login'))
 
 task_details = login_required(DetailTaskView.as_view(module_name='administer'),
@@ -123,7 +123,7 @@ urlpatterns = patterns('',
     url(r'^tasks/unprocessed$', tasks_unprocessed, name='tasks_unprocessed'),
     url(r'^tasks/finished$', tasks_finished, name='tasks_finished'),
     url(r'^tasks/sent$', tasks_sent, name='tasks_sent'),
-    url(r'^tasks/expired$', tasks_expired, name='tasks_expired'),
+    url(r'^tasks/late$', tasks_expired, name='tasks_expired'),
 
     url(r'^task/(?P<pk>\d+)/$', task_details, name='task_view'),
     url(r'^task/(?P<pk>\d+)/status$', task_status, name='task_status'),
