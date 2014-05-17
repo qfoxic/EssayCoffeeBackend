@@ -52,6 +52,7 @@ def get_stats(request):
   elif group == co.ADMIN_GROUP or group == co.EDITOR_GROUP: 
     return {
       'completed': Task.get_finished_tasks(1), 
+      'all': Task.get_all_tasks(1), 
       'sent': Task.get_sent_tasks(1), 
       'unproc': Task.get_unprocessed_tasks(1),
       'suspect': Task.get_suspicious_tasks(1), 

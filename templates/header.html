@@ -31,6 +31,12 @@
                     <li class="dropdown {% active request 'order' %}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='fa fa-tasks fa-lg' style="margin-right:.5em"></i>{% trans "Orders "%} <b class="caret"></b></a>
                         <ul class="dropdown-menu" style="min-width:400px">
+                            {% if site == 'admin' %}
+                            <li>
+                                <a href="{% url 'tasks_all' %}"><span class="badge pull-right">{{stats.all|default:0}}</span> {% trans "All tasks" %}</a>
+                            </li>
+                            <li class="divider"></li>
+                            {% endif  %}
                             <li>
                                 <strong style="margin-left: .8em;font-size:1.2em;">{% trans "Free orders" %}</strong>
                             </li>
