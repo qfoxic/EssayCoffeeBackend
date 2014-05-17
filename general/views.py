@@ -53,6 +53,7 @@ def get_stats(request):
     return {
       'completed': Task.get_finished_tasks(1), 
       'all': Task.get_all_tasks(1), 
+      'draft': Task.get_draft_tasks(1), 
       'sent': Task.get_sent_tasks(1), 
       'unproc': Task.get_unprocessed_tasks(1),
       'suspect': Task.get_suspicious_tasks(1), 
@@ -253,6 +254,18 @@ class UpdateTaskView(BaseView, UpdateView):
   form_class = TaskForm
   queryset = Task.objects.all()
   owner_required = True
+
+  def _check_permissions(self):
+    user = self.request.user
+    group = user.get_group()
+    try:
+      obj = self.get_object()
+    except:
+      obj = None
+    if obj and obj.status == co.DRAFT:
+      # Only customers can edit draft tasks.
+      if not co.CheckPermissions(user, obj, co.CAN_EDIT):
+        raise PermissionDenied
   
   def render_to_response(self, context, **response_kwargs):
     return super(UpdateTaskView, self).render_to_response(context, **response_kwargs)

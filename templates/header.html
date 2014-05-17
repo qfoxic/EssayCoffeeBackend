@@ -35,6 +35,8 @@
                             <li>
                                 <a href="{% url 'tasks_all' %}"><span class="badge pull-right">{{stats.all|default:0}}</span> {% trans "All tasks" %}</a>
                             </li>
+                            <li>
+                                <a href="{% url 'tasks_draft' %}"><span class="badge pull-right">{{stats.draft|default:0}}</span> {% trans "All draft tasks" %}</a>
                             <li class="divider"></li>
                             {% endif  %}
                             <li>

@@ -163,6 +163,12 @@ class Task(BaseModel):
     return cls.objects.filter(**kwargs)
 
   @classmethod 
+  def get_draft_tasks(cls, count_only, **kwargs):
+    if count_only:
+      return cls.objects.filter(status__exact=co.DRAFT).filter(**kwargs).count()
+    return cls.objects.filter(status__exact=co.DRAFT).filter(**kwargs)
+
+  @classmethod 
   def get_sent_tasks(cls, count_only, **kwargs):
     if count_only:
       return cls.objects.filter(status__exact=co.SENT).filter(**kwargs).count()
