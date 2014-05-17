@@ -38,6 +38,10 @@ tasks_sent = lambda request: login_required(
     TaskIndexView.as_view(module_name='writer', action_label='my sent',
                           queryset=Task.get_sent_tasks(0, **{'assignee': request.user})),
     login_url=reverse_lazy('login'))(request)
+tasks_all = lambda request: login_required(
+    TaskIndexView.as_view(module_name='writer', action_label='my all',
+                          queryset=Task.get_all_tasks(0, **{'assignee': request.user})),
+    login_url=reverse_lazy('login'))(request)
 
 tasks_expired = lambda request: login_required(
     TaskIndexView.as_view(module_name='writer', action_label='my sent',
@@ -66,6 +70,7 @@ urlpatterns = patterns('',
     url(r'^$', tasks_list),
     url(r'^tasks/$', tasks_list, name='task_list'),
     url(r'^tasks/active$', tasks_active, name='tasks_active'),
+    url(r'^tasks/all$', tasks_all, name='tasks_all'),
     url(r'^tasks/processing$', tasks_unprocessed, name='tasks_unprocessed'),
     url(r'^tasks/finished$', tasks_finished, name='tasks_finished'),
     url(r'^tasks/sent$', tasks_sent, name='tasks_sent'),

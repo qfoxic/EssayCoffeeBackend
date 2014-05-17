@@ -109,6 +109,9 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='fa fa-list fa-lg' style="margin-right:.5em"></i>{% trans "My assignments"%} <b class="caret"></b></a>
                         <ul class="dropdown-menu" style="min-width:400px">
                             <li>
+                                <a href="{% url 'tasks_all' %}"><span class="badge pull-right">{{stats.all|default:0}}</span>{% trans "All" %}</a>
+                            </li>
+                            <li>
                                 <a href="{% url 'tasks_active' %}"><span class="badge pull-right">{{stats.active|default:0}}</span>{% trans "Processing" %}</a>
                             </li>
                             <li>

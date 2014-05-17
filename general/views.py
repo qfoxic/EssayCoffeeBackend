@@ -44,6 +44,7 @@ def get_stats(request):
   if group == co.WRITER_GROUP:
     return {
       'finished': Task.get_finished_tasks(1, **{'assignee': user}), 
+      'all': Task.get_all_tasks(1, **{'assignee': user}), 
       'sent': Task.get_sent_tasks(1, **{'assignee': user}), 
       'unprocessed': Task.get_unprocessed_tasks(1, **{'assignee': user}),
       'active': Task.get_processing_tasks(1, **{'assignee': user}),
