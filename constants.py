@@ -124,7 +124,29 @@ CAN_REVISION = 'can_revision'
 # If specific permissions wasn't found here then it is concerned as not allowed.
 PERMISSIONS_TABLE = {
   'message': {
+  # Unprocessed permissions.
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_DELETE: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_EDIT: 1,
 
+  # Active or in progress permissions.
+  ADMIN_GROUP+str(PROCESSING)+CAN_DELETE: 1,
+  ADMIN_GROUP+str(PROCESSING)+CAN_EDIT: 1,
+
+  # Suspicious permissions.
+  ADMIN_GROUP+str(SUSPICIOUS)+CAN_DELETE: 1,
+  ADMIN_GROUP+str(SUSPICIOUS)+CAN_EDIT: 1,
+
+  # Rejected 
+  ADMIN_GROUP+str(REJECTED)+CAN_DELETE: 1,
+  ADMIN_GROUP+str(REJECTED)+CAN_EDIT: 1,
+
+  # Completed
+  ADMIN_GROUP+str(COMPLETED)+CAN_DELETE: 1,
+  ADMIN_GROUP+str(COMPLETED)+CAN_EDIT: 1,
+
+  # Send
+  ADMIN_GROUP+str(SENT)+CAN_DELETE: 1,
+  ADMIN_GROUP+str(SENT)+CAN_EDIT: 1,
   },
   'upload': {
   # Draft permissions.

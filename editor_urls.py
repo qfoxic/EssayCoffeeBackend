@@ -94,7 +94,7 @@ urlpatterns = patterns('',
     url(r'^task/(?P<pk>\d+)/unlock$', task_unlock, name='task_unlock'),
 
     url(r'^msg/(?P<task_id>\d+)/new$', msg_add, name='msg_add'),
-    url(r'^msg/(?P<pk>\d+)/remove$', msg_rm, name='msg_remove'),
+    #url(r'^msg/(?P<pk>\d+)/remove$', msg_rm, name='msg_remove'),
     url(r'^msgs/$', msg_list, name='msgs_list'),
     url(r'^msg/(?P<pk>\d+)/$', msg_detail, name='msg_detail'),
 

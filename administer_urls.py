@@ -13,7 +13,7 @@ from administer.views import AdminForceSwitchStatusView
 
 from userprofile.views import CreateProfileView, UpdateProfileView, ListProfileView
 from userprofile.models import UserProfile
-from msgs.views import CreateMsgView, RemoveMsgView, ListMsgsView,DetailMsgView
+from msgs.views import CreateMsgView, RemoveMsgView, ListMsgsView,DetailMsgView,UpdateMsgView
 from ftpstorage.views import UploadFileView,RemoveUploadView,UpdateUploadView 
 
 import constants as co
@@ -43,6 +43,7 @@ user_edit = login_required(UpdateProfileView.as_view(module_name='administer',
 
 msg_add = login_required(CreateMsgView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
 msg_rm = login_required(RemoveMsgView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
+msg_edit = login_required(UpdateMsgView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
 msg_list = login_required(ListMsgsView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
 msg_detail = login_required(DetailMsgView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
 upload_file = login_required(UploadFileView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
@@ -134,6 +135,7 @@ urlpatterns = patterns('',
 
     url(r'^msg/(?P<task_id>\d+)/new$', msg_add, name='msg_add'),
     url(r'^msg/(?P<pk>\d+)/remove$', msg_rm, name='msg_remove'),
+    url(r'^msg/(?P<pk>\d+)/edit$', msg_edit, name='msg_edit'),
     url(r'^msgs/$', msg_list, name='msgs_list'),
     url(r'^msg/(?P<pk>\d+)/$', msg_detail, name='msg_detail'),
 

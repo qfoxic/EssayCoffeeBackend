@@ -81,7 +81,7 @@ urlpatterns = patterns('',
     url(r'^task/(?P<pk>\d+)/lock$', task_lock, name='task_lock'),
 
     url(r'^msg/(?P<task_id>\d+)/new$', msg_add, name='msg_add'),
-    url(r'^msg/(?P<pk>\d+)/remove$', msg_rm, name='msg_remove'),
+    #url(r'^msg/(?P<pk>\d+)/remove$', msg_rm, name='msg_remove'),
     url(r'^msg/(?P<pk>\d+)/$', msg_detail, name='msg_detail'),
     url(r'^msgs/$', msg_list, name='msgs_list'),
     url(r'^upload/(?P<task_id>\d+)/new$', upload_file, name='upload_file'),

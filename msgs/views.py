@@ -1,5 +1,6 @@
 from django.forms import ModelForm, ValidationError
 from django.views.generic.edit import CreateView
+from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 from django.views.generic import ListView
 from django.views.generic import DetailView
@@ -50,6 +51,32 @@ class MsgsForm(ModelForm):
     return cleaned_data
 
 
+class MsgsEditForm(ModelForm):
+  def __init__(self, request=None, *args, **kwargs):
+    super(MsgsEditForm, self).__init__(*args, **kwargs)
+    self.request = request
+
+  class Meta:
+    model = Message 
+    fields = ['title', 'body', 'readby']
+
+  def clean_readby(self):
+    """Updates field with user id."""
+    return ':'+str(self.request.user.id)+':'
+  
+  def check_permissions(self, cleaned_data):
+    """Raises an exception if there are no permissions to save a form."""
+    if not co.CheckPermissions(self.request.user,
+        self.instance.mtask, co.CAN_EDIT, 'message'):
+      raise ValidationError('You can not update a message.') 
+ 
+  def clean(self):
+    # Check some conditions before saving a form.
+    cleaned_data = super(MsgsEditForm, self).clean()
+    self.check_permissions(cleaned_data)
+    return cleaned_data
+
+
 class ListMsgsView(BaseView, ListView):
   template_name = 'msgs/index.html'
   context_object_name = 'msgs'
@@ -80,6 +107,35 @@ class DetailMsgView(BaseView, DetailView):
     obj.save()
     return super(DetailMsgView, self).get_context_data(**kwargs)
     
+
+class UpdateMsgView(BaseView, UpdateView):
+  form_class = MsgsEditForm 
+  queryset = Message.objects.all()
+  template_name = 'msgs/details.html'
+
+  def _check_permissions(self):
+    user = self.request.user
+    group = user.get_group()
+    try:
+      obj = self.get_object()
+    except:
+      obj = None
+    obj = obj and obj.mtask
+    if not co.CheckPermissions(user, obj, co.CAN_EDIT, 'message'):
+      raise PermissionDenied
+
+  def get_form_kwargs(self):
+    kwargs = super(UpdateMsgView, self).get_form_kwargs()
+    kwargs['request'] = self.request
+    return kwargs
+
+  def get_success_url(self):
+    return reverse('task_view', kwargs={'pk': self.object.mtask.id})
+
+  def form_invalid(self, form):
+    # If form is invalid redirect to task details with an error.
+    messages.add_message(self.request, messages.ERROR, str(form.errors))
+    return HttpResponseRedirect(self.get_success_url())
  
 
 class CreateMsgView(BaseView, CreateView):
@@ -106,6 +162,17 @@ class RemoveMsgView(BaseView, DeleteView):
   template_name = 'tasks/delete.html'
   queryset = Message.objects.all()
   owner_required = True
+
+  def _check_permissions(self):
+    user = self.request.user
+    group = user.get_group()
+    try:
+      obj = self.get_object()
+    except:
+      obj = None
+    obj = obj and obj.mtask
+    if not co.CheckPermissions(user, obj, co.CAN_DELETE, 'message'):
+      raise PermissionDenied
 
   def get_success_url(self):
     task_id = self.object.mtask.pk
