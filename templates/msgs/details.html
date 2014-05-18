@@ -9,34 +9,65 @@
 {% block content %}
 <section class="container-fluid task-details" style="margin: 0 auto">
     <div class="row">
-        <form action="{% url 'msg_edit' object.pk %}" method="post">
-            {% csrf_token %}
-            <input name="body" type="text" value="{{object.body}}"/>
-            <input name="title" type="text" value="{{object.title}}"/>
-            <input type="submit" value="submit"/>
-        </form>
-        {% if perm.can_rm_msg %}
-        {% endif %}
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-3 col-md-offset-1">
-                            <i class="fa fa-male irm"></i>From: {{object.mowner.username}}
+                    {% if perm.can_edit.msg %}
+                    <form action="{% url 'msg_edit' object.pk %}" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-1">
+                                <i class="fa fa-male irm"></i>From: {{object.mowner.username}}
+                            </div>
+                            <div class="col-md-4">
+                                <i class="fa fa-calendar irm"></i>Created: {{object.created}}
+                            </div>
+                            <div class="col-md-4">
+                                <i class="fa fa-tasks irm"></i>Task ID: <a href="{% url "task_view" object.mtask_id %}">{{object.mtask_id}}</a>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <i class="fa fa-calendar irm"></i>Created: {{object.created}}
+                        <hr>
+                        <div class="input-group margin-bottom-sm" style="margin:0 1.2em">
+                            <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
+                            <input name="title" type="text" class="form-control" value="{{object.title}}"/>
                         </div>
-                        <div class="col-md-4">
-                            <i class="fa fa-tasks irm"></i>Task ID: <a href="{% url "task_view" object.mtask_id %}">{{object.mtask_id}}</a>
+                        <div class="mesg-body">
+                            <textarea name="body" class="form-control" rows="10" style="margin-top:1em; line-height:160%; font-style:normal;font-size:1.1em">
+                            {{object.body}}
+                        </textarea>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="mesg-body">
-                        {{object.body}}
-                    </div>
-                    <br>
+                        <div class="form-group btn-group" style="padding:0 1.2em">
+                            <a href="#" class="btn-cancel btn btn-default btn-lg" role="button"> <i class='fa fa-times-circle-o fa-lg' style="margin-right:.5em"></i>{% trans "Cancel" %} </a>
+                            {#% if perm.can_rm_msg %#}
+                            <button class="btn btn-danger btn-lg" role="button" data-url="{% url 'msg_remove' object.pk %}" type="button">
+                                Delete
+                                <i class="fa fa-times-circle-o fa-lg" style="margin-left:.5em"></i>
+                            </button>
+                            {#% endif %#}
+                            <button type="submit" class="btn btn-primary btn-lg" role="button">
+                                {% trans "Save" %}<i class='fa fa-check-circle-o fa-lg' style="margin-left:.5em"></i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
+                {% else %}
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-1">
+                        <i class="fa fa-male irm"></i>From: {{object.mowner.username}}
+                    </div>
+                    <div class="col-md-4">
+                        <i class="fa fa-calendar irm"></i>Created: {{object.created}}
+                    </div>
+                    <div class="col-md-4">
+                        <i class="fa fa-tasks irm"></i>Task ID: <a href="{% url "task_view" object.mtask_id %}">{{object.mtask_id}}</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="mesg-body">
+                    {{object.body}}
+                </div>
+                <br>
+                {% endif %}
             </div>
         </div>
     </div>
