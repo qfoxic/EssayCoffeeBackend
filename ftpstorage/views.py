@@ -56,6 +56,7 @@ class RemoveUploadView(BaseView, DeleteView):
       obj = self.get_object()
     except:
       obj = None
+    obj = obj and obj.ftask
     if not co.CheckPermissions(user, obj, co.CAN_DELETE, 'upload'):
       raise PermissionDenied
 
