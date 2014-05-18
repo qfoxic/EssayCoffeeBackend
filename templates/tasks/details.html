@@ -92,9 +92,19 @@
                 <div class="col-md-12">
                     <div class="row small highlight">
                         <div class="col-md-3">
-                            <span style="font-size:1.6em">{{object.status|render_status}}</span><strong class="ilm">{% trans "Status" %}</strong>
+                            <span style="font-size:1.6em">
+                              {% if site == "customer" and object.status == co.SENT  %}
+                                {{co.PROCESSING|render_status}}
+                              {% else %}
+                                {{object.status|render_status}}
+                              {% endif %}
+                              </span><strong class="ilm">{% trans "Status" %}</strong>
                             <div style="margin-left:2.5em">
+                              {% if site == "customer" and object.status == co.SENT  %}
+                                PROCESSING
+                              {% else %}
                                 {{object.get_status}}
+                              {% endif %}
                             </div>
                         </div>
                         <div class="col-md-3">

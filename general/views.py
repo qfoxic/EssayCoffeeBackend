@@ -263,10 +263,8 @@ class UpdateTaskView(BaseView, UpdateView):
       obj = self.get_object()
     except:
       obj = None
-    if obj and obj.status == co.DRAFT:
-      # Only customers can edit draft tasks.
-      if not co.CheckPermissions(user, obj, co.CAN_EDIT):
-        raise PermissionDenied
+    if not co.CheckPermissions(user, obj, co.CAN_EDIT):
+      raise PermissionDenied
   
   def render_to_response(self, context, **response_kwargs):
     return super(UpdateTaskView, self).render_to_response(context, **response_kwargs)

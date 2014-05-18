@@ -20,7 +20,10 @@
         <td>{{task.id}}</td>
         <td><a href="{% url 'task_view' task.id %}">{{task.paper_title}}</a></td>
         <td>{{task.get_assigment}}</td>
-        <td data-status="{{task.status}}" style="font-size:1.4em;line-height:100%">{{task.status|render_status}}</td>
+        <td data-status="{% if task.status == co.SENT %}{{co.PROCESSING}}{% else %}{{task.status}}{% endif %}"
+            style="font-size:1.4em;line-height:100%">
+          {% if task.status == co.SENT %}{{co.PROCESSING|render_status}}{% else %}{{task.status|render_status}}{% endif %}
+        </td>
         <td>{% if task.assignee %}{{task.assignee}}{% endif %}</td>
         <td>{{task.created}}</td>
         <td>{{task.get_urgency}}</td>
