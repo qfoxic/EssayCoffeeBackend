@@ -123,6 +123,9 @@ CAN_REVISION = 'can_revision'
 # 3d table with different permissions for each action and each group.
 # If specific permissions wasn't found here then it is concerned as not allowed.
 PERMISSIONS_TABLE = {
+  'message': {
+
+  },
   'upload': {
   # Draft permissions.
   CUSTOMER_GROUP+str(DRAFT)+CAN_DELETE: 1,
@@ -169,7 +172,6 @@ PERMISSIONS_TABLE = {
   ADMIN_GROUP+str(UNPROCESSED)+CAN_LOCK: 1,
   ADMIN_GROUP+str(UNPROCESSED)+CAN_UNLOCK: 1,
   ADMIN_GROUP+str(UNPROCESSED)+CAN_REVISION: 1,
-  EDITOR_GROUP+str(UNPROCESSED)+CAN_MESSAGE: 1,
 
   # Active or in progress permissions.
   CUSTOMER_GROUP+str(PROCESSING)+CAN_MESSAGE: 1,
@@ -218,9 +220,12 @@ PERMISSIONS_TABLE = {
   ADMIN_GROUP+str(REJECTED)+CAN_UNLOCK: 1,
   ADMIN_GROUP+str(REJECTED)+CAN_UPLOAD: 1,
   ADMIN_GROUP+str(REJECTED)+CAN_REPORT: 1,
+  ADMIN_GROUP+str(REJECTED)+CAN_MESSAGE: 1,
   EDITOR_GROUP+str(REJECTED)+CAN_REPORT: 1,
   EDITOR_GROUP+str(REJECTED)+CAN_LOCK: 1,
   EDITOR_GROUP+str(REJECTED)+CAN_UNLOCK: 1,
+  EDITOR_GROUP+str(REJECTED)+CAN_MESSAGE: 1,
+  WRITER_GROUP+str(REJECTED)+CAN_MESSAGE: 1,
 
   # Completed
   CUSTOMER_GROUP+str(COMPLETED)+CAN_MESSAGE: 1,
