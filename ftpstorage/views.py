@@ -47,7 +47,17 @@ class UpdateUploadView(BaseView, UpdateView):
 class RemoveUploadView(BaseView, DeleteView):
   template_name = 'tasks/delete.html'
   queryset = Upload.objects.all()
-  owner_required = True 
+  owner_required = True
+
+  def _check_permissions(self):
+    user = self.request.user
+    group = user.get_group()
+    try:
+      obj = self.get_object()
+    except:
+      obj = None
+    if not co.CheckPermissions(user, obj, co.CAN_DELETE, 'upload'):
+      raise PermissionDenied
 
   def get_success_url(self):
     task_id = self.object.ftask.pk

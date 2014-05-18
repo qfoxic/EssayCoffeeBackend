@@ -123,6 +123,35 @@ CAN_REVISION = 'can_revision'
 # 3d table with different permissions for each action and each group.
 # If specific permissions wasn't found here then it is concerned as not allowed.
 PERMISSIONS_TABLE = {
+  'upload': {
+  # Draft permissions.
+  CUSTOMER_GROUP+str(DRAFT)+CAN_DELETE: 1,
+  
+  # Unprocessed permissions.
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_DELETE: 1,
+  EDITOR_GROUP+str(UNPROCESSED)+CAN_DELETE: 1,
+
+  # Active or in progress permissions.
+  ADMIN_GROUP+str(PROCESSING)+CAN_DELETE: 1,
+  EDITOR_GROUP+str(PROCESSING)+CAN_DELETE: 1,
+
+  # Suspicious permissions.
+  ADMIN_GROUP+str(SUSPICIOUS)+CAN_DELETE: 1,
+  EDITOR_GROUP+str(SUSPICIOUS)+CAN_DELETE: 1,
+
+  # Rejected 
+  ADMIN_GROUP+str(REJECTED)+CAN_DELETE: 1,
+
+  # Completed
+  ADMIN_GROUP+str(COMPLETED)+CAN_DELETE: 1,
+  EDITOR_GROUP+str(COMPLETED)+CAN_DELETE: 1,
+
+  # Send
+  ADMIN_GROUP+str(SENT)+CAN_DELETE: 1,
+  EDITOR_GROUP+str(SENT)+CAN_DELETE: 1,
+  },
+  # Permissions for a task.
+  'task': {
   # Draft permissions.
   CUSTOMER_GROUP+str(DRAFT)+CAN_SUBMIT: 1,
   CUSTOMER_GROUP+str(DRAFT)+CAN_EDIT: 1,
@@ -213,17 +242,17 @@ PERMISSIONS_TABLE = {
   ADMIN_GROUP+str(SENT)+CAN_MESSAGE: 1,
   WRITER_GROUP+str(SENT)+CAN_MESSAGE: 1,
   WRITER_GROUP+str(SENT)+CAN_UPLOAD: 1,
-
+  }
 }
 
-def CheckPermissions(user, entity, action):
+def CheckPermissions(user, entity, action, entity_type='task'):
   try:
     group = user.groups.values_list('name')[0][0]
     status = entity.status
   except:
     status, group = '', ''
 
-  return PERMISSIONS_TABLE.get(group+str(status)+action) is not None
+  return PERMISSIONS_TABLE[entity_type].get(group+str(status)+action) is not None
 
 MALE = 0
 FEMALE = 1
