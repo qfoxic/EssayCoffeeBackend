@@ -152,6 +152,7 @@ class BaseView(View):
       'can_send': co.CheckPermissions(user, obj, co.CAN_SEND),
       # Can admins put reports on task.
       'can_report': co.CheckPermissions(user, obj, co.CAN_REPORT),
+      'can_rm_upload': co.CheckPermissions(user, obj, co.CAN_DELETE, 'upload'),
       'can_lock': co.CheckPermissions(user, obj, co.CAN_LOCK) and not obj.is_locked(user),
       'can_unlock': co.CheckPermissions(user, obj, co.CAN_UNLOCK) and obj.is_locked(user, by_user=True),
       'can_delete': co.CheckPermissions(user, obj, co.CAN_DELETE),

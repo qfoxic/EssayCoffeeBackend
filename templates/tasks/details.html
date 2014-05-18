@@ -499,8 +499,9 @@
         {% include "tasks/uploads_list.html" with uploads_list=my_uploads accid="my" list_title="My uploads" %}
     </div>
 </div>
-{% if reports or perm.can_report%}
-<div id="reportsRight" class="{title:' reports &middot; {{reports|length}} '}">
+{% if site == 'admin' or site = 'editor' %}
+  {% if reports or perm.can_report %}
+  <div id="reportsRight" class="{title:' reports &middot; {{reports|length}} '}">
     <div class="admin-reports">
         {% if perm.can_report %}
         <div class="well well-sm">
@@ -523,11 +524,11 @@
         <div id="adm-report-holder">
             {% for report in reports %}
             <div class="panel panel-info">
-                <form id="report_remove" action="{% url "report_remove" report.pk %}" method="post">
-                    {% csrf_token %}
-                </form>
+                <!--form id="report_remove" action="{# url "report_remove" report.pk #}" method="post">
+                    {# csrf_token #}
+                </form-->
                 <div class="panel-heading">
-                    <h3 class="panel-title"><a class="pull-right adm-report-ctrl" data-body-id="{{report.pk}}" href="javascript:void(0)"><i class="fa fa-caret-square-o-down"></i></a><a class="pull-right adm-report-del" id="rep-del-{{report.pk}}" onclick="$('#report_remove').submit();" href="javascript:void(0)" style="display:none"> <i class="fa fa-times-circle"></i> </a> {{report.title}}</h3>
+                    <h3 class="panel-title"><a class="pull-right adm-report-ctrl" data-body-id="{{report.pk}}" href="javascript:void(0)"><i class="fa fa-caret-square-o-down"></i></a><!--a class="pull-right adm-report-del" id="rep-del-{{report.pk}}" onclick="$('#report_remove').submit();" href="javascript:void(0)" style="display:none"--> <i class="fa fa-times-circle"></i> </a> {{report.title}}</h3>
                 </div>
                 <div id="body-id-{{report.pk}}" class="panel-body small" style="display:none">
                     {{report.body}}
@@ -539,7 +540,8 @@
             {% endfor  %}
         </div>
     </div>
-</div>
+  </div>
+  {% endif %}
 {% endif %}
 {% endblock %}
 {% block styles %}

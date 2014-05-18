@@ -103,7 +103,7 @@ urlpatterns = patterns('',
     url(r'^upload/(?P<pk>\d+)/visibility$', upload_visibility, name='upload_visibility'),
 
     url(r'^report/(?P<task_id>\d+)/new$', report_new, name='report_new'),
-    url(r'^report/(?P<pk>\d+)/remove$', report_rm, name='report_remove'),
+    #url(r'^report/(?P<pk>\d+)/remove$', report_rm, name='report_remove'),
 
     url(r'profile/new', user_new, name='user_new'),
     url(r'profile/(?P<pk>\d+)/$', user_edit, name='user_details'),

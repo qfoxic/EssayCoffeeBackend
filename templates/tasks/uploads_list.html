@@ -8,7 +8,9 @@
             <th>Owner</th>
             <th>Created/Updated</th>
             <th>&nbsp;</th>
-            <th>&nbsp;</th>
+            {% if can_rm_upload %}
+              <th>&nbsp;</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -24,7 +26,9 @@
                 {{u.updated}}
             </div></td>
             <td><a href="javascript:void()" data-url="{% url "upload_visibility" u.pk %}" class="set-public" style="font-size:1.5em"><i class="fa fa-eye{% if u.access_level == co.PRIVATE_ACCESS %}-slash text-danger{% endif %}"></i></a></td>
+            {% if can_rm_uploads %}
             <td><a href="javascript:void()" data-file-name="{{u.attach.name}}" data-url="{% url "upload_remove" u.pk %}" class="upload-delete"  style="font-size:1.5em;color:#a00"><i class="fa fa-times-circle"></i></a></td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>
