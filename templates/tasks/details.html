@@ -1,9 +1,21 @@
 {% extends "layout.html" %}
 {% load i18n render_status %}
-{% block pagetitle %}{% trans "Task Details" %}{% endblock %}
+{% block pagetitle %}
+  {% if object and object.status == co.DRAFT %}
+    {% trans "Order Draft Details" %}
+  {% else %}
+    {% trans "Order Details" %}
+  {% endif %}
+{% endblock %}
+
 {% block info_block %}
 <section class="info">
-    <h2><i class="fa fa-list-alt irm"></i> {% trans "Task Details" %}
+    <h2><i class="fa fa-list-alt irm"></i>
+    {% if object and object.status == co.DRAFT %}
+      {% trans "Order Draft Details" %}
+    {% else %}
+      {% trans "Order Details" %}
+    {% endif %}
     {% if perm.can_edit %} <a href="{% url "task_edit" object.id %}" title="{% trans "Edit task" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a></h2>
     {% endif  %}
 </section>
