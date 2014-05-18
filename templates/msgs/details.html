@@ -7,18 +7,16 @@
 </section>
 {% endblock %}
 {% block content %}
-{% if perm.can_edit_msg  %}
-<form action="{% url 'msg_edit' object.pk %}" method="post">
-  {% csrf_token %}
-  <input name="body" type="text" value="{{object.body}}"/>
-  <input name="title" type="text" value="{{object.title}}"/>
-  <input type="submit" value="submit"/>
-</form>
-{% endif %}
-{% if perm.can_rm_msg %}
-{% endif %}
 <section class="container-fluid task-details" style="margin: 0 auto">
     <div class="row">
+        <form action="{% url 'msg_edit' object.pk %}" method="post">
+            {% csrf_token %}
+            <input name="body" type="text" value="{{object.body}}"/>
+            <input name="title" type="text" value="{{object.title}}"/>
+            <input type="submit" value="submit"/>
+        </form>
+        {% if perm.can_rm_msg %}
+        {% endif %}
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-body">
