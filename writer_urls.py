@@ -64,7 +64,7 @@ msg_list = login_required(ListMsgsView.as_view(module_name='writer'), login_url=
 msg_detail = login_required(DetailMsgView.as_view(module_name='writer'), login_url=reverse_lazy('login'))
 upload_file = login_required(UploadFileView.as_view(module_name='writer'), login_url=reverse_lazy('login'))
 upload_rm = login_required(RemoveUploadView.as_view(module_name='writer'), login_url=reverse_lazy('login'))
-upload_visibility = login_required(UpdateUploadView.as_view(module_name='writer'), login_url=reverse_lazy('login'))
+#upload_visibility = login_required(UpdateUploadView.as_view(module_name='writer'), login_url=reverse_lazy('login'))
 
 urlpatterns = patterns('',
     url(r'^$', tasks_list),
@@ -86,7 +86,7 @@ urlpatterns = patterns('',
     url(r'^msgs/$', msg_list, name='msgs_list'),
     url(r'^upload/(?P<task_id>\d+)/new$', upload_file, name='upload_file'),
     url(r'^upload/(?P<pk>\d+)/remove$', upload_rm, name='upload_remove'),
-    url(r'^upload/(?P<pk>\d+)/visibility$', upload_visibility, name='upload_visibility'),
+    #url(r'^upload/(?P<pk>\d+)/visibility$', upload_visibility, name='upload_visibility'),
 
     url(r'profile/new', user_new, name='user_new'),
     url(r'profile/(?P<pk>\d+)/$', user_edit, name='user_details'),

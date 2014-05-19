@@ -120,6 +120,9 @@ CAN_LOCK = 'can_lock'
 CAN_UNLOCK = 'can_unlock'
 CAN_REVISION = 'can_revision'
 
+# Whether users can change visibility for an upload
+CAN_CH_VISIBILITY = 'can_visibility'
+
 # 3d table with different permissions for each action and each group.
 # If specific permissions wasn't found here then it is concerned as not allowed.
 PERMISSIONS_TABLE = {
@@ -154,25 +157,37 @@ PERMISSIONS_TABLE = {
   
   # Unprocessed permissions.
   ADMIN_GROUP+str(UNPROCESSED)+CAN_DELETE: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_CH_VISIBILITY: 1,
+  EDITOR_GROUP+str(UNPROCESSED)+CAN_CH_VISIBILITY: 1,
   EDITOR_GROUP+str(UNPROCESSED)+CAN_DELETE: 1,
 
   # Active or in progress permissions.
+  ADMIN_GROUP+str(PROCESSING)+CAN_CH_VISIBILITY: 1,
   ADMIN_GROUP+str(PROCESSING)+CAN_DELETE: 1,
   EDITOR_GROUP+str(PROCESSING)+CAN_DELETE: 1,
+  EDITOR_GROUP+str(PROCESSING)+CAN_CH_VISIBILITY: 1,
 
   # Suspicious permissions.
+  ADMIN_GROUP+str(SUSPICIOUS)+CAN_CH_VISIBILITY: 1,
   ADMIN_GROUP+str(SUSPICIOUS)+CAN_DELETE: 1,
+  EDITOR_GROUP+str(SUSPICIOUS)+CAN_CH_VISIBILITY: 1,
   EDITOR_GROUP+str(SUSPICIOUS)+CAN_DELETE: 1,
 
   # Rejected 
+  EDITOR_GROUP+str(REJECTED)+CAN_CH_VISIBILITY: 1,
+  ADMIN_GROUP+str(REJECTED)+CAN_CH_VISIBILITY: 1,
   ADMIN_GROUP+str(REJECTED)+CAN_DELETE: 1,
 
   # Completed
+  ADMIN_GROUP+str(COMPLETED)+CAN_CH_VISIBILITY: 1,
   ADMIN_GROUP+str(COMPLETED)+CAN_DELETE: 1,
+  EDITOR_GROUP+str(COMPLETED)+CAN_CH_VISIBILITY: 1,
   EDITOR_GROUP+str(COMPLETED)+CAN_DELETE: 1,
 
   # Send
+  ADMIN_GROUP+str(SENT)+CAN_CH_VISIBILITY: 1,
   ADMIN_GROUP+str(SENT)+CAN_DELETE: 1,
+  EDITOR_GROUP+str(SENT)+CAN_CH_VISIBILITY: 1,
   EDITOR_GROUP+str(SENT)+CAN_DELETE: 1,
   },
   # Permissions for a task.

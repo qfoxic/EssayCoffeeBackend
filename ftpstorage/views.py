@@ -9,6 +9,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
+import constants as co
+
 
 class UploadFileView(BaseView, CreateView):
   form_class = UploadForm
@@ -34,6 +36,11 @@ class UpdateUploadView(BaseView, UpdateView):
   form_class = UploadVisibilityForm 
   queryset = Upload.objects.all() 
   template_name = 'tasks/details.html'
+
+  def get_form_kwargs(self):
+    kwargs = super(UpdateUploadView, self).get_form_kwargs()
+    kwargs['request'] = self.request
+    return kwargs
 
   def get_success_url(self):
     return reverse('task_view', kwargs={'pk': self.object.ftask.id})

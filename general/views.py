@@ -153,6 +153,7 @@ class BaseView(View):
       # Can admins put reports on task.
       'can_report': co.CheckPermissions(user, obj, co.CAN_REPORT),
       'can_rm_upload': co.CheckPermissions(user, obj, co.CAN_DELETE, 'upload'),
+      'can_ch_visibility': co.CheckPermissions(user, obj, co.CAN_CH_VISIBILITY, 'upload'),
       'can_rm_msg': co.CheckPermissions(user, obj, co.CAN_DELETE, 'message'),
       'can_edit_msg': co.CheckPermissions(user, obj, co.CAN_EDIT, 'message'),
       'can_lock': co.CheckPermissions(user, obj, co.CAN_LOCK) and not obj.is_locked(user),
@@ -326,18 +327,25 @@ class DetailTaskView(BaseView, DetailView):
     #or_q = Q(fowner_id__exact=self.request.user.id)|Q(access_level__in=(co.PUBLIC_ACCESS,))
     or_q = Q(access_level__in=(co.PUBLIC_ACCESS,))
     not_owner_q = ~Q(fowner_id__exact=self.request.user.id)
-    context['my_uploads'] = Upload.objects.filter(task_q, Q(fowner_id__exact=self.request.user.id))
+    m_ups = Upload.objects.filter(task_q, Q(fowner_id__exact=self.request.user.id))
+    ups = []
     if group in [co.ADMIN_GROUP, co.EDITOR_GROUP]:
-      context['customer_uploads'] = Upload.objects.filter(fowner__groups__name=co.CUSTOMER_GROUP).filter(task_q, or_q, not_owner_q)
-      context['admin_uploads'] = Upload.objects.filter(fowner__groups__name=co.ADMIN_GROUP).filter(task_q, or_q, not_owner_q)
-      context['editor_uploads'] = Upload.objects.filter(fowner__groups__name=co.EDITOR_GROUP).filter(task_q, or_q, not_owner_q)
-      context['writer_uploads'] = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q, not_owner_q)
+      c_ups = Upload.objects.filter(fowner__groups__name=co.CUSTOMER_GROUP).filter(task_q, not_owner_q)
+      a_ups = Upload.objects.filter(fowner__groups__name=co.ADMIN_GROUP).filter(task_q, not_owner_q)
+      e_ups = Upload.objects.filter(fowner__groups__name=co.EDITOR_GROUP).filter(task_q, not_owner_q)
+      w_ups = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, not_owner_q)
+      ups.extend(c_ups), ups.extend(a_ups), ups.extend(e_ups), ups.extend(w_ups), ups.extend(m_ups)
+      context['uploads'] = ups
     elif group == co.WRITER_GROUP:
-      context['customer_uploads'] = Upload.objects.filter(fowner__groups__name=co.CUSTOMER_GROUP).filter(task_q, or_q, not_owner_q)
-      context['editor_uploads'] = Upload.objects.filter(fowner__groups__name=co.EDITOR_GROUP).filter(task_q, or_q, not_owner_q)
-      context['writer_uploads'] = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q, not_owner_q)
+      c_ups = Upload.objects.filter(fowner__groups__name=co.CUSTOMER_GROUP).filter(task_q, or_q, not_owner_q)
+      e_ups = Upload.objects.filter(fowner__groups__name=co.EDITOR_GROUP).filter(task_q, or_q, not_owner_q)
+      w_ups = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q, not_owner_q)
+      ups.extend(c_ups), ups.extend(e_ups), ups.extend(w_ups), ups.extend(m_ups)
+      context['uploads'] = ups
     elif group == co.CUSTOMER_GROUP:
-      context['writer_uploads'] = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q, not_owner_q)
+      w_ups = Upload.objects.filter(fowner__groups__name=co.WRITER_GROUP).filter(task_q, or_q, not_owner_q)
+      ups.extend(w_ups), ups.extend(m_ups)
+      context['uploads'] = ups
        
     return context
 

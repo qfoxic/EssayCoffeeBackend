@@ -3,6 +3,7 @@ from ftpstorage.models import Upload
 from userprofile.models import UserProfile
 from general.models import Task
 from general.forms import BaseForm
+from django.core.exceptions import PermissionDenied
 
 import constants as co
 
@@ -46,4 +47,6 @@ class UploadVisibilityForm(BaseForm):
 
   def check_permissions(self, cleaned_data):
     """Raises an exception if there are no permissions to save a form."""
-    pass
+    if not co.CheckPermissions(self.request.user, self.instance.ftask,
+                               co.CAN_CH_VISIBILITY, 'upload'):
+      raise PermissionDenied

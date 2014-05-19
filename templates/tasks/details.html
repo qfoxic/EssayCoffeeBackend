@@ -455,11 +455,11 @@
         </tfoot>
     </table>
 </div>
-<div id="uploadsRight" class="{title:'uploads &middot; {{my_uploads|length}}'}">
+<div id="uploadsRight" class="{title:'uploads &middot; {{uploads|length}}'}">
     {% if perm.can_upload %}
     <div class="well well-sm">
         <a class="pull-right uploads-add" href="javascript:void(0)"><i class="fa fa-plus-circle"></i></a>
-        <strong>{% trans "Upload a file" %}&hellip;</strong><span class="ilm badge">{{stats.uploads}}</span>
+        <strong>{% trans "Upload a file" %}&hellip;</strong><span class="ilm badge">{{uploads|length}}</span>
         <div id="uploads-form" style="display:none; margin-top:-10px">
             <form action="{% url "upload_file" object.pk %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -474,12 +474,16 @@
                 <div class="row">
                     <div class="col-md-7">
                         <div class="btn-group btn-group-xs" data-toggle="buttons">
+                            {% if site == 'admin' or site == 'editor'  %}
                             <label class="btn btn-default flat-btn">
                                 <input class="vtoggler" type="radio" name="access_level" value="{{co.PUBLIC_ACCESS}}" checked="checked">
                                 Public </label>
                             <label class="btn btn-default flat-btn">
                                 <input class="vtoggler" type="radio" name="access_level" value="{{co.PRIVATE_ACCESS}}">
                                 Private </label>
+                            {% else %}
+                              <input class="vtoggler" type="radio" name="access_level" value="{{co.PUBLIC_ACCESS}}">
+                            {% endif  %}
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -496,7 +500,7 @@
         <form id="uploads_manage" action="" method="post" style="display:none">
             {% csrf_token %}
         </form>
-        {% include "tasks/uploads_list.html" with uploads_list=my_uploads accid="my" list_title="My uploads" %}
+        {% include "tasks/uploads_list.html" with accid="my" list_title="My uploads" %}
     </div>
 </div>
 {% if site == 'admin' or site = 'editor' %}

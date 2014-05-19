@@ -7,14 +7,16 @@
             <th>File</th>
             <th>Owner</th>
             <th>Created/Updated</th>
-            <th>&nbsp;</th>
-            {% if can_rm_upload %}
+            {% if perm.can_ch_visibility %}
+              <th>&nbsp;</th>
+            {% endif %}
+            {% if perm.can_rm_upload %}
               <th>&nbsp;</th>
             {% endif %}
         </tr>
     </thead>
     <tbody>
-        {% for u in uploads_list  %}
+        {% for u in uploads  %}
         <tr>
             <td>{{u.attach.name}}</td>
             <td><a href="{% url "user_edit" u.fowner.pk %}">{{u.fowner}}</a></td>
@@ -25,8 +27,10 @@
             <div>
                 {{u.updated}}
             </div></td>
+            {% if perm.can_ch_visibility %}
             <td><a href="javascript:void()" data-url="{% url "upload_visibility" u.pk %}" class="set-public" style="font-size:1.5em"><i class="fa fa-eye{% if u.access_level == co.PRIVATE_ACCESS %}-slash text-danger{% endif %}"></i></a></td>
-            {% if can_rm_uploads %}
+            {% endif %}
+            {% if perm.can_rm_upload %}
             <td><a href="javascript:void()" data-file-name="{{u.attach.name}}" data-url="{% url "upload_remove" u.pk %}" class="upload-delete"  style="font-size:1.5em;color:#a00"><i class="fa fa-times-circle"></i></a></td>
             {% endif %}
         </tr>
