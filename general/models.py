@@ -74,7 +74,7 @@ class Task(BaseModel):
   mark = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
   instructions = models.TextField(max_length=co.INSTRUCTION_MAX_LEN,
                                   validators=[ValidateMinSize(100)])
-  discount = models.CharField(max_length=co.TITLE_MAX_LEN)
+  discount = models.CharField(max_length=co.TITLE_MAX_LEN, null=True, blank=True)
   accept_terms = models.BooleanField(validators=[ValidateTerms])
   payment_status = models.SmallIntegerField(choices=co.PAYMENT_STATUS, default=co.UNPAID)
   priority = models.BooleanField(default=False, blank=True)

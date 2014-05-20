@@ -16,7 +16,7 @@ def get_attach_path(instance, filename):
 class Upload(BaseModel):
   created = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(auto_now=True)
-  attach = models.FileField(upload_to=get_attach_path, blank=True, null=True)
+  attach = models.FileField(upload_to=get_attach_path)
   fowner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True,
                             related_name='fowner')
   ftask = models.ForeignKey(Task, on_delete=models.CASCADE, blank=True,

@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 CHANGE_EVENT = 'change'
 NEW_EVENT = 'new'
 DELETE_EVENT = 'delete'
-ELIMINATION_FIELDS = ['mtask','ftask','rtask', 'logentry', 'manager',
-    'howner', 'groups', 'fowner', 'editor', 'assignee',
+ELIMINATION_FIELDS = ['mtask','ftask','rtask', 'logentry',
+    'howner', 'groups', 'fowner',
     'ctask', 'owner', 'site', 'user_permissions', 'rowner', 'mowner', ]
 
 

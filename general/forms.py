@@ -64,11 +64,12 @@ class TaskForm(BaseForm):
       is_new = False
 
     res = super(TaskForm, self).save(*args, **kwargs)
-    if is_new:    
-      upload = Upload(attach=self.cleaned_data['attach'],
-                      ftask=self.instance, fowner=self.request.user,
-                      access_level=co.PRIVATE_ACCESS)
-      upload.save()
+    if is_new:
+      if self.cleaned_data['attach']:
+        upload = Upload(attach=self.cleaned_data['attach'],
+                        ftask=self.instance, fowner=self.request.user,
+                        access_level=co.PRIVATE_ACCESS)
+        upload.save()
     return res
 
 

@@ -99,7 +99,7 @@
                                 <div class="file-input form-control">
                                     <div class="input-group margin-bottom-sm">
                                         <span class="input-group-addon"><i class="fa fa-paperclip fa-fw"></i></span>
-                                        <input id="id_attach" class="upload-file" type="file" title="Attachment" name="attach">
+                                        <input id="id_attach" class="upload-file" type="file" title="Attachment" name="attach" required>
                                         {% if form.attach.value %}
                                         <a href="{{ MEDIA_URL }}{{ form.attach.value }}" style="margin:0 10px">{{ form.attach.value }}</a>
                                         <input id="attach-clear_id" type="checkbox" name="attach-clear" style="virtual-align:middle">
