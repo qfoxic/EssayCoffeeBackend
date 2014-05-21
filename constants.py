@@ -297,6 +297,10 @@ PERMISSIONS_TABLE = {
 
 def CheckPermissions(user, entity, action, entity_type='task'):
   try:
+    if entity_type == 'message':
+      entity = entity if entity.__class__.__name__ == 'Task' else entity.mtask
+    elif entity_type == 'upload':
+      entity = entity if entity.__class__.__name__ == 'Task' else entity.ftask
     group = user.groups.values_list('name')[0][0]
     status = entity.status
   except:

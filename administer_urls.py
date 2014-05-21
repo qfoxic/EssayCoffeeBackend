@@ -47,7 +47,7 @@ msg_edit = login_required(UpdateMsgView.as_view(module_name='administer'), login
 msg_list = login_required(ListMsgsView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
 msg_detail = login_required(DetailMsgView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
 upload_file = login_required(UploadFileView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
-upload_rm = login_required(RemoveUploadView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
+upload_rm = login_required(RemoveUploadView.as_view(module_name='administer', owner_required=False), login_url=reverse_lazy('login'))
 upload_visibility = login_required(UpdateUploadView.as_view(module_name='administer'), login_url=reverse_lazy('login'))
 report_new = login_required(
     CreateReportView.as_view(module_name='administer'),

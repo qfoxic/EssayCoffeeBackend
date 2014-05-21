@@ -47,6 +47,6 @@ class UploadVisibilityForm(BaseForm):
 
   def check_permissions(self, cleaned_data):
     """Raises an exception if there are no permissions to save a form."""
-    if not co.CheckPermissions(self.request.user, self.instance.ftask,
+    if not co.CheckPermissions(self.request.user, self.instance,
                                co.CAN_CH_VISIBILITY, 'upload'):
       raise PermissionDenied

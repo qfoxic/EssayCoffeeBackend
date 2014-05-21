@@ -12,7 +12,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    {% if perm.can_edit.msg %}
+                    {% if perm.can_edit_msg %}
                     <form action="{% url 'msg_edit' object.pk %}" method="post">
                         {% csrf_token %}
                         <div class="row">
@@ -32,18 +32,18 @@
                             <input name="title" type="text" class="form-control" value="{{object.title}}"/>
                         </div>
                         <div class="mesg-body">
-                            <textarea name="body" class="form-control" rows="10" style="margin-top:1em; line-height:160%; font-style:normal;font-size:1.1em">
-                            {{object.body}}
+                        <textarea name="body" class="form-control" rows="10" style="margin-top:1em; line-height:160%; font-style:normal;font-size:1.1em">{% spaceless %}
+                            {{object.body}}{% endspaceless %}
                         </textarea>
                         </div>
                         <div class="form-group btn-group" style="padding:0 1.2em">
                             <a href="#" class="btn-cancel btn btn-default btn-lg" role="button"> <i class='fa fa-times-circle-o fa-lg' style="margin-right:.5em"></i>{% trans "Cancel" %} </a>
-                            {#% if perm.can_rm_msg %#}
+                            {% if perm.can_rm_msg %}
                             <button class="btn btn-danger btn-lg" role="button" data-url="{% url 'msg_remove' object.pk %}" type="button">
                                 Delete
                                 <i class="fa fa-times-circle-o fa-lg" style="margin-left:.5em"></i>
                             </button>
-                            {#% endif %#}
+                            {% endif %}
                             <button type="submit" class="btn btn-primary btn-lg" role="button">
                                 {% trans "Save" %}<i class='fa fa-check-circle-o fa-lg' style="margin-left:.5em"></i>
                             </button>

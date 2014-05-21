@@ -12,7 +12,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.db.models import Q
-
+from django.core.exceptions import PermissionDenied
 import constants as co
 
 
@@ -67,7 +67,7 @@ class MsgsEditForm(ModelForm):
   def check_permissions(self, cleaned_data):
     """Raises an exception if there are no permissions to save a form."""
     if not co.CheckPermissions(self.request.user,
-        self.instance.mtask, co.CAN_EDIT, 'message'):
+        self.instance, co.CAN_EDIT, 'message'):
       raise ValidationError('You can not update a message.') 
  
   def clean(self):
@@ -120,7 +120,6 @@ class UpdateMsgView(BaseView, UpdateView):
       obj = self.get_object()
     except:
       obj = None
-    obj = obj and obj.mtask
     if not co.CheckPermissions(user, obj, co.CAN_EDIT, 'message'):
       raise PermissionDenied
 
@@ -170,7 +169,6 @@ class RemoveMsgView(BaseView, DeleteView):
       obj = self.get_object()
     except:
       obj = None
-    obj = obj and obj.mtask
     if not co.CheckPermissions(user, obj, co.CAN_DELETE, 'message'):
       raise PermissionDenied
 
