@@ -128,6 +128,30 @@ $( document ).ready( function( ) {
             }
         } );
     } );
+    $( 'a.msg-delete' ).on( 'click', function( ev ) {
+        ev.preventDefault( );
+        var that = $( this );
+        bootbox.dialog( {
+            message: "The message will be permanently deleted. Are you sure?",
+            title: "Please confirm",
+            className: "bootbox-modal",
+            buttons: {
+                cancel: {
+                    label: "Cancel",
+                    className: "btn-default",
+                    callback: function( ) {
+                    }
+                },
+                confirm: {
+                    label: "Delete",
+                    className: "btn-danger",
+                    callback: function( ) {
+                        $( '#message_manage' ).attr( 'action', that.data( 'url' ) ).submit( );
+                    }
+                },
+            }
+        } );
+    } );
     $( 'a.set-public' ).on( 'click', function( ev ) {
         ev.preventDefault( );
         //alert($(this).data( 'url' ));
