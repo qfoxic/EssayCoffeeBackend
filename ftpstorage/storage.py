@@ -2,7 +2,6 @@ import os
 import errno
 import itertools
 from datetime import datetime
-
 from django.conf import settings
 from django.core.exceptions import SuspiciousFileOperation
 from django.core.files import locks, File
@@ -18,6 +17,7 @@ from django.utils.encoding import force_bytes, python_2_unicode_compatible
 from ftplib import FTP, error_perm, error_reply, error_temp
 from django.core.files.storage import Storage
 from django.db.models.fields import files
+from StringIO import StringIO
 
 
 class FTPStorage(Storage):
@@ -57,6 +57,13 @@ class FTPStorage(Storage):
       except error_temp:
         return False
 
+    def cp(self, name, file_obj, mode='rwb'):
+      """Copy ftp file 'name' to file_obj."""
+      self.session.cwd('/')
+      ftp_answer = self.session.retrbinary('RETR ' + self.path(name), file_obj.write)
+      file_obj.flush()
+      self.session.cwd('/')
+
     def listdir(self, path):
         path = self.path(path)
         directories, files = [], []
@@ -85,4 +92,7 @@ class FTPStorage(Storage):
     def modified_time(self, name):
         return None
         #return datetime.fromtimestamp(os.path.getmtime(self.path(name)))
+    
+    def close(self):
+      self.session.close()
 
