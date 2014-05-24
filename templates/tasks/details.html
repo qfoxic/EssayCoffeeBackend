@@ -459,7 +459,7 @@
     {% if perm.can_upload %}
     <div class="well well-sm">
         <a class="pull-right uploads-add" href="javascript:void(0)"><i class="fa fa-plus-circle"></i></a>
-        <strong>{% trans "Upload a file" %}&hellip;</strong><span class="ilm badge">{{uploads|length}}</span>
+        <strong>{% trans "Upload a file" %}&hellip;</strong>
         <div id="uploads-form" style="display:none; margin-top:-10px">
             <form action="{% url "upload_file" object.pk %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
