@@ -94,9 +94,10 @@ $( document ).ready( function( ) {
 
     $( '.btn-cancel' ).on( 'click', function( ) {
         var message = "Are you sure to leave this page? All unsaved data will be lost&hellip;";
+        var that = $(this);
         bootbox.confirm( message, function( result ) {
             if( result == true ) {
-                window.location.replace( '/tasks/' );
+                window.location.replace( that.data('back-to') );
             }
         } );
     } );
