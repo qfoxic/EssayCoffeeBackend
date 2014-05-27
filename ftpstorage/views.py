@@ -1,4 +1,4 @@
-from general.views import BaseView 
+from general.views import BaseView, serve 
 from ftpstorage.forms import UploadForm, UploadVisibilityForm 
 from ftpstorage.models import Upload 
 from django.views.generic.edit import UpdateView
@@ -6,7 +6,8 @@ from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
+from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 
 import constants as co
@@ -31,6 +32,35 @@ class UploadFileView(BaseView, CreateView):
     messages.add_message(self.request, messages.ERROR, str(form.errors))
     return HttpResponseRedirect(self.get_success_url())
 
+
+class DownloadFileView(BaseView):
+  template_name = 'tasks/details.html'
+
+  def _check_permissions(self):
+    user = self.request.user
+    group = user.get_group()
+    try:
+      self.upload = Upload.objects.get(pk=self.kwargs['pk'])
+      task = self.upload.ftask
+    except:
+      raise Http404
+    if group == co.WRITER_GROUP:
+      if not task.is_locked(user, by_user=True):
+        raise Http404
+      if not self.upload.access_level == co.PUBLIC_ACCESS:
+        # Don't raise Permission denied to avoid hacker attacks.
+        raise Http404
+    elif group == co.CUSTOMER_GROUP:
+      if not self.upload.access_level == co.PUBLIC_ACCESS:
+        # Don't raise Permission denied to avoid hacker attacks.
+        raise Http404
+      if not task.owner == user:
+        # Don't raise Permission denied to avoid hacker attacks.
+        raise Http404
+
+  def get(self, *args, **kwargs):
+    return serve(self.request, self.upload.attach.name)
+  
 
 class UpdateUploadView(BaseView, UpdateView):
   form_class = UploadVisibilityForm 

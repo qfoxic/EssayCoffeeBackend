@@ -1,4 +1,5 @@
 import os
+import tempfile
 
 from django.views.generic import TemplateView, View
 from django.views.generic import ListView
@@ -14,6 +15,7 @@ from reports.models import Report
 from history.models import list_task_events
 from msgs.models import Message
 from ftpstorage.models import Upload
+from ftpstorage.storage import FTPStorage
 from general.forms import TaskForm, SwitchStatusForm, LockTaskForm, UnlockTaskForm
 
 from django.views.generic.edit import UpdateView
@@ -21,7 +23,8 @@ from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 from django.views.generic import DetailView
 
-from django.http import HttpResponseRedirect
+from django.views.static import serve as djserve
+from django.http import HttpResponseRedirect, Http404
 from django.contrib import messages
 
 import lib.confreader as conf
@@ -36,6 +39,15 @@ def check_mobile(request):
     if b or v:
       return True
   return False
+
+
+def serve(request, path):
+  ftp = FTPStorage()
+  if not ftp.exists(path):
+      raise Http404(_('"%(path)s" does not exist') % {'path': path})
+  tmp_file = tempfile.NamedTemporaryFile() 
+  ftp.cp(path, tmp_file)
+  return djserve(request, tmp_file.name, '/')
 
 
 def get_stats(request):
@@ -61,7 +73,7 @@ def get_stats(request):
       'rejected': Task.get_rejected_tasks(1), 
       'process': Task.get_processing_tasks(1),
       'expired': Task.get_expired_tasks(1),
-      'adm_reports': Report.objects.all().count() 
+      'adm_reports': 0#Report.objects.all().count() 
     }
   else:
     return {}
