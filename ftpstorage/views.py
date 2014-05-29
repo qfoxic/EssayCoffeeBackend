@@ -59,7 +59,12 @@ class DownloadFileView(BaseView):
         raise Http404
 
   def get(self, *args, **kwargs):
-    return serve(self.request, self.upload.attach.name)
+    try:
+      return serve(self.request, self.upload.attach.name)
+    except Exception, e:
+      messages.add_message(self.request, messages.ERROR, str(e))
+      return HttpResponseRedirect(reverse('task_view', kwargs={'pk': self.upload.ftask.pk}))
+      
   
 
 class UpdateUploadView(BaseView, UpdateView):
