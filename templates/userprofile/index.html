@@ -3,6 +3,16 @@
 {% block pagetitle %}All Users{% endblock %}
 {% block info_block %}
 <section class="info">
+    {% if request.user.get_group == co.ADMIN_GROUP %}
+        {% if action_label == "writers" %}
+        <a href="{% url 'user_new_writer' %}?group_name={{co.WRITER_GROUP}}" class="btn btn-info btn-lg pull-right" role="button">
+            <i class='fa fa-plus-circle fa-lg irm'></i>add writer</a>
+        {% endif %}
+        {% if action_label == "editors" %}
+        <a href="{% url 'user_new_editor' %}?group_name={{co.EDITOR_GROUP}}" class="btn btn-info btn-lg pull-right" role="button">
+            <i class='fa fa-plus-circle fa-lg irm'></i>add editor</a>
+        {% endif %}
+    {% endif %}
     <h2><i class="fa fa-users irm"></i> {{action_label}} <span class="badge" style="font-size:.6em;text-shadow:none;margin-left:1em;vertical-align:middle">{{users|length}}</span></h2>
 </section>
 {% endblock %}

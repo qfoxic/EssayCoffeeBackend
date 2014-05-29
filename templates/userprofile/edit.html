@@ -184,6 +184,7 @@
                             <a href="{% url 'pswd_reset' %}" type="submit" class="btn btn-default btn-lg" role="button">
                                <i class='fa fa-key fa-lg' style='margin-right:1em'></i>{% trans "Reset Password" %}</a>
                         </div>
+                        <!--
                         {% if site == 'admin' and object == request.user%}
                           <div class="col-md-6">
                               <a href="{% url 'user_new_writer' %}?group_name={{co.WRITER_GROUP}}" type="submit" class="btn btn-default btn-lg" role="button">
@@ -194,6 +195,7 @@
                                  <i class='fa fa-key fa-lg' style='margin-right:1em'></i>{% trans "Add Editor" %}</a>
                           </div>
                         {% endif %}
+                        -->
                         <div class="col-md-6" style="text-align:right">
                             <button type="submit" class="btn btn-primary btn-lg" role="button">
                                 {% trans "Submit" %}<i class='fa fa-check-circle-o fa-lg' style='margin-left:1em'></i>
