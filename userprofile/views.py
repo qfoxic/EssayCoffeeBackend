@@ -3,6 +3,7 @@ from django.contrib.auth.models import Group
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 from django.views.generic.edit import UpdateView
+from django.views.generic import DetailView
 from django.views.generic import TemplateView,ListView
 
 from general.views import BaseView
@@ -60,6 +61,11 @@ class ListProfileView(BaseView, ListView):
   module_name = ''
   queryset = UserProfile.objects.all()
   template_name = 'userprofile/index.html'
+
+
+class DetailProfileView(BaseView, DetailView):
+  queryset = UserProfile.objects.all()
+  template_name = 'userprofile/details.html'
 
 
 class UpdateProfileView(BaseView, UpdateView):

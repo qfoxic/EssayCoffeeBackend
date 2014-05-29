@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 from django.core.urlresolvers import reverse_lazy
 
-from general.views import RemoveTaskView,SwitchStatusView
+from general.views import RemoveTaskView,SwitchStatusView, LoginView
 from general.views import CreateTaskView,UpdateTaskView,DetailTaskView,TaskIndexView
 from general.models import Task
 from msgs.views import CreateMsgView, RemoveMsgView, ListMsgsView,DetailMsgView
@@ -67,6 +67,7 @@ urlpatterns = patterns('',
     url(r'profile/(?P<pk>\d+)/$', user_edit, name='user_details'),
     url(r'profile/(?P<pk>\d+)/edit$', user_edit, name='user_edit'),
 
+    url(r'^login/$', LoginView.as_view(module_name='customer'), name='login'),
     url(r'', include('common_urls')),
 )
 

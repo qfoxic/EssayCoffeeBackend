@@ -15,7 +15,6 @@ from ftpstorage.views import DownloadFileView
 user_remove = login_required(RemoveProfileView.as_view(), login_url=reverse_lazy('login'))
 upload_download = login_required(DownloadFileView.as_view(), login_url=reverse_lazy('login'))
 urlpatterns = patterns('',
-    url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
     url(r'^reset/$', ResetPswdView.as_view(), name='pswd_reset'),
     url(r'^resetdone/$', ResetPswdDoneView.as_view(), name='pswd_reset_done'),

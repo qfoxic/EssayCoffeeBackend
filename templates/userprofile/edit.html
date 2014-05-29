@@ -8,7 +8,10 @@
     </div>
     <div class="panel-body">
         <!-- {{form.errors}} -->
-        <form role="form" role="form" action="{% if object %}{% url "user_edit" object.pk %}{% else %}{% url "user_new" %}{% endif %}" method="post" enctype='multipart/form-data'>
+        <form role="form" role="form" action="{% if object %}{% url "user_edit" object.pk %}{% else %}
+           {% if request.GET.group_name == co.WRITER_GROUP %}{% url "user_new_writer" %}{% endif %}
+           {% if request.GET.group_name == co.EDITOR_GROUP %}{% url "user_new_editor" %}{% endif %}
+           {% if not request.GET.group_name %}{% url "user_new" %}{% endif %}{% endif %}" method="post" enctype='multipart/form-data'>
             {% csrf_token %}
             {% if not object %}
             <div class="row">
@@ -178,8 +181,19 @@
                     </div>
                     <div class="row" style="margin-top:2em">
                         <div class="col-md-6">
-                            <a href="{% url 'pswd_reset' %}" type="submit" class="btn btn-default btn-lg" role="button"><i class='fa fa-key fa-lg' style='margin-right:1em'></i>{% trans "Reset Password" %}</a>
+                            <a href="{% url 'pswd_reset' %}" type="submit" class="btn btn-default btn-lg" role="button">
+                               <i class='fa fa-key fa-lg' style='margin-right:1em'></i>{% trans "Reset Password" %}</a>
                         </div>
+                        {% if site == 'admin' and object == request.user%}
+                          <div class="col-md-6">
+                              <a href="{% url 'user_new_writer' %}?group_name={{co.WRITER_GROUP}}" type="submit" class="btn btn-default btn-lg" role="button">
+                                 <i class='fa fa-key fa-lg' style='margin-right:1em'></i>{% trans "Add Writer" %}</a>
+                          </div>
+                          <div class="col-md-6">
+                              <a href="{% url 'user_new_editor' %}?group_name={{co.EDITOR_GROUP}}" type="submit" class="btn btn-default btn-lg" role="button">
+                                 <i class='fa fa-key fa-lg' style='margin-right:1em'></i>{% trans "Add Editor" %}</a>
+                          </div>
+                        {% endif %}
                         <div class="col-md-6" style="text-align:right">
                             <button type="submit" class="btn btn-primary btn-lg" role="button">
                                 {% trans "Submit" %}<i class='fa fa-check-circle-o fa-lg' style='margin-left:1em'></i>

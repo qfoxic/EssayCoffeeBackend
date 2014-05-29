@@ -3,12 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
 
 from general.views import DetailTaskView,SwitchStatusView,LockTaskView,UnlockTaskView
-from general.views import TaskIndexView, UpdateTaskView
+from general.views import TaskIndexView, UpdateTaskView, LoginView
 from general.models import Task
 
 from reports.views import CreateReportView,RemoveReportView 
 
-from userprofile.views import CreateProfileView, UpdateProfileView, ListProfileView
+#from userprofile.views import CreateProfileView, UpdateProfileView, ListProfileView, DetailProfileView
+from userprofile.views import UpdateProfileView, ListProfileView, DetailProfileView
 from userprofile.models import UserProfile
 
 from msgs.views import CreateMsgView, RemoveMsgView, ListMsgsView,DetailMsgView
@@ -19,11 +20,14 @@ writers = login_required(ListProfileView.as_view(module_name='editor',
                          queryset=UserProfile.objects.filter(groups__name=co.WRITER_GROUP),
                          action_label='writers', context_object_name='users'),
                          login_url=reverse_lazy('login'))
-user_new = CreateProfileView.as_view(module_name='editor',
-                                     group_name=co.EDITOR_GROUP)
+#user_new = CreateProfileView.as_view(module_name='editor',
+#                                     group_name=co.EDITOR_GROUP)
 user_edit = login_required(UpdateProfileView.as_view(module_name='editor',
                                                      allowed_groups=[co.WRITER_GROUP]),
                            login_url=reverse_lazy('login'))
+user_detail = login_required(DetailProfileView.as_view(module_name='editor',
+                                                       allowed_groups=[co.WRITER_GROUP]),
+                             login_url=reverse_lazy('login'))
 
 msg_add = login_required(CreateMsgView.as_view(module_name='editor'), login_url=reverse_lazy('login'))
 msg_rm = login_required(RemoveMsgView.as_view(module_name='editor'), login_url=reverse_lazy('login'))
@@ -105,12 +109,13 @@ urlpatterns = patterns('',
     url(r'^report/(?P<task_id>\d+)/new$', report_new, name='report_new'),
     #url(r'^report/(?P<pk>\d+)/remove$', report_rm, name='report_remove'),
 
-    url(r'profile/new', user_new, name='user_new'),
-    url(r'profile/(?P<pk>\d+)/$', user_edit, name='user_details'),
+    #url(r'profile/new', user_new, name='user_new'),
+    url(r'profile/(?P<pk>\d+)/$', user_detail, name='user_details'),
     url(r'profile/(?P<pk>\d+)/edit$', user_edit, name='user_edit'),
 
     url(r'^writers/$', writers, name='writers'),
 
+    url(r'^login/$', LoginView.as_view(module_name='editor'), name='login'),
     url(r'', include('common_urls')),
 )
 

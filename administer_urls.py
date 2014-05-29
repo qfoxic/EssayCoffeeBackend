@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import permission_required
 from django.core.urlresolvers import reverse_lazy
 
 from general.views import DetailTaskView,SwitchStatusView,LockTaskView,UnlockTaskView
-from general.views import TaskIndexView,UpdateTaskView
+from general.views import TaskIndexView,UpdateTaskView,LoginView
 from general.models import Task
 
 from reports.views import CreateReportView,RemoveReportView 
@@ -36,8 +36,12 @@ admins = login_required(ListProfileView.as_view(module_name='administer',
                         login_url=reverse_lazy('login'))
 user_new = CreateProfileView.as_view(module_name='administer',
                                      group_name=co.ADMIN_GROUP)
+user_new_writer = login_required(CreateProfileView.as_view(module_name='administer',
+                                                           group_name=co.WRITER_GROUP), login_url=reverse_lazy('login'))
+user_new_editor = login_required(CreateProfileView.as_view(module_name='administer',
+                                                           group_name=co.EDITOR_GROUP), login_url=reverse_lazy('login'))
 user_edit = login_required(UpdateProfileView.as_view(module_name='administer',
-                                                     allowed_groups=[co.WRITER_GROUP,co.CUSTOMER_GROUP]),
+                                                     allowed_groups=[co.WRITER_GROUP,co.CUSTOMER_GROUP,co.EDITOR_GROUP,co.ADMIN_GROUP]),
                            login_url=reverse_lazy('login'))
 
 
@@ -146,15 +150,18 @@ urlpatterns = patterns('',
     url(r'^report/(?P<task_id>\d+)/new$', report_new, name='report_new'),
     #url(r'^report/(?P<pk>\d+)/remove$', report_rm, name='report_remove'),
 
-    url(r'profile/new', user_new, name='user_new'),
-    url(r'profile/(?P<pk>\d+)/$', user_edit, name='user_details'),
-    url(r'profile/(?P<pk>\d+)/edit$', user_edit, name='user_edit'),
+    url(r'^profile/newwriter$', user_new_writer, name='user_new_writer'),
+    url(r'^profile/neweditor$', user_new_editor, name='user_new_editor'),
+    url(r'^profile/new$', user_new, name='user_new'),
+    url(r'^profile/(?P<pk>\d+)/$', user_edit, name='user_details'),
+    url(r'^profile/(?P<pk>\d+)/edit$', user_edit, name='user_edit'),
 
     url(r'^writers/$', writers, name='writers'),
     url(r'^customers/$', customers, name='customers'),
     url(r'^editors/$', editors, name='editors'),
     url(r'^admins/$', admins, name='admins'),
 
+    url(r'^login/$', LoginView.as_view(module_name='administer'), name='login'),
     url(r'', include('common_urls')),
 )
 
