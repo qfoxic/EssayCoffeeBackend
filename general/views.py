@@ -391,7 +391,10 @@ class SwitchStatusView(UpdateTaskView):
   form_class = SwitchStatusForm 
   template_name = 'tasks/details.html'
   owner_required = False 
-  
+
+  def _check_permissions(self):
+    pass  
+ 
   def get_success_url(self):
     return self.object.to_link()
 
@@ -399,7 +402,10 @@ class SwitchStatusView(UpdateTaskView):
 class LockTaskView(UpdateTaskView):
   form_class = LockTaskForm 
   template_name = 'tasks/details.html'
-  owner_required = False 
+  owner_required = False
+
+  def _check_permissions(self):
+    pass  
   
   def get_success_url(self):
     return self.object.to_link()
@@ -408,7 +414,10 @@ class LockTaskView(UpdateTaskView):
 class UnlockTaskView(UpdateTaskView):
   form_class = UnlockTaskForm 
   template_name = 'tasks/details.html'
-  owner_required = False 
+  owner_required = False
+
+  def _check_permissions(self):
+    pass  
   
   def get_success_url(self):
     return self.object.to_link()
