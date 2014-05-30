@@ -94,17 +94,46 @@ $( document ).ready( function( ) {
 
     $( '.btn-cancel' ).on( 'click', function( ) {
         var message = "Are you sure to leave this page? All unsaved data will be lost&hellip;";
-        var that = $(this);
+        var that = $( this );
         bootbox.confirm( message, function( result ) {
             if( result == true ) {
-                window.location.replace( that.data('back-to') );
+                window.location.replace( that.data( 'back-to' ) );
             }
         } );
     } );
 
+    $( 'a.user_delete_action' ).on( 'click', function( ev ) {
+        ev.preventDefault( );
+        var that = $( this );
+        bootbox.dialog( {
+            message: "The user &quot;" + that.data( 'user' ) + "&quot; will be permanently deleted. Are you sure?",
+            title: "Please confirm",
+            className: "bootbox-modal",
+            buttons: {
+                cancel: {
+                    label: "Cancel",
+                    className: "btn-default",
+                    callback: function( ) {
+                    }
+                },
+                confirm: {
+                    label: "Delete",
+                    className: "btn-danger",
+                    callback: function( ) {
+                        if( !$( '#dynamic_form' ).length ) {
+                            $( "body" ).append( '<form id="dynamic_form" action="" method="post"></form>' );
+                        }
+                        $( '#dynamic_form' ).attr( 'method', 'post' ).attr( 'action', that.data( 'url' ) ).submit( );
+                    }
+                },
+            }
+        } );
+
+    } );
+
     $( '.upload-file' ).bootstrapFileInput( );
     $( 'a.upload-delete' ).on( 'click', function( ev ) {
-        $( "#uploadsRight" ).closeMbExtruder();
+        $( "#uploadsRight" ).closeMbExtruder( );
         ev.preventDefault( );
         var that = $( this );
         bootbox.dialog( {
@@ -116,7 +145,7 @@ $( document ).ready( function( ) {
                     label: "Cancel",
                     className: "btn-default",
                     callback: function( ) {
-                    $( "#uploadsRight" ).openMbExtruder(true);
+                        $( "#uploadsRight" ).openMbExtruder( true );
                     }
                 },
                 confirm: {

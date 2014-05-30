@@ -4,14 +4,12 @@
 {% block info_block %}
 <section class="info">
     {% if request.user.get_group == co.ADMIN_GROUP %}
-        {% if action_label == "writers" %}
-        <a href="{% url 'user_new_writer' %}?group_name={{co.WRITER_GROUP}}" class="btn btn-info btn-lg pull-right" role="button">
-            <i class='fa fa-plus-circle fa-lg irm'></i>add writer</a>
-        {% endif %}
-        {% if action_label == "editors" %}
-        <a href="{% url 'user_new_editor' %}?group_name={{co.EDITOR_GROUP}}" class="btn btn-info btn-lg pull-right" role="button">
-            <i class='fa fa-plus-circle fa-lg irm'></i>add editor</a>
-        {% endif %}
+    {% if action_label == "writers" %}
+    <a href="{% url 'user_new_writer' %}?group_name={{co.WRITER_GROUP}}" class="btn btn-info btn-lg pull-right" role="button"> <i class='fa fa-plus-circle fa-lg irm'></i>add writer</a>
+    {% endif %}
+    {% if action_label == "editors" %}
+    <a href="{% url 'user_new_editor' %}?group_name={{co.EDITOR_GROUP}}" class="btn btn-info btn-lg pull-right" role="button"> <i class='fa fa-plus-circle fa-lg irm'></i>add editor</a>
+    {% endif %}
     {% endif %}
     <h2><i class="fa fa-users irm"></i> {{action_label}} <span class="badge" style="font-size:.6em;text-shadow:none;margin-left:1em;vertical-align:middle">{{users|length}}</span></h2>
 </section>
@@ -25,6 +23,9 @@
                 <tr>
                     <th>{% trans 'Username' %}</th>
                     <th>{% trans 'Created' %}</th>
+                    {% if request.user.get_group == co.ADMIN_GROUP %}
+                    <th>{% trans "Actions" %}</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +33,9 @@
                 <tr>
                     <td><a href="{% url 'user_details' user.pk %}">{{user.username}}</a></td>
                     <td>{{user.date_joined}}</td>
+                    {% if request.user.get_group == co.ADMIN_GROUP %}
+                    <td><a href="#" title="Delete {{user.username}}" class="user_delete_action" data-user="{{user.username}}" data-url="{% url "user_remove" user.pk %}"><i class="fa fa-times-circle fa-lg text-danger"></i></a></td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
@@ -41,5 +45,8 @@
         </table>
     </div>
 </div>
+<form id="dynamic_form" style="display:none">
+    {% csrf_token %}
+</form>
 {% endif  %}
 {% endblock %}
