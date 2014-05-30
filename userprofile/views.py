@@ -5,6 +5,8 @@ from django.views.generic.edit import DeleteView
 from django.views.generic.edit import UpdateView
 from django.views.generic import DetailView
 from django.views.generic import TemplateView,ListView
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 from general.views import BaseView
 from django.core.urlresolvers import reverse_lazy
@@ -63,11 +65,6 @@ class ListProfileView(BaseView, ListView):
   template_name = 'userprofile/index.html'
 
 
-class DetailProfileView(BaseView, DetailView):
-  queryset = UserProfile.objects.all()
-  template_name = 'userprofile/details.html'
-
-
 class UpdateProfileView(BaseView, UpdateView):
   template_name = 'userprofile/edit.html'
   form_class = ProfileForm
@@ -87,9 +84,23 @@ class UpdateProfileView(BaseView, UpdateView):
 
 class RemoveProfileView(BaseView, DeleteView):
   queryset = UserProfile.objects.all()
-  success_url = reverse_lazy('task_list')
   template_name = 'userprofile/delete.html'
   owner_required = True
+
+  def get_success_url(self):
+    group = self.object.get_group()
+    if group == co.ADMIN_GROUP:
+      return reverse_lazy('admins')
+    elif group == co.EDITOR_GROUP:
+      return reverse_lazy('editors')
+    elif group == co.WRITER_GROUP:
+      return reverse_lazy('writers')
+    else:
+      return reverse_lazy('customers')
+
+  def form_invalid(self, form):
+    messages.add_message(self.request, messages.ERROR, str(form.errors))
+    return HttpResponseRedirect(self.get_success_url())
 
   def user_id(self):
     return self.get_object().pk
