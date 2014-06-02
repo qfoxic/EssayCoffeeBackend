@@ -18,7 +18,7 @@
     <tbody>
         {% for u in uploads  %}
         <tr>
-            <td><a href="{% url "upload_download" u.pk %}">{{u.attach.name}}</a></td>
+            <td><a href="{% url "upload_download" u.pk %}">{{u.get_filename}}</a></td>
             <td><a href="{% url "user_edit" u.fowner.pk %}">{{u.fowner}}</a></td>
             <td>
             <div>

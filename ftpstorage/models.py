@@ -28,6 +28,12 @@ class Upload(BaseModel):
   class Meta:
     db_table = 'uploads'
 
+  def get_filename(self):
+    try:
+      return self.attach.name and self.attach.name.split('/')[1]
+    except:
+      return  self.attach.name
+
   def delete(self, using=None):
     self.attach.delete()
     super(Upload, self).delete(using)
