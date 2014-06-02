@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% load i18n %}
+{% load i18n render_status %}
 {% block pagetitle %}All Users{% endblock %}
 {% block info_block %}
 <section class="info">
@@ -42,7 +42,7 @@
                     <td>{{user.last_name}}</td>
                     <td>{{user.phone}}</td>
                     <td>{{user.email}}</td>
-                    <td>0 link to all user orders</td>
+                    <td>{{ user_tasks|dget:user.pk|default:0 }}</td>
                     <td>users site</td>
                     <td>{{user.date_joined}}</td>
                     {% if request.user.get_group == co.ADMIN_GROUP %}

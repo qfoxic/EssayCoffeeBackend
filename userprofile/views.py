@@ -7,8 +7,10 @@ from django.views.generic import DetailView
 from django.views.generic import TemplateView,ListView
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.db.models import Count
 
 from general.views import BaseView
+from general.models import Task
 from django.core.urlresolvers import reverse_lazy
 
 from userprofile.models import UserProfile
@@ -62,6 +64,14 @@ class CreateProfileView(BaseView, CreateView):
 class ListProfileView(BaseView, ListView):
   queryset = UserProfile.objects.all()
   template_name = 'userprofile/index.html'
+
+  def get_context_data(self, **kwargs):
+    context = super(ListProfileView, self).get_context_data(**kwargs)
+    tasks_per_user = dict(Task.objects.all().values('owner').annotate(
+                          tasks=Count('owner')).values_list('owner', 'tasks'))
+    # Count of user's tasks.
+    context['user_tasks'] = tasks_per_user
+    return context
 
 
 class DetailProfileView(BaseView, DetailView):

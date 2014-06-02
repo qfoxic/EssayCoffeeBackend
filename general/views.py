@@ -268,7 +268,7 @@ class TaskIndexView(BaseView, ListView):
   """Displays all tasks for signed users."""
   template_name = 'tasks/index.html'
   context_object_name = 'tasks'
-  
+
 
 class UpdateTaskView(BaseView, UpdateView):
   template_name = 'tasks/edit.html'
