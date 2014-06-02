@@ -9,7 +9,7 @@ class UserProfile(BaseModel, User):
   country = models.CharField(choices=co.COUNTRIES, max_length=co.TITLE_MAX_LEN,
                              default=co.COUNTRIES[0])
   phone = models.CharField(max_length=co.TITLE_MAX_LEN)
-
+  site = models.CharField(max_length=co.TITLE_MAX_LEN, null=True, blank=True)
   updated = models.DateTimeField(auto_now=True)
   objects = UserManager()
 

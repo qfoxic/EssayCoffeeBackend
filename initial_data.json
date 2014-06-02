@@ -334,6 +334,7 @@
   "fields": {
     "updated": "2014-04-15T14:30:00Z", 
     "gender": 1, 
+    "site": null, 
     "phone": "123", 
     "groups": [], 
     "country": "ua", 
@@ -346,6 +347,7 @@
   "fields": {
     "updated": "2014-04-15T12:31:36Z", 
     "gender": 0, 
+    "site": null, 
     "phone": "1111", 
     "groups": [
       1
@@ -360,6 +362,7 @@
   "fields": {
     "updated": "2014-04-15T12:32:00Z", 
     "gender": 0, 
+    "site": "customers.yourseller.com:8081", 
     "phone": "1111", 
     "groups": [
       3
@@ -374,6 +377,7 @@
   "fields": {
     "updated": "2014-04-15T12:32:25Z", 
     "gender": 0, 
+    "site": null, 
     "phone": "1111", 
     "groups": [
       4
@@ -388,6 +392,7 @@
   "fields": {
     "updated": "2014-04-15T12:32:55Z", 
     "gender": 0, 
+    "site": null, 
     "phone": "1111", 
     "groups": [
       2
@@ -402,6 +407,7 @@
   "fields": {
     "updated": "2014-04-15T15:11:26Z", 
     "gender": 0, 
+    "site": null, 
     "phone": "123", 
     "groups": [
       1

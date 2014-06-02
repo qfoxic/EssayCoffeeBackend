@@ -412,6 +412,7 @@ CREATE TABLE `user_profiles` (
   `gender` smallint(6) NOT NULL,
   `country` varchar(100) NOT NULL,
   `phone` varchar(100) NOT NULL,
+  `site` varchar(100) DEFAULT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`user_ptr_id`),
   CONSTRAINT `user_ptr_id_refs_id_738769bc` FOREIGN KEY (`user_ptr_id`) REFERENCES `auth_user` (`id`)
@@ -424,7 +425,7 @@ CREATE TABLE `user_profiles` (
 
 LOCK TABLES `user_profiles` WRITE;
 /*!40000 ALTER TABLE `user_profiles` DISABLE KEYS */;
-INSERT INTO `user_profiles` VALUES (1,1,'ua','123','2014-04-15 14:30:00'),(2,0,'AF','1111','2014-04-15 12:31:36'),(3,0,'AF','1111','2014-04-15 12:32:00'),(4,0,'AF','1111','2014-04-15 12:32:25'),(5,0,'AF','1111','2014-04-15 12:32:55'),(6,0,'AF','123','2014-04-15 15:11:26');
+INSERT INTO `user_profiles` VALUES (1,1,'ua','123',NULL,'2014-04-15 14:30:00'),(2,0,'AF','1111',NULL,'2014-04-15 12:31:36'),(3,0,'AF','1111','customers.yourseller.com:8081','2014-04-15 12:32:00'),(4,0,'AF','1111',NULL,'2014-04-15 12:32:25'),(5,0,'AF','1111',NULL,'2014-04-15 12:32:55'),(6,0,'AF','123',NULL,'2014-04-15 15:11:26');
 /*!40000 ALTER TABLE `user_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

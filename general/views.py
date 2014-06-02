@@ -193,7 +193,7 @@ class LoginView(BaseView, TemplateView):
   def render_to_response(self, context, **response_kwargs):
     context.update(self.settings)
     return login(request=self.request, template_name=self.get_template_names(),
-        extra_context=context)
+                 extra_context=context)
 
   def post(self, *args, **kwargs):
     kwargs.update(self.settings)
