@@ -60,7 +60,10 @@ class DownloadFileView(BaseView):
 
   def get(self, *args, **kwargs):
     try:
-      return serve(self.request, self.upload.attach.name)
+      request = serve(self.request, self.upload.attach.name)
+      filename = self.upload.attach.name and self.upload.attach.name.split('/')[1]
+      request['Content-Disposition'] = 'attachment; filename=%s' % filename 
+      return request 
     except Exception, e:
       messages.add_message(self.request, messages.ERROR, str(e))
       return HttpResponseRedirect(reverse('task_view', kwargs={'pk': self.upload.ftask.pk}))

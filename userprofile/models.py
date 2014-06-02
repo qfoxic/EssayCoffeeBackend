@@ -26,6 +26,9 @@ class UserProfile(BaseModel, User):
       return self.groups.values_list('name', flat=True)[0]
     except:
       return ''
+  
+  def get_country(self):
+    return co.COUNTRIES_DICT.get(self.country)
 
   class Meta:
     db_table = 'user_profiles'

@@ -60,9 +60,13 @@ class CreateProfileView(BaseView, CreateView):
 
 
 class ListProfileView(BaseView, ListView):
-  module_name = ''
   queryset = UserProfile.objects.all()
   template_name = 'userprofile/index.html'
+
+
+class DetailProfileView(BaseView, DetailView):
+  template_name = 'userprofile/detail.html' 
+  queryset = UserProfile.objects.all()
 
 
 class UpdateProfileView(BaseView, UpdateView):
@@ -70,7 +74,6 @@ class UpdateProfileView(BaseView, UpdateView):
   form_class = ProfileForm
   queryset = UserProfile.objects.all()
   group_name = ''
-  owner_required = True
 
   def get_form_kwargs(self):
     kwargs = super(UpdateProfileView, self).get_form_kwargs()
@@ -85,7 +88,6 @@ class UpdateProfileView(BaseView, UpdateView):
 class RemoveProfileView(BaseView, DeleteView):
   queryset = UserProfile.objects.all()
   template_name = 'userprofile/delete.html'
-  owner_required = True
 
   def get_success_url(self):
     group = self.object.get_group()

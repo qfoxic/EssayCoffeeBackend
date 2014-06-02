@@ -11,7 +11,7 @@ from reports.views import CreateReportView,RemoveReportView
 
 from administer.views import AdminForceSwitchStatusView
 
-from userprofile.views import CreateProfileView, UpdateProfileView, ListProfileView, RemoveProfileView
+from userprofile.views import CreateProfileView, UpdateProfileView, ListProfileView, RemoveProfileView, DetailProfileView
 from userprofile.models import UserProfile
 from msgs.views import CreateMsgView, RemoveMsgView, ListMsgsView,DetailMsgView,UpdateMsgView
 from ftpstorage.views import UploadFileView,RemoveUploadView,UpdateUploadView 
@@ -42,6 +42,9 @@ user_new_editor = login_required(CreateProfileView.as_view(module_name='administ
                                                            group_name=co.EDITOR_GROUP), login_url=reverse_lazy('login'))
 user_edit = login_required(UpdateProfileView.as_view(module_name='administer',
                                                      allowed_groups=[co.WRITER_GROUP,co.CUSTOMER_GROUP,co.EDITOR_GROUP,co.ADMIN_GROUP]),
+                           login_url=reverse_lazy('login'))
+user_detail = login_required(DetailProfileView.as_view(module_name='administer',
+                                                       allowed_groups=[co.WRITER_GROUP,co.CUSTOMER_GROUP,co.EDITOR_GROUP,co.ADMIN_GROUP]),
                            login_url=reverse_lazy('login'))
 user_remove = login_required(RemoveProfileView.as_view(module_name='administer', owner_required=False),
                              login_url=reverse_lazy('login'))
@@ -155,7 +158,7 @@ urlpatterns = patterns('',
     url(r'^profile/newwriter$', user_new_writer, name='user_new_writer'),
     url(r'^profile/neweditor$', user_new_editor, name='user_new_editor'),
     url(r'^profile/new$', user_new, name='user_new'),
-    url(r'^profile/(?P<pk>\d+)/$', user_edit, name='user_details'),
+    url(r'^profile/(?P<pk>\d+)/$', user_detail, name='user_details'),
     url(r'^profile/(?P<pk>\d+)/edit$', user_edit, name='user_edit'),
     url(r'^profile/(?P<pk>\d+)/remove$', user_remove, name='user_remove'),
 

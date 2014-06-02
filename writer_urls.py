@@ -6,7 +6,7 @@ from general.views import DetailTaskView,SwitchStatusView,LockTaskView
 from general.views import TaskIndexView, LoginView
 from general.models import Task
 
-from userprofile.views import UpdateProfileView
+from userprofile.views import DetailProfileView
 from msgs.views import CreateMsgView, RemoveMsgView, ListMsgsView,DetailMsgView
 from ftpstorage.views import UploadFileView,RemoveUploadView,UpdateUploadView 
 
@@ -14,7 +14,7 @@ import constants as co
 
 #user_new = CreateProfileView.as_view(module_name='writer',
 #                                     group_name=co.WRITER_GROUP)
-user_edit = login_required(UpdateProfileView.as_view(module_name='writer',
+user_edit = login_required(DetailProfileView.as_view(module_name='writer',
                                                      allowed_groups=[]),
                            login_url=reverse_lazy('login'))
 
@@ -90,7 +90,7 @@ urlpatterns = patterns('',
 
     #url(r'profile/new', user_new, name='user_new'),
     url(r'profile/(?P<pk>\d+)/$', user_edit, name='user_details'),
-    url(r'profile/(?P<pk>\d+)/edit$', user_edit, name='user_edit'),
+    #url(r'profile/(?P<pk>\d+)/edit$', user_edit, name='user_edit'),
 
     url(r'^login/$', LoginView.as_view(module_name='writer'), name='login'),
     url(r'', include('common_urls')),

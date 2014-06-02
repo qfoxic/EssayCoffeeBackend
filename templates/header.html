@@ -137,7 +137,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.username %}
                     <li class="{% active request 'profile' %}">
-                        <a href="{% url "user_edit" user.pk %}"><i class='fa fa-male fa-lg' style="margin-right:.5em"></i>{% trans "Profile" %} <sup style="border-bottom: 1px dotted">{{user.username}}</sup></a>
+                        <a href="{% url "user_details" user.pk %}"><i class='fa fa-male fa-lg' style="margin-right:.5em"></i>{% trans "Profile" %} <sup style="border-bottom: 1px dotted">{{user.username}}</sup></a>
                     </li>
                     {% endif %}
                     {% if user.username %}

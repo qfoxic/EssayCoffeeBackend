@@ -21,7 +21,13 @@
         <table class="table table-hover tablesorter">
             <thead>
                 <tr>
-                    <th>{% trans 'Username' %}</th>
+                    <th>{% trans 'Login' %}</th>
+                    <th>{% trans 'Name' %}</th>
+                    <th>{% trans 'Surname' %}</th>
+                    <th>{% trans 'Phone Number' %}</th>
+                    <th>{% trans 'Email' %}</th>
+                    <th>{% trans 'Amount of orders' %}</th>
+                    <th>{% trans 'Site' %}</th>
                     <th>{% trans 'Created' %}</th>
                     {% if request.user.get_group == co.ADMIN_GROUP %}
                     <th>{% trans "Actions" %}</th>
@@ -32,6 +38,12 @@
                 {% for user in users %}
                 <tr>
                     <td><a href="{% url 'user_details' user.pk %}">{{user.username}}</a></td>
+                    <td>{{user.first_name}}</td>
+                    <td>{{user.last_name}}</td>
+                    <td>{{user.phone}}</td>
+                    <td>{{user.email}}</td>
+                    <td>0 link to all user orders</td>
+                    <td>users site</td>
                     <td>{{user.date_joined}}</td>
                     {% if request.user.get_group == co.ADMIN_GROUP %}
                     <td><a href="#" title="Delete {{user.username}}" class="user_delete_action" data-user="{{user.username}}" data-url="{% url "user_remove" user.pk %}"><i class="fa fa-times-circle fa-lg text-danger"></i></a></td>

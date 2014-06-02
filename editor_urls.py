@@ -9,7 +9,7 @@ from general.models import Task
 from reports.views import CreateReportView,RemoveReportView 
 
 #from userprofile.views import CreateProfileView, UpdateProfileView, ListProfileView, DetailProfileView
-from userprofile.views import UpdateProfileView, ListProfileView
+from userprofile.views import UpdateProfileView, ListProfileView, DetailProfileView
 from userprofile.models import UserProfile
 
 from msgs.views import CreateMsgView, RemoveMsgView, ListMsgsView,DetailMsgView
@@ -25,7 +25,9 @@ writers = login_required(ListProfileView.as_view(module_name='editor',
 user_edit = login_required(UpdateProfileView.as_view(module_name='editor',
                                                      allowed_groups=[co.WRITER_GROUP]),
                            login_url=reverse_lazy('login'))
-user_detail = user_edit
+user_detail = login_required(DetailProfileView.as_view(module_name='editor',
+                                                       allowed_groups=[co.WRITER_GROUP]),
+                             login_url=reverse_lazy('login'))
 
 msg_add = login_required(CreateMsgView.as_view(module_name='editor'), login_url=reverse_lazy('login'))
 msg_rm = login_required(RemoveMsgView.as_view(module_name='editor'), login_url=reverse_lazy('login'))
@@ -108,8 +110,8 @@ urlpatterns = patterns('',
     #url(r'^report/(?P<pk>\d+)/remove$', report_rm, name='report_remove'),
 
     #url(r'profile/new', user_new, name='user_new'),
-    url(r'profile/(?P<pk>\d+)/$', user_detail, name='user_details'),
-    url(r'profile/(?P<pk>\d+)/edit$', user_edit, name='user_edit'),
+    url(r'^profile/(?P<pk>\d+)/$', user_detail, name='user_details'),
+    #url(r'profile/(?P<pk>\d+)/edit$', user_edit, name='user_edit'),
 
     url(r'^writers/$', writers, name='writers'),
 

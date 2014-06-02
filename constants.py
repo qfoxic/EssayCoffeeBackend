@@ -433,6 +433,7 @@ STYLES_DICT = dict(STYLES)
 LEVELS_DICT = dict(LEVELS)
 ASSIGMENTS_DICT = dict(ASSIGMENTS)
 DISCIPLINES_DICT = dict(DISCIPLINES)
+COUNTRIES_DICT = dict(COUNTRIES)
 
 # If task has public access then it will be visible to everyone.
 # private tasks are visible only for users from private group.

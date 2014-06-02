@@ -35,7 +35,7 @@
         <th class="sorter-text">{% trans 'Created' %}</th>
         <!-- <th class="sorter-text">{% trans 'Updated' %}</th> -->
         <th class="sorter-text">{% trans 'Urgency' %}</th>
-        <th class="sorter-text">{% trans 'Loc. time' %}</th>
+        <!--th class="sorter-text">{% trans 'Loc. time' %}</th -->
         <th class="sorter-text">{% trans 'Full DL' %}</th>
         <th class="sorter-text">{% trans 'Writer DL' %}</th>
         <th class="sorter-text">{% trans 'Revision' %}</th>
@@ -55,7 +55,7 @@
         <td>{% if task.editor %}<a href="{% url 'user_edit' task.editor.id %}">{{task.editor}}</a>{% endif %}</td>
         <td>{{task.created}}</td>
         <td>{{task.get_urgency}}</td>
-        <td>loc.time not implemented</td>
+        <!--td>loc.time not implemented</td-->
         <td class="momdl">{{task.admin_deadline}}</td>
         <td class="momdl">{{task.writer_deadline}}</td>
         <td>{{task.revision}}</td>

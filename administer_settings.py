@@ -26,11 +26,11 @@ SESSION_COOKIE_NAME = 'sessa'
 #SESSION_COOKIE_DOMAIN = '.admins.yourseller.net'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True 
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['admins.yourseller.net']
 
 
 # Application definition
