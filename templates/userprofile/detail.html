@@ -4,29 +4,76 @@
 {% block content %}
 <section class="container-fluid task-details" style="margin: 0 auto">
     <div class="row">
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-9">
-                <div>
-                    <h2>User Name: {{object.username}}</h2>
-                    <h2>First Name: {{object.first_name}}</h2>
-                    <h2>Last Name: {{object.last_name}}</h2>
-                    <h2>Email: {{object.email}}</h2>
-                    <h2>Phone: {{object.phone}}</h2>
-                    <h2>Country: {{object.get_country}}</h2>
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><abbr title="user name">{{object.username}}</abbr> profile details</h4>
                 </div>
-                {% if request.user.get_group == co.ADMIN_GROUP %}
-                <div class="col-md-6">
-                  <a href="{% url 'user_edit' object.pk %}" type="submit" class="btn btn-default btn-lg" role="button">
-                    <i class='fa fa-key fa-lg' style='margin-right:1em'></i>{% trans "Edit Profile" %}</a>
+                <div class="panel-body" style="margin: 0 1.5em">
+                    <div class="form-group">
+                        <label>{% trans "User name" %}</label>
+                        <div class="input-group input-group-lg margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            <div class="form-control">
+                                {{object.username}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{% trans "First name" %}</label>
+                        <div class="input-group input-group-lg margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-circle-o fa-fw"></i></span>
+                            <div class="form-control">
+                                {{object.first_name}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{% trans "Last name" %}</label>
+                        <div class="input-group input-group-lg margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-circle-o fa-fw"></i></span>
+                            <div class="form-control">
+                                {{object.last_name}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{% trans "Email" %}</label>
+                        <div class="input-group input-group-lg margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                            <div class="form-control">
+                                {{object.email}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{% trans "Phone" %}</label>
+                        <div class="input-group input-group-lg margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+                            <div class="form-control">
+                                {{object.phone}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{% trans "Country" %}</label>
+                        <div class="input-group input-group-lg margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-globe fa-fw"></i></span>
+                            <div class="form-control">
+                                {{object.get_country}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                {% endif %}
+            </div>
+
         </div>
     </div>
 </section>
 {% endblock %}
 {% block info_block %}
 <section class="info">
-    <h2>{% trans "User Details" %}</h2>
+    <h2>{% trans "User Details" %}
+    {% if request.user.get_group == co.ADMIN_GROUP %} <a href="{% url "user_edit" object.pk %}" title="{% trans "Edit profile" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a> {% endif %} </h2>
 </section>
 {% endblock %}
