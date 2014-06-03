@@ -73,7 +73,7 @@
 {% endblock %}
 {% block info_block %}
 <section class="info">
-    <h2>{% trans "User Details" %}
+    <h2><i class="fa fa-user irm"></i>{% trans "User Details" %}
     {% if request.user.get_group == co.ADMIN_GROUP %} <a href="{% url "user_edit" object.pk %}" title="{% trans "Edit profile" %}"><i class="fa fa-pencil-square-o" style="margin-left:.5em"></i></a> {% endif %} </h2>
 </section>
 {% endblock %}
