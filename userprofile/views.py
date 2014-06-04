@@ -19,10 +19,11 @@ import constants as co
 
 
 class ProfileForm(forms.ModelForm):
-  def __init__(self, group_name=None, user_id=None, *args, **kwargs):
+  def __init__(self, group_name=None, user_id=None, request=None, *args, **kwargs):
     super(ProfileForm, self).__init__(*args, **kwargs)
     self.group_name = group_name
     self.user_id = user_id
+    self.request = request
     if user_id:
       self.fields['password'].required = False
       self.fields['username'].required = False
@@ -30,7 +31,11 @@ class ProfileForm(forms.ModelForm):
   class Meta:
     model = UserProfile
     fields = ['username', 'password', 'first_name', 'last_name', 'email', 'gender',
-              'country', 'phone']
+              'country', 'phone', 'site']
+
+  def clean_site(self):
+    """Specifies default Host parameter."""
+    return self.request.get_host()
   
   def save(self, commit=True):
     if self.user_id:
@@ -58,6 +63,8 @@ class CreateProfileView(BaseView, CreateView):
   def get_form_kwargs(self):
     kwargs = super(CreateProfileView, self).get_form_kwargs()
     kwargs['group_name'] = self.group_name
+    kwargs['user_id'] = None
+    kwargs['request'] = self.request
     return kwargs
 
 
@@ -89,6 +96,7 @@ class UpdateProfileView(BaseView, UpdateView):
     kwargs = super(UpdateProfileView, self).get_form_kwargs()
     kwargs['group_name'] = self.group_name
     kwargs['user_id'] = self.user_id()
+    kwargs['request'] = self.request
     return kwargs
 
   def user_id(self):

@@ -59,7 +59,7 @@
     "is_active": true, 
     "is_superuser": false, 
     "is_staff": false, 
-    "last_login": "2014-04-22T11:53:10Z", 
+    "last_login": "2014-06-04T04:08:13Z", 
     "groups": [
       1
     ], 
@@ -316,6 +316,51 @@
 },
 {
   "pk": 1, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "assignee=<django.db.models.fields.related.RelatedManager object at 0xa7ad1ec>,country=AF,editor=<django.db.models.fields.related.RelatedManager object at 0xa7ad1ec>,manager=<django.db.models.fields.related.RelatedManager object at 0xa7ad94c>", 
+    "created": "2014-06-04T04:08:41Z", 
+    "fields": "assignee,country,editor,manager", 
+    "object_type": "UserProfile", 
+    "object_id": 2, 
+    "parent_id": 2, 
+    "howner": 2, 
+    "action_type": "change", 
+    "new_values": "assignee=<django.db.models.fields.related.RelatedManager object at 0xa7ad9cc>,country=AZ,editor=<django.db.models.fields.related.RelatedManager object at 0xa7ad94c>,manager=<django.db.models.fields.related.RelatedManager object at 0xa7adacc>"
+  }
+},
+{
+  "pk": 2, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "assignee=<django.db.models.fields.related.RelatedManager object at 0xb599dd8c>,country=AZ,editor=<django.db.models.fields.related.RelatedManager object at 0xb599dd8c>,manager=<django.db.models.fields.related.RelatedManager object at 0xb598230c>", 
+    "created": "2014-06-04T04:09:57Z", 
+    "fields": "assignee,country,editor,manager", 
+    "object_type": "UserProfile", 
+    "object_id": 2, 
+    "parent_id": 2, 
+    "howner": 2, 
+    "action_type": "change", 
+    "new_values": "assignee=<django.db.models.fields.related.RelatedManager object at 0xb599d74c>,country=BY,editor=<django.db.models.fields.related.RelatedManager object at 0xb599d74c>,manager=<django.db.models.fields.related.RelatedManager object at 0xb599d74c>"
+  }
+},
+{
+  "pk": 3, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "assignee=<django.db.models.fields.related.RelatedManager object at 0xb5bb5d2c>,country=BY,editor=<django.db.models.fields.related.RelatedManager object at 0xb5bb5d2c>,manager=<django.db.models.fields.related.RelatedManager object at 0xb5bb5e2c>", 
+    "created": "2014-06-04T04:10:57Z", 
+    "fields": "assignee,country,editor,manager", 
+    "object_type": "UserProfile", 
+    "object_id": 2, 
+    "parent_id": 2, 
+    "howner": 2, 
+    "action_type": "change", 
+    "new_values": "assignee=<django.db.models.fields.related.RelatedManager object at 0xb5bb5fec>,country=AT,editor=<django.db.models.fields.related.RelatedManager object at 0xb5bb5e2c>,manager=<django.db.models.fields.related.RelatedManager object at 0xb5bb5b6c>"
+  }
+},
+{
+  "pk": 1, 
   "model": "msgs.message", 
   "fields": {
     "body": "qqqq", 
@@ -334,7 +379,7 @@
   "fields": {
     "updated": "2014-04-15T14:30:00Z", 
     "gender": 1, 
-    "site": null, 
+    "site": "customers.yourseller.com:8081", 
     "phone": "123", 
     "groups": [], 
     "country": "ua", 
@@ -345,14 +390,14 @@
   "pk": 2, 
   "model": "userprofile.userprofile", 
   "fields": {
-    "updated": "2014-04-15T12:31:36Z", 
+    "updated": "2014-06-04T04:11:03Z", 
     "gender": 0, 
-    "site": null, 
+    "site": "customers.yourseller.com:8081", 
     "phone": "1111", 
     "groups": [
       1
     ], 
-    "country": "AF", 
+    "country": "AT", 
     "user_permissions": []
   }
 },
@@ -377,7 +422,7 @@
   "fields": {
     "updated": "2014-04-15T12:32:25Z", 
     "gender": 0, 
-    "site": null, 
+    "site": "customers.yourseller.com:8081", 
     "phone": "1111", 
     "groups": [
       4
@@ -392,7 +437,7 @@
   "fields": {
     "updated": "2014-04-15T12:32:55Z", 
     "gender": 0, 
-    "site": null, 
+    "site": "customers.yourseller.com:8081", 
     "phone": "1111", 
     "groups": [
       2
@@ -407,7 +452,7 @@
   "fields": {
     "updated": "2014-04-15T15:11:26Z", 
     "gender": 0, 
-    "site": null, 
+    "site": "customers.yourseller.com:8081", 
     "phone": "123", 
     "groups": [
       1
