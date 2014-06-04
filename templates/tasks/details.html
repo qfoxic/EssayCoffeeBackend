@@ -90,16 +90,8 @@
                     {% endif %}
                 </div>
             </div>
-            <!-- <div id="uploads">
-            {% if perm.can_message %}
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#write-a-message" style="font-size: 1.1em;width:100%;margin: -10px auto 10px">
-            Write a message <i class="fa fa-envelope-o  fa-lg ilm"></i>
-            </button>
-            {% endif %}
-            </div> -->
         </div>
         <div class="col-md-9">
-            <!-- <div class="task-details-inner"> -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="row small highlight">
@@ -207,7 +199,6 @@
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <ul class="dropdown-menu" role="menu" id="admin_actions_list" style="min-width:190px">
-                        <!-- style="min-width:245px" -->
                         <li>
                             <a href="javascript:void(0)" data-status="{{co.UNPROCESSED}}">{{co.UNPROCESSED|render_status}}<span class="ilm">{% trans "Unprocessed" %}</span></a>
                         </li>
@@ -252,7 +243,6 @@
                     <button type="button" data-status="{{co.SENT}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg" role="button">
                         {% trans "Send" %}<i class='fa fa-share-square-o' style="margin-left:.5em"></i>
                     </button>
-                    <!-- <a data-status="{{co.SENT}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg send" role="button"> {% trans "Send" %}&hellip; <i class='fa fa-upload' style="margin-left:.5em"></i> </a> -->
                     {% endif %}
                     {% if perm.can_reject %}
                     <button type="button" data-status="{{co.REJECTED}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-danger btn-lg" role="button">
@@ -343,7 +333,7 @@
 <div id="eventsRight" class="{title:' history '}">
     <table class="table table-hover table-condensed small" style="background-color:#fff;">
         <caption class="my">
-            History
+            <i class="fa fa-history fa-lg irm"></i>History
         </caption>
         <thead>
             <tr>
@@ -465,7 +455,7 @@
     {% if perm.can_upload %}
     <div class="well well-sm">
         <a class="pull-right uploads-add" href="javascript:void(0)"><i class="fa fa-plus-circle"></i></a>
-        <strong>{% trans "Upload a file" %}&hellip;</strong>
+        <i class="fa fa-upload fa-lg irm"></i><strong>{% trans "Upload a file" %}&hellip;</strong>
         <div id="uploads-form" style="display:none; margin-top:-10px">
             <form action="{% url "upload_file" object.pk %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -516,7 +506,7 @@
         {% if perm.can_report %}
         <div class="well well-sm">
             <a class="pull-right adm-report-add" href="javascript:void(0)"><i class="fa fa-plus-circle"></i></a>
-            <strong>{% trans "Admin reports"%}</strong><span class="ilm badge">{{reports|length}}</span>
+            <i class="fa fa-th-large fa-lg irm"></i><strong>{% trans "Admin reports"%}</strong><span class="ilm badge">{{reports|length}}</span>
             <div id="report-form" style="display:none">
                 <form action="{% url "report_new" object.pk %}" method="post">
                     {% csrf_token %}
