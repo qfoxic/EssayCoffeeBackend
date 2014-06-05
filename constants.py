@@ -387,6 +387,31 @@ COUNTRIES = (
   ('EH', 'Western Sahara'),  ('YE', 'Yemen'),
   ('ZM', 'Zambia'),  ('ZW', 'Zimbabwe'))
 
+MAX_PAGE_PRICE = 40.00
+ITEMS_PERCENTS = {
+  # Max 33%
+  'assigments': {
+    'es': 0.2, 're': 0.1, 'ab': 0.15,
+    'an': 0.14, 'rw': 0.13, 'cs': 0.18
+  },
+  # Max 33%
+  'levels': {
+    'hs': 0.24, 'co': 0.26, 'un': 0.28,
+    'ms': 0.3, 'ph': 0.33
+  },
+  # Max 33%.
+  'urgency': {
+    21600: 0.33, 43200: 0.32, 86400: 0.31, 172800: 0.3,
+    259200: 0.29, 518400: 0.28, 1036800: 0.27,
+    2073600: 0.26
+  },
+  # single 100%, double 0%.
+  'spacing': {
+    1: 1.0,
+    2: 0.0
+  }
+    
+}
 
 DISCIPLINES = (
   (0, '- Please choose -'),

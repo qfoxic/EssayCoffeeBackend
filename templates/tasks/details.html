@@ -55,7 +55,7 @@
                     <br>
                     <i class="fa fa-credit-card fa-fw irm"></i><strong>{% trans "Payment" %}</strong>: <em>{{object.get_payment_status}}</em>
                     <br>
-                    <i class="fa fa-money fa-fw irm"></i><strong>{% trans "Price" %}</strong>: <em>{{object.price}}</em>
+                    <i class="fa fa-money fa-fw irm"></i><strong>{% trans "Price" %}</strong>: <em>{{object.get_price}}$</em>
                     <br>
                     <i class="fa fa-exclamation-circle fa-fw irm"></i><strong>{% trans "Priority" %}</strong>: <em>{{object.priority}}</em>
                     {% elif site == 'editor' %}
@@ -78,7 +78,7 @@
                     <br>
                     <i class="fa fa-credit-card fa-fw irm"></i><strong>{% trans "Payment" %}</strong>: <em>{{object.get_payment_status}}</em>
                     <br>
-                    <i class="fa fa-money fa-fw irm"></i><strong>{% trans "Price" %}</strong>: <em>{{object.price}}</em>
+                    <i class="fa fa-money fa-fw irm"></i><strong>{% trans "Price" %}</strong>: <em>{{object.get_price}}$</em>
                     <br>
                     {% elif site == 'writer' %}
                     <i class="fa fa-star-half-o fa-fw irm"></i><strong>{% trans "Mark" %}</strong>: <em>{{object.mark}}</em>
@@ -231,7 +231,7 @@
                     {% endif %}
                     {% if perm.can_submit %}
                     <button type="submit" data-status="{{co.UNPROCESSED}}" data-url="{% url 'task_status' object.pk %}" class="btn btn-primary btn-lg" role="button">
-                        {% trans "Submit" %}<i class='fa fa-check-circle' style="margin-left:.5em"></i>
+                        {% trans "Buy" %}  {{object.get_price}}$<i class='fa fa-check-circle' style="margin-left:.5em"></i>
                     </button>
                     {% endif %}
                     {% if perm.can_complete %}
