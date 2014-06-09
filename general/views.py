@@ -184,14 +184,6 @@ class BaseView(View):
     }
     context['stats'] = get_stats(self.request)
     context['action_label'] = self.action_label
-    #import pdb; pdb.set_trace()
-    #if self.request.get('json'):
-    #return HttpResponse(context)
-    if self.request.get('type') == 'json':
-      c = RequestContext(self.request,{'result':json.dumps(context)})
-      t = Template("{{result}}") # A dummy template
-      response = HttpResponse(t.render(c), mimetype = u'application/json')
-      return response
     return super(BaseView, self).render_to_response(context, **response_kwargs)
 
   def get_template_names(self):
