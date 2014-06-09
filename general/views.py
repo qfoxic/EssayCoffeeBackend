@@ -8,6 +8,9 @@ from django.contrib.auth.views import password_reset_done, password_reset_confir
 from django.core.urlresolvers import reverse_lazy
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.http import HttpResponse
+from django.template import RequestContext, Template
+import json
 
 from general.models import Task
 from userprofile.models import UserProfile
@@ -181,6 +184,14 @@ class BaseView(View):
     }
     context['stats'] = get_stats(self.request)
     context['action_label'] = self.action_label
+    #import pdb; pdb.set_trace()
+    #if self.request.get('json'):
+    #return HttpResponse(context)
+    if self.request.get('type') == 'json':
+      c = RequestContext(self.request,{'result':json.dumps(context)})
+      t = Template("{{result}}") # A dummy template
+      response = HttpResponse(t.render(c), mimetype = u'application/json')
+      return response
     return super(BaseView, self).render_to_response(context, **response_kwargs)
 
   def get_template_names(self):
