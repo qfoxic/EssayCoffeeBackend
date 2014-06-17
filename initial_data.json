@@ -150,9 +150,30 @@
   }
 },
 {
+  "pk": 7, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "Customer10", 
+    "first_name": "Customer", 
+    "last_name": "Customer", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": false, 
+    "last_login": "2014-06-05T11:57:47Z", 
+    "groups": [
+      3
+    ], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$12000$UCjfkJ9H5Agm$plRMF4kSyIkTr2qvrZ2Z++SSEW5SWAI/0mqHblmb1lo=", 
+    "email": "cust@gmail.com", 
+    "date_joined": "2014-06-05T11:57:37Z"
+  }
+},
+{
   "pk": 1, 
   "model": "general.task", 
   "fields": {
+    "payment_status": 1, 
     "site": "85.17.249.125:8089", 
     "assignee": null, 
     "manager": null, 
@@ -185,6 +206,7 @@
   "pk": 2, 
   "model": "general.task", 
   "fields": {
+    "payment_status": 1, 
     "site": "85.17.249.125:8089", 
     "assignee": null, 
     "manager": null, 
@@ -217,6 +239,7 @@
   "pk": 3, 
   "model": "general.task", 
   "fields": {
+    "payment_status": 1, 
     "site": "85.17.249.125:8089", 
     "assignee": null, 
     "manager": null, 
@@ -249,6 +272,7 @@
   "pk": 4, 
   "model": "general.task", 
   "fields": {
+    "payment_status": 1, 
     "site": "85.17.249.125:8089", 
     "assignee": null, 
     "manager": null, 
@@ -281,6 +305,7 @@
   "pk": 5, 
   "model": "general.task", 
   "fields": {
+    "payment_status": 1, 
     "site": "85.17.249.125:8089", 
     "assignee": null, 
     "manager": null, 
@@ -307,6 +332,402 @@
     "created": "2014-04-16T13:26:29Z", 
     "urgency": 86400, 
     "paper_title": "qqqqqqqq"
+  }
+},
+{
+  "pk": 6, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "85.17.249.125:8089", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 1, 
+    "owner": 3, 
+    "discipline": "ln", 
+    "style": 2, 
+    "assigment": "ab", 
+    "mark": null, 
+    "priority": false, 
+    "access_level": "1", 
+    "page_number": 1, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 4, 
+    "updated": "2014-06-05T06:09:25Z", 
+    "completed": null, 
+    "spacing": 1, 
+    "discount": "", 
+    "accept_terms": true, 
+    "instructions": "first calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for pricefirst calculation for price", 
+    "level": "hs", 
+    "created": "2014-06-05T05:43:04Z", 
+    "urgency": 21600, 
+    "paper_title": "first calculation of price"
+  }
+},
+{
+  "pk": 7, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "customers.yourseller.net:8081", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 1, 
+    "owner": 7, 
+    "discipline": "ln", 
+    "style": 3, 
+    "assigment": "es", 
+    "mark": null, 
+    "priority": false, 
+    "access_level": "1", 
+    "page_number": 1, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 7, 
+    "updated": "2014-06-06T14:31:03Z", 
+    "completed": null, 
+    "spacing": 2, 
+    "discount": "1", 
+    "accept_terms": true, 
+    "instructions": "Paper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper title", 
+    "level": "ph", 
+    "created": "2014-06-05T11:58:31Z", 
+    "urgency": 2073600, 
+    "paper_title": "Paper title"
+  }
+},
+{
+  "pk": 8, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "customers.yourseller.net:8081", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 1, 
+    "owner": 7, 
+    "discipline": "ln", 
+    "style": 3, 
+    "assigment": "es", 
+    "mark": null, 
+    "priority": false, 
+    "access_level": "1", 
+    "page_number": 1, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 4, 
+    "updated": "2014-06-05T11:59:25Z", 
+    "completed": null, 
+    "spacing": 1, 
+    "discount": "1", 
+    "accept_terms": true, 
+    "instructions": "Paper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper title", 
+    "level": "co", 
+    "created": "2014-06-05T11:59:25Z", 
+    "urgency": 2073600, 
+    "paper_title": "paper 1 1"
+  }
+},
+{
+  "pk": 9, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "customers.yourseller.net:8081", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 1, 
+    "owner": 7, 
+    "discipline": "ln", 
+    "style": 3, 
+    "assigment": "es", 
+    "mark": null, 
+    "priority": false, 
+    "access_level": "1", 
+    "page_number": 1, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 7, 
+    "updated": "2014-06-05T12:00:56Z", 
+    "completed": null, 
+    "spacing": 1, 
+    "discount": "1", 
+    "accept_terms": true, 
+    "instructions": "Paper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper titlePaper title", 
+    "level": "co", 
+    "created": "2014-06-05T11:59:50Z", 
+    "urgency": 2073600, 
+    "paper_title": "paper title"
+  }
+},
+{
+  "pk": 10, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "customers.yourseller.net:8081", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 0, 
+    "owner": 7, 
+    "discipline": "hs", 
+    "style": 1, 
+    "assigment": "es", 
+    "mark": null, 
+    "priority": false, 
+    "access_level": "1", 
+    "page_number": 1, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 4, 
+    "updated": "2014-06-05T12:05:02Z", 
+    "completed": null, 
+    "spacing": 2, 
+    "discount": "", 
+    "accept_terms": true, 
+    "instructions": "esssay 1 p, 24+ deadline, 0 references MLA, double spaceesssay 1 p, 24+ deadline, 0 references MLA, double spaceesssay 1 p, 24+ deadline, 0 references MLA, double spaceesssay 1 p, 24+ deadline, 0 references MLA, double spaceesssay 1 p, 24+ deadline, 0 references MLA, double spaceesssay 1 p, 24+ deadline, 0 references MLA, double space", 
+    "level": "hs", 
+    "created": "2014-06-05T12:05:02Z", 
+    "urgency": 2073600, 
+    "paper_title": "esssay 1 p, 24+ deadline, 0 references MLA, double space"
+  }
+},
+{
+  "pk": 11, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "customers.yourseller.net:8081", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 1, 
+    "owner": 7, 
+    "discipline": "hs", 
+    "style": 1, 
+    "assigment": "cs", 
+    "mark": null, 
+    "priority": false, 
+    "access_level": "1", 
+    "page_number": 1, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 4, 
+    "updated": "2014-06-05T12:06:45Z", 
+    "completed": null, 
+    "spacing": 2, 
+    "discount": "", 
+    "accept_terms": true, 
+    "instructions": "expensive essayexpensive essayexpensive essayexpensive essayexpensive essayexpensive essayexpensive essayexpensive essayexpensive essayexpensive essay", 
+    "level": "ph", 
+    "created": "2014-06-05T12:06:45Z", 
+    "urgency": 21600, 
+    "paper_title": "expensive essay"
+  }
+},
+{
+  "pk": 12, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "customers.yourseller.net:8081", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 1, 
+    "owner": 7, 
+    "discipline": "pa", 
+    "style": 1, 
+    "assigment": "re", 
+    "mark": null, 
+    "priority": false, 
+    "access_level": "1", 
+    "page_number": 1, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 4, 
+    "updated": "2014-06-05T12:17:48Z", 
+    "completed": null, 
+    "spacing": 2, 
+    "discount": "1", 
+    "accept_terms": true, 
+    "instructions": "3 days, 1 page, university3 days, 1 page, university3 days, 1 page, university3 days, 1 page, university3 days, 1 page, university3 days, 1 page, university3 days, 1 page, university", 
+    "level": "un", 
+    "created": "2014-06-05T12:17:48Z", 
+    "urgency": 259200, 
+    "paper_title": "3 days, 1 page, university"
+  }
+},
+{
+  "pk": 13, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "customers.yourseller.net:8081", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 1, 
+    "owner": 7, 
+    "discipline": "pa", 
+    "style": 1, 
+    "assigment": "re", 
+    "mark": null, 
+    "priority": false, 
+    "access_level": "1", 
+    "page_number": 3, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 4, 
+    "updated": "2014-06-05T12:19:34Z", 
+    "completed": null, 
+    "spacing": 2, 
+    "discount": "", 
+    "accept_terms": true, 
+    "instructions": "3 days, 1 page, university3 days, 1 page, university3 days, 1 page, university3 days, 1 page, university3 days, 1 page, university3 days, 1 page, university3 days, 1 page, university", 
+    "level": "un", 
+    "created": "2014-06-05T12:19:34Z", 
+    "urgency": 259200, 
+    "paper_title": "3 days, 1 page, university3 days, 1 page, university3 days, 1 page, university3 days, 1 page, univer"
+  }
+},
+{
+  "pk": 14, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "customers.yourseller.net:8081", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 2, 
+    "owner": 3, 
+    "discipline": "hs", 
+    "style": 2, 
+    "assigment": "re", 
+    "mark": null, 
+    "priority": false, 
+    "access_level": "1", 
+    "page_number": 2, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 4, 
+    "updated": "2014-06-09T09:41:49Z", 
+    "completed": null, 
+    "spacing": 1, 
+    "discount": "", 
+    "accept_terms": true, 
+    "instructions": "asd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkjasd lkj", 
+    "level": "hs", 
+    "created": "2014-06-09T09:41:37Z", 
+    "urgency": 21600, 
+    "paper_title": "title"
+  }
+},
+{
+  "pk": 15, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "customers.yourseller.net:8081", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 1, 
+    "owner": 3, 
+    "discipline": "hs", 
+    "style": 1, 
+    "assigment": "es", 
+    "mark": null, 
+    "priority": false, 
+    "access_level": "1", 
+    "page_number": 12, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 4, 
+    "updated": "2014-06-13T14:44:04Z", 
+    "completed": null, 
+    "spacing": 2, 
+    "discount": "", 
+    "accept_terms": true, 
+    "instructions": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111v", 
+    "level": "co", 
+    "created": "2014-06-13T14:44:04Z", 
+    "urgency": 21600, 
+    "paper_title": "11111111111111111111111111111111"
+  }
+},
+{
+  "pk": 16, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "customers.yourseller.net:8081", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 1, 
+    "owner": 3, 
+    "discipline": "hs", 
+    "style": 1, 
+    "assigment": "es", 
+    "mark": null, 
+    "priority": false, 
+    "access_level": "1", 
+    "page_number": 1, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 4, 
+    "updated": "2014-06-13T14:44:31Z", 
+    "completed": null, 
+    "spacing": 2, 
+    "discount": "1", 
+    "accept_terms": true, 
+    "instructions": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111v", 
+    "level": "co", 
+    "created": "2014-06-13T14:44:31Z", 
+    "urgency": 21600, 
+    "paper_title": "11111111111111111111111111111111"
+  }
+},
+{
+  "pk": 17, 
+  "model": "general.task", 
+  "fields": {
+    "payment_status": 1, 
+    "site": "customers.yourseller.net:8081", 
+    "assignee": null, 
+    "manager": null, 
+    "source_number": 2, 
+    "owner": 3, 
+    "discipline": "hs", 
+    "style": 1, 
+    "assigment": "10", 
+    "mark": null, 
+    "priority": false, 
+    "access_level": "1", 
+    "page_number": 2, 
+    "editor": null, 
+    "ttype": 1, 
+    "revision": false, 
+    "status": 4, 
+    "updated": "2014-06-15T08:42:58Z", 
+    "completed": null, 
+    "spacing": 1, 
+    "discount": "", 
+    "accept_terms": true, 
+    "instructions": "222222222222222222222222222222    222222222222222222222222222222    222222222222222222222222222222    222222222222222222222222222222    222222222222222222222222222222    222222222222222222222222222222    222222222222222222222222222222    222222222222222222222222222222    222222222222222222222222222222    222222222222222222222222222222    222222222222222222222222222222    222222222222222222222222222222    222222222222222222222222222222    222222222222222222222222222222    ", 
+    "level": "hs", 
+    "created": "2014-06-15T08:42:58Z", 
+    "urgency": 43200, 
+    "paper_title": "222222"
   }
 },
 {
@@ -355,6 +776,501 @@
   }
 },
 {
+  "pk": 4, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-05T05:43:04Z", 
+    "fields": "", 
+    "object_type": "Task", 
+    "object_id": 6, 
+    "parent_id": null, 
+    "howner": 3, 
+    "action_type": "new", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 5, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "assigment=re,urgency=2073600", 
+    "created": "2014-06-05T05:50:58Z", 
+    "fields": "assigment,urgency", 
+    "object_type": "Task", 
+    "object_id": 6, 
+    "parent_id": 6, 
+    "howner": 3, 
+    "action_type": "change", 
+    "new_values": "assigment=ab,urgency=21600"
+  }
+},
+{
+  "pk": 6, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-05T06:09:03Z", 
+    "fields": "", 
+    "object_type": "Task", 
+    "object_id": 6, 
+    "parent_id": 6, 
+    "howner": 3, 
+    "action_type": "change", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 7, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "spacing=1", 
+    "created": "2014-06-05T06:09:16Z", 
+    "fields": "spacing", 
+    "object_type": "Task", 
+    "object_id": 6, 
+    "parent_id": 6, 
+    "howner": 3, 
+    "action_type": "change", 
+    "new_values": "spacing=2"
+  }
+},
+{
+  "pk": 8, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "spacing=2", 
+    "created": "2014-06-05T06:09:25Z", 
+    "fields": "spacing", 
+    "object_type": "Task", 
+    "object_id": 6, 
+    "parent_id": 6, 
+    "howner": 3, 
+    "action_type": "change", 
+    "new_values": "spacing=1"
+  }
+},
+{
+  "pk": 9, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "assignee=<django.db.models.fields.related.RelatedManager object at 0xac64b56c>,editor=<django.db.models.fields.related.RelatedManager object at 0xac64b56c>,manager=<django.db.models.fields.related.RelatedManager object at 0xac64b56c>", 
+    "created": "2014-06-05T11:57:37Z", 
+    "fields": "assignee,editor,manager", 
+    "object_type": "UserProfile", 
+    "object_id": 7, 
+    "parent_id": null, 
+    "howner": null, 
+    "action_type": "new", 
+    "new_values": "assignee=<django.db.models.fields.related.RelatedManager object at 0xabe090ec>,editor=<django.db.models.fields.related.RelatedManager object at 0xabe090ec>,manager=<django.db.models.fields.related.RelatedManager object at 0xac64b40c>"
+  }
+},
+{
+  "pk": 10, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "assignee=<django.db.models.fields.related.RelatedManager object at 0xac62b14c>,date_joined=2014-06-05 11:57:37+00:00,editor=<django.db.models.fields.related.RelatedManager object at 0xac62b1cc>,last_login=2014-06-05 11:57:37+00:00,manager=<django.db.models.fields.related.RelatedManager object at 0xac62b56c>,updated=2014-06-05 11:57:37+00:00", 
+    "created": "2014-06-05T11:57:37Z", 
+    "fields": "assignee,date_joined,editor,last_login,manager,updated", 
+    "object_type": "UserProfile", 
+    "object_id": 7, 
+    "parent_id": null, 
+    "howner": null, 
+    "action_type": "change", 
+    "new_values": "assignee=<django.db.models.fields.related.RelatedManager object at 0xac62b56c>,date_joined=2014-06-05 11:57:37.364090+00:00,editor=<django.db.models.fields.related.RelatedManager object at 0xac62b14c>,last_login=2014-06-05 11:57:37.364090+00:00,manager=<django.db.models.fields.related.RelatedManager object at 0xac62b14c>,updated=2014-06-05 11:57:37.536687+00:00"
+  }
+},
+{
+  "pk": 11, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "assignee=<django.db.models.fields.related.RelatedManager object at 0xac6c7aec>,editor=<django.db.models.fields.related.RelatedManager object at 0xac6c770c>,last_login=2014-06-05 11:57:37+00:00,manager=<django.db.models.fields.related.RelatedManager object at 0xac6c7a6c>", 
+    "created": "2014-06-05T11:57:47Z", 
+    "fields": "assignee,editor,last_login,manager", 
+    "object_type": "UserProfile", 
+    "object_id": 7, 
+    "parent_id": null, 
+    "howner": null, 
+    "action_type": "change", 
+    "new_values": "assignee=<django.db.models.fields.related.RelatedManager object at 0xac6c7a6c>,editor=<django.db.models.fields.related.RelatedManager object at 0xac6c7aec>,last_login=2014-06-05 11:57:47.403363+00:00,manager=<django.db.models.fields.related.RelatedManager object at 0xac6c7aec>"
+  }
+},
+{
+  "pk": 12, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-05T11:58:31Z", 
+    "fields": "", 
+    "object_type": "Task", 
+    "object_id": 7, 
+    "parent_id": null, 
+    "howner": 7, 
+    "action_type": "new", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 13, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-05T11:59:25Z", 
+    "fields": "", 
+    "object_type": "Task", 
+    "object_id": 8, 
+    "parent_id": null, 
+    "howner": 7, 
+    "action_type": "new", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 14, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-05T11:59:50Z", 
+    "fields": "", 
+    "object_type": "Task", 
+    "object_id": 9, 
+    "parent_id": null, 
+    "howner": 7, 
+    "action_type": "new", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 15, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "status=4", 
+    "created": "2014-06-05T12:00:53Z", 
+    "fields": "status", 
+    "object_type": "Task", 
+    "object_id": 9, 
+    "parent_id": 9, 
+    "howner": 7, 
+    "action_type": "change", 
+    "new_values": "status=7"
+  }
+},
+{
+  "pk": 16, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-05T12:05:02Z", 
+    "fields": "", 
+    "object_type": "Task", 
+    "object_id": 10, 
+    "parent_id": null, 
+    "howner": 7, 
+    "action_type": "new", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 17, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-05T12:06:45Z", 
+    "fields": "", 
+    "object_type": "Task", 
+    "object_id": 11, 
+    "parent_id": null, 
+    "howner": 7, 
+    "action_type": "new", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 18, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-05T12:17:48Z", 
+    "fields": "", 
+    "object_type": "Task", 
+    "object_id": 12, 
+    "parent_id": null, 
+    "howner": 7, 
+    "action_type": "new", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 19, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-05T12:19:34Z", 
+    "fields": "", 
+    "object_type": "Task", 
+    "object_id": 13, 
+    "parent_id": null, 
+    "howner": 7, 
+    "action_type": "new", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 20, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "level=co,page_number=2,urgency=43200", 
+    "created": "2014-06-05T12:20:30Z", 
+    "fields": "level,page_number,urgency", 
+    "object_type": "Task", 
+    "object_id": 7, 
+    "parent_id": 7, 
+    "howner": 7, 
+    "action_type": "change", 
+    "new_values": "level=hs,page_number=1,urgency=21600"
+  }
+},
+{
+  "pk": 21, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "spacing=1", 
+    "created": "2014-06-05T12:20:42Z", 
+    "fields": "spacing", 
+    "object_type": "Task", 
+    "object_id": 7, 
+    "parent_id": 7, 
+    "howner": 7, 
+    "action_type": "change", 
+    "new_values": "spacing=2"
+  }
+},
+{
+  "pk": 22, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "urgency=21600", 
+    "created": "2014-06-05T12:20:52Z", 
+    "fields": "urgency", 
+    "object_type": "Task", 
+    "object_id": 7, 
+    "parent_id": 7, 
+    "howner": 7, 
+    "action_type": "change", 
+    "new_values": "urgency=1036800"
+  }
+},
+{
+  "pk": 23, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "urgency=1036800", 
+    "created": "2014-06-05T12:21:05Z", 
+    "fields": "urgency", 
+    "object_type": "Task", 
+    "object_id": 7, 
+    "parent_id": 7, 
+    "howner": 7, 
+    "action_type": "change", 
+    "new_values": "urgency=2073600"
+  }
+},
+{
+  "pk": 24, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "level=hs", 
+    "created": "2014-06-05T12:21:25Z", 
+    "fields": "level", 
+    "object_type": "Task", 
+    "object_id": 7, 
+    "parent_id": 7, 
+    "howner": 7, 
+    "action_type": "change", 
+    "new_values": "level=ph"
+  }
+},
+{
+  "pk": 25, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "status=4", 
+    "created": "2014-06-06T14:31:03Z", 
+    "fields": "status", 
+    "object_type": "Task", 
+    "object_id": 7, 
+    "parent_id": 7, 
+    "howner": 7, 
+    "action_type": "change", 
+    "new_values": "status=7"
+  }
+},
+{
+  "pk": 26, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "access_level=1,status=7", 
+    "created": "2014-06-06T14:31:30Z", 
+    "fields": "access_level,status", 
+    "object_type": "Task", 
+    "object_id": 2, 
+    "parent_id": 2, 
+    "howner": 2, 
+    "action_type": "change", 
+    "new_values": "access_level=0,status=1"
+  }
+},
+{
+  "pk": 27, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-09T09:41:37Z", 
+    "fields": "", 
+    "object_type": "Task", 
+    "object_id": 14, 
+    "parent_id": null, 
+    "howner": 3, 
+    "action_type": "new", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 28, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "style=1", 
+    "created": "2014-06-09T09:41:49Z", 
+    "fields": "style", 
+    "object_type": "Task", 
+    "object_id": 14, 
+    "parent_id": 14, 
+    "howner": 3, 
+    "action_type": "change", 
+    "new_values": "style=2"
+  }
+},
+{
+  "pk": 29, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-09T09:42:25Z", 
+    "fields": "", 
+    "object_type": "Message", 
+    "object_id": 1, 
+    "parent_id": 1, 
+    "howner": 3, 
+    "action_type": "change", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 30, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-09T09:44:09Z", 
+    "fields": "", 
+    "object_type": "Upload", 
+    "object_id": 7, 
+    "parent_id": 6, 
+    "howner": 3, 
+    "action_type": "new", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 31, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "attach=customer/001_overview.pdf", 
+    "created": "2014-06-09T09:44:57Z", 
+    "fields": "attach", 
+    "object_type": "Upload", 
+    "object_id": 7, 
+    "parent_id": 7, 
+    "howner": 3, 
+    "action_type": "change", 
+    "new_values": "attach="
+  }
+},
+{
+  "pk": 32, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-09T09:44:57Z", 
+    "fields": "", 
+    "object_type": "Upload", 
+    "object_id": 7, 
+    "parent_id": 7, 
+    "howner": 3, 
+    "action_type": "delete", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 33, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "assignee=<django.db.models.fields.related.RelatedManager object at 0xa998764c>,editor=<django.db.models.fields.related.RelatedManager object at 0xa998764c>,last_login=2014-06-09 09:37:00+00:00,manager=<django.db.models.fields.related.RelatedManager object at 0xa998768c>", 
+    "created": "2014-06-13T14:43:25Z", 
+    "fields": "assignee,editor,last_login,manager", 
+    "object_type": "UserProfile", 
+    "object_id": 3, 
+    "parent_id": 3, 
+    "howner": 3, 
+    "action_type": "change", 
+    "new_values": "assignee=<django.db.models.fields.related.RelatedManager object at 0xa9987a8c>,editor=<django.db.models.fields.related.RelatedManager object at 0xa998768c>,last_login=2014-06-13 14:43:25.449557+00:00,manager=<django.db.models.fields.related.RelatedManager object at 0xa998728c>"
+  }
+},
+{
+  "pk": 34, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-13T14:44:04Z", 
+    "fields": "", 
+    "object_type": "Task", 
+    "object_id": 15, 
+    "parent_id": null, 
+    "howner": 3, 
+    "action_type": "new", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 35, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-13T14:44:31Z", 
+    "fields": "", 
+    "object_type": "Task", 
+    "object_id": 16, 
+    "parent_id": null, 
+    "howner": 3, 
+    "action_type": "new", 
+    "new_values": ""
+  }
+},
+{
+  "pk": 36, 
+  "model": "history.history", 
+  "fields": {
+    "old_values": "", 
+    "created": "2014-06-15T08:42:58Z", 
+    "fields": "", 
+    "object_type": "Task", 
+    "object_id": 17, 
+    "parent_id": null, 
+    "howner": 3, 
+    "action_type": "new", 
+    "new_values": ""
+  }
+},
+{
   "pk": 1, 
   "model": "msgs.message", 
   "fields": {
@@ -366,6 +1282,90 @@
     "visibility": 0, 
     "mowner": 3, 
     "mtask": 4
+  }
+},
+{
+  "pk": 1, 
+  "model": "ftpstorage.upload", 
+  "fields": {
+    "updated": "2014-06-05T05:43:04Z", 
+    "access_level": "1", 
+    "created": "2014-06-05T05:43:04Z", 
+    "ftask": 6, 
+    "attach": "customer/001_overview (3).pdf", 
+    "fowner": 3
+  }
+},
+{
+  "pk": 2, 
+  "model": "ftpstorage.upload", 
+  "fields": {
+    "updated": "2014-06-05T11:58:31Z", 
+    "access_level": "1", 
+    "created": "2014-06-05T11:58:31Z", 
+    "ftask": 7, 
+    "attach": "Customer10/APA Style.doc", 
+    "fowner": 7
+  }
+},
+{
+  "pk": 3, 
+  "model": "ftpstorage.upload", 
+  "fields": {
+    "updated": "2014-06-05T11:59:50Z", 
+    "access_level": "1", 
+    "created": "2014-06-05T11:59:50Z", 
+    "ftask": 9, 
+    "attach": "Customer10/APA Style_1.doc", 
+    "fowner": 7
+  }
+},
+{
+  "pk": 4, 
+  "model": "ftpstorage.upload", 
+  "fields": {
+    "updated": "2014-06-05T12:05:02Z", 
+    "access_level": "1", 
+    "created": "2014-06-05T12:05:02Z", 
+    "ftask": 10, 
+    "attach": "Customer10/Chicago author-date sample.doc", 
+    "fowner": 7
+  }
+},
+{
+  "pk": 5, 
+  "model": "ftpstorage.upload", 
+  "fields": {
+    "updated": "2014-06-05T12:06:45Z", 
+    "access_level": "1", 
+    "created": "2014-06-05T12:06:45Z", 
+    "ftask": 11, 
+    "attach": "Customer10/CONTRACT.doc", 
+    "fowner": 7
+  }
+},
+{
+  "pk": 6, 
+  "model": "ftpstorage.upload", 
+  "fields": {
+    "updated": "2014-06-09T09:41:38Z", 
+    "access_level": "1", 
+    "created": "2014-06-09T09:41:38Z", 
+    "ftask": 14, 
+    "attach": "customer/001_overview (3)_1.pdf", 
+    "fowner": 3
+  }
+},
+{
+  "pk": 8, 
+  "model": "ftpstorage.upload", 
+  "fields": {
+    "updated": "2014-06-15T08:42:58Z", 
+    "access_level": "1", 
+    "created": "2014-06-15T08:42:58Z", 
+    "ftask": 17, 
+    "attach": "customer/#9695137830 at the gate.-edited-remarks.doc", 
+    "fowner": 3
   }
 },
 {
@@ -451,6 +1451,21 @@
     "phone": "123", 
     "groups": [
       1
+    ], 
+    "country": "AF", 
+    "user_permissions": []
+  }
+},
+{
+  "pk": 7, 
+  "model": "userprofile.userprofile", 
+  "fields": {
+    "updated": "2014-06-05T11:57:37Z", 
+    "gender": 0, 
+    "site": "customers.yourseller.net:8081", 
+    "phone": "123567", 
+    "groups": [
+      3
     ], 
     "country": "AF", 
     "user_permissions": []
