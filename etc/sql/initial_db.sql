@@ -399,7 +399,6 @@ CREATE TABLE `tasks` (
   `instructions` longtext COLLATE utf16_unicode_ci NOT NULL,
   `discount` varchar(100) COLLATE utf16_unicode_ci DEFAULT NULL,
   `accept_terms` tinyint(1) NOT NULL,
-  `payment_status` smallint(6) NOT NULL,
   `priority` tinyint(1) NOT NULL,
   `site` longtext COLLATE utf16_unicode_ci,
   `ttype` smallint(6) NOT NULL,

@@ -153,7 +153,6 @@
   "pk": 1, 
   "model": "general.task", 
   "fields": {
-    "payment_status": 1, 
     "site": "85.17.249.125:8089", 
     "assignee": null, 
     "manager": null, 
@@ -186,7 +185,6 @@
   "pk": 2, 
   "model": "general.task", 
   "fields": {
-    "payment_status": 1, 
     "site": "85.17.249.125:8089", 
     "assignee": null, 
     "manager": null, 
@@ -219,7 +217,6 @@
   "pk": 3, 
   "model": "general.task", 
   "fields": {
-    "payment_status": 1, 
     "site": "85.17.249.125:8089", 
     "assignee": null, 
     "manager": null, 
@@ -252,7 +249,6 @@
   "pk": 4, 
   "model": "general.task", 
   "fields": {
-    "payment_status": 1, 
     "site": "85.17.249.125:8089", 
     "assignee": null, 
     "manager": null, 
@@ -285,7 +281,6 @@
   "pk": 5, 
   "model": "general.task", 
   "fields": {
-    "payment_status": 1, 
     "site": "85.17.249.125:8089", 
     "assignee": null, 
     "manager": null, 
