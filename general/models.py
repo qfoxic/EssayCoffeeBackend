@@ -76,7 +76,6 @@ class Task(BaseModel):
                                   validators=[ValidateMinSize(100)])
   discount = models.CharField(max_length=co.TITLE_MAX_LEN, null=True, blank=True)
   accept_terms = models.BooleanField(validators=[ValidateTerms])
-  payment_status = models.SmallIntegerField(choices=co.PAYMENT_STATUS, default=co.UNPAID)
   priority = models.BooleanField(default=False, blank=True)
   #######################################
   site = models.TextField(blank=True,null=True)
@@ -105,7 +104,6 @@ class Task(BaseModel):
     return self.paper_title
 
   get_status = lambda self: co.TASK_STATUSES_DICT.get(self.status)
-  get_payment_status = lambda self: co.PAYMENT_STATUS_DICT.get(self.payment_status)
   get_discipline = lambda self: co.DISCIPLINES_DICT.get(self.discipline)
   get_spacing = lambda self: co.SPACING_DICT.get(self.spacing)
   get_assigment = lambda self: co.ASSIGMENTS_DICT.get(self.assigment)
