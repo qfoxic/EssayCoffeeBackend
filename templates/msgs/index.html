@@ -29,7 +29,7 @@
                     <td><a href="{% url 'msg_detail' m.id %}">{{m.title}}</a></td>
                     <td>{{m.created}}</td>
                     <td><a href="{% url 'task_view' m.mtask.id %}">{{m.mtask.paper_title}}</a></td>
-                    <td><a href="{% url 'user_edit' m.mowner.id %}">{{m.mowner.username}}</a></td>
+                    <td><a href="{% url 'user_details' m.mowner.id %}">{{m.mowner.username}}</a></td>
                     <td>{{m.get_visibility}}</td>
                 </tr>
                 {% endfor %}

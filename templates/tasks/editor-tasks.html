@@ -51,8 +51,8 @@
         <!-- <td>{{task.status|render_status}} - {{task.status}}</td> -->
         <td>{{task.get_assigment}}</td>
         <td>{{task.mark}}</td>
-        <td>{% if task.assignee %}<a href="{% url 'user_edit' task.assignee.id %}">{{task.assignee}}</a>{% endif %}</td>
-        <td>{% if task.editor %}<a href="{% url 'user_edit' task.editor.id %}">{{task.editor}}</a>{% endif %}</td>
+        <td>{% if task.assignee %}<a href="{% url 'user_details' task.assignee.id %}">{{task.assignee}}</a>{% endif %}</td>
+        <td>{% if task.editor %}<a href="{% url 'user_details' task.editor.id %}">{{task.editor}}</a>{% endif %}</td>
         <td>{{task.created}}</td>
         <td>{{task.get_urgency}}</td>
         <!--td>loc.time not implemented</td-->

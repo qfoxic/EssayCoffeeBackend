@@ -35,11 +35,11 @@
                     {% if site == 'admin' %}
                     <i class="fa fa-globe fa-fw irm"></i><strong>{% trans "Site" %}</strong>: <em>{{object.site}}</em>
                     <br>
-                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Owner" %}</strong>: <em><a href="{% url 'user_edit' object.owner.id %}">{{object.owner}}</a></em>
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Owner" %}</strong>: <em><a href="{% url 'user_details' object.owner.id %}">{{object.owner}}</a></em>
                     <br>
-                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Manager" %}</strong>: <em> {% if object.manager %} <a href="{% url 'user_edit' object.manager.id %}">{{object.manager}}</a> {% endif %} </em>
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Manager" %}</strong>: <em> {% if object.manager %} <a href="{% url 'user_details' object.manager.id %}">{{object.manager}}</a> {% endif %} </em>
                     <br>
-                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em> {% if object.assignee %} <a href="{% url 'user_edit' object.assignee.id %}">{{object.assignee}}</a> {% endif %} </em>
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em> {% if object.assignee %} <a href="{% url 'user_details' object.assignee.id %}">{{object.assignee}}</a> {% endif %} </em>
                     <br>
                     <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Editor" %}</strong>: <em>{{object.writer}}</em>
                     <br>
@@ -59,9 +59,9 @@
                     <br>
                     <i class="fa fa-exclamation-circle fa-fw irm"></i><strong>{% trans "Priority" %}</strong>: <em>{{object.priority}}</em>
                     {% elif site == 'editor' %}
-                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em> {% if object.assignee %} <a href="{% url 'user_edit' object.assignee.id %}">{{object.assignee}}</a> {% endif %} </em>
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em> {% if object.assignee %} <a href="{% url 'user_details' object.assignee.id %}">{{object.assignee}}</a> {% endif %} </em>
                     <br>
-                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Editor" %}</strong>: <em> {% if object.editor %} <a href="{% url 'user_edit' object.editor.id %}">{{object.editor}}</a> {% endif %} </em>
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Editor" %}</strong>: <em> {% if object.editor %} <a href="{% url 'user_details' object.editor.id %}">{{object.editor}}</a> {% endif %} </em>
                     <br>
                     <i class="fa fa-clock-o fa-fw irm"></i><strong>{% trans "Local time" %}</strong>: <em>{{object.local_time}}</em>
                     <br>
@@ -347,7 +347,7 @@
         <tbody>
             {% for h in history %}
             <tr>
-                <td><a href="{% url "user_edit" h.howner_id %}">{{h.howner.username}}</a></td>
+                <td><a href="{% url "user_details" h.howner_id %}">{{h.howner.username}}</a></td>
                 <td>{% if h.object_type == "Message" %}<a href="{% url "msg_detail" h.object_id %}">{{h.object_type}}</a>{% else %}{{h.object_type}} [id:{{h.object_id}}]{% endif %}</td>
                 <td>{{h.action_type}}</td>
                 <td>{{h.created}}</td>
@@ -441,7 +441,7 @@
                 <td><i class="fa fa-envelope{% if not m|is_msg_new:request.user %}-o{% endif %}" title="{% if m|is_msg_new:request.user %}New message{% else %}Old message{% endif %}"></i></td>
                 <td><a href="{% url 'msg_detail' m.id %}">{{m.title}}</a></td>
                 <td>{{m.created}}</td>
-                <td><a href="{% url 'user_edit' m.mowner.id %}">{{m.mowner.username}}</a></td>
+                <td><a href="{% url 'user_details' m.mowner.id %}">{{m.mowner.username}}</a></td>
                 <td>{{m.get_visibility}}</td>
             </tr>
             {% endfor %}
