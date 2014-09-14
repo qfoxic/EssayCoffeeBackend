@@ -41,7 +41,7 @@ class MsgsForm(ModelForm):
   def check_permissions(self, cleaned_data):
     """Raises an exception if there are no permissions to save a form."""
     if not co.CheckPermissions(self.request.user,
-        self.cleaned_data['mtask'], co.CAN_MESSAGE):
+        self.cleaned_data['mtask'], co.CAN_MESSAGE, 'message'):
       raise ValidationError('You can not send a message.') 
  
   def clean(self):
