@@ -127,6 +127,13 @@ CAN_CH_VISIBILITY = 'can_visibility'
 # If specific permissions wasn't found here then it is concerned as not allowed.
 PERMISSIONS_TABLE = {
   'message': {
+  ADMIN_GROUP+str(DRAFT)+CAN_MESSAGE: 1,
+
+  # Unprocessed permissions.
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_DELETE: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_EDIT: 1,
+  ADMIN_GROUP+str(UNPROCESSED)+CAN_MESSAGE: 1,
+
   # Unprocessed permissions.
   ADMIN_GROUP+str(UNPROCESSED)+CAN_DELETE: 1,
   ADMIN_GROUP+str(UNPROCESSED)+CAN_EDIT: 1,
@@ -414,7 +421,7 @@ ITEMS_PERCENTS = {
 }
 
 DISCIPLINES = (
-  (0, '- Please choose -'),
+  (0, 'Please select'),
   ('hs', 'History'), ('ln', 'Linguistics'), ('lt', 'Literature'),
   ('pa', 'Performing arts'), ('ph', 'Philosophy'), ('rg', 'Religion'),
   ('va', 'Visual arts'), ('an', 'Anthropology'), ('ar', 'Archaeology'),
@@ -426,30 +433,42 @@ DISCIPLINES = (
 
 
 ASSIGMENTS = (
-  ('', '- Please choose -'),
-  ('es', 'Essay'), ('re', 'Report'), ('ab', 'Abstract'),
-  ('an', 'Annotated bibliography'), ('rw', 'Review'), ('cs', 'Case Study'))
+  (0, 'Please select'),
+  ('es', 'Essay'), ('ab', 'Abstract'),
+  ('an', 'Annotated bibliography'), ('cs', 'Case Study'),
+  ('31', 'Admission/Application Essay'), ('5',  'Article'),
+  ('57', 'Assignment'), ('65', 'Book Report/Review'), ('56', 'Coursework'),
+  ('00', 'Dissertation'), ('10', 'Dissertation Chapter - Abstract'), ('11', 'Dissertation Chapter - Introduction Chapter'),
+  ('12', 'Dissertation Chapter - Literature Review'), ('13', 'Dissertation Chapter - Methodology'),
+  ('14', 'Dissertation Chapter - Results'), ('15', 'Dissertation Chapter - Discussion'),('16', 'Dissertation Chapter - Hypothesis'),
+  ('17', 'Dissertation Chapter - Conclusion Chapter'), ('8', 'Editing'),
+  ('81', 'Formatting'), ('61', 'Lab Report'), ('62', 'Math Problem'), ('66', 'Movie Review'),
+  ('51', 'Personal Statement'), ('9', 'PowerPoint Presentation'), ('82', 'Proofreading'),
+  ('41', 'Research Paper'), ('2', 'Research Proposal'), ('32', 'Scholarship Essay'),
+  ('63', 'Speech/Presentation'), ('64', 'Statistics Project'), ('4', 'Term Paper'), 
+  ('1', 'Thesis'), ('21', 'Thesis Proposal'))
 
 
 LEVELS = (
-  ('', '- Please choose -'),
+  (0, 'Please select'),
   ('hs', 'High School'), ('co', 'College'), ('un', 'University'),
   ('ms', 'Master\'s'), ('ph', 'PHD'))
 
 # Urgency is more convenient to represent as time in seconds and label
 URGENCY = (
-  (0, '- Please choose -'),
+  (0, 'Please select'),
   (21600, '6 hours'), (43200, '12 hours'), (86400, '1 day'), (172800, '2 days'),
   (259200, '3 days'), (518400, '6 days'), (1036800, '12 days'),
   (2073600, '24+ days'))
 
 
-SPACING = ((0, '- Please choose -'), (1, 'Single'), (2, 'Double'))
+SPACING = ((0, 'Please select'), (1, 'Single'), (2, 'Double'))
 
 STYLES = (
-  (0, '- Please choose -'),
+  (0, 'Please select'),
   (1, 'MLA'), (2, 'APA'), (3, 'Chicago'), (4, 'Turabian'), (5, 'Harvar'),
   (6, 'other'))
+
 
 TASK_STATUSES_DICT = dict(TASK_STATUSES)
 URGENCY_DICT = dict(URGENCY)

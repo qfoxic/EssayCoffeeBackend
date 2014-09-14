@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 from django.views.generic.edit import UpdateView
 from django.views.generic import DetailView
-from django.views.generic import TemplateView,ListView
+from django.views.generic import ListView
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.db.models import Count
