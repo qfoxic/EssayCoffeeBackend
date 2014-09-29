@@ -10,7 +10,7 @@ class Payment(models.Model):
   ptask = models.ForeignKey(Task, on_delete=models.CASCADE,
                             null=True, blank=True, related_name='ptask')
   payment_status = models.SmallIntegerField(choices=co.PAYMENT_STATUS, default=co.UNPAID)
-  payment_type = models.SmallIntegerField(choices=co.PAYMENT_SYSTEMS, default=co.LIQPAY, null=True, blank=True)
+  payment_type = models.SmallIntegerField(choices=co.PAYMENT_SYSTEMS, default=co.TWOCHECKOUT, null=True, blank=True)
   created = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(auto_now=True)
   values = models.CharField(max_length=5000, default='{}')# incoming data from payment system. 

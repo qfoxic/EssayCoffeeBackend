@@ -25,6 +25,16 @@ Administration
 
 NEW_PROFILE_SUBJECT = 'Thanks for registering.'
 ORDER_MAIL_SUBJECT = 'Thanks for ordering.'
+DELETE_ORDER_SUBJECT = 'Your order has been deleted.'
+DELETE_ORDER_EMAIL = """ 
+Dear %(first_name)s 
+
+Your order "%(order_title)s" with id "%(order_id)s" has been deleted.
+
+Regards,
+Administration
+"""
+
 
 #EMAIL_HOST = 'smtp.ukr.net'
 #EMAIL_HOST_PASSWORD = 'QAZqaz1983'
@@ -38,6 +48,7 @@ EMAIL_PORT = 465
 
 #ADMIN_EMAIL = 'workforum@ukr.net'#'no-reply@essaycoffee.com'
 ADMIN_EMAIL = 'no-reply@essaycoffee.com'
+INFO_EMAIL = 'info@essaycoffee.com'
 ADMIN_DOMAIN = 'www.essaycoffee.com'
 
 # Settings related variables.
@@ -92,8 +103,16 @@ LIQPAY = 1
 LIQ_PUB_KEY = 'i77735892077'
 LIQ_PRIV_KEY = 'JGTGKOKgrHzSr5mEVD6CAaik3acoR4cwqPF529BN'
 
+TWOCHECKOUT = 2
+TWOSID = '202362386'
+TWO_PUB_KEY = '4E238020-3AE1-11E4-84E6-7C8C3A5D4FFE'
+TWO_PRIV_KEY = '4E2380DE-3AE1-11E4-84E6-7C8C3A5D4FFE'
+TWO_USERNAME = 'essayapi'
+TWO_PASSWORD = 'QAZqaz19831234567890'
+
 PAYMENT_SYSTEMS = (
   (LIQPAY, 'Liqpay'),
+  (TWOCHECKOUT, '2Checkout'),
 )
 
 PAYMENT_SYSTEMS_DICT = dict(PAYMENT_SYSTEMS)
@@ -117,7 +136,7 @@ PAYMENT_STATUS_DICT = dict(PAYMENT_STATUS)
 # according record is here and status to set is within allowed.
 STATUS_SWITCH_TABLE = {
   PROCESSING: [SUSPICIOUS,REJECTED,SENT],
-  UNPROCESSED: [PROCESSING,SUSPICIOUS,REJECTED],
+  UNPROCESSED: [UNPROCESSED,PROCESSING,SUSPICIOUS,REJECTED],
   SUSPICIOUS: [PROCESSING,REJECTED],
   DRAFT: [UNPROCESSED],
   SENT: [COMPLETED]
@@ -355,6 +374,12 @@ def CheckPermissions(user, entity, action, entity_type='task'):
     status, group = '', ''
 
   return PERMISSIONS_TABLE[entity_type].get(group+str(status)+action) is not None
+
+def CheckPermissionTmpl(entity, action):
+  status = entity.status
+  group = CUSTOMER_GROUP
+  return PERMISSIONS_TABLE[entity.__class__.__name__.lower()].get(group+str(status)+action) is not None
+  
 
 MALE = 0
 FEMALE = 1
