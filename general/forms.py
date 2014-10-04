@@ -2,6 +2,7 @@ from django.forms import ModelForm, ValidationError, FileField
 from general.models import Task
 from ftpstorage.models import Upload
 from userprofile.models import UserProfile
+from django.core.mail import send_mail
 
 import constants as co
 
@@ -154,7 +155,20 @@ class SwitchStatusForm(BaseForm):
     status = self.cleaned_data['status']
     if status == co.PROCESSING:
       self.instance.access_level = co.PUBLIC_ACCESS
-    return super(SwitchStatusForm, self).save(*args, **kwargs)
+    elif status == co.COMPLETED:
+      user = self.request.user 
+      try:
+        send_mail('Order has been completed.',
+                  co.ORDER_FINISHED_EMAIL % {
+                       'first_name': user.first_name,
+                       'order_title': self.instance.paper_title,
+                       'order_id': self.instance.pk},
+                  co.ADMIN_EMAIL,
+                  [user.email])
+      except:
+        raise
+      finally:
+        return super(SwitchStatusForm, self).save(*args, **kwargs)
 
 
 class ForceSwitchStatusForm(BaseForm):

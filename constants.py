@@ -35,6 +35,23 @@ Regards,
 Administration
 """
 
+UPDATE_PASSWORD_EMAIL = """ 
+Dear %(first_name)s 
+
+Your password has been updated sucessfully.
+
+Regards,
+Administration
+"""
+
+ORDER_FINISHED_EMAIL = """ 
+Dear %(first_name)s 
+
+Your order "%(order_title)s" with id "%(order_id)s" has been completed.
+
+Regards,
+Administration
+"""
 
 #EMAIL_HOST = 'smtp.ukr.net'
 #EMAIL_HOST_PASSWORD = 'QAZqaz1983'
@@ -138,7 +155,7 @@ STATUS_SWITCH_TABLE = {
   PROCESSING: [SUSPICIOUS,REJECTED,SENT],
   UNPROCESSED: [UNPROCESSED,PROCESSING,SUSPICIOUS,REJECTED],
   SUSPICIOUS: [PROCESSING,REJECTED],
-  DRAFT: [UNPROCESSED],
+  DRAFT: [DRAFT,UNPROCESSED],
   SENT: [COMPLETED]
 }
 
@@ -264,9 +281,6 @@ PERMISSIONS_TABLE = {
   CUSTOMER_GROUP+str(DRAFT)+CAN_EDIT: 1,
   CUSTOMER_GROUP+str(DRAFT)+CAN_DELETE: 1,
   CUSTOMER_GROUP+str(DRAFT)+CAN_UPLOAD: 1,
-  ADMIN_GROUP+str(DRAFT)+CAN_MESSAGE: 1,
-  WRITER_GROUP+str(DRAFT)+CAN_MESSAGE: 1,
-  EDITOR_GROUP+str(DRAFT)+CAN_MESSAGE: 1,
   
   # Unprocessed permissions.
   CUSTOMER_GROUP+str(UNPROCESSED)+CAN_MESSAGE: 1,
@@ -569,9 +583,9 @@ URGENCY = (
   (172800, '48 hours'),
   (259200, '3 days'),
   (345600, '4 days'),
-  (432000, "5 days"),
+  (432000, '5 days'),
   (604800, '7 days'),
-  (864000, "10 days"),
+  (864000, '10 days'),
   (950400, '11 days'),
   (1209600, '14 days'),
   (1814400, '21 days'),
@@ -582,6 +596,7 @@ URGENCY_11_DAYS = dict((URGENCY[1], URGENCY[2], URGENCY[3],
                        URGENCY[4], URGENCY[5], URGENCY[6], URGENCY[7],
                        URGENCY[8], URGENCY[10], URGENCY[12]))
 URGENCY_6_HOURS = dict((URGENCY[1], URGENCY[2], URGENCY[3]))
+URGENCY_3_6_HOURS = dict((URGENCY[1], URGENCY[2]))
 URGENCY_2_MONTHS = dict((URGENCY[6], URGENCY[9], URGENCY[11], URGENCY[13],
                         URGENCY[14], URGENCY[15], URGENCY[16]))
 URGENCY_10_DAYS = dict((URGENCY[1], URGENCY[2], URGENCY[4], URGENCY[5], URGENCY[6],
@@ -623,7 +638,7 @@ PRICELIST = [
   },
   {
     "assigments": ["Online Test"],
-    "urgencies": URGENCY_6_HOURS,
+    "urgencies": URGENCY_3_6_HOURS,
     "levels": LEVELS5_HCUMP,
     "prices": {
         21600: {1:34.99, 2:38.99, 3:43.99, 4:0, 5:0},
