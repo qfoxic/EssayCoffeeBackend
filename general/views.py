@@ -403,7 +403,7 @@ class SwitchStatusView(UpdateTaskView):
     pass  
  
   def get_success_url(self):
-    return self.get_object.to_link()
+    return self.get_object().to_link()
 
 
 class LockTaskView(UpdateTaskView):
@@ -415,7 +415,7 @@ class LockTaskView(UpdateTaskView):
     pass  
   
   def get_success_url(self):
-    return self.get_object.to_link()
+    return self.get_object().to_link()
 
 
 class UnlockTaskView(UpdateTaskView):
@@ -427,7 +427,7 @@ class UnlockTaskView(UpdateTaskView):
     pass  
   
   def get_success_url(self):
-    return self.get_object.to_link()
+    return self.get_object().to_link()
 
 
 class StaticHtmlView(BaseView, TemplateView):
