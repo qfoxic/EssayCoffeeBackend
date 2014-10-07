@@ -21,7 +21,7 @@ class UploadForm(BaseForm):
   def clean_fowner(self):
     """Specifies default User parameter."""
     return self.request.user
-
+  
   def clean_ftask(self):
     """Specifies default task for a comment."""
     return Task.objects.get(pk=self.task_id)
