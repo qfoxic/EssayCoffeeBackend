@@ -166,10 +166,8 @@ class SwitchStatusForm(BaseForm):
                   co.ADMIN_EMAIL,
                   [user.email])
       except:
-        raise
-      finally:
-        return super(SwitchStatusForm, self).save(*args, **kwargs)
-
+        pass 
+    return super(SwitchStatusForm, self).save(*args, **kwargs)
 
 class ForceSwitchStatusForm(BaseForm):
   class Meta(BaseForm.Meta):
