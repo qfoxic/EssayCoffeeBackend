@@ -180,7 +180,7 @@ class BaseView(View):
       'can_delete': co.CheckPermissions(user, obj, co.CAN_DELETE),
       'can_complete': co.CheckPermissions(user, obj, co.CAN_COMPLETE),
       'can_upload': co.CheckPermissions(user, obj, co.CAN_UPLOAD),
-      'can_message': co.CheckPermissions(user, obj, co.CAN_MESSAGE)
+      'can_message': co.CheckPermissions(user, obj, co.CAN_MESSAGE, 'message')
     }
     context['stats'] = get_stats(self.request)
     context['action_label'] = self.action_label
