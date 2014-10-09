@@ -27,16 +27,17 @@
         -->
         <th class="sorter-digit" valign="middle">{% trans 'ID' %}</th>
         <th class="sorter-text" style="white-space: nowrap">{% trans 'Order name' %}</th>
+        <th class="sorter-text">{% trans 'Assignment' %}</th>
         {% if action_label == 'all' %}
           <th class="sorter-text">{% trans 'Status' %}</th>
         {% endif %}
-        <th class="sorter-text">{% trans 'Assignment' %}</th>
         <th class="sorter-text">{% trans 'Mark' %}</th>
         <th class="sorter-text">{% trans 'Site' %}</th>
         <th class="sorter-text">{% trans 'Owner' %}</th>
         <th class="sorter-text">{% trans 'Manager' %}</th>
         <th class="sorter-text">{% trans 'Writer' %}</th>
         <th class="sorter-text">{% trans 'Editor' %}</th>
+        <th class="sorter-text">{% trans 'Customer timezone' %}</th>
         <th class="sorter-text">{% trans 'Created' %}</th>
         <!-- <th class="sorter-text">{% trans 'Updated' %}</th> -->
         <th class="sorter-text">{% trans 'Urgency' %}</th>
@@ -56,16 +57,17 @@
     <tr>
         <td>{{task.id}}</td>
         <td><a href="{% url 'task_view' task.id %}">{{task.paper_title}}</a></td>
+        <td>{{task.get_assigment}}</td>
         {% if action_label == 'all' %}
           <td data-status="{{task.status}}" style="font-size:1.4em;line-height:100%">{{task.status|render_status}}</td>
         {% endif %}
-        <td>{{task.get_assigment}}</td>
         <td>{{task.mark}}</td>
         <td>{{task.site}}</td>
         <td>{% if task.owner %}<a href="{% url 'user_edit' task.owner.id %}">{{task.owner}}</a>{% endif  %}</td>
         <td>{% if task.manager %}<a href="{% url 'user_edit' task.manager.id %}">{{task.manager}}</a>{% endif  %}</td>
         <td>{% if task.assignee %}<a href="{% url 'user_edit' task.assignee.id %}">{{task.assignee}}</a>{% endif  %}</td>
         <td>{% if task.editor %}<a href="{% url 'user_edit' task.editor.id %}">{{task.editor}}</a>{% endif  %}</td>
+        <td>{{task.owner.userprofile.timezone}}</td>
         <td>{{task.created}}</td>
         <td>{{task.get_urgency}}</td>
         <!--td>loc.time not implemented</td-->
