@@ -5,6 +5,7 @@ from django.views.generic import View
 import json
 import constants as co
 from django.views.decorators.csrf import csrf_exempt
+from django.core.urlresolvers import reverse
 
 def lds(values):
     try:
@@ -16,12 +17,20 @@ def lds(values):
 def _two_checkout_payment(request):
   pst = request.POST
   order_id = pst.get('vendor_order_id')
-  order = Task.objects.all().filter(id=order_id)
+  if not order_id:
+    return
+  try:
+    order = Task.objects.all().filter(id=order_id)
+  except (TypeError, ValueError):
+    # order_id is not an integer
+    return
   order = order and order[0]
   if order:
     vals = {'sale_id': request.POST.get('sale_id'),
             'customer_ip': request.POST.get('customer_ip'),
             'amount': request.POST.get('invoice_usd_amount')}
+    order.status = co.UNPROCESSED
+    order.save()
     payment = Payment(powner=order.owner, ptask=order,
                       values=json.dumps(vals), payment_status=co.IN_PROCESS,
                       payment_type=co.TWOCHECKOUT)
@@ -54,9 +63,9 @@ def update_payment_status(ptype, task, request, data=None):
     import twocheckout
     # mode: production, mode:sandbox
     twocheckout.Api.auth_credentials({'private_key': co.TWO_PRIV_KEY,
-                                      'seller_id': co.TWOSID,'mode': 'sandbox'})
+                                      'seller_id': co.TWOSID})
     twocheckout.Api.credentials({'username': co.TWO_USERNAME,
-                                 'password': co.TWO_PASSWORD,'mode': 'sandbox'})
+                                 'password': co.TWO_PASSWORD})
     sale_id = data.get('sale_id')
     try:
       sale_status = twocheckout.Sale.find({'sale_id': sale_id})['invoices'][0]['status']
@@ -76,10 +85,9 @@ def update_payment_status(ptype, task, request, data=None):
 
 def get_payments_status():
   sql = ('SELECT max(id) as id, powner_id, ptask_id,'
-         ' SUBSTRING_INDEX(GROUP_CONCAT(`payment_status` ORDER BY `Id` DESC SEPARATOR \',\'),\',\',1)'
-         ' as status, payment_type, '
-         'SUBSTRING_INDEX(GROUP_CONCAT(`values` order by `Id` desc separator \'|\'),\'|\',1) as ovalues'
-         ' FROM payments GROUP BY ptask_id')
+         ' `payment_status` as status, payment_type,'
+         ' `values` as ovalues'
+         ' FROM payments GROUP BY ptask_id DESC')
   _d = {}
   [_d.setdefault(int(i.ptask_id),
              [
@@ -98,7 +106,9 @@ def get_payment_url(ptype, request, params):
   if ptype == co.TWOCHECKOUT:
     params['sid'] = co.TWOSID
     params['currency_code'] = 'USD'
+    params['return_url'] = co.ADMIN_DOMAIN + reverse('order-id', args=(params['order_id'],))
     return ('https://www.2checkout.com/checkout/purchase/?sid=%(sid)s&mode=2CO&'
+            'x_receipt_link_url=%(return_url)s&'
             'li_0_type=product&li_0_name=%(title)s&li_0_quantity=1&li_0_tangible=N&currency_code=%(currency_code)s&'
             'li_0_description=%(title)s&li_0_product_id=%(order_id)s&merchant_order_id=%(order_id)s&li_0_price=%(price)s' % params)
   elif ptype == co.LIQPAY:

@@ -20,6 +20,7 @@ from msgs.models import Message
 from ftpstorage.models import Upload
 from ftpstorage.storage import FTPStorage
 from general.forms import TaskForm, SwitchStatusForm, LockTaskForm, UnlockTaskForm
+from payments.views import get_payments_status,get_payment_url,update_payment_status
 
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import CreateView
@@ -186,6 +187,11 @@ class BaseView(View):
     context['action_label'] = self.action_label
     return super(BaseView, self).render_to_response(context, **response_kwargs)
 
+  def get_context_data(self, **kwargs):
+    context = super(BaseView, self).get_context_data(**kwargs)
+    context['payments'] = get_payments_status()
+    return context
+
   def get_template_names(self):
     return [self.template_name]
 
@@ -337,6 +343,10 @@ class DetailTaskView(BaseView, DetailView):
   def get_context_data(self, **kwargs):
     context = super(DetailTaskView, self).get_context_data(**kwargs)
     task_id = self.kwargs.get('pk')
+    task_payments = context['payments'].get(task_id)
+    if task_payments and task_payments[1] in [co.IN_PROCESS]:
+      update_payment_status(task_payments[3], self.get_object(), self.request,
+                            task_payments[-1])
     group = self.request.user.get_group()
     context['reports'] = Report.objects.filter(rtask_id__exact=task_id)
     if group in [co.ADMIN_GROUP, co.EDITOR_GROUP]: 
