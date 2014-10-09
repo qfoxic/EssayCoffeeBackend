@@ -163,7 +163,7 @@ class Task(BaseModel):
     data = [i['prices'] for i in co.PRICELIST if assigment in i['assigments']]
     data = data[0] if data else {}
     pagePrice = data.get(self.urgency, {}).get(self.level, 0.00)
-    totalPrice = pagePrice * (self.spacing == co.SPACING[1][0] and 1 or 2) * self.page_number 
+    totalPrice = pagePrice * (self.spacing == co.SPACING[1][0] and 2 or 1) * self.page_number 
     return '%.2f' % (totalPrice)
  
   @classmethod 
