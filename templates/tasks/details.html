@@ -41,7 +41,7 @@
                     <br>
                     <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Writer" %}</strong>: <em> {% if object.assignee %} <a href="{% url 'user_details' object.assignee.id %}">{{object.assignee}}</a> {% endif %} </em>
                     <br>
-                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Editor" %}</strong>: <em>{{object.editor}}</em>
+                    <i class="fa fa-user fa-fw irm"></i><strong>{% trans "Editor" %}</strong>: <em> {% if object.editor %} <a href="{% url 'user_details' object.editor.id %}">{{object.editor}}</a> {% endif %} </em>
                     <br>
                     <i class="fa fa-clock-o fa-fw irm"></i><strong>{% trans "Local time" %}</strong>: <em>{{object.local_time}}</em>
                     <br>
