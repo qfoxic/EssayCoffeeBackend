@@ -615,7 +615,7 @@ STYLES = (
   (2, 'APA'),
   (3, 'Chicago'),
   (4, 'Turabian'),
-  (5, 'Harvar'),
+  (5, 'Harvard'),
   (6, 'other'))
 
 
