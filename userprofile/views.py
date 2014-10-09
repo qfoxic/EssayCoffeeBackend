@@ -85,6 +85,9 @@ class DetailProfileView(BaseView, DetailView):
   template_name = 'userprofile/detail.html' 
   queryset = UserProfile.objects.all()
 
+  def user_id(self):
+    return self.get_object().pk
+
 
 class UpdateProfileView(BaseView, UpdateView):
   template_name = 'userprofile/edit.html'

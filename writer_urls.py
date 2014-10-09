@@ -15,7 +15,7 @@ import constants as co
 #user_new = CreateProfileView.as_view(module_name='writer',
 #                                     group_name=co.WRITER_GROUP)
 user_edit = login_required(DetailProfileView.as_view(module_name='writer',
-                                                     allowed_groups=[]),
+                                                     allowed_groups=[], owner_required=True),
                            login_url=reverse_lazy('login'))
 
 tasks_list = login_required(TaskIndexView.as_view(module_name='writer',

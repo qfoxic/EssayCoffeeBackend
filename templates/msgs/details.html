@@ -58,7 +58,11 @@
                 {% else %}
                 <div class="row">
                     <div class="col-md-3 col-md-offset-1">
+                        {% if site == 'writer' %}
                         <i class="fa fa-male irm"></i>From: {{object.mowner.username}}
+                        {% else %}
+                        <i class="fa fa-male irm"></i>From: {{object.mowner.username}}
+                        {% endif %}
                     </div>
                     <div class="col-md-4">
                         <i class="fa fa-calendar irm"></i>Created: {{object.created}}
