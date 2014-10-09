@@ -128,7 +128,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$Vd9a38P5xyHa$pquwZlnbEx5/dir+UYvjiem1GzmAxBshCHCOfZstrdg=','2014-04-22 12:17:08',1,'transport','','','wwwww@www.com',1,1,'2014-04-15 12:27:25'),(2,'pbkdf2_sha256$12000$eKbqEddEt0hP$tDfzGlx02Wl9pwAKsxTRop0LsrBURBOTAl9FUIkCv6M=','2014-06-04 04:08:13',0,'admin','Admin','Admin','foxandkamarus@gmail.com',0,1,'2014-04-15 12:31:15'),(3,'pbkdf2_sha256$12000$iDEzJ6pfWoYY$TisahZaho3s6r0NjPjWfIGvdsuneQfYm3eXKaDlsz90=','2014-04-17 14:45:58',0,'customer','Customer','Customer','cust@ukt.rnt',0,1,'2014-04-15 12:31:43'),(4,'pbkdf2_sha256$12000$V4vfmI3S4fkZ$D25TeJnUBVH50YsRcMzNfRie2pUPyh1W6pvDYNk+OHw=','2014-04-15 12:32:03',0,'editor','Editor','Editor','employer@tr.com',0,1,'2014-04-15 12:32:03'),(5,'pbkdf2_sha256$12000$ZytjcJhqF2gk$fYcALTdm+3wmLhyYtJ7uJnoMzhTRRrcAAQbJH5PW1hY=','2014-04-15 12:32:28',0,'writer','Writer','Writer','employee@tr.com',0,1,'2014-04-15 12:32:29'),(6,'pbkdf2_sha256$12000$BVaZsFFBmEu4$2gJAvBhK9/81zvyfy5M9n8F6fplaRvthorKs7qlIKqU=','2014-04-15 15:11:33',0,'admin1','Admin1','Admin1','wwww@qq.qq',0,1,'2014-04-15 15:11:26'),(7,'pbkdf2_sha256$12000$UCjfkJ9H5Agm$plRMF4kSyIkTr2qvrZ2Z++SSEW5SWAI/0mqHblmb1lo=','2014-06-05 11:57:47',0,'Customer10','Customer','Customer','cust@gmail.com',0,1,'2014-06-05 11:57:37'),(8,'pbkdf2_sha256$12000$edjCv6HVnomy$BsxsSjIc+ElQQ+8DfPH2LFLXxWUr4kil70AwFokQeLs=','2014-06-19 19:16:27',0,'Newcustomer','Newcustomer','Newcustomer','Newcustomer@gmailc.om',0,1,'2014-06-19 19:16:27'),(9,'pbkdf2_sha256$12000$qblocARgP7un$SHgRZirwu2KcfjPohEVcZlGxM3KwGOh5u0vdJL6rh1E=','2014-06-19 19:16:44',0,'Newcustomer123','Newcustomer','Newcustomer','Newcustomer@gmailc.om',0,1,'2014-06-19 19:16:37'),(10,'pbkdf2_sha256$12000$xIWXwz0DiW8s$DkngV270v/rTEU7qe+sk89t89J0Ny4teJECnAZBzImc=','2014-06-20 12:47:31',0,'newscustomer12345','','','',0,1,'2014-06-20 12:47:22');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$Vd9a38P5xyHa$pquwZlnbEx5/dir+UYvjiem1GzmAxBshCHCOfZstrdg=','2014-04-22 12:17:08',1,'transport','','','wwwww@www.com',1,1,'2014-04-15 12:27:25'),(2,'pbkdf2_sha256$12000$eKbqEddEt0hP$tDfzGlx02Wl9pwAKsxTRop0LsrBURBOTAl9FUIkCv6M=','2014-06-04 04:08:13',0,'admin','Admin','Admin','foxandkamarus@gmail.com',0,1,'2014-04-15 12:31:15'),(3,'pbkdf2_sha256$12000$iDEzJ6pfWoYY$TisahZaho3s6r0NjPjWfIGvdsuneQfYm3eXKaDlsz90=','2014-04-17 14:45:58',0,'customer','Customer','Customer','cust@ukt.rnt',0,1,'2014-04-15 12:31:43'),(4,'pbkdf2_sha256$12000$V4vfmI3S4fkZ$D25TeJnUBVH50YsRcMzNfRie2pUPyh1W6pvDYNk+OHw=','2014-04-15 12:32:03',0,'editor','Editor','Editor','employer@tr.com',0,1,'2014-04-15 12:32:03'),(5,'pbkdf2_sha256$12000$ZytjcJhqF2gk$fYcALTdm+3wmLhyYtJ7uJnoMzhTRRrcAAQbJH5PW1hY=','2014-04-15 12:32:28',0,'writer','Writer','Writer','employee@tr.com',0,1,'2014-04-15 12:32:29');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,7 +158,7 @@ CREATE TABLE `auth_user_groups` (
 
 LOCK TABLES `auth_user_groups` WRITE;
 /*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
-INSERT INTO `auth_user_groups` VALUES (62,2,1),(63,3,3),(64,4,4),(65,5,2),(66,6,1),(67,7,3),(68,8,3),(69,9,3),(70,10,3);
+INSERT INTO `auth_user_groups` VALUES (62,2,1),(63,3,3),(64,4,4),(65,5,2);
 /*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -448,7 +448,7 @@ CREATE TABLE `uploads` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
-  `attach` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `attach` varchar(500) COLLATE utf16_unicode_ci NOT NULL,
   `fowner_id` int(11) NOT NULL,
   `ftask_id` int(11) NOT NULL,
   `access_level` varchar(1) COLLATE utf16_unicode_ci NOT NULL,
@@ -489,7 +489,7 @@ CREATE TABLE `user_profiles` (
 
 LOCK TABLES `user_profiles` WRITE;
 /*!40000 ALTER TABLE `user_profiles` DISABLE KEYS */;
-INSERT INTO `user_profiles` VALUES (1,1,'ua','123','customers.yourseller.com:8081','2014-04-15 14:30:00'),(2,0,'AT','1111','customers.yourseller.com:8081','2014-06-04 04:11:03'),(3,0,'AF','1111','customers.yourseller.com:8081','2014-04-15 12:32:00'),(4,0,'AF','1111','customers.yourseller.com:8081','2014-04-15 12:32:25'),(5,0,'AF','1111','customers.yourseller.com:8081','2014-04-15 12:32:55'),(6,0,'AF','123','customers.yourseller.com:8081','2014-04-15 15:11:26'),(7,0,'AF','123567','customers.yourseller.net:8081','2014-06-05 11:57:37'),(8,0,'AF','111111111111111111','customers.yourseller.net:8081','2014-06-19 19:16:30'),(9,0,'AF','111111111111111111','customers.yourseller.net:8081','2014-06-19 19:16:38'),(10,0,'AF','123','customers.yourseller.net:8081','2014-06-20 12:47:22');
+INSERT INTO `user_profiles` VALUES (1,1,'ua','123','www.essaycoffee.com','2014-04-15 14:30:00'),(2,0,'AT','1111','www.essaycoffee.com','2014-06-04 04:11:03'),(3,0,'AF','1111','www.essaycoffee.com','2014-04-15 12:32:00'),(4,0,'AF','1111','www.essaycoffee.com','2014-04-15 12:32:25'),(5,0,'AF','1111','www.essaycoffee.com','2014-04-15 12:32:55');
 /*!40000 ALTER TABLE `user_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

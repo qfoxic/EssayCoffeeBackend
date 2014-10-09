@@ -30,7 +30,7 @@ def get_attach_path(instance, filename):
 class Upload(BaseModel):
   created = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(auto_now=True)
-  attach = MFileField(upload_to=get_attach_path)
+  attach = MFileField(upload_to=get_attach_path, max_length=100)
   fowner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True,
                             related_name='fowner')
   ftask = models.ForeignKey(Task, on_delete=models.CASCADE, blank=True,
