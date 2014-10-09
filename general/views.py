@@ -179,7 +179,7 @@ class BaseView(View):
       'can_unlock': co.CheckPermissions(user, obj, co.CAN_UNLOCK) and obj.is_locked(user, by_user=True),
       'can_delete': co.CheckPermissions(user, obj, co.CAN_DELETE),
       'can_complete': co.CheckPermissions(user, obj, co.CAN_COMPLETE),
-      'can_upload': co.CheckPermissions(user, obj, co.CAN_UPLOAD),
+      'can_upload': co.CheckPermissions(user, obj, co.CAN_UPLOAD, 'upload'),
       'can_message': co.CheckPermissions(user, obj, co.CAN_MESSAGE, 'message')
     }
     context['stats'] = get_stats(self.request)

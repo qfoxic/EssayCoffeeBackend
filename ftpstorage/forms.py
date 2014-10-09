@@ -29,7 +29,7 @@ class UploadForm(BaseForm):
   def check_permissions(self, cleaned_data):
     """Raises an exception if there are no permissions to save a form."""
     if not co.CheckPermissions(self.request.user,
-        self.cleaned_data['ftask'], co.CAN_UPLOAD):
+        self.cleaned_data['ftask'], co.CAN_UPLOAD, 'upload'):
       raise ValidationError('You can not upload file.') 
 
 
