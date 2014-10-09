@@ -10,6 +10,7 @@ class UserProfile(BaseModel, User):
                              default=co.COUNTRIES[0])
   phone = models.CharField(max_length=co.TITLE_MAX_LEN)
   site = models.CharField(max_length=co.TITLE_MAX_LEN, null=True, blank=True)
+  timezone = models.CharField(max_length=co.TITLE_MAX_LEN)
   updated = models.DateTimeField(auto_now=True)
   objects = UserManager()
 

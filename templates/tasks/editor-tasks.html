@@ -32,6 +32,7 @@
         <th class="sorter-text">{% trans 'Mark' %}</th>
         <th class="sorter-text">{% trans 'Writer' %}</th>
         <th class="sorter-text">{% trans 'Editor' %}</th>
+        <th class="sorter-text">{% trans 'Customer Timezone' %}</th>
         <th class="sorter-text">{% trans 'Created' %}</th>
         <!-- <th class="sorter-text">{% trans 'Updated' %}</th> -->
         <th class="sorter-text">{% trans 'Urgency' %}</th>
@@ -53,6 +54,7 @@
         <td>{{task.mark}}</td>
         <td>{% if task.assignee %}<a href="{% url 'user_details' task.assignee.id %}">{{task.assignee}}</a>{% endif %}</td>
         <td>{% if task.editor %}<a href="{% url 'user_details' task.editor.id %}">{{task.editor}}</a>{% endif %}</td>
+        <td>{{task.owner.userprofile.timezone}}</td>
         <td>{{task.created}}</td>
         <td>{{task.get_urgency}}</td>
         <!--td>loc.time not implemented</td-->

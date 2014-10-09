@@ -7,7 +7,6 @@
         <th class="sorter-status">{% trans 'Status' %}</th>
         <th>{% trans 'Mark' %}</th>
         <th>{% trans 'Deadline' %}</th>
-        <th>{% trans 'Updated' %}</th>
         <th>{% trans 'Revision' %}</th>
         <th>{% trans 'Price' %}</th>
     </tr>
@@ -21,9 +20,8 @@
         <td data-status="{{task.status}}" style="font-size:1.4em;line-height:100%">{{task.status|render_status}}</td>
         <td>{{task.mark}}</td>
         <td class="momdl">{{task.writer_deadline}}</td>
-        <td>{{task.updated}}</td>
         <td>{{task.revision}}</td>
-        <td>{{task.price}}</td>
+        <td>{{task.get_writer_price }}</td>
     </tr>
     {% endfor %}
 </tbody>

@@ -148,7 +148,7 @@ class Task(BaseModel):
     elif group == co.EDITOR_GROUP:
       self.editor = None
   
-  def get_price(self):
+  def get_price(self, group=None):
     #percents = co.ITEMS_PERCENTS
     #mpp = co.MAX_PAGE_PRICE
     #assig_percent = percents['assigments'].get(self.assigment, 0)
@@ -164,7 +164,12 @@ class Task(BaseModel):
     data = data[0] if data else {}
     pagePrice = data.get(self.urgency, {}).get(self.level, 0.00)
     totalPrice = pagePrice * (self.spacing == co.SPACING[1][0] and 2 or 1) * self.page_number 
+    if group == co.WRITER_GROUP:
+      return '%.2f' % (totalPrice / 3.00)
     return '%.2f' % (totalPrice)
+  
+  def get_writer_price(self):
+    return self.get_price(co.WRITER_GROUP)
  
   @classmethod 
   def get_finished_tasks(cls, count_only, **kwargs):
