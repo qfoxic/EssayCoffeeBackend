@@ -47,8 +47,8 @@ def check_mobile(request):
 
 def serve(request, path):
   ftp = FTPStorage()
-  if not ftp.exists(path):
-      raise Http404(_('"%(path)s" does not exist') % {'path': path})
+  if not ftp.check_path(path):
+      raise Http404('"%(path)s" does not exist' % {'path': path})
   tmp_file = tempfile.NamedTemporaryFile() 
   ftp.cp(path, tmp_file)
   return djserve(request, tmp_file.name, '/')
