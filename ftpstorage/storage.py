@@ -50,10 +50,19 @@ class FTPStorage(Storage):
       assert name, 'The name argument is not allowed to be empty.'
       self.session.delete(self.path(name))
 
-    def exists(self, name):
+    def check_path(self, name):
       try:
+        # Allow to override teh same filenames.
         self.session.retrlines('LIST /' + self.path(name))
         return True
+      except error_temp:
+        return False
+
+    def exists(self, name):
+      try:
+        # Allow to override teh same filenames.
+        #self.session.retrlines('LIST /' + self.path(name))
+        return False#True
       except error_temp:
         return False
 
