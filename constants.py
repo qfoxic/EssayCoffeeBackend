@@ -394,7 +394,7 @@ def CheckPermissions(user, entity, action, entity_type='task'):
     status = entity.status
     is_locked = IS_LOCKED if entity.is_locked(user, True) and group in [WRITER_GROUP, EDITOR_GROUP] else ISNOT_LOCKED
   except:
-    status, group = '', ''
+    is_locked, status, group = '', '', ''
 
   return PERMISSIONS_TABLE[entity_type].get(group+str(status)+action+is_locked) is not None
 
