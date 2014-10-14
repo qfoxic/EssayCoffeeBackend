@@ -1,26 +1,25 @@
 import re
 
 ORDER_MAIL = """
-Dear %(first_name)s 
+Dear %(first_name)s,
+thank you for using our service!
+Our writer will start working on your order as soon as we will verify your payment!  
+If you face any problems with making your payment, kindly contact us via our toll free numbers or live chat support team anytime you want - we are working 24/7,
+all for your satisfaction.
+If you, for some reason, changed your mind and would not like to proceed with your payment, please inform us right away so that we could cancel your order.
 
-Thank you for ordering at %(domain)s. We will assign your order to the best writer available as soon as 
-
-possible and will let you know via email.
-
-Regards,
-
-Administration
+Kind regards,
+EssayCoffee Administration
 """
 
 NEW_PROFILE_EMAIL = """ 
 Dear %(first_name)s 
 
-Thank you for registering at %(domain)s.
-Your username: %(username)s
-Your email: %(email)s
+Thank you for registering at %(domain)s, the best writing service on the Web!
+Your username is %(username)s
 
-Regards,
-Administration
+Kind Regards,
+EssayCoffee Administration
 """
 
 NEW_PROFILE_SUBJECT = 'Thanks for registering.'
@@ -38,19 +37,18 @@ Administration
 UPDATE_PASSWORD_EMAIL = """ 
 Dear %(first_name)s 
 
-Your password has been updated sucessfully.
+you successfully changed password at %(domain)s.
 
-Regards,
-Administration
+Kind Regards,
+EssayCoffee Administration
 """
 
 ORDER_FINISHED_EMAIL = """ 
 Dear %(first_name)s 
+your order is ready! Please log in into our system and let us know how you liked it!
 
-Your order "%(order_title)s" with id "%(order_id)s" has been completed.
-
-Regards,
-Administration
+Kind regards,
+EssayCoffee Administration
 """
 
 #EMAIL_HOST = 'smtp.ukr.net'

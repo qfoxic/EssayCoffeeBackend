@@ -156,7 +156,7 @@ class SwitchStatusForm(BaseForm):
     if status == co.PROCESSING:
       self.instance.access_level = co.PUBLIC_ACCESS
     elif status == co.COMPLETED:
-      user = self.request.user 
+      user = self.instance.owner 
       try:
         send_mail('Order has been completed.',
                   co.ORDER_FINISHED_EMAIL % {
