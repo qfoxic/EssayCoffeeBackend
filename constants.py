@@ -51,17 +51,13 @@ Kind regards,
 EssayCoffee Administration
 """
 
-#EMAIL_HOST = 'smtp.ukr.net'
-#EMAIL_HOST_PASSWORD = 'QAZqaz1983'
-#EMAIL_HOST_USER = 'workforum@ukr.net'
-#EMAIL_PORT = 465
 
-EMAIL_HOST = 'email-smtp.us-west-2.amazonaws.com'
-EMAIL_HOST_PASSWORD = 'ArjbUpVfD8Slt91OAy11bInlmzcIH+NJUxYe8jz/LVvr'
-EMAIL_HOST_USER = 'AKIAILRHCFXQWXJEGIVA'
+EMAIL_HOST = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = ''
 EMAIL_PORT = 465
 
-#ADMIN_EMAIL = 'workforum@ukr.net'#'no-reply@essaycoffee.com'
+#ADMIN_EMAIL = '#'no-reply@essaycoffee.com'
 ADMIN_EMAIL = 'no-reply@essaycoffee.com'
 INFO_EMAIL = 'info@essaycoffee.com'
 ADMIN_DOMAIN = 'www.essaycoffee.com'
@@ -115,15 +111,15 @@ TASK_STATUSES_DICT = dict(TASK_STATUSES)
 # Payment systems.
 LIQPAY = 1 
 
-LIQ_PUB_KEY = 'i77735892077'
-LIQ_PRIV_KEY = 'JGTGKOKgrHzSr5mEVD6CAaik3acoR4cwqPF529BN'
+LIQ_PUB_KEY = ''
+LIQ_PRIV_KEY = ''
 
 TWOCHECKOUT = 2
-TWOSID = '202362386'
-TWO_PUB_KEY = '4E238020-3AE1-11E4-84E6-7C8C3A5D4FFE'
-TWO_PRIV_KEY = '4E2380DE-3AE1-11E4-84E6-7C8C3A5D4FFE'
-TWO_USERNAME = 'essayapi'
-TWO_PASSWORD = 'QAZqaz19831234567890'
+TWOSID = ''
+TWO_PUB_KEY = ''
+TWO_PRIV_KEY = ''
+TWO_USERNAME = ''
+TWO_PASSWORD = ''
 
 PAYMENT_SYSTEMS = (
   (LIQPAY, 'Liqpay'),
